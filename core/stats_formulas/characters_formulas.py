@@ -21,4 +21,8 @@ def max_damage_formula(max_damage, agility, agility_damage_multiplier, strength,
 
 
 def critical_strike_formula(base_critical_strike_chance, agility, critical_strike_chance_multiplier):
-    return base_critical_strike_chance * critical_strike_chance_multiplier * agility * 0.05
+    return base_critical_strike_chance * (1 + critical_strike_chance_multiplier * agility * 0.05)
+
+
+def accuracy_formula(accuracy, agility, level):
+    return accuracy * (agility * 5 - level)

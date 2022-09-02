@@ -1,15 +1,24 @@
-from main_character.character_dataclasses import Parameters, Stats, ClassMultipliers
+from main_character.start_parameters import MainStats, Attributes, Bars, CombatStats, ClassMultipliers
 import items.weapon
-from core.constants import character_constants as cc
+from core.constants.character_constants import (
+    BarsNames as bn,
+    AttributesNames as an,
+    CombatStats as cs,
+    MainStatsNames as msn,
+    Classes,
+)
 from core.stats_formulas import characters_formulas as cf
 
 
 class MainCharacter:
     def __init__(self):
-        self._parameters = Parameters
-        self._stats = Stats
+        self._main_stats = MainStats
+        self._attributes = Attributes
+        self._bars = Bars
+        self._combat_stats = CombatStats
         self._class_multipliers = ClassMultipliers
         self._equipped_weapon = items.weapon.Fists
+        self.add_level()
 
     def set_class_warrior(self):
         self._class_multipliers.HEALTH_MULTIPLIER = 2
@@ -17,6 +26,7 @@ class MainCharacter:
         self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0
         self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 0.5
         self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 1
+        self._main_stats.CLASS = Classes.WARRIOR
 
     def set_class_assassin(self):
         self._class_multipliers.HEALTH_MULTIPLIER = 0.7
@@ -24,114 +34,132 @@ class MainCharacter:
         self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 1
         self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 2
         self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0
+        self._main_stats.CLASS = Classes.ASSASSIN
+
+    def set_class_peasant(self):
+        self._class_multipliers.HEALTH_MULTIPLIER = 1
+        self._class_multipliers.STAMINA_MULTIPLIER = 1
+        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0.75
+        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0.75
+        self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 1
+        self._main_stats.CLASS = Classes.PEASANT
 
     def _refresh_stats(self):
-        self._stats.MAX_HEALTH = cf.health_formula(
+        self._bars.MAX_HEALTH = cf.health_formula(
             health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
-            level=self._parameters.LEVEL,
-            vitality=self._parameters.VITALITY
+            level=self._main_stats.LEVEL,
+            vitality=self._attributes.VITALITY
         )
-        self._stats.MAX_STAMINA = cf.stamina_formula(
+        self._bars.MAX_STAMINA = cf.stamina_formula(
             stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
-            level=self._parameters.LEVEL,
-            endurance=self._parameters.ENDURANCE,
+            level=self._main_stats.LEVEL,
+            endurance=self._attributes.ENDURANCE,
         )
-        self._stats.MIN_DAMAGE = cf.min_damage_formula(
+        self._combat_stats.MIN_DAMAGE = cf.min_damage_formula(
             min_damage=self._equipped_weapon.MIN_DAMAGE,
-            strength=self._parameters.STRENGTH,
+            strength=self._attributes.STRENGTH,
             strength_damage_multiplier=self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
-            agility=self._parameters.AGILITY,
+            agility=self._attributes.AGILITY,
             agility_damage_multiplier=self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
         )
-        self._stats.MAX_DAMAGE = cf.max_damage_formula(
+        self._combat_stats.MAX_DAMAGE = cf.max_damage_formula(
             max_damage=self._equipped_weapon.MAX_DAMAGE,
-            strength=self._parameters.STRENGTH,
+            strength=self._attributes.STRENGTH,
             strength_damage_multiplier=self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
-            agility=self._parameters.AGILITY,
+            agility=self._attributes.AGILITY,
             agility_damage_multiplier=self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
         )
-        self._stats.CRITICAL_STRIKE_CHANCE = cf.critical_strike_formula(
+        self._combat_stats.CRITICAL_STRIKE_CHANCE = cf.critical_strike_formula(
             base_critical_strike_chance=self._equipped_weapon.CRITICAL_STRIKE_CHANCE,
-            agility=self._parameters.AGILITY,
+            agility=self._attributes.AGILITY,
             critical_strike_chance_multiplier=self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER
         )
-        self._stats.CRITICAL_STRIKE_MULTIPLIER = 1.5
-        self._stats.ACCURACY = self._equipped_weapon.ACCURACY
+        self._combat_stats.CRITICAL_STRIKE_MULTIPLIER = 1.5
+        self._combat_stats.ACCURACY = cf.accuracy_formula(
+            accuracy=self._equipped_weapon.ACCURACY,
+            agility=self._attributes.AGILITY,
+            level=self._main_stats.LEVEL,
+        )
 
     @staticmethod
     def _not_enough_points():
-        print("Not enough parameters points!")
+        print("Not enough attribute points!")
 
     def set_max_health(self):
-        self._stats.HEALTH = self._stats.MAX_HEALTH
+        self._bars.HEALTH = self._bars.MAX_HEALTH
 
     def set_max_stamina(self):
-        self._stats.STAMINA = self._stats.MAX_STAMINA
+        self._bars.STAMINA = self._bars.MAX_STAMINA
 
     def add_level(self):
-        self._parameters.LEVEL += 1
-        self._parameters.PARAMETERS_POINTS += 3
+        self._main_stats.LEVEL += 1
+        self._attributes.ATTRIBUTE_POINTS += 3
         self._refresh_stats()
         self.set_max_health()
         self.set_max_stamina()
 
     def add_endurance(self):
-        if self._parameters.PARAMETERS_POINTS >= 1:
-            self._parameters.ENDURANCE += 1
-            self._parameters.PARAMETERS_POINTS -= 1
+        if self._attributes.ATTRIBUTE_POINTS >= 1:
+            self._attributes.ENDURANCE += 1
+            self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
         else:
             self._not_enough_points()
 
     def add_vitality(self):
-        if self._parameters.PARAMETERS_POINTS >= 1:
-            self._parameters.VITALITY += 1
-            self._parameters.PARAMETERS_POINTS -= 1
+        if self._attributes.ATTRIBUTE_POINTS >= 1:
+            self._attributes.VITALITY += 1
+            self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
         else:
             self._not_enough_points()
 
     def add_strength(self):
-        if self._parameters.PARAMETERS_POINTS >= 1:
-            self._parameters.STRENGTH += 1
-            self._parameters.PARAMETERS_POINTS -= 1
+        if self._attributes.ATTRIBUTE_POINTS >= 1:
+            self._attributes.STRENGTH += 1
+            self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
         else:
             self._not_enough_points()
 
     def add_agility(self):
-        if self._parameters.PARAMETERS_POINTS >= 1:
-            self._parameters.AGILITY += 1
-            self._parameters.PARAMETERS_POINTS -= 1
+        if self._attributes.ATTRIBUTE_POINTS >= 1:
+            self._attributes.AGILITY += 1
+            self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
         else:
             self._not_enough_points()
 
-    def get_level(self):
-        return self._parameters.LEVEL
+    def get_main_stats(self):
+        main_stats = {
+            msn.LEVEL: self._main_stats.LEVEL,
+            msn.CLASS: self._main_stats.CLASS,
+        }
+        return main_stats
 
     def get_bars(self):
         bars = {
-            cc.HEALTH: (self._stats.MAX_HEALTH, self._stats.HEALTH),
-            cc.STAMINA: (self._stats.MAX_STAMINA, self._stats.STAMINA),
+            bn.HEALTH: (self._bars.MAX_HEALTH, self._bars.HEALTH),
+            bn.STAMINA: (self._bars.MAX_STAMINA, self._bars.STAMINA),
         }
         return bars
 
-    def get_parameters(self):
-        parameters = {
-            cc.STRENGTH: self._parameters.STRENGTH,
-            cc.AGILITY: self._parameters.AGILITY,
-            cc.VITALITY: self._parameters.VITALITY,
-            cc.ENDURANCE: self._parameters.ENDURANCE,
+    def get_attributes(self):
+        attributes = {
+            an.STRENGTH: self._attributes.STRENGTH,
+            an.AGILITY: self._attributes.AGILITY,
+            an.VITALITY: self._attributes.VITALITY,
+            an.ENDURANCE: self._attributes.ENDURANCE,
+            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS
         }
-        return parameters
+        return attributes
 
     def get_combat_stats(self):
         combat_stats = {
-            cc.MIN_DAMAGE: self._stats.MIN_DAMAGE,
-            cc.MAX_DAMAGE: self._stats.MAX_DAMAGE,
-            cc.ACCURACY: self._stats.ACCURACY,
-            cc.CRITICAL_STRIKE_CHANCE: self._stats.CRITICAL_STRIKE_CHANCE,
-            cc.CRITICAL_STRIKE_MULTIPLIER: self._stats.CRITICAL_STRIKE_MULTIPLIER
+            cs.MIN_DAMAGE: self._combat_stats.MIN_DAMAGE,
+            cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
+            cs.ACCURACY: self._combat_stats.ACCURACY,
+            cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
+            cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
         }
         return combat_stats
