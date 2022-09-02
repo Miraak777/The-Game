@@ -15,9 +15,9 @@ class Parameters:
 class ClassMultipliers:
     HEALTH_MULTIPLIER: float = 1
     STAMINA_MULTIPLIER: float = 1
-    AGILITY_DAMAGE_MULTIPLIER: float = 0.5
-    STRENGTH_DAMAGE_MULTIPLIER: float = 0.5
-    AGILITY_CRITICAL_MULTIPLIER: float = 1
+    AGILITY_DAMAGE_MULTIPLIER: float = 0.75
+    STRENGTH_DAMAGE_MULTIPLIER: float = 0.75
+    CRITICAL_STRIKE_CHANCE_MULTIPLIER: float = 1
 
 
 @dataclass
@@ -30,4 +30,4 @@ class Stats:
     MAX_DAMAGE: float = 0
     CRITICAL_STRIKE_CHANCE: float = 0
     CRITICAL_STRIKE_MULTIPLIER: float = 0
-    STRIKE_CHANCE: float = 0
+    ACCURACY: float = 0
