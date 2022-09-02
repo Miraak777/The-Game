@@ -1,0 +1,11 @@
+from main_character.character import MainCharacter
+Character = MainCharacter()
+Character.set_class_warrior()
+Character.add_level()
+Character.add_strength()
+Character.add_agility()
+Character.add_vitality()
+Character.add_endurance()
+Character.set_max_health()
+print(Character.get_stats())
+print(Character.get_parameters())

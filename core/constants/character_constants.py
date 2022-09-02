@@ -1,0 +1,6 @@
+HEALTH = "health"
+STAMINA = "stamina"
+STRENGTH = "strength"
+AGILITY = "agility"
+VITALITY = "vitality"
+ENDURANCE = "endurance"
