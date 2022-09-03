@@ -11,8 +11,9 @@ from core.stats_formulas import characters_formulas as cf
 
 
 class MainCharacter:
-    def __init__(self):
+    def __init__(self, character_name: str):
         self._main_stats = MainStats
+        self._main_stats.NAME = character_name
         self._attributes = Attributes
         self._bars = Bars
         self._combat_stats = CombatStats
@@ -132,6 +133,7 @@ class MainCharacter:
 
     def get_main_stats(self):
         main_stats = {
+            msn.NAME: self._main_stats.NAME,
             msn.LEVEL: self._main_stats.LEVEL,
             msn.CLASS: self._main_stats.CLASS,
         }

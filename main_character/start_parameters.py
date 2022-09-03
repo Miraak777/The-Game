@@ -4,6 +4,7 @@ from core.constants.character_constants import Classes as c
 
 @dataclass
 class MainStats:
+    NAME: str = None
     LEVEL: int = 0
     CLASS: str = c.PEASANT
 

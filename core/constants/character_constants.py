@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class MainStatsNames:
+    NAME: str = "character_name"
     LEVEL: str = "level"
     CLASS: str = "class"
 
