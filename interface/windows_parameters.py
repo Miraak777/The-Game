@@ -13,4 +13,3 @@ class WindowSizes:
 @dataclass
 class WindowsFonts:
     FONT_SIZE: int = 15
-

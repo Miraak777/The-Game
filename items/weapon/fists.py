@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Fists:
     WEAPON_NAME: str = "Fists"

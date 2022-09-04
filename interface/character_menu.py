@@ -1,15 +1,14 @@
-from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QHBoxLayout, QLabel, QWidget
-from PyQt6.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt6.QtCore import Qt
-from interface.interface_language.en_lang import CharacterMenuText
+from PyQt6.QtGui import QBrush, QIcon, QImage, QPalette
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QMainWindow, QVBoxLayout, QWidget
+
+from core.constants.character_constants import AttributesNames as an
+from core.constants.character_constants import BarsNames as bn
+from core.constants.character_constants import CombatStats as cs
+from core.constants.character_constants import MainStatsNames as msn
 from core.constants.path_constants import Paths
-from core.constants.character_constants import (
-    BarsNames as bn,
-    AttributesNames as an,
-    CombatStats as cs,
-    MainStatsNames as msn,
-)
-from interface.windows_parameters import WindowSizes, WindowsFonts
+from interface.interface_language.en_lang import CharacterMenuText
+from interface.windows_parameters import WindowsFonts, WindowSizes
 from main_character import MainCharacter
 
 
@@ -69,7 +68,9 @@ class CharacterMenu(QMainWindow):
         self._global_layout.addWidget(label)
 
     def _create_level_line(self):
-        label = QLabel(CharacterMenuText.LEVEL + str(self._main_character_stats[msn.LEVEL]))
+        label = QLabel(
+            CharacterMenuText.LEVEL + str(self._main_character_stats[msn.LEVEL])
+        )
         label = self._upper_font(label)
 
         self._global_layout.addWidget(label)
@@ -87,20 +88,20 @@ class CharacterMenu(QMainWindow):
 
     def _create_health_line(self):
         label = QLabel(
-            CharacterMenuText.HEALTH +
-            str(self._main_character_stats[bn.HEALTH][0]) +
-            "/" +
-            str(self._main_character_stats[bn.HEALTH][1])
+            CharacterMenuText.HEALTH
+            + str(self._main_character_stats[bn.HEALTH][0])
+            + "/"
+            + str(self._main_character_stats[bn.HEALTH][1])
         )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_stamina_line(self):
         label = QLabel(
-            CharacterMenuText.STAMINA +
-            str(self._main_character_stats[bn.STAMINA][0]) +
-            "/" +
-            str(self._main_character_stats[bn.STAMINA][1])
+            CharacterMenuText.STAMINA
+            + str(self._main_character_stats[bn.STAMINA][0])
+            + "/"
+            + str(self._main_character_stats[bn.STAMINA][1])
         )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
@@ -112,27 +113,38 @@ class CharacterMenu(QMainWindow):
         self._global_layout.addWidget(label)
 
     def _create_strength_line(self):
-        label = QLabel(CharacterMenuText.STRENGTH + str(self._main_character_stats[an.STRENGTH]))
+        label = QLabel(
+            CharacterMenuText.STRENGTH + str(self._main_character_stats[an.STRENGTH])
+        )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_agility_line(self):
-        label = QLabel(CharacterMenuText.AGILITY + str(self._main_character_stats[an.AGILITY]))
+        label = QLabel(
+            CharacterMenuText.AGILITY + str(self._main_character_stats[an.AGILITY])
+        )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_vitality_line(self):
-        label = QLabel(CharacterMenuText.VITALITY + str(self._main_character_stats[an.VITALITY]))
+        label = QLabel(
+            CharacterMenuText.VITALITY + str(self._main_character_stats[an.VITALITY])
+        )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_endurance_line(self):
-        label = QLabel(CharacterMenuText.ENDURANCE + str(self._main_character_stats[an.ENDURANCE]))
+        label = QLabel(
+            CharacterMenuText.ENDURANCE + str(self._main_character_stats[an.ENDURANCE])
+        )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_attribute_points_line(self):
-        label = QLabel(CharacterMenuText.ATTRIBUTE_POINTS + str(self._main_character_stats[an.ATTRIBUTE_POINTS]))
+        label = QLabel(
+            CharacterMenuText.ATTRIBUTE_POINTS
+            + str(self._main_character_stats[an.ATTRIBUTE_POINTS])
+        )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
@@ -144,28 +156,28 @@ class CharacterMenu(QMainWindow):
 
     def _create_damage_line(self):
         label = QLabel(
-            CharacterMenuText.DAMAGE +
-            str(self._main_character_stats[cs.MIN_DAMAGE]) +
-            "-" +
-            str(self._main_character_stats[cs.MAX_DAMAGE])
+            CharacterMenuText.DAMAGE
+            + str(self._main_character_stats[cs.MIN_DAMAGE])
+            + "-"
+            + str(self._main_character_stats[cs.MAX_DAMAGE])
         )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_accuracy_line(self):
         label = QLabel(
-            CharacterMenuText.ACCURACY +
-            str(self._main_character_stats[cs.ACCURACY] * 100) +
-            "%"
+            CharacterMenuText.ACCURACY
+            + str(self._main_character_stats[cs.ACCURACY] * 100)
+            + "%"
         )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
 
     def _create_critical_strike_chance_line(self):
         label = QLabel(
-            CharacterMenuText.CRITICAL_STRIKE_CHANCE +
-            str(self._main_character_stats[cs.CRITICAL_STRIKE_CHANCE] * 100) +
-            "%"
+            CharacterMenuText.CRITICAL_STRIKE_CHANCE
+            + str(self._main_character_stats[cs.CRITICAL_STRIKE_CHANCE] * 100)
+            + "%"
         )
         label = self._upper_font(label)
         self._global_layout.addWidget(label)
@@ -174,8 +186,8 @@ class CharacterMenu(QMainWindow):
         layout = QHBoxLayout()
 
         label = QLabel(
-            CharacterMenuText.CRITICAL_STRIKE_MULTIPLIER +
-            str(self._main_character_stats[cs.CRITICAL_STRIKE_MULTIPLIER])
+            CharacterMenuText.CRITICAL_STRIKE_MULTIPLIER
+            + str(self._main_character_stats[cs.CRITICAL_STRIKE_MULTIPLIER])
         )
         label = self._upper_font(label)
         layout.addWidget(label)

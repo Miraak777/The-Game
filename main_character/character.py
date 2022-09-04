@@ -1,13 +1,17 @@
-from main_character.start_parameters import MainStats, Attributes, Bars, CombatStats, ClassMultipliers
 import items.weapon
-from core.constants.character_constants import (
-    BarsNames as bn,
-    AttributesNames as an,
-    CombatStats as cs,
-    MainStatsNames as msn,
-    Classes,
-)
+from core.constants.character_constants import AttributesNames as an
+from core.constants.character_constants import BarsNames as bn
+from core.constants.character_constants import Classes
+from core.constants.character_constants import CombatStats as cs
+from core.constants.character_constants import MainStatsNames as msn
 from core.stats_formulas import characters_formulas as cf
+from main_character.start_parameters import (
+    Attributes,
+    Bars,
+    ClassMultipliers,
+    CombatStats,
+    MainStats,
+)
 
 
 class MainCharacter:
@@ -49,7 +53,7 @@ class MainCharacter:
         self._bars.MAX_HEALTH = cf.health_formula(
             health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
             level=self._main_stats.LEVEL,
-            vitality=self._attributes.VITALITY
+            vitality=self._attributes.VITALITY,
         )
         self._bars.MAX_STAMINA = cf.stamina_formula(
             stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
@@ -73,7 +77,7 @@ class MainCharacter:
         self._combat_stats.CRITICAL_STRIKE_CHANCE = cf.critical_strike_formula(
             base_critical_strike_chance=self._equipped_weapon.CRITICAL_STRIKE_CHANCE,
             agility=self._attributes.AGILITY,
-            critical_strike_chance_multiplier=self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER
+            critical_strike_chance_multiplier=self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER,
         )
         self._combat_stats.CRITICAL_STRIKE_MULTIPLIER = 1.5
         self._combat_stats.ACCURACY = cf.accuracy_formula(
@@ -147,6 +151,6 @@ class MainCharacter:
             cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
             cs.ACCURACY: self._combat_stats.ACCURACY,
             cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
-            cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
+            cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER,
         }
         return stats

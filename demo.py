@@ -1,6 +1,6 @@
-from interface import MainWindow
 from PyQt6.QtWidgets import QApplication
-from core.constants.path_constants import Paths
+
+from interface import MainWindow
 
 app = QApplication([])
 

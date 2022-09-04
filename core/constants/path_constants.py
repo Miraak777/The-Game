@@ -1,5 +1,5 @@
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent)
 
@@ -11,5 +11,7 @@ class Paths:
     )
     CHARACTER_MENU_ICON: str = str(Path(BASE_DIR, "icons", "character_menu_icon.png"))
     CHARACTER_MENU_BACKGROUND: str = str(
-        Path(BASE_DIR, "textures", "background_textures", "character_menu_background.png")
+        Path(
+            BASE_DIR, "textures", "background_textures", "character_menu_background.png"
+        )
     )
