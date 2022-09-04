@@ -1,4 +1,5 @@
 import items.weapon
+from typing import Dict
 from core.constants.character_constants import AttributesNames as an
 from core.constants.character_constants import BarsNames as bn
 from core.constants.character_constants import Classes
@@ -15,7 +16,7 @@ from main_character.start_parameters import (
 
 
 class MainCharacter:
-    def __init__(self, character_name: str):
+    def __init__(self, character_name: str) -> None:
         self._main_stats = MainStats
         self._main_stats.NAME = character_name
         self._attributes = Attributes
@@ -25,7 +26,7 @@ class MainCharacter:
         self._equipped_weapon = items.weapon.Fists
         self.add_level()
 
-    def set_class_warrior(self):
+    def set_class_warrior(self) -> None:
         self._class_multipliers.HEALTH_MULTIPLIER = 2
         self._class_multipliers.STAMINA_MULTIPLIER = 1
         self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0
@@ -33,7 +34,7 @@ class MainCharacter:
         self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 1
         self._main_stats.CLASS = Classes.WARRIOR
 
-    def set_class_assassin(self):
+    def set_class_assassin(self) -> None:
         self._class_multipliers.HEALTH_MULTIPLIER = 0.7
         self._class_multipliers.STAMINA_MULTIPLIER = 1.5
         self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 1
@@ -41,7 +42,7 @@ class MainCharacter:
         self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0
         self._main_stats.CLASS = Classes.ASSASSIN
 
-    def set_class_peasant(self):
+    def set_class_peasant(self) -> None:
         self._class_multipliers.HEALTH_MULTIPLIER = 1
         self._class_multipliers.STAMINA_MULTIPLIER = 1
         self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0.5
@@ -49,7 +50,7 @@ class MainCharacter:
         self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 1
         self._main_stats.CLASS = Classes.PEASANT
 
-    def _refresh_stats(self):
+    def _refresh_stats(self) -> None:
         self._bars.MAX_HEALTH = cf.health_formula(
             health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
             level=self._main_stats.LEVEL,
@@ -87,23 +88,23 @@ class MainCharacter:
         )
 
     @staticmethod
-    def _not_enough_points():
+    def _not_enough_points() -> None:
         print("Not enough attribute points!")
 
-    def set_max_health(self):
+    def set_max_health(self) -> None:
         self._bars.HEALTH = self._bars.MAX_HEALTH
 
-    def set_max_stamina(self):
+    def set_max_stamina(self) -> None:
         self._bars.STAMINA = self._bars.MAX_STAMINA
 
-    def add_level(self):
+    def add_level(self) -> None:
         self._main_stats.LEVEL += 1
         self._attributes.ATTRIBUTE_POINTS += 3
         self._refresh_stats()
         self.set_max_health()
         self.set_max_stamina()
 
-    def add_endurance(self):
+    def add_endurance(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.ENDURANCE += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
@@ -111,7 +112,7 @@ class MainCharacter:
         else:
             self._not_enough_points()
 
-    def add_vitality(self):
+    def add_vitality(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.VITALITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
@@ -119,7 +120,7 @@ class MainCharacter:
         else:
             self._not_enough_points()
 
-    def add_strength(self):
+    def add_strength(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.STRENGTH += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
@@ -127,7 +128,7 @@ class MainCharacter:
         else:
             self._not_enough_points()
 
-    def add_agility(self):
+    def add_agility(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.AGILITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
@@ -135,7 +136,7 @@ class MainCharacter:
         else:
             self._not_enough_points()
 
-    def get_stats(self):
+    def get_stats(self) -> Dict:
         stats = {
             msn.NAME: self._main_stats.NAME,
             msn.LEVEL: self._main_stats.LEVEL,

@@ -56,7 +56,7 @@ class CharacterMenu(QMainWindow):
         label.setFont(font)
         return label
 
-    def _create_general_line(self):
+    def _create_general_line(self) -> None:
         label = QLabel(CharacterMenuText.GENERAL)
         label = self._upper_font(label)
         label = self._bold_font(label)

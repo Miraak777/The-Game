@@ -18,7 +18,7 @@ from main_character import MainCharacter
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self._main_character_name = None
         self._main_character = None
@@ -36,20 +36,20 @@ class MainWindow(QMainWindow):
         self._widget.setLayout(self._layout)
         self.setCentralWidget(self._widget)
 
-    def _main_window_init(self):
+    def _main_window_init(self) -> None:
         self.setWindowTitle(MainMenuText.TITLE)
         self.setFixedSize(WindowSizes.MAIN_WINDOW_SIZE)
         self._create_background()
         self._layout = QGridLayout()
 
-    def _create_background(self):
+    def _create_background(self) -> None:
         background_image = QImage(Paths.MAIN_MENU_BACKGROUND)
         background_image.scaled(WindowSizes.MAIN_WINDOW_SIZE)
         palette = QPalette()
         palette.setBrush(QPalette.ColorRole.Window, QBrush(background_image))
         self.setPalette(palette)
 
-    def _create_character_create_button(self):
+    def _create_character_create_button(self) -> None:
         self._character_creation_layout = QVBoxLayout()
         self._character_create_name_line_edit = QLineEdit()
         self._character_create_name_line_edit.setMaxLength(15)
@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
         self._character_creation_layout.addWidget(self._character_create_button)
         self._layout.addLayout(self._character_creation_layout, 1, 1)
 
-    def _create_character_menu_button(self):
+    def _create_character_menu_button(self) -> None:
         self._character_menu_button = QPushButton(icon=QIcon(Paths.CHARACTER_MENU_ICON))
         self._character_menu_button.setIconSize(
             MainWindowButtons.CHARACTER_MENU_BUTTON_SIZE
@@ -87,17 +87,17 @@ class MainWindow(QMainWindow):
         self._character_menu_button.hide()
         self._layout.addWidget(self._character_menu_button, 2, 2)
 
-    def _open_character_menu(self):
+    def _open_character_menu(self) -> None:
         self.character_menu = CharacterMenu(self._main_character)
         self.character_menu.show()
 
-    def _create_new_character(self):
+    def _create_new_character(self) -> None:
         self._main_character = MainCharacter(self._main_character_name)
         self._character_menu_button.show()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
 
-    def _main_character_name_entered(self, name):
+    def _main_character_name_entered(self, name) -> None:
         self._main_character_name = name
         if name != "" or None:
             self._character_create_button.setEnabled(True)
