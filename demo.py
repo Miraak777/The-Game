@@ -1,17 +1,10 @@
-from main_character.character import MainCharacter
+from interface import MainWindow
+from PyQt6.QtWidgets import QApplication
+from core.constants.path_constants import Paths
 
-Character = MainCharacter()
-# Character.set_class_assassin()
-# Character.set_class_warrior()
-Character.add_strength()
-Character.add_agility()
-Character.add_vitality()
-# Character.add_endurance()
-Character.set_max_health()
-Character.set_max_stamina()
-print(
-    Character.get_main_stats(), "\n",
-    Character.get_bars(), "\n",
-    Character.get_attributes(), "\n",
-    Character.get_combat_stats(), "\n",
-)
+app = QApplication([])
+
+main_window = MainWindow()
+main_window.show()
+
+app.exec()

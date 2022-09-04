@@ -3,37 +3,41 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class MainStatsNames:
-    NAME: str = "character_name"
-    LEVEL: str = "level"
-    CLASS: str = "class"
+    NAME: str = "Character Name"
+    LEVEL: str = "Level"
+    CLASS: str = "Class"
 
 
 @dataclass(frozen=True)
 class AttributesNames:
-    STRENGTH: str = "strength"
-    AGILITY: str = "agility"
-    VITALITY: str = "vitality"
-    ENDURANCE: str = "endurance"
-    ATTRIBUTE_POINTS: str = "attribute_points"
+    ATTRIBUTES: str = "Attributes"
+    STRENGTH: str = "Strength"
+    AGILITY: str = "Agility"
+    VITALITY: str = "Vitality"
+    ENDURANCE: str = "Endurance"
+    ATTRIBUTE_POINTS: str = "Attribute Points"
 
 
 @dataclass(frozen=True)
 class BarsNames:
-    HEALTH: str = "health"
-    STAMINA: str = "stamina"
+    BARS: str = "Bars"
+    HEALTH: str = "Health"
+    STAMINA: str = "Stamina"
 
 
 @dataclass(frozen=True)
 class CombatStats:
-    MIN_DAMAGE = "min_damage"
-    MAX_DAMAGE = "max_damage"
-    CRITICAL_STRIKE_CHANCE = "critical_strike_chance"
-    CRITICAL_STRIKE_MULTIPLIER = "critical_strike_multiplier"
-    ACCURACY = "accuracy"
+    STATS: str = "Stats"
+    DAMAGE: str = "Damage"
+    MIN_DAMAGE: str = "min_damage"
+    MAX_DAMAGE: str = "max_damage"
+    CRITICAL_STRIKE_CHANCE: str = "Critical Strike Chance"
+    CRITICAL_STRIKE_MULTIPLIER: str = "Critical Strike Multiplier"
+    ACCURACY: str = "Accuracy"
 
 
 @dataclass(frozen=True)
 class Classes:
-    PEASANT = "peasant"
-    WARRIOR = "warrior"
-    ASSASSIN = "assassin"
+    PEASANT: str = "Peasant"
+    WARRIOR: str = "Warrior"
+    ASSASSIN: str = "Assassin"
