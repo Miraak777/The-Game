@@ -39,6 +39,6 @@ class CombatStats:
 class ClassMultipliers:
     HEALTH_MULTIPLIER: float = 1
     STAMINA_MULTIPLIER: float = 1
-    AGILITY_DAMAGE_MULTIPLIER: float = 0.75
-    STRENGTH_DAMAGE_MULTIPLIER: float = 0.75
+    AGILITY_DAMAGE_MULTIPLIER: float = 0.5
+    STRENGTH_DAMAGE_MULTIPLIER: float = 0.5
     CRITICAL_STRIKE_CHANCE_MULTIPLIER: float = 1

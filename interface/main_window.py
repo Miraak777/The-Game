@@ -2,7 +2,6 @@ from core.constants.path_constants import Paths
 from interface.character_menu import CharacterMenu
 from interface.windows_parameters import WindowSizes
 from interface.interface_language.en_lang import MainMenuText
-from PyQt6.QtCore import Qt
 from core.constants.button_size_constants import MainWindowButtons
 from main_character import MainCharacter
 from PyQt6.QtGui import QIcon, QImage, QPalette, QBrush
@@ -20,12 +19,14 @@ from PyQt6.QtWidgets import (
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self._main_character_name = None
+        self._main_character = None
+
         self._main_window_init()
 
         self._create_character_menu_button()
-        self._character_menu_button.setEnabled(False)
 
-        self._main_character_name: str = None
+
         self._create_character_create_button()
 
         self._test_label = QLabel()
@@ -71,15 +72,16 @@ class MainWindow(QMainWindow):
         self._character_menu_button.setFixedSize(MainWindowButtons.CHARACTER_MENU_BUTTON_SIZE)
         self._character_menu_button.setCheckable(True)
         self._character_menu_button.clicked.connect(self._open_character_menu)
+        self._character_menu_button.hide()
         self._layout.addWidget(self._character_menu_button, 2, 2)
 
     def _open_character_menu(self):
-        self.character_menu = CharacterMenu()
+        self.character_menu = CharacterMenu(self._main_character)
         self.character_menu.show()
 
     def _create_new_character(self):
-        self.main_character = MainCharacter(self._main_character_name)
-        self._character_menu_button.setEnabled(True)
+        self._main_character = MainCharacter(self._main_character_name)
+        self._character_menu_button.show()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
 

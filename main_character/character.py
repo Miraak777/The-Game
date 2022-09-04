@@ -40,8 +40,8 @@ class MainCharacter:
     def set_class_peasant(self):
         self._class_multipliers.HEALTH_MULTIPLIER = 1
         self._class_multipliers.STAMINA_MULTIPLIER = 1
-        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0.75
-        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0.75
+        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0.5
+        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0.5
         self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 1
         self._main_stats.CLASS = Classes.PEASANT
 
@@ -131,37 +131,22 @@ class MainCharacter:
         else:
             self._not_enough_points()
 
-    def get_main_stats(self):
-        main_stats = {
+    def get_stats(self):
+        stats = {
             msn.NAME: self._main_stats.NAME,
             msn.LEVEL: self._main_stats.LEVEL,
             msn.CLASS: self._main_stats.CLASS,
-        }
-        return main_stats
-
-    def get_bars(self):
-        bars = {
             bn.HEALTH: (self._bars.MAX_HEALTH, self._bars.HEALTH),
             bn.STAMINA: (self._bars.MAX_STAMINA, self._bars.STAMINA),
-        }
-        return bars
-
-    def get_attributes(self):
-        attributes = {
             an.STRENGTH: self._attributes.STRENGTH,
             an.AGILITY: self._attributes.AGILITY,
             an.VITALITY: self._attributes.VITALITY,
             an.ENDURANCE: self._attributes.ENDURANCE,
-            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS
-        }
-        return attributes
-
-    def get_combat_stats(self):
-        combat_stats = {
+            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS,
             cs.MIN_DAMAGE: self._combat_stats.MIN_DAMAGE,
             cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
             cs.ACCURACY: self._combat_stats.ACCURACY,
             cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
             cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
         }
-        return combat_stats
+        return stats

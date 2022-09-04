@@ -25,4 +25,4 @@ def critical_strike_formula(base_critical_strike_chance, agility, critical_strik
 
 
 def accuracy_formula(accuracy, agility, level):
-    return accuracy * (agility * 5 - level)
+    return accuracy * (1 + (agility * 5 - level))
