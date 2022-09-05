@@ -24,7 +24,7 @@ class BarsNames:
 
 
 @dataclass(frozen=True)
-class CombatStats:
+class CombatStatsNames:
     MIN_DAMAGE: str = "min_damage"
     MAX_DAMAGE: str = "max_damage"
     CRITICAL_STRIKE_CHANCE: str = "critical_strike_chance"

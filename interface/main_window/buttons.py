@@ -5,7 +5,7 @@ from core import Paths
 from interface.interface_language.en_lang import MainMenuText
 
 
-def _create_character_create_button(self) -> None:
+def create_character_create_button(self) -> None:
     self._character_creation_layout = QVBoxLayout()
     self._character_create_name_line_edit = QLineEdit()
     self._character_create_name_line_edit.setMaxLength(15)
@@ -31,7 +31,7 @@ def _create_character_create_button(self) -> None:
     self._layout.addLayout(self._character_creation_layout, 1, 1)
 
 
-def _create_character_menu_button(self) -> None:
+def create_character_menu_button(self) -> None:
     self._character_menu_button = QPushButton(icon=QIcon(Paths.CHARACTER_MENU_ICON))
     self._character_menu_button.setIconSize(
         MainWindowButtons.CHARACTER_MENU_BUTTON_SIZE

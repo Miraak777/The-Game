@@ -6,13 +6,13 @@ from core.constants.character_constants import Classes as c
 @dataclass
 class MainStats:
     NAME: str = None
-    LEVEL: int = 0
+    LEVEL: int = 1
     CLASS: str = c.PEASANT
 
 
 @dataclass
 class Attributes:
-    ATTRIBUTE_POINTS: int = 0
+    ATTRIBUTE_POINTS: int = 3
     ENDURANCE: int = 0
     STRENGTH: int = 0
     VITALITY: int = 0

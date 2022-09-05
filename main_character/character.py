@@ -3,7 +3,7 @@ from typing import Dict
 from core.constants.character_constants import AttributesNames as an
 from core.constants.character_constants import BarsNames as bn
 from core.constants.character_constants import Classes
-from core.constants.character_constants import CombatStats as cs
+from core.constants.character_constants import CombatStatsNames as cs
 from core.constants.character_constants import MainStatsNames as msn
 from core.stats_formulas import characters_formulas as cf
 from main_character.start_parameters import (
@@ -24,7 +24,6 @@ class MainCharacter:
         self._combat_stats = CombatStats
         self._class_multipliers = ClassMultipliers
         self._equipped_weapon = items.weapon.Fists
-        self.add_level()
 
     def set_class_warrior(self) -> None:
         self._class_multipliers.HEALTH_MULTIPLIER = 2
@@ -137,6 +136,7 @@ class MainCharacter:
             self._not_enough_points()
 
     def get_stats(self) -> Dict:
+        self._refresh_stats()
         stats = {
             msn.NAME: self._main_stats.NAME,
             msn.LEVEL: self._main_stats.LEVEL,
