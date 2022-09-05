@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QWidget,
 )
+from PyQt6.QtCore import Qt
 import interface.main_window.buttons as buttons
 from core.constants.path_constants import Paths
 from interface.character_menu.character_menu import CharacterMenu
@@ -28,8 +29,11 @@ class MainWindow(QMainWindow):
 
         buttons.create_character_create_button(self)
 
-        self._dummy_widget = QWidget()
-        self._layout.addWidget(self._dummy_widget, 0, 0)
+        self._dummy_widget1 = QWidget()
+        self._layout.addWidget(self._dummy_widget1, 0, 0)
+
+        self._dummy_widget2 = QWidget()
+        self._layout.addWidget(self._dummy_widget2, 2, 2)
 
         self._widget = QWidget()
         self._widget.setLayout(self._layout)
@@ -39,7 +43,7 @@ class MainWindow(QMainWindow):
         self._main_character_name = DUMMY
         self._main_character = MainCharacter(self._main_character_name)
         self._character_menu = CharacterMenu(self._main_character)
-        self._layout.addWidget(self._character_menu)
+        self._layout.addWidget(self._character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
         self._character_menu.hide()
 
     def _create_background(self) -> None:
@@ -59,6 +63,7 @@ class MainWindow(QMainWindow):
     def _create_new_character(self) -> None:
         self._main_character = MainCharacter(self._main_character_name)
         self._character_menu_button.show()
+        self._dummy_widget2.hide()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
 

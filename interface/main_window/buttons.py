@@ -1,6 +1,8 @@
 from core.constants.button_size_constants import MainWindowButtons
+from core.constants.windows_constants import ButtonSizes
 from PyQt6.QtWidgets import QVBoxLayout, QLineEdit, QPushButton
 from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
 from core import Paths
 from interface.interface_language.en_lang import MainMenuText
 
@@ -9,6 +11,7 @@ def create_character_create_button(self) -> None:
     self._character_creation_layout = QVBoxLayout()
     self._character_create_name_line_edit = QLineEdit()
     self._character_create_name_line_edit.setMaxLength(15)
+    self._character_create_name_line_edit.setFixedSize(ButtonSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
     self._character_create_name_line_edit.setPlaceholderText(
         MainMenuText.CHARACTER_NAME_PLACEHOLDER
     )
@@ -42,4 +45,5 @@ def create_character_menu_button(self) -> None:
     self._character_menu_button.setCheckable(True)
     self._character_menu_button.clicked.connect(self._open_character_menu)
     self._character_menu_button.hide()
-    self._layout.addWidget(self._character_menu_button, 2, 2)
+    self._layout.addWidget(self._character_menu_button, 2, 2,
+                           alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))

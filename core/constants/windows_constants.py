@@ -13,3 +13,8 @@ class WindowSizes:
 @dataclass
 class WindowsFonts:
     FONT_SIZE: int = 15
+
+
+@dataclass
+class ButtonSizes:
+    CHARACTER_CREATE_NAME_LINE_EDIT: PyQt6.QtCore.QSize = QSize(150, 30)
