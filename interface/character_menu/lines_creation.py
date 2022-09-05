@@ -55,7 +55,7 @@ def create_class_line(self):
     self._layout.addWidget(label)
 
 
-def create_bars_line(self):
+def create_bars_lines(self):
     label = QLabel(CharacterMenuText.BARS)
     label = upper_font(label)
     label = bold_font(label)
@@ -88,7 +88,7 @@ def create_stamina_line(self):
     self._layout.addWidget(label)
 
 
-def create_attributes_line(self):
+def create_attributes_lines(self):
     label = QLabel(CharacterMenuText.ATTRIBUTES)
     label = upper_font(label)
     label = bold_font(label)
@@ -141,7 +141,7 @@ def create_attribute_points_line(self):
     self._layout.addWidget(label)
 
 
-def create_stats_line(self):
+def create_stats_lines(self):
     label = QLabel(CharacterMenuText.STATS)
     label = upper_font(label)
     label = bold_font(label)

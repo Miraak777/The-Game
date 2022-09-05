@@ -39,6 +39,7 @@ class MainWindow(QMainWindow):
         self._main_character_name = DUMMY
         self._main_character = MainCharacter(self._main_character_name)
         self._character_menu = CharacterMenu(self._main_character)
+        self._layout.addWidget(self._character_menu)
         self._character_menu.hide()
 
     def _create_background(self) -> None:

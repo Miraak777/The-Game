@@ -38,9 +38,9 @@ class CharacterMenu(QWidget):
         self._main_character = main_character
         self._main_character_stats = self._main_character.get_stats()
         lines.create_general_lines(self)
-        lines.create_bars_line(self)
-        lines.create_attributes_line(self)
-        lines.create_stats_line(self)
+        lines.create_bars_lines(self)
+        lines.create_attributes_lines(self)
+        lines.create_stats_lines(self)
 
     def _create_layout(self, main_character: MainCharacter):
         self._layout = QVBoxLayout()
