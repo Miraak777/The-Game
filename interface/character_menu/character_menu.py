@@ -11,12 +11,12 @@ import interface.character_menu.lines_creation as lines
 class CharacterMenu(QWidget):
     def __init__(self, main_character: MainCharacter):
         super().__init__()
-        self.setAutoFillBackground(True)
         self.setFixedSize(WindowSizes.CHARACTER_MENU_SIZE)
         self._create_background()
         self._create_layout(main_character)
 
     def _create_background(self):
+        self.setAutoFillBackground(True)
         background_image = QImage(Paths.CHARACTER_MENU_BACKGROUND)
         background_image.scaled(WindowSizes.CHARACTER_MENU_SIZE)
         palette = QPalette()
