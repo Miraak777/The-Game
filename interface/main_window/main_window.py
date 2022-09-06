@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QWidget,
     QVBoxLayout,
+    QHBoxLayout,
 )
 from PyQt6.QtCore import Qt
 import interface.main_window.buttons as buttons
@@ -23,9 +24,7 @@ class MainWindow(QMainWindow):
         self._layout = QGridLayout()
 
         self._create_background()
-
         self._create_menus()
-
         self._create_buttons()
 
         self._dummy_widget1 = QWidget()
@@ -57,15 +56,16 @@ class MainWindow(QMainWindow):
         character_creation = buttons.create_character_create_button(self)
         self._character_create_name_line_edit = character_creation[wn.CHARACTER_CREATE_NAME_LINE_EDIT]
         self._character_create_button = character_creation[wn.CHARACTER_CREATE_BUTTON]
-        character_creation_layout = QVBoxLayout()
 
+        character_creation_layout = QVBoxLayout()
         character_creation_layout.addWidget(self._character_create_name_line_edit)
         character_creation_layout.addWidget(self._character_create_button)
-
-        self._layout.addWidget(self._character_menu_button, 2, 2,
-                               alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))
+        menus_buttons_layout = QHBoxLayout()
+        menus_buttons_layout.addWidget(self._character_menu_button)
 
         self._layout.addLayout(character_creation_layout, 1, 1)
+        self._layout.addLayout(menus_buttons_layout, 2, 2,
+                               alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))
 
     def _event_open_character_menu(self) -> None:
         if self._character_menu.isHidden():
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
         self._main_character = MainCharacter(self._main_character_name)
         self._main_character.set_max_health()
         self._main_character.set_max_stamina()
-        self._character_menu_button.show()
+        self._character_menu_button.setDisabled(False)
         self._dummy_widget2.hide()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
