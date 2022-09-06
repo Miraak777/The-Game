@@ -1,8 +1,7 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QBrush, QIcon, QImage, QPalette
+from PyQt6.QtGui import QBrush, QImage, QPalette
 from PyQt6.QtWidgets import QVBoxLayout, QWidget
 from core.constants.path_constants import Paths
-from interface.interface_language.en_lang import CharacterMenuText
 from core.constants.windows_constants import WindowSizes
 from main_character import MainCharacter
 import interface.character_menu.lines_creation as lines

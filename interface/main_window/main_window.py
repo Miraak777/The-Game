@@ -55,6 +55,7 @@ class MainWindow(QMainWindow):
         self._option_menu.hide()
 
         self._layout.addWidget(self._character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
+        self._layout.addWidget(self._option_menu, 0, 0)
 
     def _create_buttons(self):
         character_creation = buttons.create_character_create_button(self)
