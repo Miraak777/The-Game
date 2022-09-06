@@ -69,9 +69,9 @@ def create_bars_lines(self):
 def create_health_line(self):
     label = QLabel(
         CharacterMenuText.HEALTH
-        + str(self._main_character_stats[bn.HEALTH][0])
+        + str(self._main_character_stats[bn.MAX_HEALTH])
         + "/"
-        + str(self._main_character_stats[bn.HEALTH][1])
+        + str(self._main_character_stats[bn.HEALTH])
     )
     label = upper_font(label)
     self._layout.addWidget(label)
@@ -80,9 +80,9 @@ def create_health_line(self):
 def create_stamina_line(self):
     label = QLabel(
         CharacterMenuText.STAMINA
-        + str(self._main_character_stats[bn.STAMINA][0])
+        + str(self._main_character_stats[bn.MAX_STAMINA])
         + "/"
-        + str(self._main_character_stats[bn.STAMINA][1])
+        + str(self._main_character_stats[bn.STAMINA])
     )
     label = upper_font(label)
     self._layout.addWidget(label)

@@ -19,7 +19,9 @@ class AttributesNames:
 
 @dataclass(frozen=True)
 class BarsNames:
+    MAX_HEALTH: str = "max_health"
     HEALTH: str = "health"
+    MAX_STAMINA: str = "max_stamina"
     STAMINA: str = "stamina"
 
 

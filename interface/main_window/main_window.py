@@ -62,6 +62,8 @@ class MainWindow(QMainWindow):
 
     def _create_new_character(self) -> None:
         self._main_character = MainCharacter(self._main_character_name)
+        self._main_character.set_max_health()
+        self._main_character.set_max_stamina()
         self._character_menu_button.show()
         self._dummy_widget2.hide()
         self._character_create_button.hide()
