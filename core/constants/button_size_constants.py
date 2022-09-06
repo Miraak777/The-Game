@@ -8,3 +8,4 @@ from PyQt6.QtCore import QSize
 class MainWindowButtons:
     CHARACTER_MENU_BUTTON_SIZE: QSize = QSize(40, 40)
     CHARACTER_CREATION_BUTTON_SIZE: QSize = QSize(150, 40)
+#     TODO сделать настройку через конфиг
