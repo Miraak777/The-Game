@@ -55,5 +55,5 @@ def create_option_menu_button(self) -> QWidget:
     option_menu_button = QPushButton(icon=QIcon(Paths.OPTION_MENU_ICON))
     option_menu_button = set_menus_button_and_icon_sizes(option_menu_button)
     option_menu_button.setCheckable(True)
-    option__menu_button.clicked.connect()
+    option_menu_button.clicked.connect(self._event_open_options_menu)
     return option_menu_button

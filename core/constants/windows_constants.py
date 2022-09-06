@@ -7,7 +7,8 @@ from PyQt6.QtCore import QSize
 @dataclass
 class WindowSizes:
     MAIN_WINDOW_SIZE: PyQt6.QtCore.QSize = QSize(1200, 700)
-    CHARACTER_MENU_SIZE: PyQt6.QtCore.QSize = QSize(400, 700)
+    CHARACTER_MENU_SIZE: PyQt6.QtCore.QSize = QSize(400, 500)
+    OPTION_MENU_SIZE: PyQt6.QtCore.QSize = QSize(1000, 600)
 #     TODO сделать настройку через конфиг
 
 @dataclass

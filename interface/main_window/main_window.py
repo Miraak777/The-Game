@@ -10,6 +10,7 @@ from PyQt6.QtCore import Qt
 import interface.main_window.buttons as buttons
 from core.constants.path_constants import Paths
 from interface.character_menu.character_menu import CharacterMenu
+from interface.option_menu.option_menu import OptionMenu
 from interface.interface_language.en_lang import MainMenuText
 from core.constants.windows_constants import WindowSizes, WidgetNames as wn
 from main_character import MainCharacter
@@ -47,21 +48,28 @@ class MainWindow(QMainWindow):
     def _create_menus(self):
         self._main_character_name = DUMMY
         self._main_character = MainCharacter(self._main_character_name)
+
         self._character_menu = CharacterMenu(self._main_character)
-        self._layout.addWidget(self._character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
         self._character_menu.hide()
+        self._option_menu = OptionMenu()
+        self._option_menu.hide()
+
+        self._layout.addWidget(self._character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
 
     def _create_buttons(self):
-        self._character_menu_button = buttons.create_character_menu_button(self)
         character_creation = buttons.create_character_create_button(self)
         self._character_create_name_line_edit = character_creation[wn.CHARACTER_CREATE_NAME_LINE_EDIT]
         self._character_create_button = character_creation[wn.CHARACTER_CREATE_BUTTON]
+        self._character_menu_button = buttons.create_character_menu_button(self)
+        self._option_menu_button = buttons.create_option_menu_button(self)
 
         character_creation_layout = QVBoxLayout()
         character_creation_layout.addWidget(self._character_create_name_line_edit)
         character_creation_layout.addWidget(self._character_create_button)
+
         menus_buttons_layout = QHBoxLayout()
         menus_buttons_layout.addWidget(self._character_menu_button)
+        menus_buttons_layout.addWidget(self._option_menu_button)
 
         self._layout.addLayout(character_creation_layout, 1, 1)
         self._layout.addLayout(menus_buttons_layout, 2, 2,
@@ -73,6 +81,12 @@ class MainWindow(QMainWindow):
             self._character_menu.show()
         else:
             self._character_menu.hide()
+
+    def _event_open_options_menu(self):
+        if self._option_menu.isHidden():
+            self._option_menu.show()
+        else:
+            self._option_menu.hide()
 
     def _event_create_new_character(self) -> None:
         self._main_character = MainCharacter(self._main_character_name)
