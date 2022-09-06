@@ -11,8 +11,7 @@ import interface.character_menu.lines_creation as lines
 class CharacterMenu(QWidget):
     def __init__(self, main_character: MainCharacter):
         super().__init__()
-        self.setWindowIcon(QIcon(Paths.CHARACTER_MENU_ICON))
-        self.setWindowTitle(CharacterMenuText.TITLE)
+        self.setAutoFillBackground(True)
         self.setFixedSize(WindowSizes.CHARACTER_MENU_SIZE)
         self._create_background()
         self._create_layout(main_character)
