@@ -4,7 +4,6 @@ from PyQt6.QtWidgets import QLineEdit, QPushButton, QWidget
 from PyQt6.QtGui import QIcon
 from core import Paths
 from typing import Dict
-from interface.interface_language.en_lang import MainMenuText
 
 
 def set_menus_button_and_icon_sizes(menu_button: QPushButton) -> QPushButton:
@@ -17,19 +16,19 @@ def set_menus_button_and_icon_sizes(menu_button: QPushButton) -> QPushButton:
     return menu_button
 
 
-def create_character_create_button(self) -> Dict:
+def create_character_create_button(self, text) -> Dict:
     character_create_name_line_edit = QLineEdit()
     character_create_name_line_edit.setMaxLength(15)
     character_create_name_line_edit.setFixedSize(ButtonSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
     character_create_name_line_edit.setPlaceholderText(
-        MainMenuText.CHARACTER_NAME_PLACEHOLDER
+        text.CHARACTER_NAME_PLACEHOLDER
     )
     character_create_name_line_edit.textChanged.connect(
         self._event_main_character_name_entered
     )
 
     character_create_button = QPushButton(
-        text=MainMenuText.CHARACTER_CREATE_BUTTON
+        text=text.CHARACTER_CREATE_BUTTON
     )
     character_create_button.setFixedSize(
         MainWindowButtons.CHARACTER_CREATION_BUTTON_SIZE

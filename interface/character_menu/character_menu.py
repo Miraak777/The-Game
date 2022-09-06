@@ -4,17 +4,19 @@ from PyQt6.QtWidgets import QVBoxLayout, QWidget
 from core.constants.path_constants import Paths
 from core.constants.windows_constants import WindowSizes
 from main_character import MainCharacter
+from interface.interface_language.character_menu_text import Text
 import interface.character_menu.lines_creation as lines
 
 
 class CharacterMenu(QWidget):
-    def __init__(self, main_character: MainCharacter):
+    def __init__(self, main_character: MainCharacter, language: str):
         super().__init__()
+        self._text = Text[language]
         self.setFixedSize(WindowSizes.CHARACTER_MENU_SIZE)
         self._create_background()
         self._create_layout(main_character)
 
-    def _create_background(self):
+    def _create_background(self) -> None:
         self.setAutoFillBackground(True)
         background_image = QImage(Paths.CHARACTER_MENU_BACKGROUND)
         background_image.scaled(WindowSizes.CHARACTER_MENU_SIZE)
@@ -22,7 +24,7 @@ class CharacterMenu(QWidget):
         palette.setBrush(QPalette.ColorRole.Window, QBrush(background_image))
         self.setPalette(palette)
 
-    def refresh_character_menu(self, main_character: MainCharacter):
+    def refresh_character_menu(self, main_character: MainCharacter) -> None:
         item_list = list(range(self._layout.count()))
         item_list.reverse()
         for i in item_list:
@@ -40,7 +42,7 @@ class CharacterMenu(QWidget):
         lines.create_attributes_lines(self)
         lines.create_stats_lines(self)
 
-    def _create_layout(self, main_character: MainCharacter):
+    def _create_layout(self, main_character: MainCharacter) -> None:
         self._layout = QVBoxLayout()
         self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self._create_lines(main_character)

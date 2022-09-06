@@ -6,6 +6,9 @@ BASE_DIR = str(Path(__file__).resolve().parent.parent)
 
 @dataclass(frozen=True)
 class Paths:
+    PATH_TO_SETTINGS: str = str(
+        Path(BASE_DIR, "settings.yml")
+    )
     MAIN_MENU_BACKGROUND: str = str(
         Path(BASE_DIR, "textures", "background_textures", "main_menu_background.jpg")
     )
@@ -16,7 +19,7 @@ class Paths:
     )
     OPTION_MENU_BACKGROUND: str = str(
         Path(
-            BASE_DIR, "textures", "background_textures", "option_menu_background.png"
+            BASE_DIR, "textures", "background_textures", "option_menu_background.jpg"
         )
     )
     CHARACTER_MENU_ICON: str = str(Path(BASE_DIR, "icons", "character_menu_icon.png"))

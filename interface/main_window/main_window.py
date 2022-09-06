@@ -11,17 +11,22 @@ import interface.main_window.buttons as buttons
 from core.constants.path_constants import Paths
 from interface.character_menu.character_menu import CharacterMenu
 from interface.option_menu.option_menu import OptionMenu
-from interface.interface_language.en_lang import MainMenuText
+from interface.interface_language.main_menu_text import Text
 from core.constants.windows_constants import WindowSizes, WidgetNames as wn
+from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from core.constants.common_constants import DUMMY
+from yaml import safe_load
 
 
 class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
-        self.setWindowTitle(MainMenuText.TITLE)
+        self._language = self._get_language()
+        self._text = Text[self._language]
+        self.setWindowTitle(self._text.TITLE)
         self.setFixedSize(WindowSizes.MAIN_WINDOW_SIZE)
+
         self._layout = QGridLayout()
 
         self._create_background()
@@ -38,6 +43,12 @@ class MainWindow(QMainWindow):
         self._widget.setLayout(self._layout)
         self.setCentralWidget(self._widget)
 
+    @staticmethod
+    def _get_language():
+        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+            settings = safe_load(settings_file)
+        return settings[LANGUAGE]
+
     def _create_background(self) -> None:
         background_image = QImage(Paths.MAIN_MENU_BACKGROUND)
         background_image.scaled(WindowSizes.MAIN_WINDOW_SIZE)
@@ -49,16 +60,18 @@ class MainWindow(QMainWindow):
         self._main_character_name = DUMMY
         self._main_character = MainCharacter(self._main_character_name)
 
-        self._character_menu = CharacterMenu(self._main_character)
+        self._character_menu = CharacterMenu(self._main_character, self._language)
         self._character_menu.hide()
-        self._option_menu = OptionMenu()
+        self._option_menu = OptionMenu(self._language)
         self._option_menu.hide()
 
-        self._layout.addWidget(self._character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
-        self._layout.addWidget(self._option_menu, 0, 0)
+        self._layout.addWidget(self._character_menu, 0, 2,
+                               alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter))
+        self._layout.addWidget(self._option_menu, 0, 1,
+                               alignment=Qt.AlignmentFlag.AlignCenter)
 
     def _create_buttons(self):
-        character_creation = buttons.create_character_create_button(self)
+        character_creation = buttons.create_character_create_button(self, self._text)
         self._character_create_name_line_edit = character_creation[wn.CHARACTER_CREATE_NAME_LINE_EDIT]
         self._character_create_button = character_creation[wn.CHARACTER_CREATE_BUTTON]
         self._character_menu_button = buttons.create_character_menu_button(self)
