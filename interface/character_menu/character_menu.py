@@ -6,6 +6,7 @@ from core.constants.windows_constants import WindowSizes
 from main_character import MainCharacter
 from interface.interface_language.character_menu_text import Text
 import interface.character_menu.lines_creation as lines
+from interface.common import clear_layout
 
 
 class CharacterMenu(QWidget):
@@ -25,13 +26,7 @@ class CharacterMenu(QWidget):
         self.setPalette(palette)
 
     def refresh_character_menu(self, main_character: MainCharacter) -> None:
-        item_list = list(range(self._layout.count()))
-        item_list.reverse()
-        for i in item_list:
-            item = self._layout.itemAt(i)
-            self._layout.removeItem(item)
-            if item.widget():
-                item.widget().deleteLater()
+        clear_layout(self._layout)
         self._create_lines(main_character)
 
     def _create_lines(self, main_character: MainCharacter) -> None:
