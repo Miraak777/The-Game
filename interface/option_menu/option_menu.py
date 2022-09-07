@@ -4,6 +4,8 @@ from core.constants.windows_constants import WindowSizes
 from core.constants.path_constants import Paths
 from interface.interface_language.option_menu_text import Text
 import interface.option_menu.lines_creation as lines
+from core.constants.language_constants import Language, LANGUAGE
+from yaml import safe_load, safe_dump
 
 
 class OptionMenu(QWidget):
@@ -11,6 +13,12 @@ class OptionMenu(QWidget):
         super().__init__()
         self._text = Text[language]
         self.setFixedSize(WindowSizes.OPTION_MENU_SIZE)
+
+        self._language_map = {
+            Language.ENGLISH: Language.EN,
+            Language.RUSSIAN: Language.RU,
+        }
+
         self._create_background()
         self._create_layout()
 
@@ -34,3 +42,11 @@ class OptionMenu(QWidget):
         lines.create_title_line(self)
 
         self.setLayout(self._layout)
+
+    def _event_change_language(self, chosen_language):
+        set_lang = self._language_map[chosen_language]
+        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+            settings = safe_load(settings_file)
+        settings[LANGUAGE] = set_lang
+        with open(Paths.PATH_TO_SETTINGS, 'w') as settings_file:
+            safe_dump(settings, settings_file, default_flow_style=False)

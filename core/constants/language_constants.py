@@ -5,6 +5,8 @@ from dataclasses import dataclass
 class Language:
     EN = "en"
     RU = "ru"
+    ENGLISH = "English"
+    RUSSIAN = "Русский"
 
 
 LANGUAGE = "language"
