@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QGridLayout
 from PyQt6.QtGui import QImage, QPalette, QBrush
-from core.constants.windows_constants import WindowSizes
+from core.constants.widget_constants import WindowSizes
 from core.constants.path_constants import Paths
 from interface.interface_language.option_menu_text import Text
 import interface.option_menu.lines_creation as lines

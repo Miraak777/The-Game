@@ -12,7 +12,7 @@ from core.constants.path_constants import Paths
 from interface.character_menu.character_menu import CharacterMenu
 from interface.option_menu.option_menu import OptionMenu
 from interface.interface_language.main_menu_text import Text
-from core.constants.windows_constants import WindowSizes, WidgetNames as wn
+from core.constants.widget_constants import WindowSizes, WidgetNames as wn
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from core.constants.common_constants import DUMMY
@@ -22,8 +22,8 @@ from yaml import safe_load
 class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
-        self._language = self._get_language()
-        self._text = Text[self._language]
+        self.language = self._get_language()
+        self._text = Text[self.language]
         self.setWindowTitle(self._text.TITLE)
         self.setFixedSize(WindowSizes.MAIN_WINDOW_SIZE)
 
@@ -58,11 +58,11 @@ class MainWindow(QMainWindow):
 
     def _create_menus(self):
         self._main_character_name = DUMMY
-        self._main_character = MainCharacter(self._main_character_name)
+        self.main_character = MainCharacter(self._main_character_name)
 
-        self._character_menu = CharacterMenu(self._main_character, self._language)
+        self._character_menu = CharacterMenu(self)
         self._character_menu.hide()
-        self._option_menu = OptionMenu(self._language)
+        self._option_menu = OptionMenu(self.language)
         self._option_menu.hide()
 
         self._layout.addWidget(self._character_menu, 0, 2,
@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
 
     def _event_open_character_menu(self) -> None:
         if self._character_menu.isHidden():
-            self._character_menu.refresh_character_menu(self._main_character)
+            self._character_menu.refresh_character_menu()
             self._character_menu.show()
         else:
             self._character_menu.hide()
@@ -103,10 +103,11 @@ class MainWindow(QMainWindow):
             self._option_menu.hide()
 
     def _event_create_new_character(self) -> None:
-        self._main_character = MainCharacter(self._main_character_name)
-        self._main_character.set_max_health()
-        self._main_character.set_max_stamina()
+        self.main_character = MainCharacter(self._main_character_name)
+        self.main_character.set_max_health()
+        self.main_character.set_max_stamina()
         self._character_menu_button.setDisabled(False)
+        self._option_menu_button.setDisabled(False)
         self._dummy_widget2.hide()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()

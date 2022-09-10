@@ -1,10 +1,12 @@
 import items.weapon
 from typing import Dict
-from core.constants.character_constants import AttributesNames as an
-from core.constants.character_constants import BarsNames as bn
-from core.constants.character_constants import Classes
-from core.constants.character_constants import CombatStatsNames as cs
-from core.constants.character_constants import MainStatsNames as msn
+from core.constants.character_constants import (
+    AttributesNames as an,
+    BarsNames as bn,
+    Classes,
+    CombatStatsNames as cs,
+    MainStatsNames as msn,
+)
 from core.stats_formulas import characters_formulas as cf
 from main_character.start_parameters import (
     Attributes,
@@ -24,6 +26,12 @@ class MainCharacter:
         self._combat_stats = CombatStats
         self._class_multipliers = ClassMultipliers
         self._equipped_weapon = items.weapon.Fists
+        self._attribute_map = {
+            an.STRENGTH: self._attributes.STRENGTH,
+            an.AGILITY: self._attributes.AGILITY,
+            an.VITALITY: self._attributes.VITALITY,
+            an.ENDURANCE: self._attributes.ENDURANCE,
+        }
 
     def set_class_warrior(self) -> None:
         self._class_multipliers.HEALTH_MULTIPLIER = 2
@@ -86,10 +94,6 @@ class MainCharacter:
             level=self._main_stats.LEVEL,
         )
 
-    @staticmethod
-    def _not_enough_points() -> None:
-        print("Not enough attribute points!")
-
     def set_max_health(self) -> None:
         self._bars.HEALTH = self._bars.MAX_HEALTH
 
@@ -108,32 +112,57 @@ class MainCharacter:
             self._attributes.ENDURANCE += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
-        else:
-            self._not_enough_points()
 
     def add_vitality(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.VITALITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
-        else:
-            self._not_enough_points()
 
     def add_strength(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.STRENGTH += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
-        else:
-            self._not_enough_points()
 
     def add_agility(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.AGILITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
             self._refresh_stats()
-        else:
-            self._not_enough_points()
+
+    def remove_strength(self):
+        if self._attributes.STRENGTH > 0:
+            self._attributes.STRENGTH -= 1
+            self._attributes.ATTRIBUTE_POINTS += 1
+            self._refresh_stats()
+
+    def remove_agility(self):
+        if self._attributes.AGILITY > 0:
+            self._attributes.AGILITY -= 1
+            self._attributes.ATTRIBUTE_POINTS += 1
+            self._refresh_stats()
+
+    def remove_vitality(self):
+        if self._attributes.VITALITY > 0:
+            self._attributes.VITALITY -= 1
+            self._attributes.ATTRIBUTE_POINTS += 1
+            self._refresh_stats()
+
+    def remove_endurance(self):
+        if self._attributes.ENDURANCE > 0:
+            self._attributes.ENDURANCE -= 1
+            self._attributes.ATTRIBUTE_POINTS += 1
+            self._refresh_stats()
+
+    def send_attributes(self, attributes: Dict) -> None:
+        attribute_count = 0
+        for attribute in attributes:
+            attribute_count += attributes[attribute]
+        if self._attributes.ATTRIBUTE_POINTS >= attribute_count:
+            self._attribute_map += attributes
+            self._attributes.ATTRIBUTE_POINTS -= attribute_count
+            self._refresh_stats()
 
     def get_stats(self) -> Dict:
         self._refresh_stats()

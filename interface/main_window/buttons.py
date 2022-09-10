@@ -1,25 +1,16 @@
 from core.constants.button_size_constants import MainWindowButtons
-from core.constants.windows_constants import ButtonSizes, WidgetNames as wn
+from core.constants.widget_constants import WidgetSizes, WidgetNames as wn
 from PyQt6.QtWidgets import QLineEdit, QPushButton, QWidget
 from PyQt6.QtGui import QIcon
 from core import Paths
 from typing import Dict
-
-
-def set_menus_button_and_icon_sizes(menu_button: QPushButton) -> QPushButton:
-    menu_button.setIconSize(
-        MainWindowButtons.MENUS_BUTTONS_SIZE
-    )
-    menu_button.setFixedSize(
-        MainWindowButtons.MENUS_BUTTONS_SIZE
-    )
-    return menu_button
+from interface.common import set_button_and_icon_sizes
 
 
 def create_character_create_button(self, text) -> Dict:
     character_create_name_line_edit = QLineEdit()
     character_create_name_line_edit.setMaxLength(15)
-    character_create_name_line_edit.setFixedSize(ButtonSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
+    character_create_name_line_edit.setFixedSize(WidgetSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
     character_create_name_line_edit.setPlaceholderText(
         text.CHARACTER_NAME_PLACEHOLDER
     )
@@ -43,7 +34,7 @@ def create_character_create_button(self, text) -> Dict:
 
 def create_character_menu_button(self) -> QWidget:
     character_menu_button = QPushButton(icon=QIcon(Paths.CHARACTER_MENU_ICON))
-    character_menu_button = set_menus_button_and_icon_sizes(character_menu_button)
+    character_menu_button = set_button_and_icon_sizes(character_menu_button, MainWindowButtons.MENUS_BUTTONS_SIZE)
     character_menu_button.setCheckable(True)
     character_menu_button.clicked.connect(self._event_open_character_menu)
     character_menu_button.setDisabled(True)
@@ -52,7 +43,8 @@ def create_character_menu_button(self) -> QWidget:
 
 def create_option_menu_button(self) -> QWidget:
     option_menu_button = QPushButton(icon=QIcon(Paths.OPTION_MENU_ICON))
-    option_menu_button = set_menus_button_and_icon_sizes(option_menu_button)
+    option_menu_button = set_button_and_icon_sizes(option_menu_button, MainWindowButtons.MENUS_BUTTONS_SIZE)
     option_menu_button.setCheckable(True)
     option_menu_button.clicked.connect(self._event_open_options_menu)
+    option_menu_button.setDisabled(True)
     return option_menu_button

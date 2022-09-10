@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QLabel
-
-from core.constants.windows_constants import WindowsFonts
+from PyQt6.QtWidgets import QLabel, QPushButton
+from PyQt6.QtCore import QSize
+from core.constants.widget_constants import WindowsFonts
 
 
 def upper_font(label: QLabel) -> QLabel:
@@ -26,3 +26,8 @@ def clear_layout(layout):
         if item.widget():
             item.widget().deleteLater()
     return layout
+
+def set_button_and_icon_sizes(button: QPushButton, size: QSize) -> QPushButton:
+    button.setIconSize(size)
+    button.setFixedSize(size)
+    return button
