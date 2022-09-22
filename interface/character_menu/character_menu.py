@@ -1,7 +1,6 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QBrush, QImage, QPalette
-from PyQt6.QtWidgets import QVBoxLayout, QWidget
-from core.constants.path_constants import Paths
+from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel, QFrame
+from core.constants.path_constants import BACKGROUNDS, BUTTONS
 from core.constants.widget_constants import WindowSizes
 from core.constants.character_constants import StatsNames as sn, AttributesNames as an
 from interface.interface_language.character_menu_text import Text
@@ -10,7 +9,7 @@ from main_character.start_parameters import Attributes
 from interface.common import clear_layout
 
 
-class CharacterMenu(QWidget):
+class CharacterMenu(QFrame):
     def __init__(self, main_menu):
         super().__init__()
         self._main_menu = main_menu
@@ -21,16 +20,38 @@ class CharacterMenu(QWidget):
         self._attributes = Attributes()
         self._actual_attribute_points = 0
 
-        self._create_background()
+        self._set_stylesheet()
         self._create_layout()
 
-    def _create_background(self) -> None:
-        self.setAutoFillBackground(True)
-        background_image = QImage(Paths.CHARACTER_MENU_BACKGROUND)
-        background_image.scaled(WindowSizes.CHARACTER_MENU_SIZE)
-        palette = QPalette()
-        palette.setBrush(QPalette.ColorRole.Window, QBrush(background_image))
-        self.setPalette(palette)
+    def _set_stylesheet(self) -> None:
+        self.setStyleSheet("CharacterMenu {"
+                           f"background-image: url({BACKGROUNDS}:character_menu_background.png);"
+                           "}")
+        self._add_button_stylesheet = ("QPushButton:enabled {" +
+                                       f"background-image: url({BUTTONS}:add_button_enabled.png);" +
+                                       "border: 0px;" +
+                                       "background-position: center;" +
+                                       "}"
+                                       "QPushButton {"
+                                       f"background-image: url({BUTTONS}:add_button_disabled.png);"
+                                       "}")
+        self._remove_button_stylesheet = ("QPushButton:enabled {" +
+                                          f"background-image: url({BUTTONS}:remove_button_enabled.png);" +
+                                          "border: 0px;" +
+                                          "background-position: center;" +
+                                          "}"
+                                          "QPushButton {"
+                                          f"background-image: url({BUTTONS}:remove_button_disabled.png);"
+                                          "}")
+        self._accept_button_stylesheet = ("QPushButton:enabled {" +
+                                          f"background-image: url({BUTTONS}:accept_button_enabled.png);" +
+                                          "font: bold 17px;" +
+                                          "color: #edbd79;" +
+                                          "border: 0px;" +
+                                          "}"
+                                          "QPushButton {"
+                                          f"background-image: url({BUTTONS}:accept_button_disabled.png);"
+                                          "}")
 
     def set_actual_character_stats(self):
         self._main_character_stats = self._main_menu.main_character.get_stats()
@@ -63,6 +84,7 @@ class CharacterMenu(QWidget):
         clear_layout(self._vitality_layout)
         clear_layout(self._endurance_layout)
         clear_layout(self._attribute_points_layout)
+        clear_layout(self._accept_button_layout)
         self._create_lines()
 
     def _create_lines(self) -> None:
@@ -76,17 +98,19 @@ class CharacterMenu(QWidget):
         attribute_layouts = lines.create_attributes_lines(self)
         self._attributes_title_layout = attribute_layouts[0]
         self._layout.addLayout(self._attributes_title_layout)
-        self._strength_layout = attribute_layouts[1]
-        self._layout.addLayout(self._strength_layout)
-        self._agility_layout = attribute_layouts[2]
-        self._layout.addLayout(self._agility_layout)
-        self._vitality_layout = attribute_layouts[3]
-        self._layout.addLayout(self._vitality_layout)
-        self._endurance_layout = attribute_layouts[4]
-        self._layout.addLayout(self._endurance_layout)
-        self._attribute_points_layout = attribute_layouts[5]
+        self._attribute_points_layout = attribute_layouts[1]
         self._layout.addLayout(self._attribute_points_layout)
-
+        self._strength_layout = attribute_layouts[2]
+        self._layout.addLayout(self._strength_layout)
+        self._agility_layout = attribute_layouts[3]
+        self._layout.addLayout(self._agility_layout)
+        self._vitality_layout = attribute_layouts[4]
+        self._layout.addLayout(self._vitality_layout)
+        self._endurance_layout = attribute_layouts[5]
+        self._layout.addLayout(self._endurance_layout)
+        self._accept_button_layout = attribute_layouts[6]
+        self._layout.addLayout(self._accept_button_layout)
+        self._layout.addWidget(QLabel())
         for line in lines.create_stats_lines(self):
             self._layout.addWidget(line)
 

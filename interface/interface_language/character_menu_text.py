@@ -27,8 +27,7 @@ class EnglishText:
 
 @dataclass(frozen=True)
 class RussianText:
-    TITLE: str = "Меню персонажа"
-    GENERAL: str = " Общие: "
+    GENERAL: str = "Общие: "
     NAME: str = " Имя: "
     LEVEL: str = " Уровень: "
     CLASS: str = " Класс: "

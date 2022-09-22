@@ -7,22 +7,19 @@ from PyQt6.QtCore import QSize
 @dataclass
 class WindowSizes:
     MAIN_WINDOW_SIZE: PyQt6.QtCore.QSize = QSize(1200, 700)
-    CHARACTER_MENU_SIZE: PyQt6.QtCore.QSize = QSize(400, 500)
+    CHARACTER_MENU_SIZE: PyQt6.QtCore.QSize = QSize(400, 600)
     OPTION_MENU_SIZE: PyQt6.QtCore.QSize = QSize(1000, 600)
-#     TODO сделать настройку через конфиг
 
 
 
 @dataclass
 class WindowsFonts:
     FONT_SIZE: int = 15
-#     TODO сделать настройку через конфиг
 
 
 @dataclass
 class WidgetSizes:
-    CHARACTER_CREATE_NAME_LINE_EDIT: PyQt6.QtCore.QSize = QSize(150, 30)
-#     TODO сделать настройку через конфиг
+    CHARACTER_CREATE_NAME_LINE_EDIT: PyQt6.QtCore.QSize = QSize(300, 40)
 
 
 @dataclass(frozen=True)

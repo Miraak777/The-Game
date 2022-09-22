@@ -2,7 +2,7 @@ from core.constants.button_size_constants import MainWindowButtons
 from core.constants.widget_constants import WidgetSizes, WidgetNames as wn
 from PyQt6.QtWidgets import QLineEdit, QPushButton, QWidget
 from PyQt6.QtGui import QIcon
-from core import Paths
+from core import Paths, BUTTONS, WIDGET_TEXTURES
 from typing import Dict
 from interface.common import set_button_and_icon_sizes
 
@@ -11,6 +11,9 @@ def create_character_create_button(self, text) -> Dict:
     character_create_name_line_edit = QLineEdit()
     character_create_name_line_edit.setMaxLength(15)
     character_create_name_line_edit.setFixedSize(WidgetSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
+    character_create_name_line_edit.setStyleSheet(
+        f"background-image: url({WIDGET_TEXTURES}:character_creation_line_edit.jpg);"
+        "font: 16px;")
     character_create_name_line_edit.setPlaceholderText(
         text.CHARACTER_NAME_PLACEHOLDER
     )
@@ -18,9 +21,8 @@ def create_character_create_button(self, text) -> Dict:
         self._event_main_character_name_entered
     )
 
-    character_create_button = QPushButton(
-        text=text.CHARACTER_CREATE_BUTTON,
-    )
+    character_create_button = QPushButton(text=text.CHARACTER_CREATE_BUTTON)
+    character_create_button.setStyleSheet(self._character_creation_button_stylesheet)
     character_create_button.setFixedSize(
         MainWindowButtons.CHARACTER_CREATION_BUTTON_SIZE
     )

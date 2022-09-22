@@ -94,11 +94,13 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     label = QLabel(self._text.ATTRIBUTES)
     label = upper_font(label)
     label = bold_font(label)
-    label.setFixedSize(CharacterMenuSizes.TITLE_LINE)
     title_layout.addWidget(label)
-    button = buttons.create_accept_button(self)
-    title_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(title_layout)
+
+    attribute_points_layout = QHBoxLayout()
+    label = create_attribute_points_line(self)
+    attribute_points_layout.addWidget(label)
+    layouts.append(attribute_points_layout)
 
     strength_layout = QHBoxLayout()
     label = create_strength_line(self)
@@ -140,10 +142,10 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     endurance_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(endurance_layout)
 
-    attribute_points_layout = QHBoxLayout()
-    label = create_attribute_points_line(self)
-    attribute_points_layout.addWidget(label)
-    layouts.append(attribute_points_layout)
+    accept_button_layout = QHBoxLayout()
+    button = buttons.create_accept_button(self)
+    accept_button_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
+    layouts.append(accept_button_layout)
 
     return layouts
 

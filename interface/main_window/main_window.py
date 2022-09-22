@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 import interface.main_window.buttons as buttons
-from core.constants.path_constants import Paths
+from core.constants.path_constants import BACKGROUNDS, BUTTONS, Paths
 from interface.character_menu.character_menu import CharacterMenu
 from interface.option_menu.option_menu import OptionMenu
 from interface.interface_language.main_menu_text import Text
@@ -50,11 +50,25 @@ class MainWindow(QMainWindow):
         return settings[LANGUAGE]
 
     def _create_background(self) -> None:
-        background_image = QImage(Paths.MAIN_MENU_BACKGROUND)
-        background_image.scaled(WindowSizes.MAIN_WINDOW_SIZE)
-        palette = QPalette()
-        palette.setBrush(QPalette.ColorRole.Window, QBrush(background_image))
-        self.setPalette(palette)
+        self.setStyleSheet("MainWindow {"
+                           f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
+                           "}"
+                           "QPushButton:hover {border: 5px #000000;"
+                           "border-radius: 10px;}")
+        self._character_creation_button_stylesheet = ("QPushButton:enabled {"
+                                                      f"background-image: url({BUTTONS}:"
+                                                      "character_creation_button_enabled.png);"
+                                                      "font: bold 16px;"
+                                                      "color: #edbd79;"
+                                                      "border: 0px"
+                                                      "}"
+                                                      "QPushButton {"
+                                                      f"background-image: url({BUTTONS}:"
+                                                      "character_creation_button_disabled.png);"
+                                                      "font: bold 16px;"
+                                                      "color: #000000;"
+                                                      "border: 0px;"
+                                                      "}")
 
     def _create_menus(self):
         self._main_character_name = DUMMY
@@ -78,8 +92,9 @@ class MainWindow(QMainWindow):
         self._option_menu_button = buttons.create_option_menu_button(self)
 
         character_creation_layout = QVBoxLayout()
-        character_creation_layout.addWidget(self._character_create_name_line_edit)
-        character_creation_layout.addWidget(self._character_create_button)
+        character_creation_layout.addWidget(self._character_create_name_line_edit,
+                                            alignment=Qt.AlignmentFlag.AlignHCenter)
+        character_creation_layout.addWidget(self._character_create_button, alignment=Qt.AlignmentFlag.AlignHCenter)
 
         menus_buttons_layout = QHBoxLayout()
         menus_buttons_layout.addWidget(self._character_menu_button)
