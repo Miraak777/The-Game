@@ -19,7 +19,7 @@ def create_character_create_button(self, text) -> Dict:
     )
 
     character_create_button = QPushButton(
-        text=text.CHARACTER_CREATE_BUTTON
+        text=text.CHARACTER_CREATE_BUTTON,
     )
     character_create_button.setFixedSize(
         MainWindowButtons.CHARACTER_CREATION_BUTTON_SIZE

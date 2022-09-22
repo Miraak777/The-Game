@@ -30,24 +30,3 @@ class WidgetNames:
     CHARACTER_CREATE_NAME_LINE_EDIT: str = "character_create_name_line_edit"
     CHARACTER_CREATE_BUTTON: str = "character_create_button"
 
-
-@dataclass
-class AttributeLinesLengthEn:
-    STRENGTH_LINE_SIZE: PyQt6.QtCore.QSize = QSize(123, 20)
-    AGILITY_LINE_SIZE: PyQt6.QtCore.QSize = QSize(103, 20)
-    VITALITY_LINE_SIZE: PyQt6.QtCore.QSize = QSize(107, 20)
-    ENDURANCE_LINE_SIZE: PyQt6.QtCore.QSize = QSize(139, 20)
-
-
-@dataclass
-class AttributeLinesLengthRu:
-    STRENGTH_LINE_SIZE: PyQt6.QtCore.QSize = QSize(93, 20)
-    AGILITY_LINE_SIZE: PyQt6.QtCore.QSize = QSize(133, 20)
-    VITALITY_LINE_SIZE: PyQt6.QtCore.QSize = QSize(147, 20)
-    ENDURANCE_LINE_SIZE: PyQt6.QtCore.QSize = QSize(177, 20)
-
-
-attribute_lines = {
-    Language.EN: AttributeLinesLengthEn,
-    Language.RU: AttributeLinesLengthRu
-}

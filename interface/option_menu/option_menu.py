@@ -43,10 +43,18 @@ class OptionMenu(QWidget):
 
         self.setLayout(self._layout)
 
-    def _event_change_language(self, chosen_language):
-        set_lang = self._language_map[chosen_language]
+    @staticmethod
+    def _event_set_en_language():
         with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
             settings = safe_load(settings_file)
-        settings[LANGUAGE] = set_lang
+        settings[LANGUAGE] = Language.EN
+        with open(Paths.PATH_TO_SETTINGS, 'w') as settings_file:
+            safe_dump(settings, settings_file, default_flow_style=False)
+
+    @staticmethod
+    def _event_set_ru_language():
+        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+            settings = safe_load(settings_file)
+        settings[LANGUAGE] = Language.RU
         with open(Paths.PATH_TO_SETTINGS, 'w') as settings_file:
             safe_dump(settings, settings_file, default_flow_style=False)

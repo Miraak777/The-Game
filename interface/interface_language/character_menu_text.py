@@ -22,6 +22,7 @@ class EnglishText:
     CRITICAL_STRIKE_CHANCE: str = " Crit. Chance: "
     CRITICAL_STRIKE_MULTIPLIER: str = " Crit. Multiplier: "
     ACCURACY: str = " Accuracy: "
+    ACCEPT: str = "Accept"
 
 
 @dataclass(frozen=True)
@@ -45,6 +46,7 @@ class RussianText:
     CRITICAL_STRIKE_CHANCE: str = " Шанс крита: "
     CRITICAL_STRIKE_MULTIPLIER: str = " Множитель крита: "
     ACCURACY: str = " Меткость: "
+    ACCEPT: str = "Принять"
 
 
 Text = {

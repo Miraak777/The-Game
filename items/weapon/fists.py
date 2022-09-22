@@ -1,7 +1,3 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class Fists:
     WEAPON_NAME: str = "Fists"
     MIN_DAMAGE: int = 1

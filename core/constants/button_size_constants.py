@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-import PyQt6.QtCore
 from PyQt6.QtCore import QSize
 
 
@@ -13,4 +12,5 @@ class MainWindowButtons:
 
 @dataclass(frozen=True)
 class CharacterMenuButtons:
-    ATTRIBUTE_BUTTON: QSize = QSize(20, 20)
+    ATTRIBUTE_BUTTON: QSize = QSize(25, 25)
+    ACCEPT_BUTTON: QSize = QSize(80, 25)

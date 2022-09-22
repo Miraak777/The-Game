@@ -1,13 +1,15 @@
 import items.weapon
-from typing import Dict
+from typing import Dict, Any
 from core.constants.character_constants import (
     AttributesNames as an,
     BarsNames as bn,
     Classes,
     CombatStatsNames as cs,
     MainStatsNames as msn,
+    StatsNames as sn
 )
 from core.stats_formulas import characters_formulas as cf
+from main_character import classes
 from main_character.start_parameters import (
     Attributes,
     Bars,
@@ -19,80 +21,79 @@ from main_character.start_parameters import (
 
 class MainCharacter:
     def __init__(self, character_name: str) -> None:
-        self._main_stats = MainStats
+        self._main_stats = MainStats()
         self._main_stats.NAME = character_name
-        self._attributes = Attributes
-        self._bars = Bars
-        self._combat_stats = CombatStats
-        self._class_multipliers = ClassMultipliers
-        self._equipped_weapon = items.weapon.Fists
-        self._attribute_map = {
-            an.STRENGTH: self._attributes.STRENGTH,
-            an.AGILITY: self._attributes.AGILITY,
-            an.VITALITY: self._attributes.VITALITY,
-            an.ENDURANCE: self._attributes.ENDURANCE,
-        }
+        self._attributes = Attributes()
+        self._bars = Bars()
+        self._combat_stats = CombatStats()
+        self._class_multipliers = ClassMultipliers()
+        self._equipped_weapon = items.weapon.Fists()
+
+    def set_class_peasant(self) -> None:
+        self._class_multipliers = classes.PeasantClass
+        self._main_stats.CLASS = Classes.PEASANT
 
     def set_class_warrior(self) -> None:
-        self._class_multipliers.HEALTH_MULTIPLIER = 2
-        self._class_multipliers.STAMINA_MULTIPLIER = 1
-        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0
-        self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 0.5
-        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 1
+        self._class_multipliers = classes.WarriorClass
         self._main_stats.CLASS = Classes.WARRIOR
 
     def set_class_assassin(self) -> None:
-        self._class_multipliers.HEALTH_MULTIPLIER = 0.7
-        self._class_multipliers.STAMINA_MULTIPLIER = 1.5
-        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 1
-        self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 2
-        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0
+        self._class_multipliers = classes.AssassinClass
         self._main_stats.CLASS = Classes.ASSASSIN
 
-    def set_class_peasant(self) -> None:
-        self._class_multipliers.HEALTH_MULTIPLIER = 1
-        self._class_multipliers.STAMINA_MULTIPLIER = 1
-        self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER = 0.5
-        self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER = 0.5
-        self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER = 1
-        self._main_stats.CLASS = Classes.PEASANT
+    @staticmethod
+    def calculate_character_stats(attributes, main_stats, class_multipliers, equipped_weapon) -> Dict[str, Any]:
+        calculated_stats = {
+            bn.MAX_HEALTH: cf.health_formula(
+                health_mult=class_multipliers.HEALTH_MULTIPLIER,
+                level=main_stats.LEVEL,
+                vitality=attributes.VITALITY,
+            ),
+            bn.MAX_STAMINA: cf.stamina_formula(
+                stamina_mult=class_multipliers.STAMINA_MULTIPLIER,
+                level=main_stats.LEVEL,
+                endurance=attributes.ENDURANCE,
+            ),
+            cs.MIN_DAMAGE: cf.min_damage_formula(
+                min_damage=equipped_weapon.MIN_DAMAGE,
+                strength=attributes.STRENGTH,
+                strength_damage_multiplier=class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
+                agility=attributes.AGILITY,
+                agility_damage_multiplier=class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
+            ),
+            cs.MAX_DAMAGE: cf.max_damage_formula(
+                max_damage=equipped_weapon.MAX_DAMAGE,
+                strength=attributes.STRENGTH,
+                strength_damage_multiplier=class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
+                agility=attributes.AGILITY,
+                agility_damage_multiplier=class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
+            ),
+            cs.CRITICAL_STRIKE_CHANCE: cf.critical_strike_formula(
+                base_critical_strike_chance=equipped_weapon.CRITICAL_STRIKE_CHANCE,
+                agility=attributes.AGILITY,
+                critical_strike_chance_multiplier=class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER,
+            ),
+            cs.CRITICAL_STRIKE_MULTIPLIER: 1.5,
+            cs.ACCURACY: cf.accuracy_formula(
+                accuracy=equipped_weapon.ACCURACY,
+                agility=attributes.AGILITY,
+                level=main_stats.LEVEL,
+            )
+        }
+        return calculated_stats
 
     def _refresh_stats(self) -> None:
-        self._bars.MAX_HEALTH = cf.health_formula(
-            health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
-            level=self._main_stats.LEVEL,
-            vitality=self._attributes.VITALITY,
-        )
-        self._bars.MAX_STAMINA = cf.stamina_formula(
-            stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
-            level=self._main_stats.LEVEL,
-            endurance=self._attributes.ENDURANCE,
-        )
-        self._combat_stats.MIN_DAMAGE = cf.min_damage_formula(
-            min_damage=self._equipped_weapon.MIN_DAMAGE,
-            strength=self._attributes.STRENGTH,
-            strength_damage_multiplier=self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
-            agility=self._attributes.AGILITY,
-            agility_damage_multiplier=self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
-        )
-        self._combat_stats.MAX_DAMAGE = cf.max_damage_formula(
-            max_damage=self._equipped_weapon.MAX_DAMAGE,
-            strength=self._attributes.STRENGTH,
-            strength_damage_multiplier=self._class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
-            agility=self._attributes.AGILITY,
-            agility_damage_multiplier=self._class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
-        )
-        self._combat_stats.CRITICAL_STRIKE_CHANCE = cf.critical_strike_formula(
-            base_critical_strike_chance=self._equipped_weapon.CRITICAL_STRIKE_CHANCE,
-            agility=self._attributes.AGILITY,
-            critical_strike_chance_multiplier=self._class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER,
-        )
-        self._combat_stats.CRITICAL_STRIKE_MULTIPLIER = 1.5
-        self._combat_stats.ACCURACY = cf.accuracy_formula(
-            accuracy=self._equipped_weapon.ACCURACY,
-            agility=self._attributes.AGILITY,
-            level=self._main_stats.LEVEL,
-        )
+        stats = self.calculate_character_stats(self._attributes,
+                                               self._main_stats,
+                                               self._class_multipliers,
+                                               self._equipped_weapon)
+        self._bars.MAX_HEALTH = stats[bn.MAX_HEALTH]
+        self._bars.MAX_STAMINA = stats[bn.MAX_STAMINA]
+        self._combat_stats.MAX_DAMAGE = stats[cs.MAX_DAMAGE]
+        self._combat_stats.MIN_DAMAGE = stats[cs.MIN_DAMAGE]
+        self._combat_stats.ACCURACY = stats[cs.ACCURACY]
+        self._combat_stats.CRITICAL_STRIKE_CHANCE = stats[cs.CRITICAL_STRIKE_CHANCE]
+        self._combat_stats.CRITICAL_STRIKE_MULTIPLIER = stats[cs.CRITICAL_STRIKE_MULTIPLIER]
 
     def set_max_health(self) -> None:
         self._bars.HEALTH = self._bars.MAX_HEALTH
@@ -107,62 +108,24 @@ class MainCharacter:
         self.set_max_health()
         self.set_max_stamina()
 
-    def add_endurance(self) -> None:
-        if self._attributes.ATTRIBUTE_POINTS >= 1:
-            self._attributes.ENDURANCE += 1
-            self._attributes.ATTRIBUTE_POINTS -= 1
-            self._refresh_stats()
-
-    def add_vitality(self) -> None:
-        if self._attributes.ATTRIBUTE_POINTS >= 1:
-            self._attributes.VITALITY += 1
-            self._attributes.ATTRIBUTE_POINTS -= 1
-            self._refresh_stats()
-
-    def add_strength(self) -> None:
-        if self._attributes.ATTRIBUTE_POINTS >= 1:
-            self._attributes.STRENGTH += 1
-            self._attributes.ATTRIBUTE_POINTS -= 1
-            self._refresh_stats()
-
-    def add_agility(self) -> None:
-        if self._attributes.ATTRIBUTE_POINTS >= 1:
-            self._attributes.AGILITY += 1
-            self._attributes.ATTRIBUTE_POINTS -= 1
-            self._refresh_stats()
-
-    def remove_strength(self):
-        if self._attributes.STRENGTH > 0:
-            self._attributes.STRENGTH -= 1
-            self._attributes.ATTRIBUTE_POINTS += 1
-            self._refresh_stats()
-
-    def remove_agility(self):
-        if self._attributes.AGILITY > 0:
-            self._attributes.AGILITY -= 1
-            self._attributes.ATTRIBUTE_POINTS += 1
-            self._refresh_stats()
-
-    def remove_vitality(self):
-        if self._attributes.VITALITY > 0:
-            self._attributes.VITALITY -= 1
-            self._attributes.ATTRIBUTE_POINTS += 1
-            self._refresh_stats()
-
-    def remove_endurance(self):
-        if self._attributes.ENDURANCE > 0:
-            self._attributes.ENDURANCE -= 1
-            self._attributes.ATTRIBUTE_POINTS += 1
-            self._refresh_stats()
-
-    def send_attributes(self, attributes: Dict) -> None:
-        attribute_count = 0
-        for attribute in attributes:
-            attribute_count += attributes[attribute]
+    def send_attributes(self, attributes: Dict[str, int]) -> None:
+        attribute_count = self._attributes.ATTRIBUTE_POINTS - attributes[an.ATTRIBUTE_POINTS]
         if self._attributes.ATTRIBUTE_POINTS >= attribute_count:
-            self._attribute_map += attributes
-            self._attributes.ATTRIBUTE_POINTS -= attribute_count
+            self._attributes.STRENGTH = attributes[an.STRENGTH]
+            self._attributes.AGILITY = attributes[an.AGILITY]
+            self._attributes.VITALITY = attributes[an.VITALITY]
+            self._attributes.ENDURANCE = attributes[an.ENDURANCE]
+            self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
             self._refresh_stats()
+
+    def get_stats_for_calculation(self) -> Dict[str, Any]:
+        output_stats = {
+            sn.ATTRIBUTES: self._attributes,
+            sn.MAIN_STATS: self._main_stats,
+            sn.CLASS_MULTIPLIERS: self._class_multipliers,
+            sn.EQUIPPED_WEAPON: self._equipped_weapon
+        }
+        return output_stats
 
     def get_stats(self) -> Dict:
         self._refresh_stats()

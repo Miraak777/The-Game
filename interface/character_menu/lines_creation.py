@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QLabel, QHBoxLayout
 from interface.common import upper_font, bold_font
 from PyQt6.QtCore import Qt
 from interface.character_menu import buttons
+from core.constants.size_constants import CharacterMenuSizes
 from core.constants import (
     AttributesNames as an,
     BarsNames as bn,
@@ -88,38 +89,54 @@ def create_stamina_line(self) -> QLabel:
 
 def create_attributes_lines(self) -> list[QHBoxLayout]:
     layouts = []
+
     title_layout = QHBoxLayout()
     label = QLabel(self._text.ATTRIBUTES)
     label = upper_font(label)
     label = bold_font(label)
+    label.setFixedSize(CharacterMenuSizes.TITLE_LINE)
     title_layout.addWidget(label)
+    button = buttons.create_accept_button(self)
+    title_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(title_layout)
 
     strength_layout = QHBoxLayout()
     label = create_strength_line(self)
+    label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     strength_layout.addWidget(label)
-    button = buttons.create_strength_button(self)
+    button = buttons.create_strength_adding_button(self)
+    strength_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignRight)
+    button = buttons.create_strength_removing_button(self)
     strength_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(strength_layout)
 
     agility_layout = QHBoxLayout()
     label = create_agility_line(self)
+    label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     agility_layout.addWidget(label)
-    button = buttons.create_agility_button(self)
+    button = buttons.create_agility_adding_button(self)
+    agility_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignRight)
+    button = buttons.create_agility_removing_button(self)
     agility_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(agility_layout)
 
     vitality_layout = QHBoxLayout()
     label = create_vitality_line(self)
+    label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     vitality_layout.addWidget(label)
-    button = buttons.create_vitality_button(self)
+    button = buttons.create_vitality_adding_button(self)
+    vitality_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignRight)
+    button = buttons.create_vitality_removing_button(self)
     vitality_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(vitality_layout)
 
     endurance_layout = QHBoxLayout()
     label = create_endurance_line(self)
+    label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     endurance_layout.addWidget(label)
-    button = buttons.create_endurance_button(self)
+    button = buttons.create_endurance_adding_button(self)
+    endurance_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignRight)
+    button = buttons.create_endurance_removing_button(self)
     endurance_layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignLeft)
     layouts.append(endurance_layout)
 
@@ -133,44 +150,40 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
 
 def create_strength_line(self) -> QLabel:
     label = QLabel(
-        self._text.STRENGTH + str(self._main_character_stats[an.STRENGTH])
+        self._text.STRENGTH + str(self._attributes.STRENGTH)
     )
     label = upper_font(label)
-    label.setFixedSize(self._attribute_lines_length.STRENGTH_LINE_SIZE)
     return label
 
 
 def create_agility_line(self) -> QLabel:
     label = QLabel(
-        self._text.AGILITY + str(self._main_character_stats[an.AGILITY])
+        self._text.AGILITY + str(self._attributes.AGILITY)
     )
     label = upper_font(label)
-    label.setFixedSize(self._attribute_lines_length.AGILITY_LINE_SIZE)
     return label
 
 
 def create_vitality_line(self) -> QLabel:
     label = QLabel(
-        self._text.VITALITY + str(self._main_character_stats[an.VITALITY])
+        self._text.VITALITY + str(self._attributes.VITALITY)
     )
     label = upper_font(label)
-    label.setFixedSize(self._attribute_lines_length.VITALITY_LINE_SIZE)
     return label
 
 
 def create_endurance_line(self) -> QLabel:
     label = QLabel(
-        self._text.ENDURANCE + str(self._main_character_stats[an.ENDURANCE])
+        self._text.ENDURANCE + str(self._attributes.ENDURANCE)
     )
     label = upper_font(label)
-    label.setFixedSize(self._attribute_lines_length.ENDURANCE_LINE_SIZE)
     return label
 
 
 def create_attribute_points_line(self) -> QLabel:
     label = QLabel(
         self._text.ATTRIBUTE_POINTS
-        + str(self._main_character_stats[an.ATTRIBUTE_POINTS])
+        + str(self._attributes.ATTRIBUTE_POINTS)
     )
     label = upper_font(label)
     return label

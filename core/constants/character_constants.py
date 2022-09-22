@@ -2,6 +2,14 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class StatsNames:
+    ATTRIBUTES: str = "attributes"
+    MAIN_STATS: str = "main_stats"
+    CLASS_MULTIPLIERS: str = "class_multipliers"
+    EQUIPPED_WEAPON: str = "equipped_weapon"
+
+
+@dataclass(frozen=True)
 class MainStatsNames:
     NAME: str = "character_name"
     LEVEL: str = "level"

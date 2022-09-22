@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
 
     def _event_open_character_menu(self) -> None:
         if self._character_menu.isHidden():
-            self._character_menu.refresh_character_menu()
+            self._character_menu.set_actual_character_stats()
             self._character_menu.show()
         else:
             self._character_menu.hide()

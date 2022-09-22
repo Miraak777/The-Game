@@ -1,16 +1,12 @@
-from dataclasses import dataclass
-
 from core.constants.character_constants import Classes as c
 
 
-@dataclass
 class MainStats:
     NAME: str = None
     LEVEL: int = 1
     CLASS: str = c.PEASANT
 
 
-@dataclass
 class Attributes:
     ATTRIBUTE_POINTS: int = 3
     ENDURANCE: int = 0
@@ -19,15 +15,13 @@ class Attributes:
     AGILITY: int = 0
 
 
-@dataclass
 class Bars:
-    MAX_HEALTH: float = 0
+    MAX_HEALTH: float = 5
     HEALTH: float = 0
-    MAX_STAMINA: float = 0
+    MAX_STAMINA: float = 2.5
     STAMINA: float = 0
 
 
-@dataclass
 class CombatStats:
     MIN_DAMAGE: float = 0
     MAX_DAMAGE: float = 0
@@ -36,7 +30,6 @@ class CombatStats:
     ACCURACY: float = 0
 
 
-@dataclass
 class ClassMultipliers:
     HEALTH_MULTIPLIER: float = 1
     STAMINA_MULTIPLIER: float = 1

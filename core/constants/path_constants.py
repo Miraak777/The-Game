@@ -24,3 +24,6 @@ class Paths:
     )
     CHARACTER_MENU_ICON: str = str(Path(BASE_DIR, "icons", "character_menu_icon.png"))
     OPTION_MENU_ICON: str = str(Path(BASE_DIR, "icons", "option_menu_icon.png"))
+    ADDING_ICON: str = str(Path(BASE_DIR, "textures", "button_textures", "add_button.png"))
+    REMOVING_ICON: str = str(Path(BASE_DIR, "textures", "button_textures", "remove_button.png"))
+    BUTTON_150x40: str = str(Path(BASE_DIR, "textures", "button_textures", "150x40_button.png"))
