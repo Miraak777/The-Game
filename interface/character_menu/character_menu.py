@@ -4,7 +4,7 @@ from core.constants.path_constants import BACKGROUNDS, BUTTONS
 from core.constants.widget_constants import WindowSizes
 from core.constants.character_constants import StatsNames as sn, AttributesNames as an
 from interface.interface_language.character_menu_text import Text
-import interface.character_menu.lines_creation as lines
+import interface.character_menu.widget_creation as lines
 from main_character.start_parameters import Attributes
 from interface.common import clear_layout
 
@@ -47,12 +47,12 @@ class CharacterMenu(QFrame):
                                           "}")
         self._accept_button_stylesheet = ("QPushButton:enabled {"
                                           f"background-image: url({BUTTONS}:accept_button_enabled.png);"
-                                          "font: bold 17px;"
                                           "color: #edbd79;"
                                           "border: 0px;"
                                           "}"
                                           "QPushButton {"
                                           f"background-image: url({BUTTONS}:accept_button_disabled.png);"
+                                          "font: bold 18px;"
                                           "border: 0px;"
                                           "}")
 
@@ -88,17 +88,17 @@ class CharacterMenu(QFrame):
         clear_layout(self._endurance_layout)
         clear_layout(self._attribute_points_layout)
         clear_layout(self._accept_button_layout)
-        self._create_lines()
+        self._create_widgets()
 
-    def _create_lines(self) -> None:
+    def _create_widgets(self) -> None:
 
-        for line in lines.create_general_lines(self):
+        for line in lines.create_general_widget(self):
             self._layout.addWidget(line)
 
         for line in lines.create_bars_lines(self):
             self._layout.addWidget(line)
 
-        attribute_layouts = lines.create_attributes_lines(self)
+        attribute_layouts = lines.create_attributes_widget(self)
         self._attributes_title_layout = attribute_layouts[0]
         self._layout.addLayout(self._attributes_title_layout)
         self._attribute_points_layout = attribute_layouts[1]
@@ -114,13 +114,13 @@ class CharacterMenu(QFrame):
         self._accept_button_layout = attribute_layouts[6]
         self._layout.addLayout(self._accept_button_layout)
         self._layout.addWidget(QLabel())
-        for line in lines.create_stats_lines(self):
+        for line in lines.create_stats_widget(self):
             self._layout.addWidget(line)
 
     def _create_layout(self) -> None:
         self._layout = QVBoxLayout()
         self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self._create_lines()
+        self._create_widgets()
         self.setLayout(self._layout)
 
     def _event_add_strength(self):

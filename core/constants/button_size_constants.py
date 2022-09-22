@@ -13,3 +13,8 @@ class MainWindowButtons:
 class CharacterMenuButtons:
     ATTRIBUTE_BUTTON: QSize = QSize(29, 29)
     ACCEPT_BUTTON: QSize = QSize(122, 45)
+
+
+@dataclass(frozen=True)
+class OptionMenuButtons:
+    LANGUAGE_BUTTON: QSize = QSize(100, 30)

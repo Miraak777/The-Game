@@ -4,7 +4,6 @@ from PyQt6.QtCore import Qt
 from interface.character_menu import buttons
 from core.constants.size_constants import CharacterMenuSizes
 from core.constants.character_constants import (
-    AttributesNames as an,
     BarsNames as bn,
     CombatStatsNames as cs,
     MainStatsNames as msn,
@@ -12,7 +11,7 @@ from core.constants.character_constants import (
 )
 
 
-def create_general_lines(self) -> list:
+def create_general_widget(self) -> list:
     lines = []
     class_map = {
         Classes.PEASANT: self._text.PEASANT,
@@ -24,7 +23,7 @@ def create_general_lines(self) -> list:
     label = bold_font(label)
     lines.append(label)
 
-    label = create_name_line(self)
+    label = create_name_widget(self)
     lines.append(label)
 
     label = create_level_line(self)
@@ -36,7 +35,7 @@ def create_general_lines(self) -> list:
     return lines
 
 
-def create_name_line(self) -> QLabel:
+def create_name_widget(self) -> QLabel:
     label = QLabel(self._text.NAME + self._main_character_stats[msn.NAME])
     label = upper_font(label)
     return label
@@ -63,15 +62,15 @@ def create_bars_lines(self) -> list:
     label = bold_font(label)
     lines.append(label)
 
-    label = create_health_line(self)
+    label = create_health_widget(self)
     lines.append(label)
 
-    label = create_stamina_line(self)
+    label = create_stamina_widget(self)
     lines.append(label)
     return lines
 
 
-def create_health_line(self) -> QLabel:
+def create_health_widget(self) -> QLabel:
     label = QLabel(
         self._text.HEALTH
         + str(self._main_character_stats[bn.MAX_HEALTH])
@@ -82,7 +81,7 @@ def create_health_line(self) -> QLabel:
     return label
 
 
-def create_stamina_line(self) -> QLabel:
+def create_stamina_widget(self) -> QLabel:
     label = QLabel(
         self._text.STAMINA
         + str(self._main_character_stats[bn.MAX_STAMINA])
@@ -93,7 +92,7 @@ def create_stamina_line(self) -> QLabel:
     return label
 
 
-def create_attributes_lines(self) -> list[QHBoxLayout]:
+def create_attributes_widget(self) -> list[QHBoxLayout]:
     layouts = []
 
     title_layout = QHBoxLayout()
@@ -104,12 +103,12 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     layouts.append(title_layout)
 
     attribute_points_layout = QHBoxLayout()
-    label = create_attribute_points_line(self)
+    label = create_attribute_points_widget(self)
     attribute_points_layout.addWidget(label)
     layouts.append(attribute_points_layout)
 
     strength_layout = QHBoxLayout()
-    label = create_strength_line(self)
+    label = create_strength_widget(self)
     label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     strength_layout.addWidget(label)
     button = buttons.create_strength_adding_button(self)
@@ -119,7 +118,7 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     layouts.append(strength_layout)
 
     agility_layout = QHBoxLayout()
-    label = create_agility_line(self)
+    label = create_agility_widget(self)
     label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     agility_layout.addWidget(label)
     button = buttons.create_agility_adding_button(self)
@@ -129,7 +128,7 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     layouts.append(agility_layout)
 
     vitality_layout = QHBoxLayout()
-    label = create_vitality_line(self)
+    label = create_vitality_widget(self)
     label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     vitality_layout.addWidget(label)
     button = buttons.create_vitality_adding_button(self)
@@ -139,7 +138,7 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     layouts.append(vitality_layout)
 
     endurance_layout = QHBoxLayout()
-    label = create_endurance_line(self)
+    label = create_endurance_widget(self)
     label.setFixedSize(CharacterMenuSizes.ATTRIBUTE_LINE)
     endurance_layout.addWidget(label)
     button = buttons.create_endurance_adding_button(self)
@@ -156,7 +155,7 @@ def create_attributes_lines(self) -> list[QHBoxLayout]:
     return layouts
 
 
-def create_strength_line(self) -> QLabel:
+def create_strength_widget(self) -> QLabel:
     label = QLabel(
         self._text.STRENGTH + str(self._attributes.STRENGTH)
     )
@@ -164,7 +163,7 @@ def create_strength_line(self) -> QLabel:
     return label
 
 
-def create_agility_line(self) -> QLabel:
+def create_agility_widget(self) -> QLabel:
     label = QLabel(
         self._text.AGILITY + str(self._attributes.AGILITY)
     )
@@ -172,7 +171,7 @@ def create_agility_line(self) -> QLabel:
     return label
 
 
-def create_vitality_line(self) -> QLabel:
+def create_vitality_widget(self) -> QLabel:
     label = QLabel(
         self._text.VITALITY + str(self._attributes.VITALITY)
     )
@@ -180,7 +179,7 @@ def create_vitality_line(self) -> QLabel:
     return label
 
 
-def create_endurance_line(self) -> QLabel:
+def create_endurance_widget(self) -> QLabel:
     label = QLabel(
         self._text.ENDURANCE + str(self._attributes.ENDURANCE)
     )
@@ -188,7 +187,7 @@ def create_endurance_line(self) -> QLabel:
     return label
 
 
-def create_attribute_points_line(self) -> QLabel:
+def create_attribute_points_widget(self) -> QLabel:
     label = QLabel(
         self._text.ATTRIBUTE_POINTS
         + str(self._attributes.ATTRIBUTE_POINTS)
@@ -197,29 +196,29 @@ def create_attribute_points_line(self) -> QLabel:
     return label
 
 
-def create_stats_lines(self) -> list:
+def create_stats_widget(self) -> list:
     lines = []
     label = QLabel(self._text.STATS)
     label = upper_font(label)
     label = bold_font(label)
     lines.append(label)
 
-    label = create_damage_line(self)
+    label = create_damage_widget(self)
     lines.append(label)
 
-    label = create_accuracy_line(self)
+    label = create_accuracy_widget(self)
     lines.append(label)
 
-    label = create_critical_strike_chance_line(self)
+    label = create_critical_strike_chance_widget(self)
     lines.append(label)
 
-    label = create_critical_strike_multiplier_line(self)
+    label = create_critical_strike_multiplier_widget(self)
     lines.append(label)
 
     return lines
 
 
-def create_damage_line(self) -> QLabel:
+def create_damage_widget(self) -> QLabel:
     label = QLabel(
         self._text.DAMAGE
         + str(self._main_character_stats[cs.MIN_DAMAGE])
@@ -230,7 +229,7 @@ def create_damage_line(self) -> QLabel:
     return label
 
 
-def create_accuracy_line(self) -> QLabel:
+def create_accuracy_widget(self) -> QLabel:
     label = QLabel(
         self._text.ACCURACY
         + str(self._main_character_stats[cs.ACCURACY] * 100)
@@ -240,7 +239,7 @@ def create_accuracy_line(self) -> QLabel:
     return label
 
 
-def create_critical_strike_chance_line(self) -> QLabel:
+def create_critical_strike_chance_widget(self) -> QLabel:
     label = QLabel(
         self._text.CRITICAL_STRIKE_CHANCE
         + str(self._main_character_stats[cs.CRITICAL_STRIKE_CHANCE] * 100)
@@ -250,7 +249,7 @@ def create_critical_strike_chance_line(self) -> QLabel:
     return label
 
 
-def create_critical_strike_multiplier_line(self) -> QLabel:
+def create_critical_strike_multiplier_widget(self) -> QLabel:
     label = QLabel(
         self._text.CRITICAL_STRIKE_MULTIPLIER
         + str(self._main_character_stats[cs.CRITICAL_STRIKE_MULTIPLIER])

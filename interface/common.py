@@ -25,7 +25,7 @@ def clear_layout(layout):
         layout.removeItem(item)
         if item.widget():
             item.widget().deleteLater()
-    return layout
+
 
 def set_button_and_icon_sizes(button: QPushButton, size: QSize) -> QPushButton:
     button.setIconSize(size)

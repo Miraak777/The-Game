@@ -20,6 +20,8 @@ class WindowsFonts:
 @dataclass
 class WidgetSizes:
     CHARACTER_CREATE_NAME_LINE_EDIT: PyQt6.QtCore.QSize = QSize(300, 40)
+    OPTION_MENU_TITLE: PyQt6.QtCore.QSize = QSize(150, 40)
+    OPTION_MENU_LANGUAGE: PyQt6.QtCore.QSize = QSize(150, 40)
 
 
 @dataclass(frozen=True)

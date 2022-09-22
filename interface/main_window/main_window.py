@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
 
         self._layout = QGridLayout()
 
-        self._create_background()
+        self._set_stylesheets()
         self._create_menus()
         self._create_buttons()
 
@@ -49,23 +49,25 @@ class MainWindow(QMainWindow):
             settings = safe_load(settings_file)
         return settings[LANGUAGE]
 
-    def _create_background(self) -> None:
+    def _set_stylesheets(self) -> None:
         self.setStyleSheet("MainWindow {"
                            f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
                            "}"
                            "QPushButton:hover {border: 5px #000000;"
-                           "border-radius: 10px;}")
+                           "border-radius: 10px;}"
+                           "QWidget {"
+                           "font-family: Comic Sans MS, Comic Sans, cursive"
+                           "}")
         self._character_creation_button_stylesheet = ("QPushButton:enabled {"
                                                       f"background-image: url({BUTTONS}:"
                                                       "character_creation_button_enabled.png);"
-                                                      "font: bold 16px;"
                                                       "color: #edbd79;"
                                                       "border: 0px"
                                                       "}"
                                                       "QPushButton {"
                                                       f"background-image: url({BUTTONS}:"
                                                       "character_creation_button_disabled.png);"
-                                                      "font: bold 16px;"
+                                                      "font: bold 18px;"
                                                       "color: #000000;"
                                                       "border: 0px;"
                                                       "}")
