@@ -27,30 +27,33 @@ class CharacterMenu(QFrame):
         self.setStyleSheet("CharacterMenu {"
                            f"background-image: url({BACKGROUNDS}:character_menu_background.png);"
                            "}")
-        self._add_button_stylesheet = ("QPushButton:enabled {" +
-                                       f"background-image: url({BUTTONS}:add_button_enabled.png);" +
-                                       "border: 0px;" +
-                                       "background-position: center;" +
+        self._add_button_stylesheet = ("QPushButton:enabled {"
+                                       f"background-image: url({BUTTONS}:add_button_enabled.png);"
+                                       "border: 0px;"
+                                       "background-position: center;"
                                        "}"
                                        "QPushButton {"
                                        f"background-image: url({BUTTONS}:add_button_disabled.png);"
+                                       "border: 0px;"
                                        "}")
-        self._remove_button_stylesheet = ("QPushButton:enabled {" +
-                                          f"background-image: url({BUTTONS}:remove_button_enabled.png);" +
-                                          "border: 0px;" +
-                                          "background-position: center;" +
+        self._remove_button_stylesheet = ("QPushButton:enabled {"
+                                          f"background-image: url({BUTTONS}:remove_button_enabled.png);"
+                                          "border: 0px;"
+                                          "background-position: center;"
                                           "}"
                                           "QPushButton {"
                                           f"background-image: url({BUTTONS}:remove_button_disabled.png);"
+                                          "border: 0px;"
                                           "}")
-        self._accept_button_stylesheet = ("QPushButton:enabled {" +
-                                          f"background-image: url({BUTTONS}:accept_button_enabled.png);" +
-                                          "font: bold 17px;" +
-                                          "color: #edbd79;" +
-                                          "border: 0px;" +
+        self._accept_button_stylesheet = ("QPushButton:enabled {"
+                                          f"background-image: url({BUTTONS}:accept_button_enabled.png);"
+                                          "font: bold 17px;"
+                                          "color: #edbd79;"
+                                          "border: 0px;"
                                           "}"
                                           "QPushButton {"
                                           f"background-image: url({BUTTONS}:accept_button_disabled.png);"
+                                          "border: 0px;"
                                           "}")
 
     def set_actual_character_stats(self):
