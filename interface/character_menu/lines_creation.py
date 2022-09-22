@@ -3,16 +3,22 @@ from interface.common import upper_font, bold_font
 from PyQt6.QtCore import Qt
 from interface.character_menu import buttons
 from core.constants.size_constants import CharacterMenuSizes
-from core.constants import (
+from core.constants.character_constants import (
     AttributesNames as an,
     BarsNames as bn,
     CombatStatsNames as cs,
-    MainStatsNames as msn
+    MainStatsNames as msn,
+    Classes
 )
 
 
 def create_general_lines(self) -> list:
     lines = []
+    class_map = {
+        Classes.PEASANT: self._text.PEASANT,
+        Classes.WARRIOR: self._text.WARRIOR,
+        Classes.ASSASSIN: self._text.ASSASSIN
+    }
     label = QLabel(self._text.GENERAL)
     label = upper_font(label)
     label = bold_font(label)
@@ -24,7 +30,7 @@ def create_general_lines(self) -> list:
     label = create_level_line(self)
     lines.append(label)
 
-    label = create_class_line(self)
+    label = create_class_line(self, class_map)
     lines.append(label)
 
     return lines
@@ -44,8 +50,8 @@ def create_level_line(self) -> QLabel:
     return label
 
 
-def create_class_line(self) -> QLabel:
-    label = QLabel(self._text.CLASS + self._main_character_stats[msn.CLASS])
+def create_class_line(self, class_map) -> QLabel:
+    label = QLabel(self._text.CLASS + class_map[self._main_character_stats[msn.CLASS]])
     label = upper_font(label)
     return label
 

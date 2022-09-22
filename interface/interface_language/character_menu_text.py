@@ -23,6 +23,9 @@ class EnglishText:
     CRITICAL_STRIKE_MULTIPLIER: str = " Crit. Multiplier: "
     ACCURACY: str = " Accuracy: "
     ACCEPT: str = "Accept"
+    PEASANT: str = "Peasant"
+    WARRIOR: str = "Warrior"
+    ASSASSIN: str = "Assassin"
 
 
 @dataclass(frozen=True)
@@ -46,6 +49,9 @@ class RussianText:
     CRITICAL_STRIKE_MULTIPLIER: str = " Множитель крита: "
     ACCURACY: str = " Меткость: "
     ACCEPT: str = "Принять"
+    PEASANT: str = "Крестьянин"
+    WARRIOR: str = "Воин"
+    ASSASSIN: str = "Убийца"
 
 
 Text = {

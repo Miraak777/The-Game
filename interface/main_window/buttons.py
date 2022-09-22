@@ -13,7 +13,7 @@ def create_character_create_button(self, text) -> Dict:
     character_create_name_line_edit.setFixedSize(WidgetSizes.CHARACTER_CREATE_NAME_LINE_EDIT)
     character_create_name_line_edit.setStyleSheet(
         f"background-image: url({WIDGET_TEXTURES}:character_creation_line_edit.jpg);"
-        "font: 16px;")
+        "font: bold 20px;")
     character_create_name_line_edit.setPlaceholderText(
         text.CHARACTER_NAME_PLACEHOLDER
     )
