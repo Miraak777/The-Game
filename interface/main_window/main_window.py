@@ -1,4 +1,3 @@
-from PyQt6.QtGui import QBrush, QImage, QPalette
 from PyQt6.QtWidgets import (
     QGridLayout,
     QMainWindow,
@@ -7,16 +6,17 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
 )
 from PyQt6.QtCore import Qt
-import interface.main_window.buttons as buttons
-from core.constants.path_constants import BACKGROUNDS, BUTTONS, Paths
-from interface.character_menu.character_menu import CharacterMenu
+from core.constants.path_constants import Paths
 from interface.option_menu.option_menu import OptionMenu
-from interface.interface_language.main_menu_text import Text
-from core.constants.widget_constants import WindowSizes, WidgetNames as wn
+from interface.character_menu.character_menu import CharacterMenu
+from core.constants.widget_constants import WidgetNames as wn
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
-from core.constants.common_constants import DUMMY
 from yaml import safe_load
+from .stylesheets import main_window_stylesheet
+from .constants import MainWindowSizes, DUMMY
+from .texts import Text
+from . import buttons
 
 
 class MainWindow(QMainWindow):
@@ -25,19 +25,16 @@ class MainWindow(QMainWindow):
         self.language = self._get_language()
         self._text = Text[self.language]
         self.setWindowTitle(self._text.TITLE)
-        self.setFixedSize(WindowSizes.MAIN_WINDOW_SIZE)
+        self.setFixedSize(MainWindowSizes.MAIN_WINDOW_SIZE)
 
         self._layout = QGridLayout()
 
-        self._set_stylesheets()
+        self.setStyleSheet(main_window_stylesheet)
         self._create_menus()
         self._create_buttons()
 
-        self._dummy_widget1 = QWidget()
-        self._layout.addWidget(self._dummy_widget1, 0, 0)
-
-        self._dummy_widget2 = QWidget()
-        self._layout.addWidget(self._dummy_widget2, 2, 2)
+        self._dummy_widget = QWidget()
+        self._layout.addWidget(self._dummy_widget, 0, 0)
 
         self._widget = QWidget()
         self._widget.setLayout(self._layout)
@@ -48,29 +45,6 @@ class MainWindow(QMainWindow):
         with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
             settings = safe_load(settings_file)
         return settings[LANGUAGE]
-
-    def _set_stylesheets(self) -> None:
-        self.setStyleSheet("MainWindow {"
-                           f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
-                           "}"
-                           "QPushButton:hover {border: 5px #000000;"
-                           "border-radius: 10px;}"
-                           "QWidget {"
-                           "font-family: Comic Sans MS, Comic Sans, cursive"
-                           "}")
-        self._character_creation_button_stylesheet = ("QPushButton:enabled {"
-                                                      f"background-image: url({BUTTONS}:"
-                                                      "character_creation_button_enabled.png);"
-                                                      "color: #edbd79;"
-                                                      "border: 0px"
-                                                      "}"
-                                                      "QPushButton {"
-                                                      f"background-image: url({BUTTONS}:"
-                                                      "character_creation_button_disabled.png);"
-                                                      "font: bold 18px;"
-                                                      "color: #000000;"
-                                                      "border: 0px;"
-                                                      "}")
 
     def _create_menus(self):
         self._main_character_name = DUMMY
@@ -125,7 +99,6 @@ class MainWindow(QMainWindow):
         self.main_character.set_max_stamina()
         self._character_menu_button.setDisabled(False)
         self._option_menu_button.setDisabled(False)
-        self._dummy_widget2.hide()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
 

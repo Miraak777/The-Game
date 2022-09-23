@@ -1,27 +1,9 @@
 from dataclasses import dataclass
-from core.constants.language_constants import Language
-import PyQt6.QtCore
-from PyQt6.QtCore import QSize
-
-
-@dataclass
-class WindowSizes:
-    MAIN_WINDOW_SIZE: PyQt6.QtCore.QSize = QSize(1200, 700)
-    CHARACTER_MENU_SIZE: PyQt6.QtCore.QSize = QSize(400, 600)
-    OPTION_MENU_SIZE: PyQt6.QtCore.QSize = QSize(1000, 600)
-
 
 
 @dataclass
 class WindowsFonts:
     FONT_SIZE: int = 15
-
-
-@dataclass
-class WidgetSizes:
-    CHARACTER_CREATE_NAME_LINE_EDIT: PyQt6.QtCore.QSize = QSize(300, 40)
-    OPTION_MENU_TITLE: PyQt6.QtCore.QSize = QSize(150, 40)
-    OPTION_MENU_LANGUAGE: PyQt6.QtCore.QSize = QSize(150, 40)
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,15 @@
+from dataclasses import dataclass
+
+from PyQt6.QtCore import QSize
+
+
+@dataclass(frozen=True)
+class CharacterMenuSizes:
+    ATTRIBUTE_LINE: QSize = QSize(200, 20)
+    CHARACTER_MENU_SIZE: QSize = QSize(400, 600)
+
+
+@dataclass(frozen=True)
+class CharacterMenuButtons:
+    ATTRIBUTE_BUTTON: QSize = QSize(29, 29)
+    ACCEPT_BUTTON: QSize = QSize(122, 45)

@@ -1,14 +1,13 @@
 from PyQt6.QtWidgets import QLabel, QHBoxLayout
-from interface.common import upper_font, bold_font
 from PyQt6.QtCore import Qt
-from interface.character_menu import buttons
-from core.constants.size_constants import CharacterMenuSizes
 from core.constants.character_constants import (
     BarsNames as bn,
     CombatStatsNames as cs,
     MainStatsNames as msn,
     Classes
 )
+from .constants import CharacterMenuSizes
+from . import buttons
 
 
 def create_general_widget(self) -> list:
@@ -19,8 +18,7 @@ def create_general_widget(self) -> list:
         Classes.ASSASSIN: self._text.ASSASSIN
     }
     label = QLabel(self._text.GENERAL)
-    label = upper_font(label)
-    label = bold_font(label)
+    label.setStyleSheet("font: bold;")
     lines.append(label)
 
     label = create_name_widget(self)
@@ -37,7 +35,6 @@ def create_general_widget(self) -> list:
 
 def create_name_widget(self) -> QLabel:
     label = QLabel(self._text.NAME + self._main_character_stats[msn.NAME])
-    label = upper_font(label)
     return label
 
 
@@ -45,21 +42,18 @@ def create_level_line(self) -> QLabel:
     label = QLabel(
         self._text.LEVEL + str(self._main_character_stats[msn.LEVEL])
     )
-    label = upper_font(label)
     return label
 
 
 def create_class_line(self, class_map) -> QLabel:
     label = QLabel(self._text.CLASS + class_map[self._main_character_stats[msn.CLASS]])
-    label = upper_font(label)
     return label
 
 
 def create_bars_lines(self) -> list:
     lines = []
     label = QLabel(self._text.BARS)
-    label = upper_font(label)
-    label = bold_font(label)
+    label.setStyleSheet("font: bold;")
     lines.append(label)
 
     label = create_health_widget(self)
@@ -77,7 +71,6 @@ def create_health_widget(self) -> QLabel:
         + "/"
         + str(self._main_character_stats[bn.HEALTH])
     )
-    label = upper_font(label)
     return label
 
 
@@ -88,7 +81,6 @@ def create_stamina_widget(self) -> QLabel:
         + "/"
         + str(self._main_character_stats[bn.STAMINA])
     )
-    label = upper_font(label)
     return label
 
 
@@ -97,8 +89,7 @@ def create_attributes_widget(self) -> list[QHBoxLayout]:
 
     title_layout = QHBoxLayout()
     label = QLabel(self._text.ATTRIBUTES)
-    label = upper_font(label)
-    label = bold_font(label)
+    label.setStyleSheet("font: bold;")
     title_layout.addWidget(label)
     layouts.append(title_layout)
 
@@ -159,7 +150,6 @@ def create_strength_widget(self) -> QLabel:
     label = QLabel(
         self._text.STRENGTH + str(self._attributes.STRENGTH)
     )
-    label = upper_font(label)
     return label
 
 
@@ -167,7 +157,6 @@ def create_agility_widget(self) -> QLabel:
     label = QLabel(
         self._text.AGILITY + str(self._attributes.AGILITY)
     )
-    label = upper_font(label)
     return label
 
 
@@ -175,7 +164,6 @@ def create_vitality_widget(self) -> QLabel:
     label = QLabel(
         self._text.VITALITY + str(self._attributes.VITALITY)
     )
-    label = upper_font(label)
     return label
 
 
@@ -183,7 +171,6 @@ def create_endurance_widget(self) -> QLabel:
     label = QLabel(
         self._text.ENDURANCE + str(self._attributes.ENDURANCE)
     )
-    label = upper_font(label)
     return label
 
 
@@ -192,15 +179,13 @@ def create_attribute_points_widget(self) -> QLabel:
         self._text.ATTRIBUTE_POINTS
         + str(self._attributes.ATTRIBUTE_POINTS)
     )
-    label = upper_font(label)
     return label
 
 
 def create_stats_widget(self) -> list:
     lines = []
     label = QLabel(self._text.STATS)
-    label = upper_font(label)
-    label = bold_font(label)
+    label.setStyleSheet("font: bold;")
     lines.append(label)
 
     label = create_damage_widget(self)
@@ -225,7 +210,6 @@ def create_damage_widget(self) -> QLabel:
         + "-"
         + str(self._main_character_stats[cs.MAX_DAMAGE])
     )
-    label = upper_font(label)
     return label
 
 
@@ -235,7 +219,6 @@ def create_accuracy_widget(self) -> QLabel:
         + str(self._main_character_stats[cs.ACCURACY] * 100)
         + "%"
     )
-    label = upper_font(label)
     return label
 
 
@@ -245,7 +228,6 @@ def create_critical_strike_chance_widget(self) -> QLabel:
         + str(self._main_character_stats[cs.CRITICAL_STRIKE_CHANCE] * 100)
         + "%"
     )
-    label = upper_font(label)
     return label
 
 
@@ -254,5 +236,4 @@ def create_critical_strike_multiplier_widget(self) -> QLabel:
         self._text.CRITICAL_STRIKE_MULTIPLIER
         + str(self._main_character_stats[cs.CRITICAL_STRIKE_MULTIPLIER])
     )
-    label = upper_font(label)
     return label

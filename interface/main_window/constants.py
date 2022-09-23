@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 from PyQt6.QtCore import QSize
 
+DUMMY = "dummy"
+
 
 @dataclass(frozen=True)
 class MainWindowButtons:
@@ -10,11 +12,6 @@ class MainWindowButtons:
 
 
 @dataclass(frozen=True)
-class CharacterMenuButtons:
-    ATTRIBUTE_BUTTON: QSize = QSize(29, 29)
-    ACCEPT_BUTTON: QSize = QSize(122, 45)
-
-
-@dataclass(frozen=True)
-class OptionMenuButtons:
-    LANGUAGE_BUTTON: QSize = QSize(100, 30)
+class MainWindowSizes:
+    MAIN_WINDOW_SIZE: QSize = QSize(1200, 700)
+    CHARACTER_CREATE_NAME_LINE_EDIT: QSize = QSize(300, 40)
