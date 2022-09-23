@@ -1,14 +1,15 @@
-from main_character.character import MainCharacter
-Character = MainCharacter()
-# Character.set_class_assassin()
-# Character.set_class_warrior()
-Character.add_level()
-Character.add_strength()
-Character.add_agility()
-# Character.add_vitality()
-Character.add_endurance()
-Character.set_max_health()
-Character.set_max_stamina()
-print(Character.get_bars())
-print(Character.get_parameters())
-print(Character.get_combat_stats())
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import QDir
+from core import BACKGROUNDS, BUTTONS, WIDGET_TEXTURES, Paths
+
+from interface import MainWindow
+
+QDir.addSearchPath(BACKGROUNDS, Paths.PATH_TO_BACKGROUNDS)
+QDir.addSearchPath(BUTTONS, Paths.PATH_TO_BUTTON_TEXTURES)
+QDir.addSearchPath(WIDGET_TEXTURES, Paths.PATH_TO_WIDGET_TEXTURES)
+app = QApplication([])
+
+main_window = MainWindow()
+main_window.show()
+
+app.exec()
