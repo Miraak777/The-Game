@@ -1,5 +1,9 @@
 from core import WIDGET_TEXTURES, BUTTONS, BACKGROUNDS
 
+option_menu_stylesheet = ("OptionMenu {"
+                          f"background-image: url({BACKGROUNDS}:option_menu_background.jpg);"
+                          "}")
+
 title_stylesheet = ("QLabel {"
                     f"background-image: url({WIDGET_TEXTURES}:option_menu_title.png);"
                     "background-repeat: no-repeat;"
@@ -31,6 +35,9 @@ restart_request_stylesheet = ("QLabel {"
                               "font: bold 18px;"
                               "color: #edbd79;}")
 
-option_menu_stylesheet = ("OptionMenu {"
-                          f"background-image: url({BACKGROUNDS}:option_menu_background.jpg);"
+exit_button_stylesheet = ("QPushButton {"
+                          f"background-image: url({BUTTONS}:exit_button.png);"
+                          "color:#edbd79;"
+                          "font: 18px;"
+                          "border: 0px;"
                           "}")

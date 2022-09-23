@@ -13,6 +13,8 @@ class StatsNames:
 class MainStatsNames:
     NAME: str = "character_name"
     LEVEL: str = "level"
+    MAX_EXPERIENCE: str = "max_experience"
+    EXPERIENCE: str = "experience"
     CLASS: str = "class"
 
 

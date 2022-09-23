@@ -7,6 +7,7 @@ from .stylesheets import (
     languages_buttons_stylesheet,
     restart_request_stylesheet,
     title_stylesheet,
+    exit_button_stylesheet,
 )
 
 
@@ -60,7 +61,16 @@ def create_english_language_button(self) -> QPushButton:
     return english_language_button
 
 
-def restart_request_label(self, text) -> QLabel:
-    label = QLabel(text=text.RESTART_REQUEST)
+def restart_request_label(self) -> QLabel:
+    label = QLabel(text=self._text.RESTART_REQUEST)
     label.setStyleSheet(restart_request_stylesheet)
     return label
+
+
+def exit_button(self) -> QPushButton:
+    button = QPushButton(text=self._text.EXIT_BUTTON)
+    button.setStyleSheet(exit_button_stylesheet)
+    button.setFixedSize(OptionMenuButtons.EXIT_BUTTON)
+    button.setCheckable(True)
+    button.clicked.connect(self._event_exit)
+    return button

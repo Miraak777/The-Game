@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QGridLayout, QFrame
+from PyQt6.QtCore import Qt
 from core import Paths
 from core.constants.language_constants import Language, LANGUAGE
 from yaml import safe_load, safe_dump
@@ -10,10 +11,11 @@ from . import widgets
 
 
 class OptionMenu(QFrame):
-    def __init__(self, language):
+    def __init__(self, main_menu):
         super().__init__()
-        self._language = language
-        self._text = Text[language]()
+        self._main_menu = main_menu
+        self._language = self._main_menu.language
+        self._text = Text[self._language]()
         self.setFixedSize(OptionMenuSizes.OPTION_MENU_SIZE)
 
         self.setStyleSheet(option_menu_stylesheet)
@@ -70,6 +72,13 @@ class OptionMenu(QFrame):
         clear_layout(self._languages_layout)
         clear_layout(self._choose_language_layout)
         clear_layout(self._layout)
-        label = widgets.restart_request_label(self, self._text)
+        clear_layout(self._main_menu.menus_buttons_layout)
+        label = widgets.restart_request_label(self)
+        button = widgets.exit_button(self)
         self._create_dummy_widgets()
+        self._layout.addWidget(button, 2, 1, alignment=Qt.AlignmentFlag.AlignCenter)
         self._layout.addWidget(label, 1, 1)
+
+    @staticmethod
+    def _event_exit():
+        exit()

@@ -41,11 +41,9 @@ def critical_strike_formula(base_critical_strike_chance: float,
 
 
 def accuracy_formula(accuracy: float, agility: int, level: int) -> float:
-    accuracy = accuracy * (1 + (agility * 5 - level))
+    accuracy = accuracy * ((1 + agility * 0.3) / (0.9 + level*0.1))
     if accuracy <= 0:
         accuracy = 0
     if accuracy >= 1:
         accuracy = 1
-
-    accuracy = round(accuracy, 2)
-    return accuracy
+    return round(accuracy, 2)

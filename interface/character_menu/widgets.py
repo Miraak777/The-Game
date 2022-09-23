@@ -40,7 +40,9 @@ def create_name_widget(self) -> QLabel:
 
 def create_level_line(self) -> QLabel:
     label = QLabel(
-        self._text.LEVEL + str(self._main_character_stats[msn.LEVEL])
+        str(self._text.LEVEL) + str(self._main_character_stats[msn.LEVEL]) +
+        ", " + str(self._main_character_stats[msn.EXPERIENCE]) +
+        "/" + str(self._main_character_stats[msn.MAX_EXPERIENCE])
     )
     return label
 
@@ -67,9 +69,9 @@ def create_bars_lines(self) -> list:
 def create_health_widget(self) -> QLabel:
     label = QLabel(
         self._text.HEALTH
-        + str(self._main_character_stats[bn.MAX_HEALTH])
-        + "/"
         + str(self._main_character_stats[bn.HEALTH])
+        + "/"
+        + str(self._main_character_stats[bn.MAX_HEALTH])
     )
     return label
 
@@ -77,9 +79,9 @@ def create_health_widget(self) -> QLabel:
 def create_stamina_widget(self) -> QLabel:
     label = QLabel(
         self._text.STAMINA
-        + str(self._main_character_stats[bn.MAX_STAMINA])
-        + "/"
         + str(self._main_character_stats[bn.STAMINA])
+        + "/"
+        + str(self._main_character_stats[bn.MAX_STAMINA])
     )
     return label
 

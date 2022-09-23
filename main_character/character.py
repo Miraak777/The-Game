@@ -101,8 +101,9 @@ class MainCharacter:
     def set_max_stamina(self) -> None:
         self._bars.STAMINA = self._bars.MAX_STAMINA
 
-    def add_level(self) -> None:
+    def _add_level(self) -> None:
         self._main_stats.LEVEL += 1
+        self._main_stats.MAX_EXPERIENCE = self._main_stats.LEVEL * 100
         self._attributes.ATTRIBUTE_POINTS += 3
         self._refresh_stats()
         self.set_max_health()
@@ -118,6 +119,13 @@ class MainCharacter:
             self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
             self._refresh_stats()
 
+    def send_experience(self, experience):
+        self._main_stats.EXPERIENCE += experience
+        if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
+            self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE
+            self._add_level()
+            self.send_experience(0)
+
     def get_stats_for_calculation(self) -> Dict[str, Any]:
         output_stats = {
             sn.ATTRIBUTES: self._attributes,
@@ -132,6 +140,8 @@ class MainCharacter:
         stats = {
             msn.NAME: self._main_stats.NAME,
             msn.LEVEL: self._main_stats.LEVEL,
+            msn.MAX_EXPERIENCE: self._main_stats.MAX_EXPERIENCE,
+            msn.EXPERIENCE: self._main_stats.EXPERIENCE,
             msn.CLASS: self._main_stats.CLASS,
             bn.MAX_HEALTH: self._bars.MAX_HEALTH,
             bn.HEALTH: self._bars.HEALTH,

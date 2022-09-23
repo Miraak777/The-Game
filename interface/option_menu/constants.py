@@ -6,6 +6,7 @@ from PyQt6.QtCore import QSize
 @dataclass(frozen=True)
 class OptionMenuButtons:
     LANGUAGE_BUTTON: QSize = QSize(100, 30)
+    EXIT_BUTTON: QSize = QSize(45, 45)
 
 
 @dataclass(frozen=True)

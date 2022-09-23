@@ -28,13 +28,14 @@ class MainWindow(QMainWindow):
         self.setFixedSize(MainWindowSizes.MAIN_WINDOW_SIZE)
 
         self._layout = QGridLayout()
+        self._dummy_widget1 = QWidget()
+        self._layout.addWidget(self._dummy_widget1, 0, 0)
+        self._dummy_widget2 = QWidget()
+        self._layout.addWidget(self._dummy_widget2, 2, 2)
 
         self.setStyleSheet(main_window_stylesheet)
         self._create_menus()
         self._create_buttons()
-
-        self._dummy_widget = QWidget()
-        self._layout.addWidget(self._dummy_widget, 0, 0)
 
         self._widget = QWidget()
         self._widget.setLayout(self._layout)
@@ -52,13 +53,13 @@ class MainWindow(QMainWindow):
 
         self._character_menu = CharacterMenu(self)
         self._character_menu.hide()
-        self._option_menu = OptionMenu(self.language)
+        self._option_menu = OptionMenu(self)
         self._option_menu.hide()
 
         self._layout.addWidget(self._character_menu, 0, 2,
                                alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter))
         self._layout.addWidget(self._option_menu, 0, 1,
-                               alignment=Qt.AlignmentFlag.AlignCenter)
+                               alignment=Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter)
 
     def _create_buttons(self):
         character_creation = buttons.create_character_create_button(self, self._text)
@@ -72,12 +73,12 @@ class MainWindow(QMainWindow):
                                             alignment=Qt.AlignmentFlag.AlignHCenter)
         character_creation_layout.addWidget(self._character_create_button, alignment=Qt.AlignmentFlag.AlignHCenter)
 
-        menus_buttons_layout = QHBoxLayout()
-        menus_buttons_layout.addWidget(self._character_menu_button)
-        menus_buttons_layout.addWidget(self._option_menu_button)
+        self.menus_buttons_layout = QHBoxLayout()
+        self.menus_buttons_layout.addWidget(self._character_menu_button)
+        self.menus_buttons_layout.addWidget(self._option_menu_button)
 
         self._layout.addLayout(character_creation_layout, 1, 1)
-        self._layout.addLayout(menus_buttons_layout, 2, 2,
+        self._layout.addLayout(self.menus_buttons_layout, 2, 2,
                                alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))
 
     def _event_open_character_menu(self) -> None:

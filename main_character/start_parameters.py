@@ -4,6 +4,8 @@ from core.constants.character_constants import Classes as c
 class MainStats:
     NAME: str = None
     LEVEL: int = 1
+    MAX_EXPERIENCE: int = 100
+    EXPERIENCE: int = 0
     CLASS: str = c.PEASANT
 
 
