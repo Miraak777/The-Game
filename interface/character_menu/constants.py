@@ -11,5 +11,5 @@ class CharacterMenuSizes:
 
 @dataclass(frozen=True)
 class CharacterMenuButtons:
-    ATTRIBUTE_BUTTON: QSize = QSize(29, 29)
-    ACCEPT_BUTTON: QSize = QSize(122, 45)
+    ATTRIBUTE_BUTTON: QSize = QSize(31, 31)
+    ACCEPT_BUTTON: QSize = QSize(124, 47)

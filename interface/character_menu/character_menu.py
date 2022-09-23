@@ -22,11 +22,8 @@ class CharacterMenu(QFrame):
         self._main_character_stats = self._main_menu.main_character.get_stats()
         self._attributes = Attributes()
 
-        self._set_stylesheet()
-        self._create_layout()
-
-    def _set_stylesheet(self) -> None:
         self.setStyleSheet(character_menu_stylesheet)
+        self._create_layout()
 
     def set_actual_character_stats(self):
         self._main_character_stats = self._main_menu.main_character.get_stats()

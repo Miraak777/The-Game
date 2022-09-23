@@ -4,11 +4,13 @@ from PyQt6.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QHBoxLayout,
+    QLabel,
 )
 from PyQt6.QtCore import Qt
 from core.constants.path_constants import Paths
 from interface.option_menu.option_menu import OptionMenu
 from interface.character_menu.character_menu import CharacterMenu
+from interface.gameplay_window.game_window import GameWindow
 from core.constants.widget_constants import WidgetNames as wn
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
@@ -55,10 +57,14 @@ class MainWindow(QMainWindow):
         self._character_menu.hide()
         self._option_menu = OptionMenu(self)
         self._option_menu.hide()
+        self._game_window = GameWindow(self)
+        self._game_window.hide()
 
-        self._layout.addWidget(self._character_menu, 0, 2,
+        self._layout.addWidget(self._game_window, 1, 0,
+                               alignment=Qt.AlignmentFlag.AlignLeft)
+        self._layout.addWidget(self._character_menu, 1, 2,
                                alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter))
-        self._layout.addWidget(self._option_menu, 0, 1,
+        self._layout.addWidget(self._option_menu, 1, 1,
                                alignment=Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter)
 
     def _create_buttons(self):
@@ -91,7 +97,9 @@ class MainWindow(QMainWindow):
     def _event_open_options_menu(self):
         if self._option_menu.isHidden():
             self._option_menu.show()
+            self._game_window.hide()
         else:
+            self._game_window.show()
             self._option_menu.hide()
 
     def _event_create_new_character(self) -> None:
@@ -100,6 +108,7 @@ class MainWindow(QMainWindow):
         self.main_character.set_max_stamina()
         self._character_menu_button.setDisabled(False)
         self._option_menu_button.setDisabled(False)
+        self._game_window.show()
         self._character_create_button.hide()
         self._character_create_name_line_edit.hide()
 
