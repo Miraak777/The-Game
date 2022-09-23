@@ -119,7 +119,7 @@ class MainCharacter:
             self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
             self._refresh_stats()
 
-    def send_experience(self, experience):
+    def send_experience(self, experience: int):
         self._main_stats.EXPERIENCE += experience
         if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
             self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE

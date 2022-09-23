@@ -53,8 +53,8 @@ class MainWindow(QMainWindow):
         self._main_character_name = DUMMY
         self.main_character = MainCharacter(self._main_character_name)
 
-        self._character_menu = CharacterMenu(self)
-        self._character_menu.hide()
+        self.character_menu = CharacterMenu(self)
+        self.character_menu.hide()
         self._option_menu = OptionMenu(self)
         self._option_menu.hide()
         self._game_window = GameWindow(self)
@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
 
         self._layout.addWidget(self._game_window, 1, 0,
                                alignment=Qt.AlignmentFlag.AlignLeft)
-        self._layout.addWidget(self._character_menu, 1, 2,
+        self._layout.addWidget(self.character_menu, 1, 2,
                                alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter))
         self._layout.addWidget(self._option_menu, 1, 1,
                                alignment=Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter)
@@ -88,11 +88,11 @@ class MainWindow(QMainWindow):
                                alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))
 
     def _event_open_character_menu(self) -> None:
-        if self._character_menu.isHidden():
-            self._character_menu.set_actual_character_stats()
-            self._character_menu.show()
+        if self.character_menu.isHidden():
+            self.character_menu.set_actual_character_stats()
+            self.character_menu.show()
         else:
-            self._character_menu.hide()
+            self.character_menu.hide()
 
     def _event_open_options_menu(self):
         if self._option_menu.isHidden():

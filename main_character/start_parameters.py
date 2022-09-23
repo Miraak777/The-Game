@@ -18,9 +18,9 @@ class Attributes:
 
 
 class Bars:
-    MAX_HEALTH: float = 5
+    MAX_HEALTH: float = 10
     HEALTH: float = 0
-    MAX_STAMINA: float = 2.5
+    MAX_STAMINA: float = 5
     STAMINA: float = 0
 
 
