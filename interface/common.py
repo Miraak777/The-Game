@@ -1,3 +1,15 @@
+from typing import Dict
+from core import Paths
+from yaml import safe_load
+from core.constants.key_bind_constants import KeyBindNames
+
+
+def get_key_binds() -> Dict:
+    with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+        settings = safe_load(settings_file)
+        return settings[KeyBindNames.KEY_BINDS]
+
+
 def clear_layout(layout):
     item_list = list(range(layout.count()))
     item_list.reverse()
@@ -6,4 +18,3 @@ def clear_layout(layout):
         layout.removeItem(item)
         if item.widget():
             item.widget().deleteLater()
-

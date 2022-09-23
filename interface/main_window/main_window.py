@@ -16,7 +16,7 @@ from yaml import safe_load
 from .stylesheets import main_window_stylesheet
 from .constants import MainWindowSizes, DUMMY
 from .texts import Text
-from . import buttons
+from . import widgets
 
 
 class MainWindow(QMainWindow):
@@ -62,11 +62,11 @@ class MainWindow(QMainWindow):
                                alignment=Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignHCenter)
 
     def _create_buttons(self):
-        character_creation = buttons.create_character_create_button(self, self._text)
+        character_creation = widgets.create_character_create_button(self, self._text)
         self._character_create_name_line_edit = character_creation[wn.CHARACTER_CREATE_NAME_LINE_EDIT]
         self._character_create_button = character_creation[wn.CHARACTER_CREATE_BUTTON]
-        self._character_menu_button = buttons.create_character_menu_button(self)
-        self._option_menu_button = buttons.create_option_menu_button(self)
+        self._character_menu_button = widgets.create_character_menu_button(self)
+        self._option_menu_button = widgets.create_option_menu_button(self)
 
         character_creation_layout = QVBoxLayout()
         character_creation_layout.addWidget(self._character_create_name_line_edit,
