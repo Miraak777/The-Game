@@ -10,4 +10,4 @@ class GameWindowSizes:
 
 @dataclass(frozen=True)
 class GameWindowButtons:
-    ACTION_BUTTON_SIZE: QSize = QSize(387, 45)
+    ACTION_BUTTON_SIZE: QSize = QSize(387, 47)

@@ -22,7 +22,7 @@ class WarriorClass:
 @dataclass(frozen=True)
 class AssassinClass:
     HEALTH_MULTIPLIER: float = 0.7
-    STAMINA_MULTIPLIER: float = 1.4
+    STAMINA_MULTIPLIER: float = 1.5
     AGILITY_DAMAGE_MULTIPLIER: float = 1.5
     STRENGTH_DAMAGE_MULTIPLIER: float = 0
     CRITICAL_STRIKE_CHANCE_MULTIPLIER: float = 2

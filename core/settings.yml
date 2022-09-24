@@ -1,4 +1,8 @@
 key_binds:
   character_menu: c
   option_menu: o
+  first_action: q
+  second_action: w
+  third_action: e
+  fourth_action: r
 language: en
