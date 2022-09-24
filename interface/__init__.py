@@ -1,1 +1,1 @@
-from interface.main_window.main_window import MainWindow
+from interface.main_window.main_menu import MainMenu

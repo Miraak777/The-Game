@@ -81,7 +81,9 @@ class CharacterMenu(QFrame):
         self._layout.addLayout(self._endurance_layout)
         self._accept_button_layout = attribute_layouts[6]
         self._layout.addLayout(self._accept_button_layout)
-        self._layout.addWidget(QLabel())
+        label = QLabel()
+        label.setFixedWidth(1)
+        self._layout.addWidget(label)
         for line in widgets.create_stats_widget(self):
             self._layout.addWidget(line)
 

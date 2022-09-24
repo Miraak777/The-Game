@@ -72,7 +72,6 @@ class OptionMenu(QFrame):
         clear_layout(self._languages_layout)
         clear_layout(self._choose_language_layout)
         clear_layout(self._layout)
-        clear_layout(self._main_menu.menus_buttons_layout)
         label = widgets.restart_request_label(self)
         button = widgets.exit_button(self)
         self._create_dummy_widgets()

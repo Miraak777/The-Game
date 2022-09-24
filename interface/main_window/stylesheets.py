@@ -4,17 +4,17 @@ character_create_button_stylesheet = (f"background-image: url({WIDGET_TEXTURES}:
                                       "font: bold 20px;"
                                       "border: 1px solid black")
 
-main_window_stylesheet = ("MainWindow {"
-                          f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
-                          "}"
-                          "QPushButton:hover {border: 1px solid #edbd79;"
-                          "}"
-                          "QPushButton {"
-                          "border: 1px solid black;"
-                          "}"
-                          "QWidget {"
-                          "font-family: Comic Sans MS, Comic Sans, cursive"
-                          "}")
+main_menu_stylesheet = ("MainMenu {"
+                        f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
+                        "}"
+                        "QPushButton:hover {border: 1px solid #edbd79;"
+                        "}"
+                        "QPushButton {"
+                        "border: 1px solid black;"
+                        "}"
+                        "QWidget {"
+                        "font-family: Comic Sans MS, Comic Sans, cursive"
+                        "}")
 
 character_creation_button_stylesheet = ("QPushButton:enabled {"
                                         f"background-image: url({BUTTONS}:"

@@ -15,6 +15,7 @@ class GameWindow(QFrame):
 
         self.setStyleSheet(game_window_stylesheet)
         self._create_layout()
+        self.hide()
 
     def _create_layout(self):
         self._layout = QGridLayout()
@@ -37,33 +38,33 @@ class GameWindow(QFrame):
         self.setLayout(self._layout)
 
     def _event_give_some_exp(self):
-        self._main_menu.main_character.send_experience(1000)
-        self._main_menu.character_menu.set_actual_character_stats()
         label = QLabel(text="Gained 1000 xp!")
         label.setStyleSheet(label_stylesheet)
         label.setFixedHeight(30)
         self.scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._main_menu.main_character.send_experience(1000, self._main_menu)
+        self._main_menu.character_menu.set_actual_character_stats()
 
     def _event_set_class_peasant(self):
-        self._main_menu.main_character.set_class_peasant()
-        self._main_menu.character_menu.set_actual_character_stats()
         label = QLabel(text="You're now Peasant!")
         label.setStyleSheet(label_stylesheet)
         label.setFixedHeight(30)
         self.scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._main_menu.main_character.set_class_peasant()
+        self._main_menu.character_menu.set_actual_character_stats()
 
     def _event_set_class_warrior(self):
-        self._main_menu.main_character.set_class_warrior()
-        self._main_menu.character_menu.set_actual_character_stats()
         label = QLabel(text="You're now Warrior!")
         label.setStyleSheet(label_stylesheet)
         label.setFixedHeight(30)
         self.scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._main_menu.main_character.set_class_warrior()
+        self._main_menu.character_menu.set_actual_character_stats()
 
     def _event_set_class_assassin(self):
-        self._main_menu.main_character.set_class_assassin()
-        self._main_menu.character_menu.set_actual_character_stats()
         label = QLabel(text="You're now Assassin!")
         label.setStyleSheet(label_stylesheet)
         label.setFixedHeight(30)
         self.scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._main_menu.main_character.set_class_assassin()
+        self._main_menu.character_menu.set_actual_character_stats()

@@ -12,6 +12,6 @@ class MainWindowButtons:
 
 
 @dataclass(frozen=True)
-class MainWindowSizes:
-    MAIN_WINDOW_SIZE: QSize = QSize(1200, 700)
-    CHARACTER_CREATE_NAME_LINE_EDIT: QSize = QSize(300, 40)
+class MainMenuSizes:
+    MAIN_MENU_SIZE: QSize = QSize(1200, 700)
+    CHARACTER_CREATE_NAME_LINE_EDIT: QSize = QSize(350, 40)

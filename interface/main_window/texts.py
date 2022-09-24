@@ -11,6 +11,7 @@ class EnglishText:
     CHARACTER_NAME_PLACEHOLDER: str = "Enter your character name"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Character Menu ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Option Menu ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
+    LEVEL_UP: str = "Level up!"
 
 
 @dataclass(frozen=True)
@@ -20,6 +21,7 @@ class RussianText:
     CHARACTER_NAME_PLACEHOLDER: str = "Введите имя вашего персонажа"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Меню персонажа ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Настройка ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
+    LEVEL_UP: str = "Повышение уровня!"
 
 
 Text = {
