@@ -1,6 +1,12 @@
-class Fists:
-    WEAPON_NAME: str = "Fists"
-    MIN_DAMAGE: int = 1
-    MAX_DAMAGE: int = 2
-    CRITICAL_STRIKE_CHANCE: float = 0.05
-    ACCURACY: float = 0.8
+from .weapon import Weapon
+
+
+class Fists(Weapon):
+    WEAPON_NAME = "Fists"
+    TWO_HANDED = True
+    MIN_DAMAGE = 1
+    MAX_DAMAGE = 2
+    CRITICAL_STRIKE_CHANCE = 0.05
+    ACCURACY = 0.8
+    STAMINA_CONSUMPTION_MULTIPLIER = 1
+    ARMOUR_PENETRATION = 0
