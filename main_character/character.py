@@ -11,7 +11,7 @@ from core.constants.character_constants import (
     StatsNames as sn
 )
 from core.stats_formulas import characters_formulas as cf
-from interface.gameplay_window.stylesheets import label_stylesheet
+from interface.game_menu.stylesheets import label_stylesheet
 from main_character import classes
 from main_character.start_parameters import (
     Attributes,
@@ -30,7 +30,7 @@ class MainCharacter:
         self._bars = Bars()
         self._combat_stats = CombatStats()
         self._class_multipliers = ClassMultipliers()
-        self._equipped_weapon = items.weapon.Fists()
+        self._equipped_weapon = items.weapon.Fists
 
     def set_class_peasant(self) -> None:
         self._class_multipliers = classes.PeasantClass
@@ -127,9 +127,7 @@ class MainCharacter:
         if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
             self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE
             self._add_level()
-            level_up_label = QLabel(main_menu.text.LEVEL_UP)
-            level_up_label.setStyleSheet(label_stylesheet)
-            main_menu.game_log.addWidget(level_up_label, alignment=Qt.AlignmentFlag.AlignBottom)
+            main_menu.game_menu.add_log(main_menu.text.LEVEL_UP)
             self.send_experience(0, main_menu)
 
     def get_stats_for_calculation(self) -> Dict[str, Any]:

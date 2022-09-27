@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from .weapon import Weapon
 
 
+@dataclass
 class Fists(Weapon):
     WEAPON_NAME = "Fists"
     TWO_HANDED = True

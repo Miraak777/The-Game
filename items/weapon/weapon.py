@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass(frozen=True)
+@dataclass
 class Weapon:
     WEAPON_NAME: str
     TWO_HANDED: bool

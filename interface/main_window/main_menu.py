@@ -2,7 +2,6 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QHBoxLayout,
     QStackedLayout,
-    QFrame,
     QGridLayout,
     QWidget,
 )
@@ -10,11 +9,11 @@ from PyQt6.QtCore import Qt
 from core.constants.path_constants import Paths
 from interface.option_menu.option_menu import OptionMenu
 from interface.character_menu.character_menu import CharacterMenu
-from interface.gameplay_window.game_window import GameWindow
+from interface.game_menu.game_menu import GameWindow
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from yaml import safe_load
-from interface.common import clear_layout
+from scenarios import DebugSituation
 from .stylesheets import main_menu_stylesheet
 from .constants import MainMenuSizes, DUMMY
 from .texts import Text
@@ -34,7 +33,7 @@ class MainMenu(QMainWindow):
 
         self._create_layouts()
 
-        self.game_log = self._game_window.scroll_area_layout
+        DebugSituation(self)
 
     def _create_layouts(self) -> None:
         self._main_layout = self._create_main_layout()
@@ -53,8 +52,8 @@ class MainMenu(QMainWindow):
         stacked_layout = QStackedLayout()
         stacked_layout.setStackingMode(QStackedLayout.StackingMode.StackAll)
 
-        self._game_window = GameWindow(self)
-        stacked_layout.addWidget(self._game_window)
+        self.game_menu = GameWindow(self)
+        stacked_layout.addWidget(self.game_menu)
 
         self._option_menu = OptionMenu(self)
         layout = QHBoxLayout()
@@ -93,7 +92,7 @@ class MainMenu(QMainWindow):
         else:
             self.character_menu.hide()
 
-    def _event_open_options_menu(self):
+    def _event_open_options_menu(self) -> None:
         if self._option_menu_widget.isHidden():
             self._option_menu_widget.show()
         else:
@@ -115,7 +114,7 @@ class MainMenu(QMainWindow):
             self._character_create_button.setEnabled(False)
 
     @staticmethod
-    def _get_language():
+    def _get_language() -> str:
         with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
             settings = safe_load(settings_file)
         return settings[LANGUAGE]
