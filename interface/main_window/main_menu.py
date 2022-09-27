@@ -13,7 +13,7 @@ from interface.game_menu.game_menu import GameWindow
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from yaml import safe_load
-from scenarios import EmptySituation
+from scenarios import EmptySituation, StartScenario
 from .stylesheets import main_menu_stylesheet
 from .constants import MainMenuSizes, DUMMY
 from .texts import Text
@@ -106,6 +106,7 @@ class MainMenu(QMainWindow):
         self.main_character.set_max_health()
         self.main_character.set_max_stamina()
         self._character_menu_button.setDisabled(False)
+        StartScenario(self)
 
     def _event_main_character_name_entered(self, name) -> None:
         self._main_character_name = name

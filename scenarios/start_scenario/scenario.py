@@ -8,4 +8,4 @@ class StartScenario:
         self.game_menu = main_menu.game_menu
         self._text = Text[self.main_menu.language]
 
-        situations.ExampleSituation(main_menu)
+        situations.StartSituation(main_menu)

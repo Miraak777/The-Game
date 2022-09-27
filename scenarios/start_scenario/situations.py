@@ -14,11 +14,12 @@ class StartSituation:
             ActionButtons.FOURTH_ACTION: self._event_doing_nothing,
         }
         self._texts = {
-            ActionButtons.FIRST_ACTION: "",
-            ActionButtons.SECOND_ACTION: "",
-            ActionButtons.THIRD_ACTION: "",
-            ActionButtons.FOURTH_ACTION: "",
+            ActionButtons.FIRST_ACTION: self._text.FIRST_ACTION,
+            ActionButtons.SECOND_ACTION: self._text.SECOND_ACTION,
+            ActionButtons.THIRD_ACTION: self._text.THIRD_ACTION,
+            ActionButtons.FOURTH_ACTION: self._text.FOURTH_ACTION,
         }
+        self._game_menu.add_log(self._text.INTRODUCTION, rows=3)
         self._game_menu.set_action_buttons(self._events, self._texts)
 
     def _event_doing_nothing(self) -> None:

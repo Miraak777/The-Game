@@ -4,18 +4,18 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    GET_1000_XP = "Get 1000 Xp"
-    BECOME_PEASANT = "Become Peasant"
-    BECOME_WARRIOR = "Become Warrior"
-    BECOME_ASSASSIN = "Become Assassin"
+    FIRST_ACTION: str = "Get 1000 Xp"
+    SECOND_ACTION: str = "Become Peasant"
+    THIRD_ACTION: str = "Become Warrior"
+    FOURTH_ACTION: str = "Become Assassin"
 
 
 @dataclass(frozen=True)
 class RussianText:
-    GET_1000_XP = "Получить 1000 опыта"
-    BECOME_PEASANT = "Стать Крестьянином"
-    BECOME_WARRIOR = "Стать Воином"
-    BECOME_ASSASSIN = "Стать Убийцей"
+    FIRST_ACTION: str = "Получить 1000 опыта"
+    SECOND_ACTION: str = "Стать Крестьянином"
+    THIRD_ACTION: str = "Стать Воином"
+    FOURTH_ACTION: str = "Стать Убийцей"
 
 
 Text = {

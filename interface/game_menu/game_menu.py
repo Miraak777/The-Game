@@ -7,7 +7,7 @@ from .texts import Text
 from interface.common import get_key_binds
 from core.constants.key_bind_constants import KeyBindNames
 from core.constants.actions_constants import ActionButtons
-from .constants import GameWindowSizes
+from .constants import GameMenuSizes
 from .stylesheets import game_window_stylesheet, label_stylesheet
 from . import widgets
 
@@ -17,7 +17,7 @@ class GameWindow(QFrame):
         super().__init__()
         self._main_menu = main_menu
         self._text = Text[self._main_menu.language]
-        self.setFixedSize(GameWindowSizes.GAME_WINDOW_SIZE)
+        self.setFixedSize(GameMenuSizes.GAME_WINDOW_SIZE)
 
         self.setStyleSheet(game_window_stylesheet)
         self._create_layout()
@@ -37,10 +37,11 @@ class GameWindow(QFrame):
 
         self.setLayout(self._layout)
 
-    def add_log(self, text: str):
+    def add_log(self, text: str, rows: int = 1):
         label = QLabel(text=text)
         label.setStyleSheet(label_stylesheet)
-        label.setFixedHeight(30)
+        label.setWordWrap(True)
+        label.setFixedHeight(GameMenuSizes.LABEL_HEIGHT * rows)
         self._scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
         self.scroll_down()
 
