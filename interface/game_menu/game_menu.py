@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout,  QWidget
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QTimer
+from functools import partial
 from typing import Any, Dict
 from interface.common import clear_layout
 from .texts import Text
@@ -24,23 +25,29 @@ class GameWindow(QFrame):
 
     def _create_layout(self):
         self._layout = QGridLayout()
-        self.scroll_area_layout = QVBoxLayout()
+        self._scroll_area_layout = QVBoxLayout()
+        self._scroll_area_layout.addStretch()
         self._scroll_area = widgets.create_scroll_area(self)
         widget = QWidget()
-        widget.setLayout(self.scroll_area_layout)
+        widget.setLayout(self._scroll_area_layout)
         self._scroll_area.setWidget(widget)
-        self.buttons_layout = QGridLayout()
-
-        self._layout.addLayout(self.buttons_layout, 1, 0, alignment=Qt.AlignmentFlag.AlignBottom)
         self._layout.addWidget(self._scroll_area, 0, 0, alignment=Qt.AlignmentFlag.AlignLeft)
-        self.scroll_area_layout.addStretch()
+
+        self.buttons_layout = QGridLayout()
+        self._layout.addLayout(self.buttons_layout, 1, 0, alignment=Qt.AlignmentFlag.AlignBottom)
+
         self.setLayout(self._layout)
 
     def add_log(self, text: str):
         label = QLabel(text=text)
         label.setStyleSheet(label_stylesheet)
         label.setFixedHeight(30)
-        self.scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
+        self.scroll_down()
+
+    def scroll_down(self):
+        scroll_bar = self._scroll_area.verticalScrollBar()
+        scroll_bar.setValue(scroll_bar.maximum())
 
     def set_action_buttons(self, events: Dict[str, Any], texts: Dict[str, Any]) -> None:
         clear_layout(self.buttons_layout)
