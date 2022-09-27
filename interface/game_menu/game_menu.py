@@ -21,20 +21,19 @@ class GameWindow(QFrame):
 
         self.setStyleSheet(game_window_stylesheet)
         self._create_layout()
-        self.hide()
 
     def _create_layout(self):
         self._layout = QGridLayout()
         self._scroll_area_layout = QVBoxLayout()
-        self._scroll_area_layout.addStretch()
         self._scroll_area = widgets.create_scroll_area(self)
-        widget = QWidget()
-        widget.setLayout(self._scroll_area_layout)
-        self._scroll_area.setWidget(widget)
-        self._layout.addWidget(self._scroll_area, 0, 0, alignment=Qt.AlignmentFlag.AlignLeft)
+        self._scroll_area_widget = QWidget()
+        self._scroll_area_widget.setLayout(self._scroll_area_layout)
+        self._scroll_area.setWidget(self._scroll_area_widget)
+        self._scroll_area_layout.addStretch()
+        self._layout.addWidget(self._scroll_area, 0, 0)
 
         self.buttons_layout = QGridLayout()
-        self._layout.addLayout(self.buttons_layout, 1, 0, alignment=Qt.AlignmentFlag.AlignBottom)
+        self._layout.addLayout(self.buttons_layout, 1, 0)
 
         self.setLayout(self._layout)
 
@@ -47,7 +46,7 @@ class GameWindow(QFrame):
 
     def scroll_down(self):
         scroll_bar = self._scroll_area.verticalScrollBar()
-        scroll_bar.setValue(scroll_bar.maximum())
+        scroll_bar.rangeChanged.connect(lambda: scroll_bar.setValue(scroll_bar.maximum()))
 
     def set_action_buttons(self, events: Dict[str, Any], texts: Dict[str, Any]) -> None:
         clear_layout(self.buttons_layout)

@@ -23,7 +23,8 @@ from main_character.start_parameters import (
 
 
 class MainCharacter:
-    def __init__(self, character_name: str) -> None:
+    def __init__(self, character_name: str, main_menu) -> None:
+        self._main_menu = main_menu
         self._main_stats = MainStats()
         self._main_stats.NAME = character_name
         self._attributes = Attributes()
@@ -35,14 +36,17 @@ class MainCharacter:
     def set_class_peasant(self) -> None:
         self._class_multipliers = classes.PeasantClass
         self._main_stats.CLASS = Classes.PEASANT
+        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_PEASANT)
 
     def set_class_warrior(self) -> None:
         self._class_multipliers = classes.WarriorClass
         self._main_stats.CLASS = Classes.WARRIOR
+        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_WARRIOR)
 
     def set_class_assassin(self) -> None:
         self._class_multipliers = classes.AssassinClass
         self._main_stats.CLASS = Classes.ASSASSIN
+        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_ASSASSIN)
 
     @staticmethod
     def calculate_character_stats(attributes, main_stats, class_multipliers, equipped_weapon) -> Dict[str, Any]:
@@ -122,13 +126,15 @@ class MainCharacter:
             self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
             self._refresh_stats()
 
-    def send_experience(self, experience: int, main_menu):
+    def send_experience(self, experience: int):
         self._main_stats.EXPERIENCE += experience
+        if experience != 0:
+            self._main_menu.game_menu.add_log(self._main_menu.text.GAINED_EXPERIENCE + str(experience))
         if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
             self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE
             self._add_level()
-            main_menu.game_menu.add_log(main_menu.text.LEVEL_UP)
-            self.send_experience(0, main_menu)
+            self._main_menu.game_menu.add_log(self._main_menu.text.LEVEL_UP)
+            self.send_experience(0)
 
     def get_stats_for_calculation(self) -> Dict[str, Any]:
         output_stats = {

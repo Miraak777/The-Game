@@ -45,7 +45,6 @@ def create_character_menu_button(self) -> QWidget:
     character_menu_button.clicked.connect(self._event_open_character_menu)
     character_menu_button.setShortcut(get_key_binds()[KeyBindNames.CHARACTER_MENU])
     character_menu_button.setToolTip(self.text.CHARACTER_MENU_BUTTON_TOOLTIP)
-    character_menu_button.setDisabled(True)
     return character_menu_button
 
 
@@ -57,5 +56,4 @@ def create_option_menu_button(self) -> QWidget:
     option_menu_button.clicked.connect(self._event_open_options_menu)
     option_menu_button.setShortcut(get_key_binds()[KeyBindNames.OPTION_MENU])
     option_menu_button.setToolTip(self.text.OPTION_MENU_BUTTON_TOOLTIP)
-    option_menu_button.setDisabled(True)
     return option_menu_button

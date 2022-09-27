@@ -1,1 +1,2 @@
-from scenarios.debug_scenario.debug_scenario import DebugSituation
+from scenarios.debug_scenario.situations import DebugSituation
+from scenarios.empty_scenario.situations import EmptySituation

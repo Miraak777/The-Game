@@ -13,7 +13,7 @@ from interface.game_menu.game_menu import GameWindow
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from yaml import safe_load
-from scenarios import DebugSituation
+from scenarios import EmptySituation
 from .stylesheets import main_menu_stylesheet
 from .constants import MainMenuSizes, DUMMY
 from .texts import Text
@@ -29,11 +29,11 @@ class MainMenu(QMainWindow):
         self.setFixedSize(MainMenuSizes.MAIN_MENU_SIZE)
         self.setStyleSheet(main_menu_stylesheet)
 
-        self.main_character = MainCharacter(DUMMY)
+        self.main_character = MainCharacter(DUMMY, self)
 
         self._create_layouts()
 
-        DebugSituation(self)
+        EmptySituation(self)
 
     def _create_layouts(self) -> None:
         self._main_layout = self._create_main_layout()
@@ -55,6 +55,11 @@ class MainMenu(QMainWindow):
         self.game_menu = GameWindow(self)
         stacked_layout.addWidget(self.game_menu)
 
+        self._character_creation_menu_layout = widgets.create_character_creation_menu(self)
+        self._character_creation_widget = QWidget()
+        self._character_creation_widget.setLayout(self._character_creation_menu_layout)
+        stacked_layout.addWidget(self._character_creation_widget)
+
         self._option_menu = OptionMenu(self)
         layout = QHBoxLayout()
         layout.addWidget(self._option_menu, alignment=Qt.AlignmentFlag.AlignCenter)
@@ -63,15 +68,12 @@ class MainMenu(QMainWindow):
         self._option_menu_widget.hide()
         stacked_layout.addWidget(self._option_menu_widget)
 
-        self._character_creation_menu_layout = widgets.create_character_creation_menu(self)
-        self._character_creation_widget = QWidget()
-        self._character_creation_widget.setLayout(self._character_creation_menu_layout)
-        stacked_layout.addWidget(self._character_creation_widget)
         return stacked_layout
 
     def _create_menu_buttons(self) -> QHBoxLayout:
         menu_buttons_layout = QHBoxLayout()
         self._character_menu_button = widgets.create_character_menu_button(self)
+        self._character_menu_button.setDisabled(True)
         self._option_menu_button = widgets.create_option_menu_button(self)
 
         menu_buttons_layout.addWidget(self._character_menu_button)
@@ -100,11 +102,10 @@ class MainMenu(QMainWindow):
 
     def _event_create_new_character(self) -> None:
         self._character_creation_widget.hide()
-        self.main_character = MainCharacter(self._main_character_name)
+        self.main_character = MainCharacter(self._main_character_name, self)
         self.main_character.set_max_health()
         self.main_character.set_max_stamina()
         self._character_menu_button.setDisabled(False)
-        self._option_menu_button.setDisabled(False)
 
     def _event_main_character_name_entered(self, name) -> None:
         self._main_character_name = name

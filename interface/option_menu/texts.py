@@ -8,6 +8,7 @@ class EnglishText:
     LANGUAGE_CHANGE_LABEL: str = "Choose language"
     RESTART_REQUEST: str = "Please, restart the game, for changes to take effect"
     EXIT_BUTTON: str = "Ok"
+    DEBUG_BUTTON: str = "Debug Mode"
 
 
 @dataclass(frozen=True)
@@ -16,6 +17,7 @@ class RussianText:
     LANGUAGE_CHANGE_LABEL: str = "Выберите язык"
     RESTART_REQUEST: str = "Пожалуйста, перезапустите игру, чтобы изменения вступили в силу"
     EXIT_BUTTON: str = "Ок"
+    DEBUG_BUTTON: str = "Режим Дебага"
 
 
 Text = {

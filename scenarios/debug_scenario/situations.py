@@ -22,26 +22,18 @@ class DebugSituation:
         self._game_menu.set_action_buttons(self._events, self._texts)
 
     def _event_give_some_exp(self) -> None:
-        self._game_menu.add_log(text="Gained 1000 xp!")
-        self._main_menu.main_character.send_experience(1000, self._main_menu)
+        self._main_menu.main_character.send_experience(1000)
         self._main_menu.character_menu.set_actual_character_stats()
-        self._game_menu.scroll_down()
 
     def _event_set_class_peasant(self) -> None:
-        self._game_menu.add_log(text="You're now Peasant!")
         self._main_menu.main_character.set_class_peasant()
         self._main_menu.character_menu.set_actual_character_stats()
-        self._game_menu.scroll_down()
 
     def _event_set_class_warrior(self) -> None:
-        self._game_menu.add_log(text="You're now Warrior!")
         self._main_menu.main_character.set_class_warrior()
         self._main_menu.character_menu.set_actual_character_stats()
-        self._game_menu.scroll_down()
 
     def _event_set_class_assassin(self) -> None:
-        self._game_menu.add_log(text="You're now Assassin!")
         self._main_menu.main_character.set_class_assassin()
         self._main_menu.character_menu.set_actual_character_stats()
-        self._game_menu.scroll_down()
 

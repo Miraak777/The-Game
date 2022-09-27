@@ -8,12 +8,12 @@ title_stylesheet = ("QLabel {"
                     f"background-image: url({WIDGET_TEXTURES}:option_menu_title.png);"
                     "background-repeat: no-repeat;"
                     "background-position:vertical-center;"
-                    "font: bold 20px;"
+                    "font: bold 24px;"
                     "color:#edbd79;"
                     "padding: 1px;}")
 
 language_choose_stylesheet = ("QLabel {"
-                              f"background-image: url({WIDGET_TEXTURES}:option_menu_title.png);"
+                              f"background-image: url({WIDGET_TEXTURES}:language_choose_title.png);"
                               "font: bold 18px;"
                               "background-repeat: no-repeat;"
                               "color:#edbd79;"
@@ -38,3 +38,9 @@ exit_button_stylesheet = ("QPushButton {"
                           "color:#edbd79;"
                           "font: 18px;"
                           "}")
+
+debug_button_stylesheet = ("QPushButton {"
+                           f"background-image: url({BUTTONS}:debug_button.png);"
+                           "color:#edbd79;"
+                           "font: 18px;"
+                           "}")

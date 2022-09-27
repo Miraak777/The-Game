@@ -8,6 +8,7 @@ from .stylesheets import (
     restart_request_stylesheet,
     title_stylesheet,
     exit_button_stylesheet,
+    debug_button_stylesheet,
 )
 
 
@@ -19,7 +20,7 @@ def create_title_widget(self) -> QLabel:
     return title
 
 
-def create_language_choose_widget(self) -> QVBoxLayout:
+def create_language_choose_title(self) -> QVBoxLayout:
     language_choose_layout = QVBoxLayout()
     label = QLabel(text=self._text.LANGUAGE_CHANGE_LABEL)
     label.setFixedSize(OptionMenuSizes.OPTION_MENU_LANGUAGE)
@@ -73,4 +74,13 @@ def exit_button(self) -> QPushButton:
     button.setFixedSize(OptionMenuButtons.EXIT_BUTTON)
     button.setCheckable(True)
     button.clicked.connect(self._event_exit)
+    return button
+
+
+def debug_mode_button(self) -> QPushButton:
+    button = QPushButton(text=self._text.DEBUG_BUTTON)
+    button.setStyleSheet(debug_button_stylesheet)
+    button.setFixedSize(OptionMenuButtons.DEBUG_BUTTON)
+    button.setCheckable(True)
+    button.clicked.connect(self._event_debug_mode)
     return button
