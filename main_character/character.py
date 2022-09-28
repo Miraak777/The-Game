@@ -1,6 +1,4 @@
 import items.weapon
-from PyQt6.QtWidgets import QLabel
-from PyQt6.QtCore import Qt
 from typing import Dict, Any
 from core.constants.character_constants import (
     AttributesNames as an,
@@ -11,7 +9,6 @@ from core.constants.character_constants import (
     StatsNames as sn
 )
 from core.stats_formulas import characters_formulas as cf
-from interface.game_menu.stylesheets import label_stylesheet
 from main_character import classes
 from main_character.start_parameters import (
     Attributes,

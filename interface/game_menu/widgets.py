@@ -8,7 +8,7 @@ def create_scroll_area(self) -> QScrollArea:
     scroll_area = QScrollArea()
     scroll_area.setStyleSheet(scroll_area_stylesheet)
     scroll_area.setFixedSize(GameMenuSizes.SCROLL_AREA_SIZE)
-    scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+    scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
     scroll_area.setWidgetResizable(True)
     return scroll_area
 
