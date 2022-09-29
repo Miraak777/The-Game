@@ -11,11 +11,6 @@ class EnglishText:
     CHARACTER_NAME_PLACEHOLDER: str = "Enter your character name"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Character Menu ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Option Menu ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
-    LEVEL_UP: str = "Level up!"
-    GAINED_EXPERIENCE: str = "Gained Experience: "
-    BECOME_PEASANT: str = "You're now Peasant!"
-    BECOME_WARRIOR: str = "You're now Warrior"
-    BECOME_ASSASSIN: str = "You're now Assassin"
 
 
 @dataclass(frozen=True)
@@ -25,11 +20,6 @@ class RussianText:
     CHARACTER_NAME_PLACEHOLDER: str = "Введите имя вашего персонажа"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Меню персонажа ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Настройка ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
-    LEVEL_UP: str = "Повышение уровня!"
-    GAINED_EXPERIENCE: str = "Получено опыта: "
-    BECOME_PEASANT: str = "Теперь вы Крестьянин"
-    BECOME_WARRIOR: str = "Теперь вы Воин"
-    BECOME_ASSASSIN: str = "Теперь ты Убийца"
 
 
 Text = {

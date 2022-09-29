@@ -3,10 +3,10 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class KeyBindNames:
-    KEY_BINDS = "key_binds"
-    CHARACTER_MENU = "character_menu"
-    OPTION_MENU = "option_menu"
-    FIRST_ACTION = "first_action"
-    SECOND_ACTION = "second_action"
-    THIRD_ACTION = "third_action"
-    FOURTH_ACTION = "fourth_action"
+    KEY_BINDS: str = "key_binds"
+    CHARACTER_MENU: str = "character_menu"
+    OPTION_MENU: str = "option_menu"
+    FIRST_ACTION: str = "first_action"
+    SECOND_ACTION: str = "second_action"
+    THIRD_ACTION: str = "third_action"
+    FOURTH_ACTION: str = "fourth_action"

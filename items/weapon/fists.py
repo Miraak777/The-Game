@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from .weapon import Weapon
 
 
-@dataclass
 class Fists(Weapon):
     WEAPON_NAME = "Fists"
     TWO_HANDED = True
@@ -10,5 +8,5 @@ class Fists(Weapon):
     MAX_DAMAGE = 2
     CRITICAL_STRIKE_CHANCE = 0.05
     ACCURACY = 0.8
-    STAMINA_CONSUMPTION_MULTIPLIER = 1
+    STAMINA_CONSUMPTION = 1
     ARMOUR_PENETRATION = 0

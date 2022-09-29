@@ -1,4 +1,5 @@
 import items.weapon
+import random
 from typing import Dict, Any
 from core.constants.character_constants import (
     AttributesNames as an,
@@ -6,7 +7,8 @@ from core.constants.character_constants import (
     Classes,
     CombatStatsNames as cs,
     MainStatsNames as msn,
-    StatsNames as sn
+    StatsNames as sn,
+    CommonConstants as cc,
 )
 from core.stats_formulas import characters_formulas as cf
 from main_character import classes
@@ -28,22 +30,135 @@ class MainCharacter:
         self._bars = Bars()
         self._combat_stats = CombatStats()
         self._class_multipliers = ClassMultipliers()
-        self._equipped_weapon = items.weapon.Fists
+        self._equipped_weapon = items.weapon.Fists()
+
+    def _calculate_damage(self, attack_type_damage_multiplier):
+        if random.random() > self._combat_stats.CRITICAL_STRIKE_CHANCE:
+            critical_multiplier = self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
+        else:
+            critical_multiplier = 1
+        damage = (
+                random.uniform(self._combat_stats.MIN_DAMAGE, self._combat_stats.MAX_DAMAGE) *
+                critical_multiplier *
+                attack_type_damage_multiplier
+        )
+        return damage
+
+    def attack(self, attack_type: str) -> float:
+        attack_map = {
+            cc.LIGHT_ATTACK: self.light_attack_prediction,
+            cc.MEDIUM_ATTACK: self.medium_attack_prediction,
+            cc.HEAVY_ATTACK: self.heavy_attack_prediction,
+        }
+        attack_params = attack_map[attack_type]
+        if self._bars.STAMINA < attack_params[cc.STAMINA_CONSUMPTION]:
+            self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.NOT_ENOUGH_STAMINA)
+            return 0
+        self._bars.STAMINA -= attack_params[cc.STAMINA_CONSUMPTION]
+        if random.random() > self._combat_stats.ACCURACY:
+            return round(attack_params[cc.DAMAGE], 2)
+        else:
+            return 0
+
+    def light_attack_prediction(self) -> Dict[str, float]:
+        output = {
+            cc.DAMAGE: self._calculate_damage(0.8),
+            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 0.7
+        }
+        return output
+
+    def medium_attack_prediction(self) -> Dict[str, float]:
+        output = {
+            cc.DAMAGE: self._calculate_damage(1),
+            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 1
+        }
+        return output
+
+    def heavy_attack_prediction(self) -> Dict[str, float]:
+        output = {
+            cc.DAMAGE: self._calculate_damage(1.2),
+            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 1.4
+        }
+        return output
+
+    def take_damage(self, damage: float) -> None:
+        self._bars.HEALTH -= damage
+        if self._bars.HEALTH <= 0:
+            self._main_menu.endgame()
 
     def set_class_peasant(self) -> None:
         self._class_multipliers = classes.PeasantClass
         self._main_stats.CLASS = Classes.PEASANT
-        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_PEASANT)
+        self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.BECOME_PEASANT)
 
     def set_class_warrior(self) -> None:
         self._class_multipliers = classes.WarriorClass
         self._main_stats.CLASS = Classes.WARRIOR
-        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_WARRIOR)
+        self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.BECOME_WARRIOR)
 
     def set_class_assassin(self) -> None:
         self._class_multipliers = classes.AssassinClass
         self._main_stats.CLASS = Classes.ASSASSIN
-        self._main_menu.game_menu.add_log(self._main_menu.text.BECOME_ASSASSIN)
+        self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.BECOME_ASSASSIN)
+
+    def set_max_health(self) -> None:
+        self._bars.HEALTH = self._bars.MAX_HEALTH
+
+    def set_max_stamina(self) -> None:
+        self._bars.STAMINA = self._bars.MAX_STAMINA
+
+    def send_attributes(self, attributes: Dict[str, int]) -> None:
+        attribute_count = self._attributes.ATTRIBUTE_POINTS - attributes[an.ATTRIBUTE_POINTS]
+        if self._attributes.ATTRIBUTE_POINTS >= attribute_count:
+            self._attributes.STRENGTH = attributes[an.STRENGTH]
+            self._attributes.AGILITY = attributes[an.AGILITY]
+            self._attributes.VITALITY = attributes[an.VITALITY]
+            self._attributes.ENDURANCE = attributes[an.ENDURANCE]
+            self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
+            self._refresh_stats()
+
+    def send_experience(self, experience: int):
+        self._main_stats.EXPERIENCE += experience
+        if experience != 0:
+            self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.GAINED_EXPERIENCE + str(experience))
+        if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
+            self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE
+            self._add_level()
+            self.send_experience(0)
+
+    def get_stats_for_calculation(self) -> Dict[str, Any]:
+        output_stats = {
+            sn.ATTRIBUTES: self._attributes,
+            sn.MAIN_STATS: self._main_stats,
+            sn.CLASS_MULTIPLIERS: self._class_multipliers,
+            sn.EQUIPPED_WEAPON: self._equipped_weapon
+        }
+        return output_stats
+
+    def get_stats(self) -> Dict:
+        self._refresh_stats()
+        stats = {
+            msn.NAME: self._main_stats.NAME,
+            msn.LEVEL: self._main_stats.LEVEL,
+            msn.MAX_EXPERIENCE: self._main_stats.MAX_EXPERIENCE,
+            msn.EXPERIENCE: self._main_stats.EXPERIENCE,
+            msn.CLASS: self._main_stats.CLASS,
+            bn.MAX_HEALTH: self._bars.MAX_HEALTH,
+            bn.HEALTH: self._bars.HEALTH,
+            bn.MAX_STAMINA: self._bars.MAX_STAMINA,
+            bn.STAMINA: self._bars.STAMINA,
+            an.STRENGTH: self._attributes.STRENGTH,
+            an.AGILITY: self._attributes.AGILITY,
+            an.VITALITY: self._attributes.VITALITY,
+            an.ENDURANCE: self._attributes.ENDURANCE,
+            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS,
+            cs.MIN_DAMAGE: self._combat_stats.MIN_DAMAGE,
+            cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
+            cs.ACCURACY: self._combat_stats.ACCURACY,
+            cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
+            cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER,
+        }
+        return stats
 
     @staticmethod
     def calculate_character_stats(attributes, main_stats, class_multipliers, equipped_weapon) -> Dict[str, Any]:
@@ -99,12 +214,6 @@ class MainCharacter:
         self._combat_stats.CRITICAL_STRIKE_CHANCE = stats[cs.CRITICAL_STRIKE_CHANCE]
         self._combat_stats.CRITICAL_STRIKE_MULTIPLIER = stats[cs.CRITICAL_STRIKE_MULTIPLIER]
 
-    def set_max_health(self) -> None:
-        self._bars.HEALTH = self._bars.MAX_HEALTH
-
-    def set_max_stamina(self) -> None:
-        self._bars.STAMINA = self._bars.MAX_STAMINA
-
     def _add_level(self) -> None:
         self._main_stats.LEVEL += 1
         self._main_stats.MAX_EXPERIENCE = self._main_stats.LEVEL * 100
@@ -112,57 +221,4 @@ class MainCharacter:
         self._refresh_stats()
         self.set_max_health()
         self.set_max_stamina()
-
-    def send_attributes(self, attributes: Dict[str, int]) -> None:
-        attribute_count = self._attributes.ATTRIBUTE_POINTS - attributes[an.ATTRIBUTE_POINTS]
-        if self._attributes.ATTRIBUTE_POINTS >= attribute_count:
-            self._attributes.STRENGTH = attributes[an.STRENGTH]
-            self._attributes.AGILITY = attributes[an.AGILITY]
-            self._attributes.VITALITY = attributes[an.VITALITY]
-            self._attributes.ENDURANCE = attributes[an.ENDURANCE]
-            self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
-            self._refresh_stats()
-
-    def send_experience(self, experience: int):
-        self._main_stats.EXPERIENCE += experience
-        if experience != 0:
-            self._main_menu.game_menu.add_log(self._main_menu.text.GAINED_EXPERIENCE + str(experience))
-        if self._main_stats.EXPERIENCE >= self._main_stats.MAX_EXPERIENCE:
-            self._main_stats.EXPERIENCE -= self._main_stats.MAX_EXPERIENCE
-            self._add_level()
-            self._main_menu.game_menu.add_log(self._main_menu.text.LEVEL_UP)
-            self.send_experience(0)
-
-    def get_stats_for_calculation(self) -> Dict[str, Any]:
-        output_stats = {
-            sn.ATTRIBUTES: self._attributes,
-            sn.MAIN_STATS: self._main_stats,
-            sn.CLASS_MULTIPLIERS: self._class_multipliers,
-            sn.EQUIPPED_WEAPON: self._equipped_weapon
-        }
-        return output_stats
-
-    def get_stats(self) -> Dict:
-        self._refresh_stats()
-        stats = {
-            msn.NAME: self._main_stats.NAME,
-            msn.LEVEL: self._main_stats.LEVEL,
-            msn.MAX_EXPERIENCE: self._main_stats.MAX_EXPERIENCE,
-            msn.EXPERIENCE: self._main_stats.EXPERIENCE,
-            msn.CLASS: self._main_stats.CLASS,
-            bn.MAX_HEALTH: self._bars.MAX_HEALTH,
-            bn.HEALTH: self._bars.HEALTH,
-            bn.MAX_STAMINA: self._bars.MAX_STAMINA,
-            bn.STAMINA: self._bars.STAMINA,
-            an.STRENGTH: self._attributes.STRENGTH,
-            an.AGILITY: self._attributes.AGILITY,
-            an.VITALITY: self._attributes.VITALITY,
-            an.ENDURANCE: self._attributes.ENDURANCE,
-            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS,
-            cs.MIN_DAMAGE: self._combat_stats.MIN_DAMAGE,
-            cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
-            cs.ACCURACY: self._combat_stats.ACCURACY,
-            cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
-            cs.CRITICAL_STRIKE_MULTIPLIER: self._combat_stats.CRITICAL_STRIKE_MULTIPLIER,
-        }
-        return stats
+        self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.LEVEL_UP)

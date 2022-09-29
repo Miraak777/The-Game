@@ -2,6 +2,15 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class CommonConstants:
+    DAMAGE: str = "damage"
+    STAMINA_CONSUMPTION: str = "stamina_consumption"
+    LIGHT_ATTACK: str = "light_attack"
+    MEDIUM_ATTACK: str = "medium_attack"
+    HEAVY_ATTACK: str = "heavy_attack"
+
+
+@dataclass(frozen=True)
 class StatsNames:
     ATTRIBUTES: str = "attributes"
     MAIN_STATS: str = "main_stats"

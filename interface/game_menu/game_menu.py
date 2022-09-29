@@ -12,11 +12,11 @@ from .stylesheets import game_window_stylesheet, label_stylesheet
 from . import widgets
 
 
-class GameWindow(QFrame):
+class GameMenu(QFrame):
     def __init__(self, main_menu):
         super().__init__()
         self._main_menu = main_menu
-        self._text = Text[self._main_menu.language]
+        self.text = Text[self._main_menu.language]
         self.setFixedSize(GameMenuSizes.GAME_WINDOW_SIZE)
 
         self.setStyleSheet(game_window_stylesheet)

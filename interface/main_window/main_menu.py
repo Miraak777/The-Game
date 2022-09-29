@@ -9,11 +9,12 @@ from PyQt6.QtCore import Qt
 from core.constants.path_constants import Paths
 from interface.option_menu.option_menu import OptionMenu
 from interface.character_menu.character_menu import CharacterMenu
-from interface.game_menu.game_menu import GameWindow
+from interface.game_menu.game_menu import GameMenu
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from yaml import safe_load
-from scenarios import EmptySituation, StartScenario
+from scenarios import StartScenario
+from scenarios.base_situation.base_situation import BaseSituation
 from .stylesheets import main_menu_stylesheet
 from .constants import MainMenuSizes, DUMMY
 from .texts import Text
@@ -33,7 +34,11 @@ class MainMenu(QMainWindow):
 
         self._create_layouts()
 
-        EmptySituation(self)
+        BaseSituation(self)
+
+    @staticmethod
+    def endgame():
+        exit()
 
     def _create_layouts(self) -> None:
         self._main_layout = self._create_main_layout()
@@ -52,7 +57,7 @@ class MainMenu(QMainWindow):
         stacked_layout = QStackedLayout()
         stacked_layout.setStackingMode(QStackedLayout.StackingMode.StackAll)
 
-        self.game_menu = GameWindow(self)
+        self.game_menu = GameMenu(self)
         stacked_layout.addWidget(self.game_menu)
 
         self._character_creation_menu_layout = widgets.create_character_creation_menu(self)
@@ -108,7 +113,7 @@ class MainMenu(QMainWindow):
         self._character_menu_button.setDisabled(False)
         StartScenario(self)
 
-    def _event_main_character_name_entered(self, name) -> None:
+    def _event_main_character_name_entered(self, name: str) -> None:
         self._main_character_name = name
         if name != "" or None:
             self._character_create_button.setEnabled(True)

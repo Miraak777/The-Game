@@ -4,12 +4,22 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    awd = "awd"
+    LEVEL_UP: str = "Level up!"
+    GAINED_EXPERIENCE: str = "Gained Experience: "
+    BECOME_PEASANT: str = "You're now Peasant!"
+    BECOME_WARRIOR: str = "You're now Warrior"
+    BECOME_ASSASSIN: str = "You're now Assassin"
+    NOT_ENOUGH_STAMINA: str = "You do not have enough stamina for this attack"
 
 
 @dataclass(frozen=True)
 class RussianText:
-    awd = "awd"
+    LEVEL_UP: str = "Повышение уровня!"
+    GAINED_EXPERIENCE: str = "Получено опыта: "
+    BECOME_PEASANT: str = "Теперь вы Крестьянин"
+    BECOME_WARRIOR: str = "Теперь вы Воин"
+    BECOME_ASSASSIN: str = "Теперь ты Убийца"
+    NOT_ENOUGH_STAMINA: str = "Вам не хватает запаса сил на эту атаку"
 
 
 Text = {
