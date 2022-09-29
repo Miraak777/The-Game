@@ -6,6 +6,7 @@ class BaseSituation:
     def __init__(self, main_menu, text=EnglishText) -> None:
         self._main_menu = main_menu
         self._game_menu = main_menu.game_menu
+        self._language = self._main_menu.language
         self._text = text
         self._events = {
             ActionButtons.FIRST_ACTION: self._event_first_action,
@@ -19,9 +20,9 @@ class BaseSituation:
             ActionButtons.THIRD_ACTION: self._text.THIRD_ACTION,
             ActionButtons.FOURTH_ACTION: self._text.FOURTH_ACTION,
         }
-        self._refresh_buttons()
+        self.refresh_buttons()
 
-    def _refresh_buttons(self):
+    def refresh_buttons(self):
         self._game_menu.set_action_buttons(self._events, self._texts)
 
     def _event_first_action(self) -> None:

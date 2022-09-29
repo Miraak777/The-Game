@@ -77,11 +77,11 @@ class MainMenu(QMainWindow):
 
     def _create_menu_buttons(self) -> QHBoxLayout:
         menu_buttons_layout = QHBoxLayout()
-        self._character_menu_button = widgets.create_character_menu_button(self)
-        self._character_menu_button.setDisabled(True)
+        self.character_menu_button = widgets.create_character_menu_button(self)
+        self.character_menu_button.setDisabled(True)
         self._option_menu_button = widgets.create_option_menu_button(self)
 
-        menu_buttons_layout.addWidget(self._character_menu_button)
+        menu_buttons_layout.addWidget(self.character_menu_button)
         menu_buttons_layout.addWidget(self._option_menu_button)
         return menu_buttons_layout
 
@@ -110,7 +110,7 @@ class MainMenu(QMainWindow):
         self.main_character = MainCharacter(self._main_character_name, self)
         self.main_character.set_max_health()
         self.main_character.set_max_stamina()
-        self._character_menu_button.setDisabled(False)
+        self.character_menu_button.setDisabled(False)
         StartScenario(self)
 
     def _event_main_character_name_entered(self, name: str) -> None:

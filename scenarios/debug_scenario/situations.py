@@ -1,12 +1,10 @@
-from .texts import Text
 from scenarios.base_situation.base_situation import BaseSituation
 
 
 class DebugSituation(BaseSituation):
-    def __init__(self, main_menu) -> None:
-        self._text = Text[main_menu.language]
-        super().__init__(main_menu, self._text)
-        self._refresh_buttons()
+    def __init__(self, main_menu, text) -> None:
+        super().__init__(main_menu, text)
+        self.refresh_buttons()
 
     def _event_first_action(self) -> None:
         self._main_menu.main_character.send_experience(1000)

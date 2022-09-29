@@ -4,7 +4,7 @@ from core import Paths
 from core.constants.language_constants import Language, LANGUAGE
 from yaml import safe_load, safe_dump
 from interface.common import clear_layout
-from scenarios import DebugSituation
+from scenarios import DebugScenario
 from .stylesheets import option_menu_stylesheet
 from .constants import OptionMenuSizes
 from .texts import Text
@@ -73,7 +73,7 @@ class OptionMenu(QFrame):
         self._layout.addWidget(button, alignment=(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop))
 
     def _event_debug_mode(self):
-        DebugSituation(self.main_menu)
+        DebugScenario(self.main_menu)
 
     @staticmethod
     def _event_exit():

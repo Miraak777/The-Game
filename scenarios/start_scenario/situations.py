@@ -6,6 +6,7 @@ class StartSituation(BaseSituation):
     def __init__(self, main_menu, text) -> None:
         super().__init__(main_menu, text)
         self._game_menu.add_log(self._text.INTRODUCTION, rows=3)
+        self.refresh_buttons()
 
     def _event_first_action(self) -> None:
         BattleScenario(self._main_menu)

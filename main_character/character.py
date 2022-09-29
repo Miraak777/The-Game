@@ -1,4 +1,4 @@
-import items.weapon
+from items.weapon.dagger import Dagger
 import random
 from typing import Dict, Any
 from core.constants.character_constants import (
@@ -30,19 +30,7 @@ class MainCharacter:
         self._bars = Bars()
         self._combat_stats = CombatStats()
         self._class_multipliers = ClassMultipliers()
-        self._equipped_weapon = items.weapon.Fists()
-
-    def _calculate_damage(self, attack_type_damage_multiplier):
-        if random.random() > self._combat_stats.CRITICAL_STRIKE_CHANCE:
-            critical_multiplier = self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
-        else:
-            critical_multiplier = 1
-        damage = (
-                random.uniform(self._combat_stats.MIN_DAMAGE, self._combat_stats.MAX_DAMAGE) *
-                critical_multiplier *
-                attack_type_damage_multiplier
-        )
-        return damage
+        self._equipped_weapon = Dagger()
 
     def attack(self, attack_type: str) -> float:
         attack_map = {
@@ -50,39 +38,54 @@ class MainCharacter:
             cc.MEDIUM_ATTACK: self.medium_attack_prediction,
             cc.HEAVY_ATTACK: self.heavy_attack_prediction,
         }
-        attack_params = attack_map[attack_type]
+        attack_params = attack_map[attack_type]()
+        if random.random() > self._combat_stats.CRITICAL_STRIKE_CHANCE:
+            self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.CRITICAL_STRIKE)
+            critical_multiplier = self._combat_stats.CRITICAL_STRIKE_MULTIPLIER
+        else:
+            critical_multiplier = 1
         if self._bars.STAMINA < attack_params[cc.STAMINA_CONSUMPTION]:
             self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.NOT_ENOUGH_STAMINA)
             return 0
-        self._bars.STAMINA -= attack_params[cc.STAMINA_CONSUMPTION]
-        if random.random() > self._combat_stats.ACCURACY:
-            return round(attack_params[cc.DAMAGE], 2)
+        self._bars.STAMINA = round(self._bars.STAMINA - attack_params[cc.STAMINA_CONSUMPTION], 1)
+        if random.random() < self._combat_stats.ACCURACY:
+            damage = random.uniform(attack_params[cs.MAX_DAMAGE], attack_params[cs.MIN_DAMAGE])
+            damage *= critical_multiplier
+            return round(damage, 2)
         else:
+            self._main_menu.game_menu.add_log(self._main_menu.game_menu.text.MISS)
             return 0
 
     def light_attack_prediction(self) -> Dict[str, float]:
+        damage = self._calculate_damage(0.8)
         output = {
-            cc.DAMAGE: self._calculate_damage(0.8),
-            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 0.7
+            cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
+            cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.STAMINA_CONSUMPTION * 0.7, 1),
         }
         return output
 
     def medium_attack_prediction(self) -> Dict[str, float]:
+        damage = self._calculate_damage(1)
         output = {
-            cc.DAMAGE: self._calculate_damage(1),
-            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 1
+            cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
+            cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.STAMINA_CONSUMPTION * 1, 1)
         }
         return output
 
     def heavy_attack_prediction(self) -> Dict[str, float]:
+        damage = self._calculate_damage(1.2)
         output = {
-            cc.DAMAGE: self._calculate_damage(1.2),
-            cc.STAMINA_CONSUMPTION: self._equipped_weapon.STAMINA_CONSUMPTION * 1.4
+            cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
+            cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.STAMINA_CONSUMPTION * 1.4, 1)
         }
         return output
 
     def take_damage(self, damage: float) -> None:
-        self._bars.HEALTH -= damage
+        self._bars.HEALTH = round(self._bars.HEALTH - damage, 2)
+
         if self._bars.HEALTH <= 0:
             self._main_menu.endgame()
 
@@ -200,6 +203,20 @@ class MainCharacter:
             )
         }
         return calculated_stats
+
+    def _calculate_damage(self, attack_type_damage_multiplier: float) -> Dict[str, float]:
+        self._refresh_stats()
+        max_damage = round(
+            self._combat_stats.MAX_DAMAGE *
+            attack_type_damage_multiplier,
+            1
+        )
+        min_damage = round(
+            self._combat_stats.MIN_DAMAGE *
+            attack_type_damage_multiplier,
+            1
+        )
+        return {cs.MAX_DAMAGE: max_damage, cs.MIN_DAMAGE: min_damage}
 
     def _refresh_stats(self) -> None:
         stats = self.calculate_character_stats(self._attributes,

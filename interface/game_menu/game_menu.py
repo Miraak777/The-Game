@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout,  QWidget
-from PyQt6.QtCore import Qt, QTimer
-from functools import partial
+from PyQt6.QtCore import Qt
 from typing import Any, Dict
 from interface.common import clear_layout
 from .texts import Text
@@ -66,4 +65,3 @@ class GameMenu(QFrame):
         button = widgets.create_action_button(events[ActionButtons.FOURTH_ACTION], texts[ActionButtons.FOURTH_ACTION])
         button.setShortcut(get_key_binds()[KeyBindNames.FOURTH_ACTION])
         self.buttons_layout.addWidget(button, 1, 1)
-

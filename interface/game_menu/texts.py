@@ -10,6 +10,8 @@ class EnglishText:
     BECOME_WARRIOR: str = "You're now Warrior"
     BECOME_ASSASSIN: str = "You're now Assassin"
     NOT_ENOUGH_STAMINA: str = "You do not have enough stamina for this attack"
+    CRITICAL_STRIKE: str = "Critical Strike!"
+    MISS: str = "Miss!"
 
 
 @dataclass(frozen=True)
@@ -20,6 +22,8 @@ class RussianText:
     BECOME_WARRIOR: str = "Теперь вы Воин"
     BECOME_ASSASSIN: str = "Теперь ты Убийца"
     NOT_ENOUGH_STAMINA: str = "Вам не хватает запаса сил на эту атаку"
+    CRITICAL_STRIKE: str = "Критический Удар!"
+    MISS: str = "Промах!"
 
 
 Text = {

@@ -1,2 +1,4 @@
-from scenarios.debug_scenario.situations import DebugSituation
+from scenarios.debug_scenario.scenario import DebugScenario
 from scenarios.start_scenario.scenario import StartScenario
+from scenarios.battle_scenario.scenario import BattleScenario
+from scenarios.chill_scenario.scenario import ChillScenario

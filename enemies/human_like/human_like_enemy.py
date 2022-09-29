@@ -3,20 +3,20 @@ from items.weapon.fists import Fists
 
 
 class HumanLikeEnemy(Enemy):
-    def __init__(self, level):
-        super().__init__(level)
+    def __init__(self, level, game_menu, language):
+        super().__init__(level, game_menu, language)
         self._equipped_weapon = Fists()
 
     def _calculate_damage(self):
-        self._stats.MAX_DAMAGE = (
+        self.stats.MAX_DAMAGE = (
                 self._equipped_weapon.MAX_DAMAGE *
-                (1 + self._stats.LEVEL / 10) *
-                self._stats.DAMAGE_MULTIPLIER *
-                self._stats.DIFFICULTY_MULTIPLIER
+                (1 + self.level / 10) *
+                self.stats.DAMAGE_MULTIPLIER *
+                self.stats.DIFFICULTY_MULTIPLIER
         )
-        self._stats.MIN_DAMAGE = (
+        self.stats.MIN_DAMAGE = (
                 self._equipped_weapon.MIN_DAMAGE *
-                (1 + self._stats.LEVEL / 10) *
-                self._stats.DAMAGE_MULTIPLIER *
-                self._stats.DIFFICULTY_MULTIPLIER
+                (1 + self.level / 10) *
+                self.stats.DAMAGE_MULTIPLIER *
+                self.stats.DIFFICULTY_MULTIPLIER
         )
