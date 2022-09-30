@@ -1,7 +1,8 @@
-from PyQt6.QtWidgets import QScrollArea, QPushButton
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QPushButton, QScrollArea
+
+from .constants import GameMenuButtons, GameMenuSizes
 from .stylesheets import scroll_area_stylesheet
-from .constants import GameMenuSizes, GameMenuButtons
 
 
 def create_scroll_area(self) -> QScrollArea:

@@ -1,14 +1,16 @@
-from PyQt6.QtWidgets import QVBoxLayout, QFrame
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QFrame, QVBoxLayout
+from yaml import safe_dump, safe_load
+
 from core import Paths
-from core.constants.language_constants import Language, LANGUAGE
-from yaml import safe_load, safe_dump
+from core.constants.language_constants import LANGUAGE, Language
 from interface.common import clear_layout
 from scenarios import DebugScenario
-from .stylesheets import option_menu_stylesheet
-from .constants import OptionMenuSizes
-from .texts import Text
+
 from . import widgets
+from .constants import OptionMenuSizes
+from .stylesheets import option_menu_stylesheet
+from .texts import Text
 
 
 class OptionMenu(QFrame):
@@ -38,8 +40,10 @@ class OptionMenu(QFrame):
 
         self._layout.addStretch()
 
-        self._layout.addWidget(widgets.debug_mode_button(self),
-                               alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight))
+        self._layout.addWidget(
+            widgets.debug_mode_button(self),
+            alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight),
+        )
 
     def _refresh_menu(self):
         clear_layout(self._layout)
@@ -48,18 +52,18 @@ class OptionMenu(QFrame):
         self._create_widgets()
 
     def _event_set_en_language(self):
-        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+        with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
             settings = safe_load(settings_file)
         settings[LANGUAGE] = Language.EN
-        with open(Paths.PATH_TO_SETTINGS, 'w') as settings_file:
+        with open(Paths.PATH_TO_SETTINGS, "w") as settings_file:
             safe_dump(settings, settings_file, default_flow_style=False)
         self._event_language_changed()
 
     def _event_set_ru_language(self):
-        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+        with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
             settings = safe_load(settings_file)
         settings[LANGUAGE] = Language.RU
-        with open(Paths.PATH_TO_SETTINGS, 'w') as settings_file:
+        with open(Paths.PATH_TO_SETTINGS, "w") as settings_file:
             safe_dump(settings, settings_file, default_flow_style=False)
         self._event_language_changed()
 
@@ -69,7 +73,10 @@ class OptionMenu(QFrame):
         clear_layout(self._layout)
         label = widgets.restart_request_label(self)
         button = widgets.exit_button(self)
-        self._layout.addWidget(label, alignment=(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom))
+        self._layout.addWidget(
+            label,
+            alignment=(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom),
+        )
         self._layout.addWidget(button, alignment=(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop))
 
     def _event_debug_mode(self):

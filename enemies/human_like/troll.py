@@ -1,6 +1,7 @@
-from .human_like_enemy import HumanLikeEnemy
 from items.weapon.fists import Fists
 from items.weapon.mace import TwoHandedMace
+
+from .human_like_enemy import HumanLikeEnemy
 
 
 class Troll(HumanLikeEnemy):

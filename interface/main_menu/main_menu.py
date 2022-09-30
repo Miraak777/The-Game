@@ -1,24 +1,20 @@
-from PyQt6.QtWidgets import (
-    QMainWindow,
-    QHBoxLayout,
-    QStackedLayout,
-    QGridLayout,
-    QWidget,
-)
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QGridLayout, QHBoxLayout, QMainWindow, QStackedLayout, QWidget
+from yaml import safe_load
+
+from core.constants.language_constants import LANGUAGE
 from core.constants.path_constants import Paths
-from interface.option_menu.option_menu import OptionMenu
 from interface.character_menu.character_menu import CharacterMenu
 from interface.game_menu.game_menu import GameMenu
-from core.constants.language_constants import LANGUAGE
+from interface.option_menu.option_menu import OptionMenu
 from main_character import MainCharacter
-from yaml import safe_load
-from scenarios import StartScenario, BattleScenario
+from scenarios import BattleScenario, StartScenario
 from scenarios.base_situation.base_situation import BaseSituation
-from .stylesheets import main_menu_stylesheet
-from .constants import MainMenuSizes, DUMMY
-from .texts import Text
+
 from . import widgets
+from .constants import DUMMY, MainMenuSizes
+from .stylesheets import main_menu_stylesheet
+from .texts import Text
 
 
 class MainMenu(QMainWindow):
@@ -89,8 +85,12 @@ class MainMenu(QMainWindow):
     def _create_main_layout(self) -> QGridLayout:
         main_layout = QGridLayout()
         self._menu_buttons = self._create_menu_buttons()
-        main_layout.addLayout(self._menu_buttons, 2, 2,
-                              alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom))
+        main_layout.addLayout(
+            self._menu_buttons,
+            2,
+            2,
+            alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom),
+        )
         return main_layout
 
     def _event_open_character_menu(self) -> None:
@@ -123,6 +123,6 @@ class MainMenu(QMainWindow):
 
     @staticmethod
     def _get_language() -> str:
-        with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+        with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
             settings = safe_load(settings_file)
         return settings[LANGUAGE]

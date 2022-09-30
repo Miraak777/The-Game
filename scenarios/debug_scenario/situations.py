@@ -21,4 +21,3 @@ class DebugSituation(BaseSituation):
     def _event_fourth_action(self) -> None:
         self._main_menu.main_character.set_class_assassin()
         self._main_menu.character_menu.set_actual_character_stats()
-

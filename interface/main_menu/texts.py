@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+
+from core.constants.key_bind_constants import KeyBindNames
 from core.constants.language_constants import Language
 from interface.common import get_key_binds
-from core.constants.key_bind_constants import KeyBindNames
 
 
 @dataclass(frozen=True)

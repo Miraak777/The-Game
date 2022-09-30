@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from PyQt6.QtCore import QSize
 
 
@@ -12,4 +13,3 @@ class GameMenuSizes:
 @dataclass(frozen=True)
 class GameMenuButtons:
     ACTION_BUTTON_SIZE: QSize = QSize(377, 67)
-

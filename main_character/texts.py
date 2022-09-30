@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from core.constants.language_constants import Language
 
 

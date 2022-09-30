@@ -1,4 +1,4 @@
-from .human_like import Goblin, Troll, ArmedTroll
+from .human_like import ArmedTroll, Goblin, Troll
 
 enemies_map = {
     0: Goblin,

@@ -1,25 +1,19 @@
+import random
+from typing import Any, Dict
+
+from core.constants.character_constants import AttributesNames as an
+from core.constants.character_constants import BarsNames as bn
+from core.constants.character_constants import Classes
+from core.constants.character_constants import CombatStatsNames as cs
+from core.constants.character_constants import CommonConstants as cc
+from core.constants.character_constants import MainStatsNames as msn
+from core.constants.character_constants import StatsNames as sn
+from core.stats_formulas import characters_formulas as cf
 from items.weapon.fists import Fists
 from scenarios.death_scenario.scenario import DeathScenario
-import random
-from typing import Dict, Any
-from core.constants.character_constants import (
-    AttributesNames as an,
-    BarsNames as bn,
-    Classes,
-    CombatStatsNames as cs,
-    MainStatsNames as msn,
-    StatsNames as sn,
-    CommonConstants as cc,
-)
-from core.stats_formulas import characters_formulas as cf
+
 from . import classes
-from .start_parameters import (
-    Attributes,
-    Bars,
-    ClassMultipliers,
-    CombatStats,
-    MainStats,
-)
+from .start_parameters import Attributes, Bars, ClassMultipliers, CombatStats, MainStats
 from .texts import Text
 
 
@@ -74,7 +68,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1, 1)
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1, 1),
         }
         return output
 
@@ -83,7 +77,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1.4, 1)
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1.4, 1),
         }
         return output
 
@@ -156,12 +150,20 @@ class MainCharacter:
             self._attributes.ENDURANCE = attributes[an.ENDURANCE]
             self._attributes.ATTRIBUTE_POINTS = attributes[an.ATTRIBUTE_POINTS]
             self._refresh_stats()
-            self.restore_health(cf.health_formula(vitality=vitality_added,
-                                                  level=0,
-                                                  health_mult=self._class_multipliers.HEALTH_MULTIPLIER))
-            self.restore_stamina(cf.stamina_formula(endurance=endurance_added,
-                                                    level=0,
-                                                    stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER))
+            self.restore_health(
+                cf.health_formula(
+                    vitality=vitality_added,
+                    level=0,
+                    health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
+                )
+            )
+            self.restore_stamina(
+                cf.stamina_formula(
+                    endurance=endurance_added,
+                    level=0,
+                    stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
+                )
+            )
 
     def send_experience(self, experience: int):
         self.main_stats.EXPERIENCE += experience
@@ -177,7 +179,7 @@ class MainCharacter:
             sn.ATTRIBUTES: self._attributes,
             sn.MAIN_STATS: self.main_stats,
             sn.CLASS_MULTIPLIERS: self._class_multipliers,
-            sn.EQUIPPED_WEAPON: self._equipped_weapon
+            sn.EQUIPPED_WEAPON: self._equipped_weapon,
         }
         return output_stats
 
@@ -243,29 +245,23 @@ class MainCharacter:
                 accuracy=equipped_weapon.stats.ACCURACY,
                 agility=attributes.AGILITY,
                 level=main_stats.LEVEL,
-            )
+            ),
         }
         return calculated_stats
 
     def _calculate_damage(self, attack_type_damage_multiplier: float) -> Dict[str, float]:
         self._refresh_stats()
-        max_damage = round(
-            self._combat_stats.MAX_DAMAGE *
-            attack_type_damage_multiplier,
-            1
-        )
-        min_damage = round(
-            self._combat_stats.MIN_DAMAGE *
-            attack_type_damage_multiplier,
-            1
-        )
+        max_damage = round(self._combat_stats.MAX_DAMAGE * attack_type_damage_multiplier, 1)
+        min_damage = round(self._combat_stats.MIN_DAMAGE * attack_type_damage_multiplier, 1)
         return {cs.MAX_DAMAGE: max_damage, cs.MIN_DAMAGE: min_damage}
 
     def _refresh_stats(self) -> None:
-        stats = self.calculate_character_stats(self._attributes,
-                                               self.main_stats,
-                                               self._class_multipliers,
-                                               self._equipped_weapon)
+        stats = self.calculate_character_stats(
+            self._attributes,
+            self.main_stats,
+            self._class_multipliers,
+            self._equipped_weapon,
+        )
         self._bars.MAX_HEALTH = stats[bn.MAX_HEALTH]
         self._bars.MAX_STAMINA = stats[bn.MAX_STAMINA]
         self._combat_stats.MAX_DAMAGE = stats[cs.MAX_DAMAGE]

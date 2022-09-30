@@ -1,13 +1,15 @@
-from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout,  QWidget
-from PyQt6.QtCore import Qt
 from typing import Any, Dict
-from interface.common import clear_layout
-from interface.common import get_key_binds
-from core.constants.key_bind_constants import KeyBindNames
+
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout, QWidget
+
 from core.constants.actions_constants import ActionButtons
+from core.constants.key_bind_constants import KeyBindNames
+from interface.common import clear_layout, get_key_binds
+
+from . import widgets
 from .constants import GameMenuSizes
 from .stylesheets import game_window_stylesheet, label_stylesheet
-from . import widgets
 
 
 class GameMenu(QFrame):

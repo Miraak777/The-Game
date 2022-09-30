@@ -13,4 +13,3 @@ class Fists(BaseWeapon):
         self.stats.STAMINA_CONSUMPTION = 1
         self.stats.ARMOUR_PENETRATION = 0
         self._calculate_damage()
-

@@ -1,14 +1,16 @@
-from PyQt6.QtWidgets import QLabel, QVBoxLayout, QHBoxLayout, QPushButton
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QPushButton, QVBoxLayout
+
 from core.constants.language_constants import Language
+
 from .constants import OptionMenuButtons, OptionMenuSizes
 from .stylesheets import (
+    debug_button_stylesheet,
+    exit_button_stylesheet,
     language_choose_stylesheet,
     languages_buttons_stylesheet,
     restart_request_stylesheet,
     title_stylesheet,
-    exit_button_stylesheet,
-    debug_button_stylesheet,
 )
 
 

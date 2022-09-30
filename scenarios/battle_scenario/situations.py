@@ -1,8 +1,9 @@
+from core.constants.actions_constants import ActionButtons
+from core.constants.character_constants import CombatStatsNames as cs
+from core.constants.character_constants import CommonConstants as cc
+from main_character.character import MainCharacter
 from scenarios.base_situation.base_situation import BaseSituation
 from scenarios.chill_scenario.scenario import ChillScenario
-from core.constants.actions_constants import ActionButtons
-from main_character.character import MainCharacter
-from core.constants.character_constants import CommonConstants as cc, CombatStatsNames as cs
 
 
 class BattleSituation(BaseSituation):
@@ -16,21 +17,39 @@ class BattleSituation(BaseSituation):
             cc.HEAVY_ATTACK: self._main_character.heavy_attack_prediction(),
         }
         self._texts = {
-            ActionButtons.FIRST_ACTION: (self._text.FIRST_ACTION + " " + self._text.DAMAGE +
-                                         str(predicted_attack_params[cc.LIGHT_ATTACK][cs.MIN_DAMAGE]) + " - " +
-                                         str(predicted_attack_params[cc.LIGHT_ATTACK][cs.MAX_DAMAGE]) + "\n" +
-                                         self._text.STAMINA_CONSUMPTION +
-                                         str(predicted_attack_params[cc.LIGHT_ATTACK][cc.STAMINA_CONSUMPTION])),
-            ActionButtons.SECOND_ACTION: (self._text.SECOND_ACTION + " " + self._text.DAMAGE +
-                                          str(predicted_attack_params[cc.MEDIUM_ATTACK][cs.MIN_DAMAGE]) + " - " +
-                                          str(predicted_attack_params[cc.MEDIUM_ATTACK][cs.MAX_DAMAGE]) + "\n" +
-                                          self._text.STAMINA_CONSUMPTION +
-                                          str(predicted_attack_params[cc.MEDIUM_ATTACK][cc.STAMINA_CONSUMPTION])),
-            ActionButtons.THIRD_ACTION: (self._text.THIRD_ACTION + " " + self._text.DAMAGE +
-                                         str(predicted_attack_params[cc.HEAVY_ATTACK][cs.MIN_DAMAGE]) + " - " +
-                                         str(predicted_attack_params[cc.HEAVY_ATTACK][cs.MAX_DAMAGE]) + "\n" +
-                                         self._text.STAMINA_CONSUMPTION +
-                                         str(predicted_attack_params[cc.HEAVY_ATTACK][cc.STAMINA_CONSUMPTION])),
+            ActionButtons.FIRST_ACTION: (
+                self._text.FIRST_ACTION
+                + " "
+                + self._text.DAMAGE
+                + str(predicted_attack_params[cc.LIGHT_ATTACK][cs.MIN_DAMAGE])
+                + " - "
+                + str(predicted_attack_params[cc.LIGHT_ATTACK][cs.MAX_DAMAGE])
+                + "\n"
+                + self._text.STAMINA_CONSUMPTION
+                + str(predicted_attack_params[cc.LIGHT_ATTACK][cc.STAMINA_CONSUMPTION])
+            ),
+            ActionButtons.SECOND_ACTION: (
+                self._text.SECOND_ACTION
+                + " "
+                + self._text.DAMAGE
+                + str(predicted_attack_params[cc.MEDIUM_ATTACK][cs.MIN_DAMAGE])
+                + " - "
+                + str(predicted_attack_params[cc.MEDIUM_ATTACK][cs.MAX_DAMAGE])
+                + "\n"
+                + self._text.STAMINA_CONSUMPTION
+                + str(predicted_attack_params[cc.MEDIUM_ATTACK][cc.STAMINA_CONSUMPTION])
+            ),
+            ActionButtons.THIRD_ACTION: (
+                self._text.THIRD_ACTION
+                + " "
+                + self._text.DAMAGE
+                + str(predicted_attack_params[cc.HEAVY_ATTACK][cs.MIN_DAMAGE])
+                + " - "
+                + str(predicted_attack_params[cc.HEAVY_ATTACK][cs.MAX_DAMAGE])
+                + "\n"
+                + self._text.STAMINA_CONSUMPTION
+                + str(predicted_attack_params[cc.HEAVY_ATTACK][cc.STAMINA_CONSUMPTION])
+            ),
             ActionButtons.FOURTH_ACTION: self._text.FOURTH_ACTION,
         }
         self.refresh_buttons()
@@ -94,8 +113,14 @@ class RewardGetSituation(BaseSituation):
             ActionButtons.THIRD_ACTION: "",
             ActionButtons.FOURTH_ACTION: "",
         }
-        self._log(self._text.YOU_FOUNDED + self._reward[0].stats.NAME + " " +
-                  str(self._reward[0].stats.LEVEL) + " " + self._text.LEVEL)
+        self._log(
+            self._text.YOU_FOUNDED
+            + self._reward[0].stats.NAME
+            + " "
+            + str(self._reward[0].stats.LEVEL)
+            + " "
+            + self._text.LEVEL
+        )
         self.refresh_buttons()
 
     def _event_first_action(self) -> None:

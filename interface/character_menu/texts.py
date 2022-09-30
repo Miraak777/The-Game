@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+
 from core.constants.language_constants import Language
 
 
@@ -54,7 +55,4 @@ class RussianText:
     ASSASSIN: str = "Убийца"
 
 
-Text = {
-    Language.EN: EnglishText,
-    Language.RU: RussianText
-}
+Text = {Language.EN: EnglishText, Language.RU: RussianText}

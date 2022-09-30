@@ -1,5 +1,6 @@
-from .human_like_enemy import HumanLikeEnemy
 from items.weapon.dagger import Dagger
+
+from .human_like_enemy import HumanLikeEnemy
 
 
 class Goblin(HumanLikeEnemy):
@@ -13,4 +14,3 @@ class Goblin(HumanLikeEnemy):
         self._calculate_damage()
         self._calculate_health()
         self._calculate_experience_gained()
-

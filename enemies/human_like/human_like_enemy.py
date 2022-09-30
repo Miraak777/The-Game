@@ -9,14 +9,14 @@ class HumanLikeEnemy(Enemy):
 
     def _calculate_damage(self):
         self.stats.MAX_DAMAGE = (
-                self._equipped_weapon.stats.MAX_DAMAGE *
-                (1 + self.stats.LEVEL / 10) *
-                self.stats.DAMAGE_MULTIPLIER *
-                self.stats.DIFFICULTY_MULTIPLIER
+            self._equipped_weapon.stats.MAX_DAMAGE
+            * (1 + self.stats.LEVEL / 10)
+            * self.stats.DAMAGE_MULTIPLIER
+            * self.stats.DIFFICULTY_MULTIPLIER
         )
         self.stats.MIN_DAMAGE = (
-                self._equipped_weapon.stats.MIN_DAMAGE *
-                (1 + self.stats.LEVEL / 10) *
-                self.stats.DAMAGE_MULTIPLIER *
-                self.stats.DIFFICULTY_MULTIPLIER
+            self._equipped_weapon.stats.MIN_DAMAGE
+            * (1 + self.stats.LEVEL / 10)
+            * self.stats.DAMAGE_MULTIPLIER
+            * self.stats.DIFFICULTY_MULTIPLIER
         )

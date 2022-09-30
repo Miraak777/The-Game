@@ -1,13 +1,15 @@
-from PyQt6.QtWidgets import QLineEdit, QPushButton, QWidget, QVBoxLayout, QFrame
 from PyQt6.QtCore import Qt
-from interface.common import get_key_binds
+from PyQt6.QtWidgets import QFrame, QLineEdit, QPushButton, QVBoxLayout, QWidget
+
 from core.constants.key_bind_constants import KeyBindNames
-from .constants import MainWindowButtons, MainMenuSizes
+from interface.common import get_key_binds
+
+from .constants import MainMenuSizes, MainWindowButtons
 from .stylesheets import (
     character_create_button_stylesheet,
     character_creation_button_stylesheet,
     character_menu_button_stylesheet,
-    option_menu_button_stylesheet
+    option_menu_button_stylesheet,
 )
 
 
@@ -29,10 +31,14 @@ def create_character_creation_menu(self) -> QVBoxLayout:
     self._character_create_button.setShortcut(Qt.Key.Key_Enter)
     self._character_create_button.setEnabled(False)
 
-    character_creation_layout.addWidget(character_create_name_line_edit,
-                                        alignment=(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom))
-    character_creation_layout.addWidget(self._character_create_button,
-                                        alignment=(Qt.AlignmentFlag.AlignHCenter| Qt.AlignmentFlag.AlignTop))
+    character_creation_layout.addWidget(
+        character_create_name_line_edit,
+        alignment=(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom),
+    )
+    character_creation_layout.addWidget(
+        self._character_create_button,
+        alignment=(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignTop),
+    )
 
     return character_creation_layout
 

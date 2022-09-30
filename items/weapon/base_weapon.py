@@ -2,7 +2,7 @@ from .weapon_stats import WeaponStats
 
 
 class BaseWeapon:
-    def __init__(self, main_menu,  level=1):
+    def __init__(self, main_menu, level=1):
         self._language = main_menu.language
         self.stats = WeaponStats()
         self.stats.LEVEL = level

@@ -1,15 +1,15 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QVBoxLayout, QLabel, QFrame
-from core.constants.character_constants import (
-    StatsNames as sn,
-    AttributesNames as an
-)
-from main_character.start_parameters import Attributes
+from PyQt6.QtWidgets import QFrame, QLabel, QVBoxLayout
+
+from core.constants.character_constants import AttributesNames as an
+from core.constants.character_constants import StatsNames as sn
 from interface.common import clear_layout
+from main_character.start_parameters import Attributes
+
+from . import widgets
 from .constants import CharacterMenuSizes
 from .stylesheets import character_menu_stylesheet
 from .texts import Text
-from . import widgets
 
 
 class CharacterMenu(QFrame):
@@ -41,7 +41,7 @@ class CharacterMenu(QFrame):
             attributes=self._attributes,
             main_stats=stats_for_calculation[sn.MAIN_STATS],
             class_multipliers=stats_for_calculation[sn.CLASS_MULTIPLIERS],
-            equipped_weapon=stats_for_calculation[sn.EQUIPPED_WEAPON]
+            equipped_weapon=stats_for_calculation[sn.EQUIPPED_WEAPON],
         )
         for stat in new_stats:
             self._main_character_stats[stat] = new_stats[stat]
@@ -151,7 +151,7 @@ class CharacterMenu(QFrame):
             an.AGILITY: self._attributes.AGILITY,
             an.VITALITY: self._attributes.VITALITY,
             an.ENDURANCE: self._attributes.ENDURANCE,
-            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS
+            an.ATTRIBUTE_POINTS: self._attributes.ATTRIBUTE_POINTS,
         }
         self._main_menu.main_character.send_attributes(output_attributes)
         self.set_actual_character_stats()

@@ -1,11 +1,13 @@
 from typing import Dict
-from core import Paths
+
 from yaml import safe_load
+
+from core import Paths
 from core.constants.key_bind_constants import KeyBindNames
 
 
 def get_key_binds() -> Dict:
-    with open(Paths.PATH_TO_SETTINGS, 'r') as settings_file:
+    with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
         settings = safe_load(settings_file)
         return settings[KeyBindNames.KEY_BINDS]
 

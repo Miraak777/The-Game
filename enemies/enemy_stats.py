@@ -10,4 +10,3 @@ class Stats:
     DIFFICULTY_MULTIPLIER: float = 1
     EXPERIENCE_GAINED: int = 0
     IS_DEAD: bool = False
-
