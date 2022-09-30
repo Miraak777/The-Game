@@ -4,20 +4,18 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    FIRST_ACTION: str = "Continue traveling"
-    SECOND_ACTION: str = "Rest"
+    FIRST_ACTION: str = "Exit the game"
+    SECOND_ACTION: str = ""
     THIRD_ACTION: str = ""
     FOURTH_ACTION: str = ""
-    CHILL: str = "You made a halt"
 
 
 @dataclass(frozen=True)
 class RussianText:
-    FIRST_ACTION: str = "Продолжить путешествие"
-    SECOND_ACTION: str = "Отдохнуть"
+    FIRST_ACTION: str = "Выйти из игры"
+    SECOND_ACTION: str = ""
     THIRD_ACTION: str = ""
     FOURTH_ACTION: str = ""
-    CHILL: str = "Вы устроили привал"
 
 
 Text = {

@@ -1,5 +1,4 @@
 from scenarios.base_situation.base_situation import BaseSituation
-from scenarios.battle_scenario.scenario import BattleScenario
 
 
 class StartSituation(BaseSituation):
@@ -9,13 +8,13 @@ class StartSituation(BaseSituation):
         self.refresh_buttons()
 
     def _event_first_action(self) -> None:
-        BattleScenario(self._main_menu)
+        self._main_menu.battle_scenario.start_battle()
 
     def _event_second_action(self) -> None:
-        BattleScenario(self._main_menu)
+        self._main_menu.battle_scenario.start_battle()
 
     def _event_third_action(self) -> None:
-        BattleScenario(self._main_menu)
+        self._main_menu.battle_scenario.start_battle()
 
     def _event_fourth_action(self) -> None:
-        BattleScenario(self._main_menu)
+        self._main_menu.battle_scenario.start_battle()

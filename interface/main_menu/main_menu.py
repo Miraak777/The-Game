@@ -13,7 +13,7 @@ from interface.game_menu.game_menu import GameMenu
 from core.constants.language_constants import LANGUAGE
 from main_character import MainCharacter
 from yaml import safe_load
-from scenarios import StartScenario
+from scenarios import StartScenario, BattleScenario
 from scenarios.base_situation.base_situation import BaseSituation
 from .stylesheets import main_menu_stylesheet
 from .constants import MainMenuSizes, DUMMY
@@ -30,14 +30,16 @@ class MainMenu(QMainWindow):
         self.setFixedSize(MainMenuSizes.MAIN_MENU_SIZE)
         self.setStyleSheet(main_menu_stylesheet)
 
+        self._stacked_layout = self._create_stacked_layout()
+
         self.main_character = MainCharacter(DUMMY, self)
 
         self._create_layouts()
-
+        self.battle_scenario = BattleScenario(self)
         BaseSituation(self)
 
     @staticmethod
-    def endgame():
+    def exit():
         exit()
 
     def _create_layouts(self) -> None:
@@ -50,7 +52,6 @@ class MainMenu(QMainWindow):
         self._main_layout.addWidget(self.character_menu, 0, 2, alignment=Qt.AlignmentFlag.AlignRight)
         self.character_menu.hide()
 
-        self._stacked_layout = self._create_stacked_layout()
         self._main_layout.addLayout(self._stacked_layout, 0, 0, 2, 0)
 
     def _create_stacked_layout(self) -> QStackedLayout:

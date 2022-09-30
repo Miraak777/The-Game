@@ -13,6 +13,11 @@ class EnglishText:
     BATTLE_START: str = "You've been attacked by"
     HEALTH: str = "Health: "
     LEVEL: str = "Lvl"
+    YOU_FOUNDED: str = "You founded "
+    EQUIP_WEAPON: str = "Equip weapon"
+    QUIT_WEAPON: str = "Quit the weapon"
+    YOU_EQUIPPED: str = "You equipped "
+    YOU_QUITED: str = "You quited "
 
 
 @dataclass(frozen=True)
@@ -26,6 +31,11 @@ class RussianText:
     BATTLE_START: str = "На вас напал"
     HEALTH: str = "Здоровье: "
     LEVEL: str = "Ур."
+    YOU_FOUNDED: str = "Вы нашли "
+    EQUIP_WEAPON: str = "Использовать оружие"
+    QUIT_WEAPON: str = "Выбросить оружие"
+    YOU_EQUIPPED: str = "Теперь вы используете "
+    YOU_QUITED: str = "Вы выбросили "
 
 
 Text = {

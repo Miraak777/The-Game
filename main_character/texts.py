@@ -12,6 +12,9 @@ class EnglishText:
     NOT_ENOUGH_STAMINA: str = "You do not have enough stamina for this attack"
     CRITICAL_STRIKE: str = "Critical Strike!"
     MISS: str = "Miss!"
+    DEATH: str = "You died, your adventure ends here"
+    REST: str = "You rested"
+    CANNOT_REST: str = "You feel full of energy and don't want ro rest"
 
 
 @dataclass(frozen=True)
@@ -24,6 +27,9 @@ class RussianText:
     NOT_ENOUGH_STAMINA: str = "Вам не хватает запаса сил на эту атаку"
     CRITICAL_STRIKE: str = "Критический Удар!"
     MISS: str = "Промах!"
+    DEATH: str = "Вы погибли, ваше приключение заканчивается здесь"
+    REST: str = "Вы отдохнули"
+    CANNOT_REST: str = "Вы чувствуете, что полны сил, и не хотите отдыхать"
 
 
 Text = {

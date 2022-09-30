@@ -5,7 +5,7 @@ game_window_stylesheet = ("GameWindow {"
                           "}"
                           "QPushButton {"
                           f"background-image: url({BUTTONS}:action_button.png);"
-                          "color: #edbd79;"
+                          "color: #dea659;"
                           "font: 20px;"
                           "}")
 

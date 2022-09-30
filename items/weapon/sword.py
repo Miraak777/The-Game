@@ -1,30 +1,40 @@
-from .weapon import Weapon
+from .base_weapon import BaseWeapon
+from .texts import Text
 
 
-class Sword(Weapon):
-    WEAPON_NAME = "Sword"
-    TWO_HANDED = False
-    MIN_DAMAGE = 12
-    MAX_DAMAGE = 24
-    CRITICAL_STRIKE_CHANCE = 0.05
-    ACCURACY = 0.8
-    STAMINA_CONSUMPTION = 5
-    ARMOUR_PENETRATION = 0.1
+class Sword(BaseWeapon):
+    def __init__(self, level, main_menu):
+        super().__init__(level=level, main_menu=main_menu)
+        self.stats.NAME = Text[self._language].SWORD
+        self.stats.TWO_HANDED = False
+        self.stats.MIN_DAMAGE = 12
+        self.stats.MAX_DAMAGE = 24
+        self.stats.CRITICAL_STRIKE_CHANCE = 0.05
+        self.stats.ACCURACY = 0.8
+        self.stats.STAMINA_CONSUMPTION = 5
+        self.stats.ARMOUR_PENETRATION = 0.1
+        self._calculate_damage()
 
 
 class TwoHandedSword(Sword):
-    WEAPON_NAME = "Two-Handed Sword"
-    TWO_HANDED = True
-    MIN_DAMAGE = 18
-    MAX_DAMAGE = 36
-    ACCURACY = 0.6
-    STAMINA_CONSUMPTION = 7
+    def __init__(self, level, main_menu):
+        super().__init__(level=level, main_menu=main_menu)
+        self.stats.NAME = Text[self._language].TWO_HANDED_SWORD
+        self.stats.TWO_HANDED = True
+        self.stats.MIN_DAMAGE = 18
+        self.stats.MAX_DAMAGE = 36
+        self.stats.ACCURACY = 0.6
+        self.stats.STAMINA_CONSUMPTION = 7
+        self._calculate_damage()
 
 
 class DualSwords(Sword):
-    WEAPON_NAME = "Dual Swords"
-    TWO_HANDED = True
-    MIN_DAMAGE = 24
-    MAX_DAMAGE = 48
-    ACCURACY = 0.6
-    STAMINA_CONSUMPTION = 8
+    def __init__(self, level, main_menu):
+        super().__init__(level=level, main_menu=main_menu)
+        self.stats.NAME = Text[self._language].DUAL_SWORDS
+        self.stats.TWO_HANDED = True
+        self.stats.MIN_DAMAGE = 24
+        self.stats.MAX_DAMAGE = 48
+        self.stats.ACCURACY = 0.6
+        self.stats.STAMINA_CONSUMPTION = 8
+        self._calculate_damage()

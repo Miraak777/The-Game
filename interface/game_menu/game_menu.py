@@ -2,7 +2,6 @@ from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout,  QWidget
 from PyQt6.QtCore import Qt
 from typing import Any, Dict
 from interface.common import clear_layout
-from .texts import Text
 from interface.common import get_key_binds
 from core.constants.key_bind_constants import KeyBindNames
 from core.constants.actions_constants import ActionButtons
@@ -15,7 +14,6 @@ class GameMenu(QFrame):
     def __init__(self, main_menu):
         super().__init__()
         self._main_menu = main_menu
-        self.text = Text[self._main_menu.language]
         self.setFixedSize(GameMenuSizes.GAME_WINDOW_SIZE)
 
         self.setStyleSheet(game_window_stylesheet)

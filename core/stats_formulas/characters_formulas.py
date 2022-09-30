@@ -1,11 +1,11 @@
 def health_formula(health_mult: float, level: int, vitality: int) -> float:
-    stamina = health_mult * ((level * 10) + (vitality * 10))
-    return round(stamina, 2)
+    health = health_mult * ((level * 10) + (vitality * 10))
+    return round(health, 1)
 
 
 def stamina_formula(stamina_mult: float, level: int, endurance: int) -> float:
-    health = stamina_mult * ((level * 5) + (endurance * 5))
-    return round(health, 2)
+    stamina = stamina_mult * ((level * 5) + (endurance * 5))
+    return round(stamina, 1)
 
 
 def min_damage_formula(min_damage: int,

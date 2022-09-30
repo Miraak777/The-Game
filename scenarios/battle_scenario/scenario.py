@@ -10,16 +10,16 @@ class BattleScenario:
         self.main_menu = main_menu
         self.game_menu: GameMenu = main_menu.game_menu
         self._text = Text[self.main_menu.language]
-        self.start_battle()
 
     def start_battle(self):
         self.main_menu.character_menu_button.setDisabled(True)
-        enemy = enemies_map[randrange(0, 2)](1, self.game_menu, self.main_menu.language)
+        enemy = enemies_map[randrange(0, 3)](self.main_menu.main_character.main_stats.LEVEL,
+                                             self.main_menu,
+                                             self.main_menu.language)
 
-        self.game_menu.add_log(self._text.BATTLE_START + " " + enemy.name + " " + str(enemy.level) + " " +
+        self.game_menu.add_log(self._text.BATTLE_START + " " + enemy.stats.NAME + " " + str(enemy.stats.LEVEL) + " " +
                                self._text.LEVEL + " " + self._text.HEALTH + str(enemy.stats.MAX_HEALTH) + "/" +
                                str(enemy.stats.HEALTH))
         BattleSituation(main_menu=self.main_menu,
                         enemy=enemy,
-                        battle_scenario=self,
                         text=self._text)
