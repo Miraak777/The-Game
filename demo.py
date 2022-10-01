@@ -2,7 +2,7 @@ from PyQt6.QtCore import QDir
 from PyQt6.QtWidgets import QApplication
 
 from core import BACKGROUNDS, BUTTONS, WIDGET_TEXTURES, Paths
-from interface import MainMenu
+from core.interface import MainMenu
 
 QDir.addSearchPath(BACKGROUNDS, Paths.PATH_TO_BACKGROUNDS)
 QDir.addSearchPath(BUTTONS, Paths.PATH_TO_BUTTON_TEXTURES)

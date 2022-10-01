@@ -1,10 +1,10 @@
 def health_formula(health_mult: float, level: int, vitality: int) -> float:
-    health = health_mult * ((level * 10) + (vitality * 10))
+    health = health_mult * ((level * 15) + (vitality * 20))
     return round(health, 1)
 
 
 def stamina_formula(stamina_mult: float, level: int, endurance: int) -> float:
-    stamina = stamina_mult * ((level * 5) + (endurance * 5))
+    stamina = stamina_mult * ((level * 10) + (endurance * 15))
     return round(stamina, 1)
 
 
@@ -48,7 +48,7 @@ def critical_strike_formula(
 
 
 def accuracy_formula(accuracy: float, agility: int, level: int) -> float:
-    accuracy = accuracy * ((1 + agility * 0.3) / (0.9 + level * 0.1))
+    accuracy = accuracy * ((1 + agility * 0.5) / (0.9 + level * 0.1))
     if accuracy <= 0:
         accuracy = 0
     if accuracy >= 1:
