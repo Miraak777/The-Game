@@ -13,3 +13,4 @@ class WeaponStats:
     ARMOUR_PENETRATION: float = 0
     LEVEL: int = 0
     LEVEL_DAMAGE_MULTIPLIER: float = 0.2
+

@@ -1,8 +1,12 @@
 from .weapon_stats import WeaponStats
+from ..base_item import BaseItem
+from core.constants.item_constants import ItemTypes
 
 
-class BaseWeapon:
+class BaseWeapon(BaseItem):
     def __init__(self, main_menu, level=1):
+        super().__init__(main_menu)
+        self.item_type = ItemTypes.WEAPON
         self._language = main_menu.language
         self.stats = WeaponStats()
         self.stats.LEVEL = level
@@ -11,3 +15,6 @@ class BaseWeapon:
     def _calculate_damage(self):
         self.stats.MAX_DAMAGE = self.stats.MAX_DAMAGE * (1 + self.stats.LEVEL * self.stats.LEVEL_DAMAGE_MULTIPLIER)
         self.stats.MIN_DAMAGE = self.stats.MIN_DAMAGE * (1 + self.stats.LEVEL * self.stats.LEVEL_DAMAGE_MULTIPLIER)
+
+    def use_item(self):
+        self._main_menu.main_character.equip_weapon(self)

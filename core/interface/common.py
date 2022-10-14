@@ -1,9 +1,9 @@
 from typing import Dict
-
+from PyQt6.QtCore import QDir
 from yaml import safe_load
 
-from core import Paths
 from core.constants.key_bind_constants import KeyBindNames
+from core import BACKGROUNDS, BUTTONS, WIDGET_TEXTURES, Paths
 
 
 def get_key_binds() -> Dict:
@@ -20,3 +20,9 @@ def clear_layout(layout):
         layout.removeItem(item)
         if item.widget():
             item.widget().deleteLater()
+
+
+def set_qdirs():
+    QDir.addSearchPath(BACKGROUNDS, Paths.PATH_TO_BACKGROUNDS)
+    QDir.addSearchPath(BUTTONS, Paths.PATH_TO_BUTTON_TEXTURES)
+    QDir.addSearchPath(WIDGET_TEXTURES, Paths.PATH_TO_WIDGET_TEXTURES)

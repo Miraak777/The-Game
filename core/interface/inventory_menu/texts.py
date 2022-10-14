@@ -5,12 +5,12 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    awd = "awd"
+    INVENTORY_IS_FULL = "Inventory is full!"
 
 
 @dataclass(frozen=True)
 class RussianText:
-    awd = "awd"
+    INVENTORY_IS_FULL = "Инвентарь полон!"
 
 
 Text = {

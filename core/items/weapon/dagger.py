@@ -6,6 +6,7 @@ class Dagger(BaseWeapon):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DAGGER
+        self.item_icon = "dagger.png"
         self.stats.TWO_HANDED = False
         self.stats.MIN_DAMAGE = 2
         self.stats.MAX_DAMAGE = 6
@@ -20,6 +21,7 @@ class DualDaggers(Dagger):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DUAL_DAGGERS
+        self.item_icon = "dual_daggers.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 4
         self.stats.MAX_DAMAGE = 12

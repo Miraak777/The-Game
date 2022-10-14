@@ -12,6 +12,7 @@ from core.interface.option_menu.menu import OptionMenu
 from core.main_character.character import MainCharacter
 from core.scenarios import BattleScenario, RandomScenario, StartScenario
 from core.scenarios.base_situation.base_situation import BaseSituation
+from core.interface.common import set_qdirs
 
 from . import widgets
 from .constants import MainMenuSizes
@@ -22,6 +23,8 @@ from .texts import Text
 class MainMenu(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
+        set_qdirs()
+
         self.language = self._get_language()
         self.text = Text[self.language]
         self.setWindowTitle(self.text.TITLE)
@@ -38,7 +41,10 @@ class MainMenu(QMainWindow):
         self._add_menu_to_stacked_layout()
         self.battle_scenario = BattleScenario(self)
         self.random_scenario = RandomScenario(self)
+
         BaseSituation(self)
+
+
 
     @staticmethod
     def exit():

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from core.constants.item_constants import ItemTypes
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent)
 
@@ -13,6 +14,10 @@ class Paths:
     PATH_TO_WIDGET_TEXTURES: str = str(Path(BASE_DIR, "resources", "textures", "widget_textures"))
     PATH_TO_WEAPON_ICONS: str = str(Path(BASE_DIR, "resources", "items", "weapons"))
 
+
+path_to_item_icons_map = {
+    ItemTypes.WEAPON: Paths.PATH_TO_WEAPON_ICONS
+}
 
 BACKGROUNDS = "backgrounds"
 BUTTONS = "buttons"

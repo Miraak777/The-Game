@@ -2,6 +2,7 @@ from core.constants.actions_constants import ActionButtons
 from core.constants.character_constants import BarsNames as bn
 from core.constants.character_constants import CombatStatsNames as cs
 from core.constants.character_constants import CommonConstants as cc
+from core.constants.item_constants import ItemTypes
 from core.main_character.character import MainCharacter
 from core.scenarios import BaseSituation
 from core.scenarios.chill_scenario.scenario import ChillScenario
@@ -142,39 +143,22 @@ class BattleSituation(BaseSituation):
     def _generate_reward(self):
         self._main_character.send_experience(self._enemy.stats.EXPERIENCE_GAINED)
         reward = self._enemy.drops.drop_items()
-        if reward:
-            reward_level = self._enemy.stats.LEVEL
-            RewardGetSituation(self._main_menu, self._text, [reward, reward_level])
-        else:
-            ChillScenario(self._main_menu)
-
-
-class RewardGetSituation(BaseSituation):
-    def __init__(self, main_menu, text, reward):
-        super().__init__(main_menu, text)
-        self._reward = reward
-        self._reward[0] = self._reward[0][0](level=self._reward[1], main_menu=main_menu)
-        self._texts = {
-            ActionButtons.FIRST_ACTION: self._text.EQUIP_WEAPON,
-            ActionButtons.SECOND_ACTION: self._text.QUIT_WEAPON,
-            ActionButtons.THIRD_ACTION: "",
-            ActionButtons.FOURTH_ACTION: "",
-        }
-        self._log(
-            self._text.YOU_FOUNDED
-            + self._reward[0].stats.NAME
-            + " "
-            + str(self._reward[0].stats.LEVEL)
-            + " "
-            + self._text.LEVEL
-        )
-        self.refresh_buttons()
-
-    def _event_first_action(self) -> None:
-        self._log(self._text.YOU_EQUIPPED + self._reward[0].stats.NAME)
-        self._main_menu.main_character.equip_weapon(self._reward[0])
-        ChillScenario(self._main_menu)
-
-    def _event_second_action(self) -> None:
-        self._log(self._text.YOU_QUITED + self._reward[0].stats.NAME)
+        reward_level = self._main_character.main_stats.LEVEL
+        for item in reward:
+            item = item(level=reward_level, main_menu=self._main_menu)
+            if item.item_type == ItemTypes.WEAPON:
+                self._log(
+                    self._text.YOU_FOUNDED
+                    + item.stats.NAME
+                    + " "
+                    + str(item.stats.LEVEL)
+                    + " "
+                    + self._text.LEVEL
+                )
+            else:
+                self._log(
+                    self._text.YOU_FOUNDED
+                    + item.stats.NAME
+                )
+            self._main_menu.inventory_menu.add_item(item)
         ChillScenario(self._main_menu)

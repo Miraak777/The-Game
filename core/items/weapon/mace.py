@@ -6,6 +6,7 @@ class Mace(BaseWeapon):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].MACE
+        self.item_icon = "mace.png"
         self.stats.TWO_HANDED = False
         self.stats.MIN_DAMAGE = 14
         self.stats.MAX_DAMAGE = 16
@@ -19,6 +20,7 @@ class TwoHandedMace(Mace):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].TWO_HANDED_MACE
+        self.item_icon = "two_handed_mace.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 18
         self.stats.MAX_DAMAGE = 22
@@ -31,6 +33,7 @@ class DualMaces(Mace):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DUAL_MACES
+        self.item_icon = "dual_maces.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 26
         self.stats.MAX_DAMAGE = 32

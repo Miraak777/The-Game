@@ -7,7 +7,7 @@ from core.constants.language_constants import Language
 class EnglishText:
     FISTS: str = "Fists"
     DAGGER: str = "Dagger"
-    DUAL_DAGGER: str = "Dual Daggers"
+    DUAL_DAGGERS: str = "Dual Daggers"
     SWORD: str = "Sword"
     TWO_HANDED_SWORD: str = "Two handed Sword"
     DUAL_SWORDS: str = "Dual Swords"
@@ -23,7 +23,7 @@ class EnglishText:
 class RussianText:
     FISTS: str = "Кулаки"
     DAGGER: str = "Кинжал"
-    DUAL_DAGGER: str = "Парные Кинжалы"
+    DUAL_DAGGERS: str = "Парные Кинжалы"
     SWORD: str = "Меч"
     TWO_HANDED_SWORD: str = "Двуручный Меч"
     DUAL_SWORDS: str = "Парные Мечи"

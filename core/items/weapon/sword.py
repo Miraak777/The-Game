@@ -6,6 +6,7 @@ class Sword(BaseWeapon):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].SWORD
+        self.item_icon = "sword.png"
         self.stats.TWO_HANDED = False
         self.stats.MIN_DAMAGE = 9
         self.stats.MAX_DAMAGE = 12
@@ -20,6 +21,7 @@ class TwoHandedSword(Sword):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].TWO_HANDED_SWORD
+        self.item_icon = "two_handed_sword.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 12
         self.stats.MAX_DAMAGE = 18
@@ -32,6 +34,7 @@ class DualSwords(Sword):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DUAL_SWORDS
+        self.item_icon = "dual_swords.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 18
         self.stats.MAX_DAMAGE = 24

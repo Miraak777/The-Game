@@ -1,4 +1,8 @@
 from core.scenarios import BaseSituation
+from core.items.weapon import (
+    Dagger, DualDaggers, Sword, TwoHandedSword, DualSwords, BattleAxe, DualBattleAxes, TwoHandedBattleAxe,
+    Mace, TwoHandedMace, DualMaces
+)
 
 
 class DebugSituation(BaseSituation):
@@ -11,8 +15,17 @@ class DebugSituation(BaseSituation):
         self._main_menu.character_menu.set_actual_character_stats()
 
     def _event_second_action(self) -> None:
-        self._main_menu.main_character.set_class_peasant()
-        self._main_menu.character_menu.set_actual_character_stats()
+        self._main_menu.inventory_menu.add_item(Dagger(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(DualDaggers(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(Sword(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(TwoHandedSword(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(DualSwords(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(BattleAxe(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(TwoHandedBattleAxe(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(DualBattleAxes(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(Mace(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(TwoHandedMace(1, self._main_menu))
+        self._main_menu.inventory_menu.add_item(DualMaces(1, self._main_menu))
 
     def _event_third_action(self) -> None:
         self._main_menu.main_character.set_class_warrior()

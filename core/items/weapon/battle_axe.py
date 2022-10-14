@@ -6,6 +6,7 @@ class BattleAxe(BaseWeapon):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].BATTLE_AXE
+        self.item_icon = "battle_axe.png"
         self.stats.TWO_HANDED = False
         self.stats.MIN_DAMAGE = 7
         self.stats.MAX_DAMAGE = 14
@@ -19,6 +20,7 @@ class TwoHandedBattleAxe(BattleAxe):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].TWO_HANDED_BATTLE_AXE
+        self.item_icon = "two_handed_battle_axe.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 10
         self.stats.MAX_DAMAGE = 20
@@ -31,6 +33,7 @@ class DualBattleAxes(BattleAxe):
     def __init__(self, level, main_menu):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DUAL_BATTLE_AXES
+        self.item_icon = "battle_axes.png"
         self.stats.TWO_HANDED = True
         self.stats.MIN_DAMAGE = 14
         self.stats.MAX_DAMAGE = 28
