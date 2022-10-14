@@ -2,7 +2,7 @@ from random import random
 from typing import List
 
 import core.items as items
-from core.constants.weapon_names import WeaponNames as wn
+from core.constants.weapon_names import WeaponNames as wn, ConsumableNames as cn
 
 
 class BaseDropRate:
@@ -19,6 +19,9 @@ class BaseDropRate:
             wn.MACE: [0, items.weapon.Mace],
             wn.TWO_HANDED_MACE: [0, items.weapon.TwoHandedMace],
             wn.DUAL_MACES: [0, items.weapon.DualMaces],
+            cn.APPLE: [0, items.consumables.Apple],
+            cn.STEAK: [0, items.consumables.Steak],
+            cn.RATION: [0, items.consumables.Ration]
         }
 
     def set_drop_rate(self, weapon, drop_rate: float) -> None:

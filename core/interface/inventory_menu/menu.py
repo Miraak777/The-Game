@@ -1,11 +1,12 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout
 
+from core.constants.item_constants import ItemTypes
 from core.interface.common import clear_layout
 from .constants import InventoryMenuSizes
 from .stylesheets import inventory_menu_stylesheet
 from .texts import Text
 from .inventory_map import inventory_map
-from . import widgets
+from .widgets import ItemSlot
 
 
 class InventoryMenu(QFrame):
@@ -31,7 +32,7 @@ class InventoryMenu(QFrame):
         item_id = 0
         for horizont in range(InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
             for vertical in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER):
-                item_button = widgets.create_item_button(self._inventory_map[item_id])
+                item_button = ItemSlot(self._inventory_map[item_id])
                 item_id += 1
                 self._layout.addWidget(item_button, vertical, horizont)
 
@@ -39,13 +40,24 @@ class InventoryMenu(QFrame):
         clear_layout(self._layout)
         self._create_item_buttons()
 
+    def unequip_all_weapon(self):
+        for item_id in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER * InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
+            if (
+                    self._inventory_map[item_id] and
+                    self._inventory_map[item_id].item_type == ItemTypes.WEAPON and
+                    self._inventory_map[item_id].item_equipped
+            ):
+                self._inventory_map[item_id].item_equipped = False
+        self.refresh_inventory()
+
     def add_item(self, item):
-        if self._inventory_map[len(self._inventory_map)-1]:
+        if self._inventory_map[len(self._inventory_map) - 1]:
             self._log(self._text.INVENTORY_IS_FULL)
         else:
             for item_id in self._inventory_map:
                 if not self._inventory_map[item_id]:
                     self._inventory_map[item_id] = item
+                    item.item_inventory_id = item_id
                     break
         self.refresh_inventory()
 

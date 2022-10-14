@@ -91,6 +91,7 @@ class MainCharacter:
 
     def equip_weapon(self, weapon):
         self._equipped_weapon = weapon
+        weapon.item_equipped = True
         self._add_log(self._text.EQUIPPED_WEAPON + weapon.stats.NAME)
         self._no_weapon = False
         self._refresh_stats()
@@ -99,6 +100,7 @@ class MainCharacter:
 
     def unequip_weapon(self):
         weapon = self._equipped_weapon
+        weapon.item_equipped = False
         self._equipped_weapon = Fists(level=self.main_stats.LEVEL, main_menu=self._main_menu)
         self._no_weapon = True
         self._refresh_stats()
@@ -143,13 +145,18 @@ class MainCharacter:
         self._bars.STAMINA = self._bars.MAX_STAMINA
 
     def restore_health(self, health):
-        self._bars.HEALTH += health
+        self._bars.HEALTH = self._bars.HEALTH + health
+        if self._bars.HEALTH > self._bars.MAX_HEALTH:
+            self._bars.HEALTH = self._bars.MAX_HEALTH
+
+    def restore_percent_health(self, health):
+        self._bars.HEALTH = self._bars.HEALTH + (health*0.01 * self._bars.MAX_HEALTH)
         if self._bars.HEALTH > self._bars.MAX_HEALTH:
             self._bars.HEALTH = self._bars.MAX_HEALTH
 
     def rest(self) -> None:
-        if self._bars.HEALTH < self._bars.MAX_HEALTH:
-            self._bars.HEALTH = self._bars.MAX_HEALTH
+        if self._bars.HEALTH < self._bars.MAX_HEALTH / 2:
+            self._bars.HEALTH = self._bars.MAX_HEALTH / 2
             self._add_log(self._text.REST)
         else:
             self._add_log(self._text.CANNOT_REST)

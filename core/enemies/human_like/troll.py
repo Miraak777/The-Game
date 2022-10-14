@@ -1,4 +1,4 @@
-from core.constants.weapon_names import WeaponNames as wn
+from core.constants.weapon_names import WeaponNames as wn, ConsumableNames as cn
 from core.items.weapon import TwoHandedMace
 
 from .human_like_enemy import HumanLikeEnemy
@@ -13,6 +13,7 @@ class Troll(HumanLikeEnemy):
         self.stats.VITALITY_PER_LEVEL = 2
         self.stats.STRENGTH_PER_LEVEL = 2
         self.stats.EXPERIENCE_GAINED = 100
+        self.drops.set_drop_rate(cn.APPLE, 0.5)
         self._calculate_damage()
         self._calculate_health()
         self._calculate_experience_gained()

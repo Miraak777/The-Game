@@ -1,0 +1,1 @@
+from  core.items.consumables.food import Apple, Steak, Ration

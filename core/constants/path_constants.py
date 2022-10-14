@@ -13,10 +13,12 @@ class Paths:
     PATH_TO_BUTTON_TEXTURES: str = str(Path(BASE_DIR, "resources", "textures", "button_textures"))
     PATH_TO_WIDGET_TEXTURES: str = str(Path(BASE_DIR, "resources", "textures", "widget_textures"))
     PATH_TO_WEAPON_ICONS: str = str(Path(BASE_DIR, "resources", "items", "weapons"))
+    PATH_TO_CONSUMABLES_ICONS: str = str(Path(BASE_DIR, "resources", "items", "consumables"))
 
 
 path_to_item_icons_map = {
-    ItemTypes.WEAPON: Paths.PATH_TO_WEAPON_ICONS
+    ItemTypes.WEAPON: Paths.PATH_TO_WEAPON_ICONS,
+    ItemTypes.CONSUMABLE: Paths.PATH_TO_CONSUMABLES_ICONS,
 }
 
 BACKGROUNDS = "backgrounds"

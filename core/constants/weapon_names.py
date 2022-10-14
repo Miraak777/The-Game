@@ -14,3 +14,10 @@ class WeaponNames:
     MACE: str = "mace"
     TWO_HANDED_MACE: str = "two_handed_mace"
     DUAL_MACES: str = "dual_maces"
+
+
+@dataclass(frozen=True)
+class ConsumableNames:
+    APPLE: str = "apple"
+    STEAK: str = "steak"
+    RATION: str = "ration"

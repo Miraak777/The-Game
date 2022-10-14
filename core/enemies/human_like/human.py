@@ -1,6 +1,6 @@
 from random import random
 
-from core.constants.weapon_names import WeaponNames as wn
+from core.constants.weapon_names import WeaponNames as wn, ConsumableNames as cn
 from core.items.weapon import Dagger, Sword, TwoHandedSword
 
 from .human_like_enemy import HumanLikeEnemy
@@ -17,6 +17,8 @@ class Human(HumanLikeEnemy):
         else:
             self.stats.VITALITY_PER_LEVEL = 1
             self.stats.STRENGTH_PER_LEVEL = 2
+        self.drops.set_drop_rate(cn.APPLE, 0.3)
+        self.drops.set_drop_rate(cn.STEAK, 0.3)
         self._calculate_experience_gained()
         self._calculate_health()
         self._calculate_damage()
@@ -29,6 +31,7 @@ class HumanWithDagger(Human):
         self.stats.EXPERIENCE_GAINED = 70
         self._equipped_weapon = Dagger(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.DAGGER, 0.3)
+        self.drops.set_drop_rate(cn.RATION, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()
 
@@ -40,6 +43,7 @@ class HumanWithSword(Human):
         self.stats.EXPERIENCE_GAINED = 100
         self._equipped_weapon = Sword(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.SWORD, 0.3)
+        self.drops.set_drop_rate(cn.RATION, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()
 
@@ -51,5 +55,6 @@ class HumanWithTwoHandedSword(Human):
         self.stats.EXPERIENCE_GAINED = 150
         self._equipped_weapon = TwoHandedSword(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.TWO_HANDED_SWORD, 0.3)
+        self.drops.set_drop_rate(cn.RATION, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()
