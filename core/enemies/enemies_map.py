@@ -9,21 +9,10 @@ from . import (
     Troll,
 )
 
-enemies_1_lvl = [
-    Goblin,
-    GoblinWithDagger,
+enemies_level_maps = [
+    [1, [Goblin, GoblinWithDagger]],
+    [3, [GoblinWithDagger, Human, HumanWithDagger, ]],
+    [5, [GoblinWithDagger, Human, HumanWithDagger, HumanWithSword]],
+    [10, [HumanWithDagger, HumanWithSword, HumanWithTwoHandedSword, Troll]],
+    [20, [HumanWithSword, HumanWithTwoHandedSword, Troll, ArmedTroll]],
 ]
-enemies_3_lvl = [
-    GoblinWithDagger,
-    Human,
-    HumanWithDagger,
-]
-
-enemies_5_lvl = [
-    Human,
-    HumanWithDagger,
-    HumanWithSword,
-    HumanWithTwoHandedSword,
-    Troll,
-]
-enemies_10_lvl = [HumanWithDagger, HumanWithSword, HumanWithTwoHandedSword, Troll, ArmedTroll]

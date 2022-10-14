@@ -57,7 +57,8 @@ class Enemy:
 
     def _calculate_health(self):
         self.stats.MAX_HEALTH = (
-            self.stats.BASE_ENEMY_HEALTH * self.stats.LEVEL + self.stats.VITALITY_PER_LEVEL * self.stats.LEVEL * 15
+            self.stats.BASE_ENEMY_HEALTH * self.stats.LEVEL + self.stats.VITALITY_PER_LEVEL * self.stats.LEVEL *
+            self.stats.VITALITY_HEALTH_MULTIPLIER
         ) * self.stats.DIFFICULTY_MULTIPLIER
         self.stats.HEALTH = self.stats.MAX_HEALTH
 

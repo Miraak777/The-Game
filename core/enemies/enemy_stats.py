@@ -5,6 +5,7 @@ class Stats:
     HEALTH: float = 1
     BASE_ENEMY_HEALTH: int = 1
     VITALITY_PER_LEVEL: int = 0
+    VITALITY_HEALTH_MULTIPLIER = 15
     MAX_DAMAGE: float = 2
     MIN_DAMAGE: float = 1
     STRENGTH_PER_LEVEL: float = 0

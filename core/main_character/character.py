@@ -148,8 +148,8 @@ class MainCharacter:
             self._bars.HEALTH = self._bars.MAX_HEALTH
 
     def rest(self) -> None:
-        if self._bars.HEALTH < self._bars.MAX_HEALTH / 2:
-            self._bars.HEALTH = self._bars.MAX_HEALTH / 2
+        if self._bars.HEALTH < self._bars.MAX_HEALTH:
+            self._bars.HEALTH = self._bars.MAX_HEALTH
             self._add_log(self._text.REST)
         else:
             self._add_log(self._text.CANNOT_REST)

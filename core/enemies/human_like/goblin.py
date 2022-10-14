@@ -10,6 +10,8 @@ class Goblin(HumanLikeEnemy):
     def __init__(self, level, main_menu):
         super().__init__(level, main_menu)
         self.stats.NAME = self._text.GOBLIN
+        self.stats.BASE_ENEMY_HEALTH = 10
+        self.stats.VITALITY_HEALTH_MULTIPLIER = 10
         if random() < 0.5:
             self.stats.VITALITY_PER_LEVEL = 1
             self.stats.STRENGTH_PER_LEVEL = 1
