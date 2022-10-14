@@ -10,6 +10,7 @@ class EnglishText:
     RESTART_REQUEST: str = "Please, restart the game, for changes to take effect"
     EXIT_BUTTON: str = "Ok"
     DEBUG_BUTTON: str = "Debug Mode"
+    ABOUT_BUTTON: str = "About"
 
 
 @dataclass(frozen=True)
@@ -19,6 +20,7 @@ class RussianText:
     RESTART_REQUEST: str = "Пожалуйста, перезапустите игру, чтобы изменения вступили в силу"
     EXIT_BUTTON: str = "Ок"
     DEBUG_BUTTON: str = "Режим Дебага"
+    ABOUT_BUTTON: str = "О Программе"
 
 
 Text = {

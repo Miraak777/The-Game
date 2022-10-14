@@ -1,1 +1,1 @@
-from core.constants.path_constants import BACKGROUNDS, BUTTONS, WIDGET_TEXTURES, Paths
+from core.constants.path_constants import BACKGROUNDS, BUTTONS, WEAPON_ICONS, WIDGET_TEXTURES, Paths

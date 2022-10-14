@@ -5,10 +5,11 @@ class ChillSituation(BaseSituation):
     def __init__(self, main_menu, text) -> None:
         super().__init__(main_menu, text)
         self._game_menu.add_log(self._text.CHILL)
-        self._battle_scenario = self._main_menu.battle_scenario
+        self._log("")
 
     def _event_first_action(self) -> None:
-        self._battle_scenario.start_battle()
+        scenario = self._main_menu.random_scenario.get_random_scenario()
+        scenario(self._main_menu)
 
     def _event_second_action(self) -> None:
         self._main_menu.main_character.rest()

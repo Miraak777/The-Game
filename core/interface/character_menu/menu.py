@@ -19,11 +19,10 @@ class CharacterMenu(QFrame):
         self._text = Text[self._main_menu.language]
         self.setFixedSize(CharacterMenuSizes.CHARACTER_MENU_SIZE)
 
-        self._main_character_stats = self._main_menu.main_character.get_stats()
+        self._main_character_stats = None
         self._attributes = Attributes()
 
         self.setStyleSheet(character_menu_stylesheet)
-        self._create_layout()
 
     def set_actual_character_stats(self):
         self._main_character_stats = self._main_menu.main_character.get_stats()
@@ -87,9 +86,10 @@ class CharacterMenu(QFrame):
         for line in widgets.create_stats_widget(self):
             self._layout.addWidget(line)
 
-    def _create_layout(self) -> None:
+    def create_layout(self) -> None:
         self._layout = QVBoxLayout()
         self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self._main_character_stats = self._main_menu.main_character.get_stats()
         self._create_widgets()
         self.setLayout(self._layout)
 

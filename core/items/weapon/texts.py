@@ -5,6 +5,7 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
+    FISTS: str = "Fists"
     DAGGER: str = "Dagger"
     DUAL_DAGGER: str = "Dual Daggers"
     SWORD: str = "Sword"
@@ -20,6 +21,7 @@ class EnglishText:
 
 @dataclass(frozen=True)
 class RussianText:
+    FISTS: str = "Кулаки"
     DAGGER: str = "Кинжал"
     DUAL_DAGGER: str = "Парные Кинжалы"
     SWORD: str = "Меч"

@@ -18,4 +18,6 @@ def create_action_button(event, text: str) -> QPushButton:
     button = QPushButton(text=text)
     button.setFixedSize(GameMenuButtons.ACTION_BUTTON_SIZE)
     button.clicked.connect(event)
+    if text == "":
+        button.setEnabled(False)
     return button

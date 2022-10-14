@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QFrame, QVBoxLayout
+from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout
 from yaml import safe_dump, safe_load
 
 from core import Paths
@@ -39,8 +39,15 @@ class OptionMenu(QFrame):
         self._layout.addLayout(self._choose_language_layout)
 
         self._layout.addStretch()
+        self._down_buttons_layout = QHBoxLayout()
+        self._layout.addLayout(self._down_buttons_layout)
 
-        self._layout.addWidget(
+        self._down_buttons_layout.addWidget(
+            widgets.about_menu_button(self),
+            alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignLeft),
+        )
+
+        self._down_buttons_layout.addWidget(
             widgets.debug_mode_button(self),
             alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight),
         )
@@ -81,6 +88,12 @@ class OptionMenu(QFrame):
 
     def _event_debug_mode(self):
         DebugScenario(self.main_menu)
+
+    def event_open_about_menu(self):
+        if self.main_menu.about_menu.isHidden():
+            self.main_menu.about_menu.show()
+        else:
+            self.main_menu.about_menu.hide()
 
     @staticmethod
     def _event_exit():

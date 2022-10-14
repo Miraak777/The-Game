@@ -86,3 +86,12 @@ def debug_mode_button(self) -> QPushButton:
     button.setCheckable(True)
     button.clicked.connect(self._event_debug_mode)
     return button
+
+
+def about_menu_button(self) -> QPushButton:
+    button = QPushButton(text=self._text.ABOUT_BUTTON)
+    button.setStyleSheet(debug_button_stylesheet)
+    button.setFixedSize(OptionMenuButtons.ABOUT_BUTTON)
+    button.setCheckable(True)
+    button.clicked.connect(self.event_open_about_menu)
+    return button

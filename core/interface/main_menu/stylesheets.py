@@ -50,3 +50,14 @@ option_menu_button_stylesheet = (
     f"image: url({BUTTONS}:option_menu_button_disabled.png);"
     "}"
 )
+
+about_menu_stylesheet = (
+    "QFrame {" f"background-image: url({BACKGROUNDS}:main_menu_background);" "border: 2px solid;" "}"
+)
+about_menu_label_stylesheet = (
+    "QLabel {" "background-image: url(no_back_ground);" "border: 0px solid;" "font: 20px;" "color: #edbd79;" "}"
+)
+
+exit_about_menu_button_stylesheet = (
+    "QPushButton {" "border: 2px solid;" "border-radius: 5px;" "background-color: rgb(150, 0, 0)" "}"
+)

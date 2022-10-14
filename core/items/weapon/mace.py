@@ -7,7 +7,7 @@ class Mace(BaseWeapon):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].MACE
         self.stats.TWO_HANDED = False
-        self.stats.MIN_DAMAGE = 8
+        self.stats.MIN_DAMAGE = 14
         self.stats.MAX_DAMAGE = 16
         self.stats.ACCURACY = 0.8
         self.stats.STAMINA_CONSUMPTION = 7
@@ -20,7 +20,7 @@ class TwoHandedMace(Mace):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].TWO_HANDED_MACE
         self.stats.TWO_HANDED = True
-        self.stats.MIN_DAMAGE = 11
+        self.stats.MIN_DAMAGE = 18
         self.stats.MAX_DAMAGE = 22
         self.stats.ACCURACY = 0.6
         self.stats.STAMINA_CONSUMPTION = 11
@@ -32,7 +32,7 @@ class DualMaces(Mace):
         super().__init__(level=level, main_menu=main_menu)
         self.stats.NAME = Text[self._language].DUAL_MACES
         self.stats.TWO_HANDED = True
-        self.stats.MIN_DAMAGE = 16
+        self.stats.MIN_DAMAGE = 26
         self.stats.MAX_DAMAGE = 32
         self.stats.ACCURACY = 0.6
         self.stats.STAMINA_CONSUMPTION = 14

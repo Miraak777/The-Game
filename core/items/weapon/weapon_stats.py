@@ -12,4 +12,4 @@ class WeaponStats:
     STAMINA_CONSUMPTION_MULTIPLIER: float = 1
     ARMOUR_PENETRATION: float = 0
     LEVEL: int = 0
-    LEVEL_DAMAGE_MULTIPLIER: float = 0.3
+    LEVEL_DAMAGE_MULTIPLIER: float = 0.2

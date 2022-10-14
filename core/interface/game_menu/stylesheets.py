@@ -1,13 +1,16 @@
 from core import BUTTONS
 
 game_window_stylesheet = (
-    "GameWindow {"
-    "background-color: rgba(100, 100, 100, 0.5);"
+    "GameMenu {"
+    "background-color: rgba(0, 0, 0, 0.08);"
     "}"
-    "QPushButton {"
-    f"background-image: url({BUTTONS}:action_button.png);"
+    "QPushButton:enabled {"
+    f"background-image: url({BUTTONS}:action_button_enabled.png);"
     "color: #dea659;"
     "font: 20px;"
+    "}"
+    "QPushButton {"
+    f"background-image: url({BUTTONS}:action_button_disabled.png);"
     "}"
 )
 

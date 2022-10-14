@@ -54,3 +54,9 @@ def accuracy_formula(accuracy: float, agility: int, level: int) -> float:
     if accuracy >= 1:
         accuracy = 1
     return round(accuracy, 3)
+
+
+def max_experience_formula(level: int) -> int:
+    max_experience = 100 * level * (1 + level * 0.05)
+    max_experience = round(max_experience)
+    return max_experience

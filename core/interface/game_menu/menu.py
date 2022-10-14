@@ -36,11 +36,10 @@ class GameMenu(QFrame):
 
         self.setLayout(self._layout)
 
-    def add_log(self, text: str, rows: int = 1):
+    def add_log(self, text: str):
         label = QLabel(text=text)
         label.setStyleSheet(label_stylesheet)
         label.setWordWrap(True)
-        label.setFixedHeight(GameMenuSizes.LABEL_HEIGHT * rows)
         self._scroll_area_layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignBottom)
         self.scroll_down()
 

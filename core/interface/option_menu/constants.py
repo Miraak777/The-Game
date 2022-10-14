@@ -8,6 +8,7 @@ class OptionMenuButtons:
     LANGUAGE_BUTTON: QSize = QSize(102, 32)
     EXIT_BUTTON: QSize = QSize(47, 47)
     DEBUG_BUTTON: QSize = QSize(132, 42)
+    ABOUT_BUTTON: QSize = QSize(132, 42)
 
 
 @dataclass(frozen=True)

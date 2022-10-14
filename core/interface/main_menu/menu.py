@@ -1,4 +1,5 @@
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QGridLayout, QHBoxLayout, QMainWindow, QStackedLayout, QWidget
 from yaml import safe_load
 
@@ -6,13 +7,14 @@ from core.constants.language_constants import LANGUAGE
 from core.constants.path_constants import Paths
 from core.interface.character_menu.menu import CharacterMenu
 from core.interface.game_menu.menu import GameMenu
+from core.interface.inventory_menu.menu import InventoryMenu
 from core.interface.option_menu.menu import OptionMenu
 from core.main_character.character import MainCharacter
-from core.scenarios import BattleScenario, StartScenario
+from core.scenarios import BattleScenario, RandomScenario, StartScenario
 from core.scenarios.base_situation.base_situation import BaseSituation
 
 from . import widgets
-from .constants import DUMMY, MainMenuSizes
+from .constants import MainMenuSizes
 from .stylesheets import main_menu_stylesheet
 from .texts import Text
 
@@ -25,13 +27,17 @@ class MainMenu(QMainWindow):
         self.setWindowTitle(self.text.TITLE)
         self.setFixedSize(MainMenuSizes.MAIN_MENU_SIZE)
         self.setStyleSheet(main_menu_stylesheet)
+        self.setWindowIcon(QIcon(Paths.PATH_TO_MAIN_MENU_ICON))
 
-        self._stacked_layout = self._create_stacked_layout()
+        self._stacked_layout = QStackedLayout()
+        self._stacked_layout.setStackingMode(QStackedLayout.StackingMode.StackAll)
 
-        self.main_character = MainCharacter(DUMMY, self)
+        self.main_character = None
 
         self._create_layouts()
+        self._add_menu_to_stacked_layout()
         self.battle_scenario = BattleScenario(self)
+        self.random_scenario = RandomScenario(self)
         BaseSituation(self)
 
     @staticmethod
@@ -50,27 +56,34 @@ class MainMenu(QMainWindow):
 
         self._main_layout.addLayout(self._stacked_layout, 0, 0, 2, 0)
 
-    def _create_stacked_layout(self) -> QStackedLayout:
-        stacked_layout = QStackedLayout()
-        stacked_layout.setStackingMode(QStackedLayout.StackingMode.StackAll)
-
-        self.game_menu = GameMenu(self)
-        stacked_layout.addWidget(self.game_menu)
-
-        self._character_creation_menu_layout = widgets.create_character_creation_menu(self)
-        self._character_creation_widget = QWidget()
-        self._character_creation_widget.setLayout(self._character_creation_menu_layout)
-        stacked_layout.addWidget(self._character_creation_widget)
-
+    def _add_menu_to_stacked_layout(self) -> None:
         self._option_menu = OptionMenu(self)
         layout = QHBoxLayout()
         layout.addWidget(self._option_menu, alignment=Qt.AlignmentFlag.AlignCenter)
         self._option_menu_widget = QWidget()
         self._option_menu_widget.setLayout(layout)
-        self._option_menu_widget.hide()
-        stacked_layout.addWidget(self._option_menu_widget)
 
-        return stacked_layout
+        self.about_menu = widgets.create_about_menu_layout(self)
+
+        self._character_creation_menu_layout = widgets.create_character_creation_menu(self)
+        self._character_creation_widget = QWidget()
+        self._character_creation_widget.setLayout(self._character_creation_menu_layout)
+
+        self.game_menu = GameMenu(self)
+
+        self.inventory_menu = InventoryMenu(self)
+        layout = QHBoxLayout()
+        layout.addWidget(self.inventory_menu, alignment=(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop))
+        widget = QWidget()
+        widget.setLayout(layout)
+
+        self._stacked_layout.addWidget(self.about_menu)
+        self.about_menu.hide()
+        self._stacked_layout.addWidget(self._option_menu_widget)
+        self._option_menu_widget.hide()
+        self._stacked_layout.addWidget(self._character_creation_widget)
+        self._stacked_layout.addWidget(self.game_menu)
+        self._stacked_layout.addWidget(widget)
 
     def _create_menu_buttons(self) -> QHBoxLayout:
         menu_buttons_layout = QHBoxLayout()
@@ -112,6 +125,7 @@ class MainMenu(QMainWindow):
         self.main_character.set_max_health()
         self.main_character.set_max_stamina()
         self.character_menu_button.setDisabled(False)
+        self.character_menu.create_layout()
         StartScenario(self)
 
     def _event_main_character_name_entered(self, name: str) -> None:

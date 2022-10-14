@@ -44,22 +44,21 @@ class Enemy:
             self.stats.IS_DEAD = True
             self._game_menu.add_log(self.stats.NAME + " " + self._text.DIED)
 
+    def set_name(self, name: str):
+        self.stats.NAME = name
+
     def _calculate_damage(self):
         self.stats.MAX_DAMAGE = (
             self.stats.MAX_DAMAGE
-            * (1 + self.stats.LEVEL / 10)
-            * self.stats.DAMAGE_MULTIPLIER
             * self.stats.DIFFICULTY_MULTIPLIER
+            * (1 + self.stats.STRENGTH_PER_LEVEL * self.stats.LEVEL * self.stats.STRENGTH_DAMAGE_MULTIPLIER)
         )
-        self.stats.MIN_DAMAGE = (
-            self.stats.MIN_DAMAGE
-            * (1 + self.stats.LEVEL / 10)
-            * self.stats.DAMAGE_MULTIPLIER
-            * self.stats.DIFFICULTY_MULTIPLIER
-        )
+        self.stats.MIN_DAMAGE = self.stats.MIN_DAMAGE * self.stats.DIFFICULTY_MULTIPLIER
 
     def _calculate_health(self):
-        self.stats.MAX_HEALTH = self.stats.HEALTH_LEVEL_MULTIPLIER * self.stats.LEVEL
+        self.stats.MAX_HEALTH = (
+            self.stats.BASE_ENEMY_HEALTH * self.stats.LEVEL + self.stats.VITALITY_PER_LEVEL * self.stats.LEVEL * 15
+        ) * self.stats.DIFFICULTY_MULTIPLIER
         self.stats.HEALTH = self.stats.MAX_HEALTH
 
     def _calculate_experience_gained(self):

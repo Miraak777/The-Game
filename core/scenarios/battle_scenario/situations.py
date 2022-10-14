@@ -72,6 +72,7 @@ class BattleSituation(BaseSituation):
             + "/"
             + str(enemy.stats.HEALTH)
         )
+        self._log("")
 
     def _event_first_action(self) -> None:
         self._log("")

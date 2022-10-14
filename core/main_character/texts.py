@@ -16,6 +16,7 @@ class EnglishText:
     DEATH: str = "You died, your adventure ends here"
     REST: str = "You rested"
     CANNOT_REST: str = "You feel full of energy and don't want ro rest"
+    EQUIPPED_WEAPON: str = "You equipped "
 
 
 @dataclass(frozen=True)
@@ -31,6 +32,7 @@ class RussianText:
     DEATH: str = "Вы погибли, ваше приключение заканчивается здесь"
     REST: str = "Вы отдохнули"
     CANNOT_REST: str = "Вы чувствуете, что полны сил, и не хотите отдыхать"
+    EQUIPPED_WEAPON: str = "Вы экипировали "
 
 
 Text = {

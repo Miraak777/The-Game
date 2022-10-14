@@ -42,3 +42,7 @@ exit_button_stylesheet = (
 debug_button_stylesheet = (
     "QPushButton {" f"background-image: url({BUTTONS}:debug_button.png);" "color:#edbd79;" "font: 18px;" "}"
 )
+
+about_button_stylesheet = (
+    "QPushButton {" f"background-image: url({BUTTONS}:debug_button.png);" "color:#edbd79;" "font: 18px;" "}"
+)

@@ -12,6 +12,14 @@ class EnglishText:
     CHARACTER_NAME_PLACEHOLDER: str = "Enter your character name"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Character Menu ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Option Menu ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
+    ABOUT_MENU_TEXT: str = (
+        "Author Name:\n"
+        "Forite (Sergy Belev)\n"
+        "University Information:\n"
+        "PO-7 3-course\n"
+        "Short Project Description:\n"
+        "This is a Roguelike Text RPG."
+    )
 
 
 @dataclass(frozen=True)
@@ -21,6 +29,14 @@ class RussianText:
     CHARACTER_NAME_PLACEHOLDER: str = "Введите имя вашего персонажа"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Меню персонажа ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
     OPTION_MENU_BUTTON_TOOLTIP: str = f"Настройка ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
+    ABOUT_MENU_TEXT: str = (
+        "Имя Автора:\n"
+        "Форайт (Сергей Белев)\n"
+        "Информация об Университете:\n"
+        "ПО-7 3-курс\n"
+        "Короткое описание проекта:\n"
+        "Это Роглайк Текстовое РПГ."
+    )
 
 
 Text = {

@@ -28,5 +28,4 @@ class CombatStats:
     MIN_DAMAGE: float = 0
     MAX_DAMAGE: float = 0
     CRITICAL_STRIKE_CHANCE: float = 0
-    CRITICAL_STRIKE_MULTIPLIER: float = 0
     ACCURACY: float = 0

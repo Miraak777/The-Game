@@ -9,7 +9,7 @@ class BaseSituation:
         self._game_menu = main_menu.game_menu
         self._log = self._game_menu.add_log
         self._text = text
-        self._events = {
+        self.__events = {
             ActionButtons.FIRST_ACTION: self._event_first_action,
             ActionButtons.SECOND_ACTION: self._event_second_action,
             ActionButtons.THIRD_ACTION: self._event_third_action,
@@ -22,10 +22,9 @@ class BaseSituation:
             ActionButtons.FOURTH_ACTION: self._text.FOURTH_ACTION,
         }
         self.refresh_buttons()
-        self._log("")
 
     def refresh_buttons(self):
-        self._game_menu.set_action_buttons(self._events, self._texts)
+        self._game_menu.set_action_buttons(self.__events, self._texts)
 
     def _event_first_action(self) -> None:
         pass

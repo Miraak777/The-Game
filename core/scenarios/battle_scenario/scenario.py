@@ -1,7 +1,6 @@
 from random import randrange
 
 from core.enemies.enemies_map import enemies_1_lvl, enemies_3_lvl, enemies_5_lvl, enemies_10_lvl
-from core.interface.game_menu.menu import GameMenu
 
 from .situations import BattleSituation
 from .texts import Text
@@ -12,7 +11,7 @@ class BattleScenario:
         self.main_menu = main_menu
         self._text = Text[self.main_menu.language]
 
-    def start_battle(self) -> None:
+    def start_battle(self, main_menu) -> None:
         self.main_menu.character_menu_button.setDisabled(True)
 
         enemy = self.spawn_enemy(self.main_menu.main_character.main_stats.LEVEL)

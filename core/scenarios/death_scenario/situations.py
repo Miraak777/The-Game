@@ -5,6 +5,7 @@ class DeathSituation(BaseSituation):
     def __init__(self, main_menu, text) -> None:
         super().__init__(main_menu, text)
         self.refresh_buttons()
+        self._log("")
 
     def _event_first_action(self) -> None:
         self._main_menu.exit()
