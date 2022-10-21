@@ -39,3 +39,9 @@ accept_button_stylesheet = (
     "font: bold 18px;"
     "}"
 )
+
+exit_menu_button_stylesheet = (
+    "QPushButton {"
+    f"background-image: url({BUTTONS}:exit_menu_button.png);"
+    "}"
+)

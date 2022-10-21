@@ -27,19 +27,7 @@ class Enemy:
         if self.stats.HEALTH < 0:
             self.stats.HEALTH = 0
         if damage != 0:
-            self._game_menu.add_log(
-                self.stats.NAME
-                + " "
-                + self._text.TAKEN
-                + " "
-                + str(damage)
-                + " "
-                + self._text.DAMAGE
-                + " "
-                + str(self.stats.HEALTH)
-                + "/"
-                + str(self.stats.MAX_HEALTH)
-            )
+            self._game_menu.refresh_enemy_bar(self)
         if self.stats.HEALTH == 0:
             self.stats.IS_DEAD = True
             self._game_menu.add_log(self.stats.NAME + " " + self._text.DIED)

@@ -9,6 +9,7 @@ class OptionMenuButtons:
     EXIT_BUTTON: QSize = QSize(47, 47)
     DEBUG_BUTTON: QSize = QSize(132, 42)
     ABOUT_BUTTON: QSize = QSize(132, 42)
+    EXIT_MENU_BUTTON: QSize = QSize(22, 22)
 
 
 @dataclass(frozen=True)

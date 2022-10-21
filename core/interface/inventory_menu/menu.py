@@ -30,11 +30,11 @@ class InventoryMenu(QFrame):
 
     def _create_item_buttons(self):
         item_id = 0
-        for horizont in range(InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
-            for vertical in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER):
+        for vertical in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER):
+            for horizontal in range(InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
                 item_button = ItemSlot(self._inventory_map[item_id])
                 item_id += 1
-                self._layout.addWidget(item_button, vertical, horizont)
+                self._layout.addWidget(item_button, vertical, horizontal)
 
     def refresh_inventory(self):
         clear_layout(self._layout)

@@ -11,6 +11,7 @@ from .stylesheets import (
     languages_buttons_stylesheet,
     restart_request_stylesheet,
     title_stylesheet,
+    exit_menu_button_stylesheet,
 )
 
 
@@ -71,7 +72,7 @@ def restart_request_label(self) -> QLabel:
 
 
 def exit_button(self) -> QPushButton:
-    button = QPushButton(text=self._text.EXIT_BUTTON)
+    button = QPushButton(text=self._text.EXIT_MENU_BUTTON)
     button.setStyleSheet(exit_button_stylesheet)
     button.setFixedSize(OptionMenuButtons.EXIT_BUTTON)
     button.setCheckable(True)
@@ -94,4 +95,12 @@ def about_menu_button(self) -> QPushButton:
     button.setFixedSize(OptionMenuButtons.ABOUT_BUTTON)
     button.setCheckable(True)
     button.clicked.connect(self.event_open_about_menu)
+    return button
+
+
+def create_exit_menu_button(self) -> QPushButton:
+    button = QPushButton()
+    button.setFixedSize(OptionMenuButtons.EXIT_MENU_BUTTON)
+    button.setStyleSheet(exit_menu_button_stylesheet)
+    button.clicked.connect(self._event_exit_menu)
     return button

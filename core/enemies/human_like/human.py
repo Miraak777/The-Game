@@ -31,7 +31,7 @@ class HumanWithDagger(Human):
         self.stats.EXPERIENCE_GAINED = 70
         self._equipped_weapon = Dagger(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.DAGGER, 0.3)
-        self.drops.set_drop_rate(cn.RATION, 0.3)
+        self.drops.set_drop_rate(cn.PIE, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()
 
@@ -43,7 +43,7 @@ class HumanWithSword(Human):
         self.stats.EXPERIENCE_GAINED = 100
         self._equipped_weapon = Sword(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.SWORD, 0.3)
-        self.drops.set_drop_rate(cn.RATION, 0.3)
+        self.drops.set_drop_rate(cn.PIE, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()
 
@@ -55,6 +55,6 @@ class HumanWithTwoHandedSword(Human):
         self.stats.EXPERIENCE_GAINED = 150
         self._equipped_weapon = TwoHandedSword(self.stats.LEVEL, main_menu=self._main_menu)
         self.drops.set_drop_rate(wn.TWO_HANDED_SWORD, 0.3)
-        self.drops.set_drop_rate(cn.RATION, 0.3)
+        self.drops.set_drop_rate(cn.PIE, 0.3)
         self._calculate_damage()
         self._calculate_experience_gained()

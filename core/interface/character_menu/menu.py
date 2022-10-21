@@ -7,6 +7,7 @@ from core.interface.common import clear_layout
 from core.main_character.start_parameters import Attributes
 
 from . import widgets
+from . import buttons
 from .constants import CharacterMenuSizes
 from .stylesheets import character_menu_stylesheet
 from .texts import Text
@@ -58,6 +59,9 @@ class CharacterMenu(QFrame):
         self._create_widgets()
 
     def _create_widgets(self) -> None:
+
+        exit_button = buttons.create_exit_menu_button(self)
+        self._layout.addWidget(exit_button, alignment=Qt.AlignmentFlag.AlignRight)
 
         for line in widgets.create_general_widget(self):
             self._layout.addWidget(line)
@@ -155,3 +159,6 @@ class CharacterMenu(QFrame):
         }
         self._main_menu.main_character.send_attributes(output_attributes)
         self.set_actual_character_stats()
+
+    def _event_exit_menu(self):
+        self.hide()

@@ -7,14 +7,14 @@ from core.constants.language_constants import Language
 class EnglishText:
     APPLE: str = "Apple"
     STEAK: str = "Steak"
-    RATION: str = "Ration"
+    PIE: str = "Pie"
 
 
 @dataclass(frozen=True)
 class RussianText:
     APPLE: str = "Яблоко"
     STEAK: str = "Стейк"
-    RATION: str = "Паек"
+    PIE: str = "Пирог"
 
 
 Text = {

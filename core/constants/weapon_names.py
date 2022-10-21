@@ -20,4 +20,4 @@ class WeaponNames:
 class ConsumableNames:
     APPLE: str = "apple"
     STEAK: str = "steak"
-    RATION: str = "ration"
+    PIE: str = "pie"

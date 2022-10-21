@@ -28,7 +28,7 @@ class RussianText:
     CHARACTER_CREATE_BUTTON: str = "Создайте персонажа!"
     CHARACTER_NAME_PLACEHOLDER: str = "Введите имя вашего персонажа"
     CHARACTER_MENU_BUTTON_TOOLTIP: str = f"Меню персонажа ({get_key_binds()[KeyBindNames.CHARACTER_MENU]})"
-    OPTION_MENU_BUTTON_TOOLTIP: str = f"Настройка ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
+    OPTION_MENU_BUTTON_TOOLTIP: str = f"Настройки ({get_key_binds()[KeyBindNames.OPTION_MENU]})"
     ABOUT_MENU_TEXT: str = (
         "Имя Автора:\n"
         "Форайт (Сергей Белев)\n"

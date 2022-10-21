@@ -22,6 +22,7 @@ class MainCharacter:
         self._main_menu = main_menu
         self._text = Text[self._main_menu.language]
         self._add_log = self._main_menu.game_menu.add_log
+        self._refresh_bars = self._main_menu.game_menu.refresh_character_bars
         self.main_stats = MainStats()
         self.main_stats.NAME = character_name
         self._attributes = Attributes()
@@ -88,6 +89,7 @@ class MainCharacter:
             self._add_log(self._text.DEATH)
             DeathScenario(self._main_menu)
         self._bars.HEALTH = round(self._bars.HEALTH - damage, 2)
+        self._refresh_bars()
 
     def equip_weapon(self, weapon):
         self._equipped_weapon = weapon
@@ -117,6 +119,7 @@ class MainCharacter:
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
         self._add_log(self._text.BECOME_PEASANT)
+        self._refresh_bars()
 
     def set_class_warrior(self) -> None:
         self._class_multipliers = classes.WarriorClass
@@ -127,6 +130,7 @@ class MainCharacter:
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
         self._add_log(self._text.BECOME_WARRIOR)
+        self._refresh_bars()
 
     def set_class_assassin(self) -> None:
         self._class_multipliers = classes.AssassinClass
@@ -137,27 +141,35 @@ class MainCharacter:
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
         self._add_log(self._text.BECOME_ASSASSIN)
+        self._refresh_bars()
 
     def set_max_health(self) -> None:
         self._bars.HEALTH = self._bars.MAX_HEALTH
+        self._refresh_bars()
 
     def set_max_stamina(self) -> None:
         self._bars.STAMINA = self._bars.MAX_STAMINA
+        self._refresh_bars()
 
     def restore_health(self, health):
         self._bars.HEALTH = self._bars.HEALTH + health
         if self._bars.HEALTH > self._bars.MAX_HEALTH:
             self._bars.HEALTH = self._bars.MAX_HEALTH
 
+        self._refresh_bars()
+
     def restore_percent_health(self, health):
         self._bars.HEALTH = self._bars.HEALTH + (health*0.01 * self._bars.MAX_HEALTH)
         if self._bars.HEALTH > self._bars.MAX_HEALTH:
             self._bars.HEALTH = self._bars.MAX_HEALTH
 
+        self._refresh_bars()
+
     def rest(self) -> None:
         if self._bars.HEALTH < self._bars.MAX_HEALTH / 2:
             self._bars.HEALTH = self._bars.MAX_HEALTH / 2
             self._add_log(self._text.REST)
+            self._refresh_bars()
         else:
             self._add_log(self._text.CANNOT_REST)
 
@@ -165,6 +177,7 @@ class MainCharacter:
         self._bars.STAMINA += stamina
         if self._bars.STAMINA > self._bars.MAX_STAMINA:
             self._bars.STAMINA = self._bars.MAX_STAMINA
+        self._refresh_bars()
 
     def send_attributes(self, attributes: Dict[str, int]) -> None:
         attribute_count = self._attributes.ATTRIBUTE_POINTS - attributes[an.ATTRIBUTE_POINTS]
@@ -191,6 +204,7 @@ class MainCharacter:
                     stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
                 )
             )
+            self._refresh_bars()
 
     def send_experience(self, experience: int):
         self.main_stats.EXPERIENCE += experience
@@ -306,4 +320,5 @@ class MainCharacter:
         self.set_max_stamina()
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
-        self._main_menu.game_menu.add_log(self._text.LEVEL_UP)
+        self._add_log(self._text.LEVEL_UP)
+        self._refresh_bars()

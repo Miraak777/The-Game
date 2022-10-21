@@ -11,8 +11,8 @@ class DebugSituation(BaseSituation):
         self.refresh_buttons()
 
     def _event_first_action(self) -> None:
-        self._main_menu.main_character.send_experience(1000)
-        self._main_menu.character_menu.set_actual_character_stats()
+        scenario = self._main_menu.random_scenario.get_random_scenario()
+        scenario(self._main_menu)
 
     def _event_second_action(self) -> None:
         self._main_menu.inventory_menu.add_item(Dagger(1, self._main_menu))

@@ -67,12 +67,8 @@ class BattleSituation(BaseSituation):
             + str(enemy.stats.LEVEL)
             + " "
             + self._text.LEVEL
-            + " "
-            + self._text.HEALTH
-            + str(enemy.stats.MAX_HEALTH)
-            + "/"
-            + str(enemy.stats.HEALTH)
         )
+        self._game_menu.refresh_enemy_bar(enemy)
         self._log("")
 
     def _event_first_action(self) -> None:
@@ -81,19 +77,12 @@ class BattleSituation(BaseSituation):
         self._enemy.take_damage(character_damage)
         if self._enemy.stats.IS_DEAD:
             self._main_character.set_max_stamina()
+            self._game_menu.refresh_character_bars()
             self._main_menu.character_menu_button.setDisabled(False)
             self._generate_reward()
         else:
             enemy_damage = self._enemy.attack()
             self._main_character.take_damage(enemy_damage)
-            main_character_stats = self._main_character.get_stats()
-            max_health = main_character_stats[bn.MAX_HEALTH]
-            health = main_character_stats[bn.HEALTH]
-            max_stamina = main_character_stats[bn.MAX_STAMINA]
-            stamina = main_character_stats[bn.STAMINA]
-            if health > 0:
-                self._log(self._text.YOUR_HEALTH + str(health) + "/" + str(max_health))
-                self._log(self._text.YOUR_STAMINA + str(stamina) + "/" + str(max_stamina))
 
     def _event_second_action(self) -> None:
         self._log("")
@@ -106,14 +95,6 @@ class BattleSituation(BaseSituation):
         else:
             enemy_damage = self._enemy.attack()
             self._main_character.take_damage(enemy_damage)
-            main_character_stats = self._main_character.get_stats()
-            max_health = main_character_stats[bn.MAX_HEALTH]
-            health = main_character_stats[bn.HEALTH]
-            max_stamina = main_character_stats[bn.MAX_STAMINA]
-            stamina = main_character_stats[bn.STAMINA]
-            if health > 0:
-                self._log(self._text.YOUR_HEALTH + str(health) + "/" + str(max_health))
-                self._log(self._text.YOUR_STAMINA + str(stamina) + "/" + str(max_stamina))
 
     def _event_third_action(self) -> None:
         self._log("")
@@ -126,14 +107,6 @@ class BattleSituation(BaseSituation):
         else:
             enemy_damage = self._enemy.attack()
             self._main_character.take_damage(enemy_damage)
-            main_character_stats = self._main_character.get_stats()
-            max_health = main_character_stats[bn.MAX_HEALTH]
-            health = main_character_stats[bn.HEALTH]
-            max_stamina = main_character_stats[bn.MAX_STAMINA]
-            stamina = main_character_stats[bn.STAMINA]
-            if health > 0:
-                self._log(self._text.YOUR_HEALTH + str(health) + "/" + str(max_health))
-                self._log(self._text.YOUR_STAMINA + str(stamina) + "/" + str(max_stamina))
 
     def _event_fourth_action(self) -> None:
         self._main_character.set_max_stamina()

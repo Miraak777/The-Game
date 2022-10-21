@@ -30,6 +30,10 @@ class OptionMenu(QFrame):
         self.setLayout(self._layout)
 
     def _create_widgets(self):
+
+        exit_menu_button = widgets.create_exit_menu_button(self)
+        self._layout.addWidget(exit_menu_button, alignment=Qt.AlignmentFlag.AlignRight)
+
         self._title = widgets.create_title_widget(self)
         self._layout.addWidget(self._title, alignment=Qt.AlignmentFlag.AlignHCenter)
 
@@ -98,3 +102,6 @@ class OptionMenu(QFrame):
     @staticmethod
     def _event_exit():
         exit()
+
+    def _event_exit_menu(self):
+        self.hide()

@@ -1,8 +1,8 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QPushButton, QScrollArea
+from PyQt6.QtWidgets import QPushButton, QScrollArea, QProgressBar
 
 from .constants import GameMenuButtons, GameMenuSizes
-from .stylesheets import scroll_area_stylesheet
+from .stylesheets import scroll_area_stylesheet, health_bar_stylesheet, stamina_bar_stylesheet, enemy_bar_stylesheet
 
 
 def create_scroll_area(self) -> QScrollArea:
@@ -21,3 +21,39 @@ def create_action_button(event, text: str) -> QPushButton:
     if text == "":
         button.setEnabled(False)
     return button
+
+
+def create_health_bar():
+    progress_bar = QProgressBar()
+    progress_bar.setFixedSize(GameMenuSizes.CHARACTER_BARS_SIZE)
+    progress_bar.setStyleSheet(health_bar_stylesheet)
+    progress_bar.setMaximum(1)
+    progress_bar.setMinimum(0)
+    progress_bar.setValue(1)
+    progress_bar.setDisabled(True)
+    progress_bar.setFormat(str(progress_bar.value()) + "/" + str(progress_bar.maximum()))
+    return progress_bar
+
+
+def create_stamina_bar():
+    progress_bar = QProgressBar()
+    progress_bar.setFixedSize(GameMenuSizes.CHARACTER_BARS_SIZE)
+    progress_bar.setStyleSheet(stamina_bar_stylesheet)
+    progress_bar.setMaximum(1)
+    progress_bar.setMinimum(0)
+    progress_bar.setValue(1)
+    progress_bar.setDisabled(True)
+    progress_bar.setFormat(str(progress_bar.value()) + "/" + str(progress_bar.maximum()))
+    return progress_bar
+
+
+def create_enemy_health_bar():
+    progress_bar = QProgressBar()
+    progress_bar.setFixedSize(GameMenuSizes.ENEMY_BAR_SIZE)
+    progress_bar.setStyleSheet(enemy_bar_stylesheet)
+    progress_bar.setMaximum(1)
+    progress_bar.setMinimum(0)
+    progress_bar.setValue(1)
+    progress_bar.setDisabled(True)
+    progress_bar.setFormat(str(progress_bar.value()) + "/" + str(progress_bar.maximum()))
+    return progress_bar

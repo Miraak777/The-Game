@@ -18,9 +18,9 @@ class Steak(BaseFood):
         self.heal = 25
 
 
-class Ration(BaseFood):
+class Pie(BaseFood):
     def __init__(self, main_menu, level):
         super().__init__(main_menu=main_menu, level=level)
-        self.stats.NAME = Text[self._language].RATION
-        self.item_icon = "ratio.png"
+        self.stats.NAME = Text[self._language].PIE
+        self.item_icon = "pie.png"
         self.heal = 50

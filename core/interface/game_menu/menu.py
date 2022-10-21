@@ -1,10 +1,11 @@
 from typing import Any, Dict
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout, QWidget, QHBoxLayout
 
 from core.constants.actions_constants import ActionButtons
 from core.constants.key_bind_constants import KeyBindNames
+from core.constants.character_constants import BarsNames as bn
 from core.interface.common import clear_layout, get_key_binds
 
 from . import widgets
@@ -23,16 +24,27 @@ class GameMenu(QFrame):
 
     def _create_layout(self):
         self._layout = QGridLayout()
+
+        self._enemy_bar = widgets.create_enemy_health_bar()
+        self._layout.addWidget(self._enemy_bar, 0, 0)
+
         self._scroll_area_layout = QVBoxLayout()
         self._scroll_area = widgets.create_scroll_area(self)
         self._scroll_area_widget = QWidget()
         self._scroll_area_widget.setLayout(self._scroll_area_layout)
         self._scroll_area.setWidget(self._scroll_area_widget)
         self._scroll_area_layout.addStretch()
-        self._layout.addWidget(self._scroll_area, 0, 0)
+        self._layout.addWidget(self._scroll_area, 1, 0)
+
+        self._bars_layout = QHBoxLayout()
+        self._health_bar = widgets.create_health_bar()
+        self._stamina_bar = widgets.create_stamina_bar()
+        self._bars_layout.addWidget(self._health_bar)
+        self._bars_layout.addWidget(self._stamina_bar)
+        self._layout.addLayout(self._bars_layout, 2, 0)
 
         self.buttons_layout = QGridLayout()
-        self._layout.addLayout(self.buttons_layout, 1, 0)
+        self._layout.addLayout(self.buttons_layout, 3, 0)
 
         self.setLayout(self._layout)
 
@@ -64,3 +76,19 @@ class GameMenu(QFrame):
         button = widgets.create_action_button(events[ActionButtons.FOURTH_ACTION], texts[ActionButtons.FOURTH_ACTION])
         button.setShortcut(get_key_binds()[KeyBindNames.FOURTH_ACTION])
         self.buttons_layout.addWidget(button, 1, 1)
+
+    def refresh_character_bars(self):
+        stats = self._main_menu.main_character.get_stats()
+        self._health_bar.setMaximum(int(stats[bn.MAX_HEALTH]))
+        self._health_bar.setValue(int(round(stats[bn.HEALTH])))
+        self._health_bar.setFormat(str(stats[bn.HEALTH]) + "/" + str(stats[bn.MAX_HEALTH]))
+        self._stamina_bar.setMaximum(int(stats[bn.MAX_STAMINA]))
+        self._stamina_bar.setValue(int(round(stats[bn.STAMINA])))
+        self._stamina_bar.setFormat(str(stats[bn.STAMINA]) + "/" + str(stats[bn.MAX_STAMINA]))
+
+    def refresh_enemy_bar(self, enemy):
+        max_health = enemy.stats.MAX_HEALTH
+        health = enemy.stats.HEALTH
+        self._enemy_bar.setMaximum(int(max_health))
+        self._enemy_bar.setValue(int(health))
+        self._enemy_bar.setFormat(str(health) + "/" + str(max_health))

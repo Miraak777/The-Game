@@ -59,5 +59,5 @@ about_menu_label_stylesheet = (
 )
 
 exit_about_menu_button_stylesheet = (
-    "QPushButton {" "border: 2px solid;" "border-radius: 5px;" "background-color: rgb(150, 0, 0)" "}"
+    "QPushButton {" "border: 2px solid;" "border-radius: 2px;" "background-color: rgb(150, 0, 0)" "}"
 )

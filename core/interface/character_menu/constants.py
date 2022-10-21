@@ -13,3 +13,4 @@ class CharacterMenuSizes:
 class CharacterMenuButtons:
     ATTRIBUTE_BUTTON: QSize = QSize(31, 31)
     ACCEPT_BUTTON: QSize = QSize(124, 47)
+    EXIT_MENU_BUTTON: QSize = QSize(22, 22)

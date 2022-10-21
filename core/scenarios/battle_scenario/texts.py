@@ -26,7 +26,7 @@ class EnglishText:
 @dataclass(frozen=True)
 class RussianText:
     FIRST_ACTION: str = "Лёгкая атака"
-    SECOND_ACTION: str = "Средняя атака"
+    SECOND_ACTION: str = "Обычная атака"
     THIRD_ACTION: str = "Тяжелая атака"
     FOURTH_ACTION: str = "Отступить"
     DAMAGE: str = "Урон: "

@@ -21,7 +21,7 @@ class BaseDropRate:
             wn.DUAL_MACES: [0, items.weapon.DualMaces],
             cn.APPLE: [0, items.consumables.Apple],
             cn.STEAK: [0, items.consumables.Steak],
-            cn.RATION: [0, items.consumables.Ration]
+            cn.PIE: [0, items.consumables.Pie]
         }
 
     def set_drop_rate(self, weapon, drop_rate: float) -> None:

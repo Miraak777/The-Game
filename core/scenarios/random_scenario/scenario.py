@@ -21,7 +21,11 @@ class RandomScenario:
         return self._battle_scenario.start_battle
 
     def _get_scenarios_map(self) -> List:
+        output_scenario = None
         level = self._main_menu.main_character.main_stats.LEVEL
         for i in range(len(scenarios_maps)):
-            if level < scenarios_maps[i][0]:
-                return scenarios_maps[i-1][1]
+            if level >= scenarios_maps[i][0]:
+                output_scenario = scenarios_maps[i][1]
+            else:
+                output_scenario = scenarios_maps[i - 1][1]
+        return output_scenario
