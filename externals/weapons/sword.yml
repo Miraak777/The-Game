@@ -1,0 +1,12 @@
+weapon_type: sword
+drop_rate: 0.1
+names:
+  en: Sword
+  ru: "\u041c\u0435\u0447"
+stats:
+  max_damage: 12
+  min_damage: 9
+  accuracy: 0.8
+  critical_strike_chance: 0.06
+  base_stamina_consumption: 3.5
+icon: sword.png

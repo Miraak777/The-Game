@@ -1,0 +1,12 @@
+weapon_type: two_handed_sword
+drop_rate: 0.1
+names:
+  en: Two Handed Sword
+  ru: "\u0414\u0432\u0443\u0440\u0443\u0447\u043d\u044b\u0439\u0020\u041c\u0435\u0447"
+stats:
+  max_damage: 18
+  min_damage: 12
+  accuracy: 0.6
+  critical_strike_chance: 0.06
+  base_stamina_consumption: 5
+icon: two_handed_sword.png

@@ -1,0 +1,12 @@
+weapon_type: dual_daggers
+drop_rate: 0.1
+names:
+  en: Dual Daggers
+  ru: "\u041f\u0430\u0440\u043d\u044b\u0435\u0020\u041a\u0438\u043d\u0436\u0430\u043b\u044b"
+stats:
+  max_damage: 12
+  min_damage: 4
+  accuracy: 0.8
+  critical_strike_chance: 0.1
+  base_stamina_consumption: 3.5
+icon: dual_daggers.png

@@ -12,7 +12,7 @@ from core.interface.option_menu.menu import OptionMenu
 from core.main_character.character import MainCharacter
 from core.scenarios import BattleScenario, RandomScenario, StartScenario
 from core.scenarios.base_situation.base_situation import BaseSituation
-from core.interface.common import set_qdirs
+from core.common import set_qdirs
 
 from . import widgets
 from .constants import MainMenuSizes
@@ -66,8 +66,8 @@ class MainMenu(QMainWindow):
         self._option_menu = OptionMenu(self)
         layout = QHBoxLayout()
         layout.addWidget(self._option_menu, alignment=Qt.AlignmentFlag.AlignCenter)
-        self._option_menu_widget = QWidget()
-        self._option_menu_widget.setLayout(layout)
+        self.option_menu_widget = QWidget()
+        self.option_menu_widget.setLayout(layout)
 
         self.about_menu = widgets.create_about_menu_layout(self)
 
@@ -85,8 +85,8 @@ class MainMenu(QMainWindow):
 
         self._stacked_layout.addWidget(self.about_menu)
         self.about_menu.hide()
-        self._stacked_layout.addWidget(self._option_menu_widget)
-        self._option_menu_widget.hide()
+        self._stacked_layout.addWidget(self.option_menu_widget)
+        self.option_menu_widget.hide()
         self._stacked_layout.addWidget(self._character_creation_widget)
         self._stacked_layout.addWidget(self.game_menu)
         self._stacked_layout.addWidget(widget)
@@ -120,10 +120,10 @@ class MainMenu(QMainWindow):
             self.character_menu.hide()
 
     def _event_open_options_menu(self) -> None:
-        if self._option_menu_widget.isHidden():
-            self._option_menu_widget.show()
+        if self.option_menu_widget.isHidden():
+            self.option_menu_widget.show()
         else:
-            self._option_menu_widget.hide()
+            self.option_menu_widget.hide()
 
     def _event_create_new_character(self) -> None:
         self._character_creation_widget.hide()

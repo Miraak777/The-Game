@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout
 
 from core.constants.item_constants import ItemTypes
-from core.interface.common import clear_layout
+from core.common import clear_layout
 from .constants import InventoryMenuSizes
 from .stylesheets import inventory_menu_stylesheet
 from .texts import Text

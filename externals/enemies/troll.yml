@@ -1,0 +1,12 @@
+names:
+  en: Troll
+  ru:
+weapon: fists.yml
+stats:
+  base_health: 25
+  strength_per_level: 2
+  vitality_per_level: 2
+  strength_damage_multiplier: 0.11
+  vitality_health_multiplier: 20
+  experience_gained: 200
+min_level: 9

@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout, QWidget, Q
 from core.constants.actions_constants import ActionButtons
 from core.constants.key_bind_constants import KeyBindNames
 from core.constants.character_constants import BarsNames as bn
-from core.interface.common import clear_layout, get_key_binds
+from core.common import clear_layout, get_key_binds
 
 from . import widgets
 from .constants import GameMenuSizes
@@ -87,8 +87,8 @@ class GameMenu(QFrame):
         self._stamina_bar.setFormat(str(stats[bn.STAMINA]) + "/" + str(stats[bn.MAX_STAMINA]))
 
     def refresh_enemy_bar(self, enemy):
-        max_health = enemy.stats.MAX_HEALTH
-        health = enemy.stats.HEALTH
+        max_health = enemy.max_health
+        health = enemy.health
         self._enemy_bar.setMaximum(int(max_health))
         self._enemy_bar.setValue(int(health))
         self._enemy_bar.setFormat(str(health) + "/" + str(max_health))

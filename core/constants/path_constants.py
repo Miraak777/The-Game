@@ -14,6 +14,9 @@ class Paths:
     PATH_TO_WIDGET_TEXTURES: str = str(Path(BASE_DIR, "resources", "textures", "widget_textures"))
     PATH_TO_WEAPON_ICONS: str = str(Path(BASE_DIR, "resources", "items", "weapons"))
     PATH_TO_CONSUMABLES_ICONS: str = str(Path(BASE_DIR, "resources", "items", "consumables"))
+    PATH_TO_WEAPONS: str = str(Path(BASE_DIR, "externals", "weapons"))
+    PATH_TO_CONSUMABLES: str = str(Path(BASE_DIR, "externals", "consumables"))
+    PATH_TO_ENEMIES: str = str(Path(BASE_DIR, "externals", "enemies"))
 
 
 path_to_item_icons_map = {

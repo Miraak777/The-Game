@@ -1,0 +1,7 @@
+consumable_type: food
+names:
+  en: Apple
+  ru:
+stats:
+  restore_value: 10
+icon: apple.png

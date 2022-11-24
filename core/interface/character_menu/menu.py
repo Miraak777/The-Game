@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QFrame, QLabel, QVBoxLayout
 
 from core.constants.character_constants import AttributesNames as an
 from core.constants.character_constants import StatsNames as sn
-from core.interface.common import clear_layout
+from core.common import clear_layout
 from core.main_character.start_parameters import Attributes
 
 from . import widgets

@@ -1,0 +1,7 @@
+consumable_type: food
+names:
+  en: Steak
+  ru:
+stats:
+  restore_value: 25
+icon: steak.png

@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
 from core.constants.key_bind_constants import KeyBindNames
-from core.interface.common import get_key_binds
+from core.common import get_key_binds
 
 from .constants import MainMenuButtons, MainMenuSizes
 from .stylesheets import (

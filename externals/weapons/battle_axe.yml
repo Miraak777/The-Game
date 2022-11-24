@@ -1,0 +1,12 @@
+weapon_type: battle_axe
+drop_rate: 0.1
+names:
+  en: Battle Axe
+  ru: "\u0411\u043e\u0435\u0432\u043e\u0439\u0020\u0442\u043e\u043f\u043e\u0440"
+stats:
+  max_damage: 14
+  min_damage: 7
+  accuracy: 0.8
+  critical_strike_chance: 0.05
+  base_stamina_consumption: 4
+icon: battle_axe.png

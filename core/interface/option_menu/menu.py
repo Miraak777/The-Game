@@ -4,7 +4,7 @@ from yaml import safe_dump, safe_load
 
 from core import Paths
 from core.constants.language_constants import LANGUAGE, Language
-from core.interface.common import clear_layout
+from core.common import clear_layout
 from core.scenarios.debug_scenario.scenario import DebugScenario
 
 from . import widgets
@@ -104,4 +104,4 @@ class OptionMenu(QFrame):
         exit()
 
     def _event_exit_menu(self):
-        self.hide()
+        self.main_menu.option_menu_widget.hide()

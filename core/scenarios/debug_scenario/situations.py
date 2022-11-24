@@ -1,8 +1,7 @@
 from core.scenarios import BaseSituation
-from core.items.weapon import (
-    Dagger, DualDaggers, Sword, TwoHandedSword, DualSwords, BattleAxe, DualBattleAxes, TwoHandedBattleAxe,
-    Mace, TwoHandedMace, DualMaces
-)
+from core.main_character.classes import WarriorClass, AssassinClass
+from core.items.weapon import Weapon
+from core.items.tables import get_weapon_table
 
 
 class DebugSituation(BaseSituation):
@@ -15,22 +14,17 @@ class DebugSituation(BaseSituation):
         scenario(self._main_menu)
 
     def _event_second_action(self) -> None:
-        self._main_menu.inventory_menu.add_item(Dagger(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(DualDaggers(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(Sword(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(TwoHandedSword(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(DualSwords(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(BattleAxe(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(TwoHandedBattleAxe(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(DualBattleAxes(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(Mace(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(TwoHandedMace(1, self._main_menu))
-        self._main_menu.inventory_menu.add_item(DualMaces(1, self._main_menu))
+        weapon_list = get_weapon_table()
+        for weapon in weapon_list:
+            if weapon != "fists.yml":
+                self._main_menu.inventory_menu.add_item(Weapon(self._main_menu,
+                                                               self._main_menu.main_character.main_stats.LEVEL,
+                                                               weapon))
 
     def _event_third_action(self) -> None:
-        self._main_menu.main_character.set_class_warrior()
+        self._main_menu.main_character.set_class(WarriorClass)
         self._main_menu.character_menu.set_actual_character_stats()
 
     def _event_fourth_action(self) -> None:
-        self._main_menu.main_character.set_class_assassin()
+        self._main_menu.main_character.set_class(AssassinClass)
         self._main_menu.character_menu.set_actual_character_stats()

@@ -1,5 +1,6 @@
 from core.constants.actions_constants import ActionButtons
-from core.enemies import Human, HumanWithSword
+from core.main_character.classes import WarriorClass
+from core.enemies import Enemy
 from core.scenarios import BaseSituation, BattleSituation, ChillScenario
 
 
@@ -31,8 +32,9 @@ class MeetSituation(BaseSituation):
 
     def _event_third_action(self) -> None:
         self._log("")
-        sentry = HumanWithSword(main_menu=self._main_menu, level=self._main_menu.main_character.main_stats.LEVEL + 10)
-        sentry.stats.NAME = self._text.SENTRY
+        sentry = Enemy(main_menu=self._main_menu, level=self._main_menu.main_character.main_stats.level + 10,
+                       enemy_file_name="human_with_sword")
+        sentry.name = self._text.SENTRY
         BattleSituation(self._main_menu, sentry)
 
     def _event_fourth_action(self) -> None:
@@ -66,7 +68,7 @@ class DerickBattleSituation(BattleSituation):
     def __init__(self, main_menu, scenario, text):
         self._won_text = text.WON
         self._scenario = scenario
-        derick = Human(main_menu.main_character.main_stats.LEVEL, main_menu)
+        derick = Human(main_menu.main_character.main_stats.level, main_menu)
         derick.set_name(text.DERICK)
         super().__init__(main_menu=main_menu, enemy=derick)
         self._texts[ActionButtons.FOURTH_ACTION] = ""
@@ -78,6 +80,6 @@ class DerickBattleSituation(BattleSituation):
     def _generate_reward(self):
         self._log(self._won_text)
         self._main_menu.main_character.equip_weapon(self._scenario.main_character_weapon)
-        self._main_menu.main_character.set_class_warrior()
+        self._main_menu.main_character.set_class(WarriorClass)
         self._main_menu.main_character.send_experience(2500)
         ChillScenario(self._main_menu)

@@ -5,11 +5,11 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    INTRODUCTION: str = ""
-    FIRST_ACTION: str = ""
-    SECOND_ACTION: str = ""
-    THIRD_ACTION: str = ""
-    FOURTH_ACTION: str = ""
+    INTRODUCTION: str = "You awake"
+    FIRST_ACTION: str = "Travel to North"
+    SECOND_ACTION: str = "Travel to East"
+    THIRD_ACTION: str = "Travel to South"
+    FOURTH_ACTION: str = "Travel to West"
 
 
 @dataclass(frozen=True)

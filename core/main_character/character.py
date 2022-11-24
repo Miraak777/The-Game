@@ -3,16 +3,14 @@ from typing import Any, Dict
 
 from core.constants.character_constants import AttributesNames as an
 from core.constants.character_constants import BarsNames as bn
-from core.constants.character_constants import Classes
 from core.constants.character_constants import CombatStatsNames as cs
 from core.constants.character_constants import CommonConstants as cc
 from core.constants.character_constants import MainStatsNames as msn
 from core.constants.character_constants import StatsNames as sn
-from core.items.weapon import Fists
+from core.items import Weapon
 from core.scenarios.death_scenario.scenario import DeathScenario
-from core.stats_formulas import characters_formulas as cf
 
-from . import classes
+from . import classes, characters_formulas as cf
 from .start_parameters import Attributes, Bars, CombatStats, MainStats
 from .texts import Text
 
@@ -28,8 +26,8 @@ class MainCharacter:
         self._attributes = Attributes()
         self._bars = Bars()
         self._combat_stats = CombatStats()
-        self._class_multipliers = classes.PeasantClass()
-        self._equipped_weapon = Fists(level=self.main_stats.LEVEL, main_menu=self._main_menu)
+        self._class_parameters = classes.PeasantClass()
+        self._equipped_weapon = Weapon(self._main_menu, self.main_stats.LEVEL, "fists.yml")
         self._no_weapon = True
         self._refresh_stats()
 
@@ -42,7 +40,7 @@ class MainCharacter:
         attack_params = attack_map[attack_type]()
         if random.random() < self._combat_stats.CRITICAL_STRIKE_CHANCE:
             self._add_log(self._text.CRITICAL_STRIKE)
-            critical_multiplier = self._class_multipliers.CRITICAL_DAMAGE_MULTIPLIER
+            critical_multiplier = self._class_parameters.CRITICAL_DAMAGE_MULTIPLIER
         else:
             critical_multiplier = 1
         if self._bars.STAMINA < attack_params[cc.STAMINA_CONSUMPTION]:
@@ -62,7 +60,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 0.7, 1),
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 0.7, 1),
         }
         return output
 
@@ -71,7 +69,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1, 1),
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1, 1),
         }
         return output
 
@@ -80,7 +78,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stats.STAMINA_CONSUMPTION * 1.4, 1),
+            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1.4, 1),
         }
         return output
 
@@ -94,7 +92,7 @@ class MainCharacter:
     def equip_weapon(self, weapon):
         self._equipped_weapon = weapon
         weapon.item_equipped = True
-        self._add_log(self._text.EQUIPPED_WEAPON + weapon.stats.NAME)
+        self._add_log(self._text.EQUIPPED_WEAPON + weapon.name)
         self._no_weapon = False
         self._refresh_stats()
         self._main_menu.character_menu.set_actual_character_stats()
@@ -103,44 +101,22 @@ class MainCharacter:
     def unequip_weapon(self):
         weapon = self._equipped_weapon
         weapon.item_equipped = False
-        self._equipped_weapon = Fists(level=self.main_stats.LEVEL, main_menu=self._main_menu)
+        self._equipped_weapon = Weapon(self._main_menu, self.main_stats.LEVEL, "fists.yml")
         self._no_weapon = True
         self._refresh_stats()
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
         return weapon
 
-    def set_class_peasant(self) -> None:
-        self._class_multipliers = classes.PeasantClass
-        self.main_stats.CLASS = Classes.PEASANT
+    def set_class(self, chosen_class) -> None:
+        self._class_parameters = chosen_class
+        self.main_stats.CLASS = self._class_parameters.CLASS_NAME
         self._refresh_stats()
-        self._bars.HEALTH *= self._class_multipliers.HEALTH_MULTIPLIER
-        self._bars.STAMINA *= self._class_multipliers.STAMINA_MULTIPLIER
+        self._bars.HEALTH *= self._class_parameters.HEALTH_MULTIPLIER
+        self._bars.STAMINA *= self._class_parameters.STAMINA_MULTIPLIER
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
-        self._add_log(self._text.BECOME_PEASANT)
-        self._refresh_bars()
-
-    def set_class_warrior(self) -> None:
-        self._class_multipliers = classes.WarriorClass
-        self.main_stats.CLASS = Classes.WARRIOR
-        self._refresh_stats()
-        self._bars.HEALTH *= self._class_multipliers.HEALTH_MULTIPLIER
-        self._bars.STAMINA *= self._class_multipliers.STAMINA_MULTIPLIER
-        self._main_menu.character_menu.set_actual_character_stats()
-        self._main_menu.character_menu.refresh_character_menu()
-        self._add_log(self._text.BECOME_WARRIOR)
-        self._refresh_bars()
-
-    def set_class_assassin(self) -> None:
-        self._class_multipliers = classes.AssassinClass
-        self.main_stats.CLASS = Classes.ASSASSIN
-        self._refresh_stats()
-        self._bars.HEALTH *= self._class_multipliers.HEALTH_MULTIPLIER
-        self._bars.STAMINA *= self._class_multipliers.STAMINA_MULTIPLIER
-        self._main_menu.character_menu.set_actual_character_stats()
-        self._main_menu.character_menu.refresh_character_menu()
-        self._add_log(self._text.BECOME_ASSASSIN)
+        self._add_log(self._text.CHANGE_CLASS + self.main_stats.CLASS)
         self._refresh_bars()
 
     def set_max_health(self) -> None:
@@ -194,14 +170,14 @@ class MainCharacter:
                 cf.health_formula(
                     vitality=vitality_added,
                     level=0,
-                    health_mult=self._class_multipliers.HEALTH_MULTIPLIER,
+                    health_mult=self._class_parameters.HEALTH_MULTIPLIER,
                 )
             )
             self.restore_stamina(
                 cf.stamina_formula(
                     endurance=endurance_added,
                     level=0,
-                    stamina_mult=self._class_multipliers.STAMINA_MULTIPLIER,
+                    stamina_mult=self._class_parameters.STAMINA_MULTIPLIER,
                 )
             )
             self._refresh_bars()
@@ -219,7 +195,7 @@ class MainCharacter:
         output_stats = {
             sn.ATTRIBUTES: self._attributes,
             sn.MAIN_STATS: self.main_stats,
-            sn.CLASS_MULTIPLIERS: self._class_multipliers,
+            sn.CLASS_MULTIPLIERS: self._class_parameters,
             sn.EQUIPPED_WEAPON: self._equipped_weapon,
         }
         return output_stats
@@ -245,7 +221,7 @@ class MainCharacter:
             cs.MAX_DAMAGE: self._combat_stats.MAX_DAMAGE,
             cs.ACCURACY: self._combat_stats.ACCURACY,
             cs.CRITICAL_STRIKE_CHANCE: self._combat_stats.CRITICAL_STRIKE_CHANCE,
-            cs.CRITICAL_STRIKE_MULTIPLIER: self._class_multipliers.CRITICAL_DAMAGE_MULTIPLIER,
+            cs.CRITICAL_STRIKE_MULTIPLIER: self._class_parameters.CRITICAL_DAMAGE_MULTIPLIER,
         }
         return stats
 
@@ -263,26 +239,26 @@ class MainCharacter:
                 endurance=attributes.ENDURANCE,
             ),
             cs.MIN_DAMAGE: cf.min_damage_formula(
-                min_damage=equipped_weapon.stats.MIN_DAMAGE,
+                min_damage=equipped_weapon.min_damage,
                 strength=attributes.STRENGTH,
                 strength_damage_multiplier=class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
                 agility=attributes.AGILITY,
                 agility_damage_multiplier=class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
             ),
             cs.MAX_DAMAGE: cf.max_damage_formula(
-                max_damage=equipped_weapon.stats.MAX_DAMAGE,
+                max_damage=equipped_weapon.max_damage,
                 strength=attributes.STRENGTH,
                 strength_damage_multiplier=class_multipliers.STRENGTH_DAMAGE_MULTIPLIER,
                 agility=attributes.AGILITY,
                 agility_damage_multiplier=class_multipliers.AGILITY_DAMAGE_MULTIPLIER,
             ),
             cs.CRITICAL_STRIKE_CHANCE: cf.critical_strike_formula(
-                base_critical_strike_chance=equipped_weapon.stats.CRITICAL_STRIKE_CHANCE,
+                base_critical_strike_chance=equipped_weapon.critical_strike_chance,
                 agility=attributes.AGILITY,
                 critical_strike_chance_multiplier=class_multipliers.CRITICAL_STRIKE_CHANCE_MULTIPLIER,
             ),
             cs.ACCURACY: cf.accuracy_formula(
-                accuracy=equipped_weapon.stats.ACCURACY,
+                accuracy=equipped_weapon.accuracy,
                 agility=attributes.AGILITY,
                 level=main_stats.LEVEL,
             ),
@@ -299,7 +275,7 @@ class MainCharacter:
         stats = self.calculate_character_stats(
             self._attributes,
             self.main_stats,
-            self._class_multipliers,
+            self._class_parameters,
             self._equipped_weapon,
         )
         self._bars.MAX_HEALTH = stats[bn.MAX_HEALTH]
@@ -314,7 +290,7 @@ class MainCharacter:
         self.main_stats.MAX_EXPERIENCE = cf.max_experience_formula(level=self.main_stats.LEVEL)
         self._attributes.ATTRIBUTE_POINTS += 3
         if self._no_weapon:
-            self._equipped_weapon = Fists(level=self.main_stats.LEVEL, main_menu=self._main_menu)
+            self._equipped_weapon = Weapon(self._main_menu, self.main_stats.LEVEL, "fists.yml")
         self._refresh_stats()
         self.set_max_health()
         self.set_max_stamina()

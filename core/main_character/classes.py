@@ -1,8 +1,10 @@
 from dataclasses import dataclass
+from core.constants.character_constants import Classes
 
 
 @dataclass(frozen=True)
 class PeasantClass:
+    CLASS_NAME: float = Classes.PEASANT
     HEALTH_MULTIPLIER: float = 1
     STAMINA_MULTIPLIER: float = 1
     AGILITY_DAMAGE_MULTIPLIER: float = 0
@@ -13,6 +15,7 @@ class PeasantClass:
 
 @dataclass(frozen=True)
 class WarriorClass:
+    CLASS_NAME: float = Classes.WARRIOR
     HEALTH_MULTIPLIER: float = 1.5
     STAMINA_MULTIPLIER: float = 1.1
     AGILITY_DAMAGE_MULTIPLIER: float = 0
@@ -23,7 +26,8 @@ class WarriorClass:
 
 @dataclass(frozen=True)
 class AssassinClass:
-    HEALTH_MULTIPLIER: float = 0.7
+    CLASS_NAME: float = Classes.ASSASSIN
+    HEALTH_MULTIPLIER: float = 1
     STAMINA_MULTIPLIER: float = 1.5
     AGILITY_DAMAGE_MULTIPLIER: float = 1
     STRENGTH_DAMAGE_MULTIPLIER: float = 2

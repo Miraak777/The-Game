@@ -72,7 +72,7 @@ def restart_request_label(self) -> QLabel:
 
 
 def exit_button(self) -> QPushButton:
-    button = QPushButton(text=self._text.EXIT_MENU_BUTTON)
+    button = QPushButton(text=self._text.EXIT_BUTTON)
     button.setStyleSheet(exit_button_stylesheet)
     button.setFixedSize(OptionMenuButtons.EXIT_BUTTON)
     button.setCheckable(True)

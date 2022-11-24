@@ -62,9 +62,9 @@ class BattleSituation(BaseSituation):
         self._game_menu.add_log(
             self._text.BATTLE_START
             + " "
-            + enemy.stats.NAME
+            + enemy.name
             + " "
-            + str(enemy.stats.LEVEL)
+            + str(enemy.level)
             + " "
             + self._text.LEVEL
         )
@@ -75,7 +75,7 @@ class BattleSituation(BaseSituation):
         self._log("")
         character_damage = self._main_character.attack(cc.LIGHT_ATTACK)
         self._enemy.take_damage(character_damage)
-        if self._enemy.stats.IS_DEAD:
+        if self._enemy.is_dead:
             self._main_character.set_max_stamina()
             self._game_menu.refresh_character_bars()
             self._main_menu.character_menu_button.setDisabled(False)
@@ -88,7 +88,7 @@ class BattleSituation(BaseSituation):
         self._log("")
         character_damage = self._main_character.attack(cc.MEDIUM_ATTACK)
         self._enemy.take_damage(character_damage)
-        if self._enemy.stats.IS_DEAD:
+        if self._enemy.is_dead:
             self._main_character.set_max_stamina()
             self._main_menu.character_menu_button.setDisabled(False)
             self._generate_reward()
@@ -100,7 +100,7 @@ class BattleSituation(BaseSituation):
         self._log("")
         character_damage = self._main_character.attack(cc.HEAVY_ATTACK)
         self._enemy.take_damage(character_damage)
-        if self._enemy.stats.IS_DEAD:
+        if self._enemy.is_dead:
             self._main_character.set_max_stamina()
             self._main_menu.character_menu_button.setDisabled(False)
             self._generate_reward()
@@ -114,24 +114,12 @@ class BattleSituation(BaseSituation):
         ChillScenario(self._main_menu)
 
     def _generate_reward(self):
-        self._main_character.send_experience(self._enemy.stats.EXPERIENCE_GAINED)
-        reward = self._enemy.drops.drop_items()
-        reward_level = self._main_character.main_stats.LEVEL
+        self._main_character.send_experience(self._enemy.experience_gained)
+        reward = self._enemy.calculate_drop()
         for item in reward:
-            item = item(level=reward_level, main_menu=self._main_menu)
             if item.item_type == ItemTypes.WEAPON:
-                self._log(
-                    self._text.YOU_FOUNDED
-                    + item.stats.NAME
-                    + " "
-                    + str(item.stats.LEVEL)
-                    + " "
-                    + self._text.LEVEL
-                )
+                self._log(f"{self._text.YOU_FOUNDED} {item.name} {item.level} {self._text.level}")
             else:
-                self._log(
-                    self._text.YOU_FOUNDED
-                    + item.stats.NAME
-                )
+                self._log(self._text.YOU_FOUNDED + item.name)
             self._main_menu.inventory_menu.add_item(item)
         ChillScenario(self._main_menu)

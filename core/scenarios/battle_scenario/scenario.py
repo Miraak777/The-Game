@@ -1,6 +1,8 @@
-from random import randrange
+from random import choice
 
-from core.enemies.enemies_map import enemies_level_maps
+from core.enemies.enemies_table import get_enemy_table
+from core.enemies import Enemy
+
 
 from .situations import BattleSituation
 from .texts import Text
@@ -19,12 +21,8 @@ class BattleScenario:
         BattleSituation(main_menu=self.main_menu, enemy=enemy)
 
     def spawn_enemy(self, character_level):
-        for i in range(len(enemies_level_maps)):
-            if character_level < enemies_level_maps[i][0]:
-                enemy_map = enemies_level_maps[i-1][1]
-                break
-        enemy = enemy_map[randrange(0, len(enemy_map))](
-            level=character_level,
-            main_menu=self.main_menu,
-        )
+        enemy_table = [enemy_name for enemy_name, enemy_min_level in get_enemy_table().items() if
+                       enemy_min_level <= character_level]
+        enemy = Enemy(character_level, self.main_menu, choice(enemy_table))
         return enemy
+

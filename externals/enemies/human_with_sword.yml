@@ -1,0 +1,12 @@
+names:
+  en: Swordsman
+  ru:
+weapon: sword.yml
+stats:
+  base_health: 20
+  strength_per_level: 2
+  vitality_per_level: 1
+  strength_damage_multiplier: 0.1
+  vitality_health_multiplier: 15
+  experience_gained: 100
+min_level: 5

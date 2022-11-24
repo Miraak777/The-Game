@@ -43,5 +43,9 @@ accept_button_stylesheet = (
 exit_menu_button_stylesheet = (
     "QPushButton {"
     f"background-image: url({BUTTONS}:exit_menu_button.png);"
+    "border: 0px"
+    "}"
+    "QPushButton:hover {"
+    f"background-image: url({BUTTONS}:selected_exit_menu_button.png);"
     "}"
 )

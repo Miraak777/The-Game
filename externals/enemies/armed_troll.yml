@@ -1,0 +1,12 @@
+names:
+  en: Armed Troll
+  ru:
+weapon: mace.yml
+stats:
+  base_health: 25
+  strength_per_level: 2
+  vitality_per_level: 2
+  strength_damage_multiplier: 0.11
+  vitality_health_multiplier: 20
+  experience_gained: 100
+min_level: 12

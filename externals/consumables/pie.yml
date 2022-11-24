@@ -1,0 +1,7 @@
+consumable_type: food
+names:
+  en: Pie
+  ru:
+stats:
+  restore_value: 50
+icon: pie.png

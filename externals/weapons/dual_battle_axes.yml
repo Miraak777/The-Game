@@ -1,0 +1,12 @@
+weapon_type: dual_battle_axes
+drop_rate: 0.1
+names:
+  en: Dual Battle Axes
+  ru: "\u041f\u0430\u0440\u043d\u044b\u0435\u0020\u0411\u043e\u0435\u0432\u044b\u0435\u0020\u0422\u043e\u043f\u043e\u0440\u044b"
+stats:
+  max_damage: 28
+  min_damage: 14
+  accuracy: 0.6
+  critical_strike_chance: 0.05
+  base_stamina_consumption: 8
+icon: dual_battle_axes.png
