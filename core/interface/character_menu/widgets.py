@@ -55,7 +55,7 @@ def create_class_line(self, class_map) -> QLabel:
     return label
 
 
-def create_bars_lines(self) -> list:
+def create_bars_lines(self) -> list[QLabel]:
     lines = []
     label = QLabel(self._text.BARS)
     label.setStyleSheet("font: bold;")
@@ -176,7 +176,7 @@ def create_attribute_points_widget(self) -> QLabel:
     return label
 
 
-def create_stats_widget(self) -> list:
+def create_stats_widget(self) -> list[QLabel]:
     lines = []
     label = QLabel(self._text.STATS)
     label.setStyleSheet("font: bold;")

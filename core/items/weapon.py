@@ -1,12 +1,13 @@
 from core.items.base_item import BaseItem
 from core.constants.item_constants import StatNames, ItemTypes
-from typing import List
+from typing import List, Dict, Any
 from yaml import safe_load
 from core.constants.path_constants import Path, Paths
+from PyQt6.QtWidgets import QMainWindow
 
 
 class Weapon(BaseItem):
-    def __init__(self, main_menu, level, weapon_file_name):
+    def __init__(self, main_menu: QMainWindow, level: int, weapon_file_name: str) -> None:
         super().__init__(main_menu)
         self.level = level
         stats = self.get_weapon_stats(weapon_file_name)
@@ -25,14 +26,14 @@ class Weapon(BaseItem):
         self._calculate_damage()
         self._calculate_stamina_cost()
 
-    def _calculate_damage(self):
+    def _calculate_damage(self) -> None:
         self.max_damage = self.max_damage * (1 + self.level * self._level_damage_multiplier)
         self.min_damage = self.min_damage * (1 + self.level * self._level_damage_multiplier)
 
-    def _calculate_stamina_cost(self):
+    def _calculate_stamina_cost(self) -> None:
         self.stamina_consumption = self._base_stamina_consumption * self.level
 
-    def use_item(self):
+    def use_item(self) -> None:
         if self.item_equipped:
             self._main_menu.main_character.unequip_weapon()
             self._main_menu.inventory_menu.refresh_inventory()
@@ -42,7 +43,7 @@ class Weapon(BaseItem):
             self._main_menu.inventory_menu.refresh_inventory()
 
     @staticmethod
-    def get_weapon_stats(weapon_file_name):
+    def get_weapon_stats(weapon_file_name) -> Dict[str, Any]:
         with open(str(Path(Paths.PATH_TO_WEAPONS, weapon_file_name)), "r") as weapon_file:
             stats = safe_load(weapon_file)
             return stats

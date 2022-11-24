@@ -6,6 +6,7 @@ from core.constants.language_constants import Language
 from .constants import OptionMenuButtons, OptionMenuSizes
 from .stylesheets import (
     debug_button_stylesheet,
+    about_button_stylesheet,
     exit_button_stylesheet,
     language_choose_stylesheet,
     languages_buttons_stylesheet,
@@ -91,7 +92,7 @@ def debug_mode_button(self) -> QPushButton:
 
 def about_menu_button(self) -> QPushButton:
     button = QPushButton(text=self._text.ABOUT_BUTTON)
-    button.setStyleSheet(debug_button_stylesheet)
+    button.setStyleSheet(about_button_stylesheet)
     button.setFixedSize(OptionMenuButtons.ABOUT_BUTTON)
     button.setCheckable(True)
     button.clicked.connect(self.event_open_about_menu)

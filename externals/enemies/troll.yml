@@ -1,6 +1,6 @@
 names:
   en: Troll
-  ru:
+  ru: \u0422\u0440\u043e\u043b\u043b\u044c
 weapon: fists.yml
 stats:
   base_health: 25

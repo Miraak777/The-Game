@@ -89,7 +89,7 @@ class MainCharacter:
         self._bars.HEALTH = round(self._bars.HEALTH - damage, 2)
         self._refresh_bars()
 
-    def equip_weapon(self, weapon):
+    def equip_weapon(self, weapon: Weapon) -> None:
         self._equipped_weapon = weapon
         weapon.item_equipped = True
         self._add_log(self._text.EQUIPPED_WEAPON + weapon.name)
@@ -98,7 +98,7 @@ class MainCharacter:
         self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
 
-    def unequip_weapon(self):
+    def unequip_weapon(self) -> Weapon:
         weapon = self._equipped_weapon
         weapon.item_equipped = False
         self._equipped_weapon = Weapon(self._main_menu, self.main_stats.LEVEL, "fists.yml")
@@ -127,14 +127,14 @@ class MainCharacter:
         self._bars.STAMINA = self._bars.MAX_STAMINA
         self._refresh_bars()
 
-    def restore_health(self, health):
+    def restore_health(self, health: float) -> None:
         self._bars.HEALTH = self._bars.HEALTH + health
         if self._bars.HEALTH > self._bars.MAX_HEALTH:
             self._bars.HEALTH = self._bars.MAX_HEALTH
 
         self._refresh_bars()
 
-    def restore_percent_health(self, health):
+    def restore_percent_health(self, health: float) -> None:
         self._bars.HEALTH = self._bars.HEALTH + (health*0.01 * self._bars.MAX_HEALTH)
         if self._bars.HEALTH > self._bars.MAX_HEALTH:
             self._bars.HEALTH = self._bars.MAX_HEALTH
@@ -149,7 +149,7 @@ class MainCharacter:
         else:
             self._add_log(self._text.CANNOT_REST)
 
-    def restore_stamina(self, stamina) -> None:
+    def restore_stamina(self, stamina: float) -> None:
         self._bars.STAMINA += stamina
         if self._bars.STAMINA > self._bars.MAX_STAMINA:
             self._bars.STAMINA = self._bars.MAX_STAMINA
@@ -182,7 +182,7 @@ class MainCharacter:
             )
             self._refresh_bars()
 
-    def send_experience(self, experience: int):
+    def send_experience(self, experience: int) -> None:
         self.main_stats.EXPERIENCE += experience
         if experience != 0:
             self._main_menu.game_menu.add_log(self._text.GAINED_EXPERIENCE + str(experience))
@@ -200,7 +200,7 @@ class MainCharacter:
         }
         return output_stats
 
-    def get_stats(self) -> Dict:
+    def get_stats(self) -> Dict[str, Any]:
         self._refresh_stats()
         stats = {
             msn.NAME: self.main_stats.NAME,
@@ -226,7 +226,7 @@ class MainCharacter:
         return stats
 
     @staticmethod
-    def calculate_character_stats(attributes, main_stats, class_multipliers, equipped_weapon) -> Dict[str, Any]:
+    def calculate_character_stats(attributes, main_stats, class_multipliers, equipped_weapon: Weapon) -> Dict[str, Any]:
         calculated_stats = {
             bn.MAX_HEALTH: cf.health_formula(
                 health_mult=class_multipliers.HEALTH_MULTIPLIER,

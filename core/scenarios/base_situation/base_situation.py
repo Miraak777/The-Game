@@ -23,7 +23,7 @@ class BaseSituation:
         }
         self.refresh_buttons()
 
-    def refresh_buttons(self):
+    def refresh_buttons(self) -> None:
         self._game_menu.set_action_buttons(self.__events, self._texts)
 
     def _event_first_action(self) -> None:

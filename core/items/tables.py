@@ -1,9 +1,10 @@
 from core.constants.path_constants import Paths, Path
 from core.items import Weapon, Consumable
 from core.constants.item_constants import StatNames
+from typing import Dict
 
 
-def get_weapon_table():
+def get_weapon_table() -> Dict[str, str]:
     weapon_dir = Path(Paths.PATH_TO_WEAPONS)
     weapon_table = {}
 
@@ -15,7 +16,7 @@ def get_weapon_table():
     return weapon_table
 
 
-def get_consumables_table():
+def get_consumables_table() -> Dict[str, str]:
     consumable_dir = Path(Paths.PATH_TO_CONSUMABLES)
     consumable_table = {}
 

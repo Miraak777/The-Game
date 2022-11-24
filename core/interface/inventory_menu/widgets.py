@@ -7,7 +7,7 @@ from core.constants.path_constants import path_to_item_icons_map
 
 
 class ItemSlot(QPushButton):
-    def __init__(self, item):
+    def __init__(self, item) -> None:
         super().__init__()
         self.setFixedSize(InventoryMenuSizes.ITEM_SIZE)
         self.setStyleSheet(item_button_stylesheet)

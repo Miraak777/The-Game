@@ -113,7 +113,7 @@ class BattleSituation(BaseSituation):
         self._main_menu.character_menu_button.setDisabled(False)
         ChillScenario(self._main_menu)
 
-    def _generate_reward(self):
+    def _generate_reward(self) -> None:
         self._main_character.send_experience(self._enemy.experience_gained)
         reward = self._enemy.calculate_drop()
         for item in reward:

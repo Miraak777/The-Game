@@ -1,6 +1,6 @@
 names:
   en: Swordsman
-  ru:
+  ru: \u041c\u0435\u0447\u043d\u0438\u043a
 weapon: sword.yml
 stats:
   base_health: 20

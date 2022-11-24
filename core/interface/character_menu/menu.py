@@ -14,7 +14,7 @@ from .texts import Text
 
 
 class CharacterMenu(QFrame):
-    def __init__(self, main_menu):
+    def __init__(self, main_menu) -> None:
         super().__init__()
         self._main_menu = main_menu
         self._text = Text[self._main_menu.language]
@@ -25,7 +25,7 @@ class CharacterMenu(QFrame):
 
         self.setStyleSheet(character_menu_stylesheet)
 
-    def set_actual_character_stats(self):
+    def set_actual_character_stats(self) -> None:
         self._main_character_stats = self._main_menu.main_character.get_stats()
         self._attributes.STRENGTH = self._main_character_stats[an.STRENGTH]
         self._attributes.AGILITY = self._main_character_stats[an.AGILITY]
@@ -97,59 +97,59 @@ class CharacterMenu(QFrame):
         self._create_widgets()
         self.setLayout(self._layout)
 
-    def _event_add_strength(self):
+    def _event_add_strength(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.STRENGTH += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
         self.refresh_character_menu()
 
-    def _event_add_agility(self):
+    def _event_add_agility(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.AGILITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
         self.refresh_character_menu()
 
-    def _event_add_vitality(self):
+    def _event_add_vitality(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.VITALITY += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
         self.refresh_character_menu()
 
-    def _event_add_endurance(self):
+    def _event_add_endurance(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS >= 1:
             self._attributes.ENDURANCE += 1
             self._attributes.ATTRIBUTE_POINTS -= 1
         self.refresh_character_menu()
 
-    def _event_remove_strength(self):
+    def _event_remove_strength(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS <= self._main_character_stats[an.ATTRIBUTE_POINTS]:
             if self._attributes.STRENGTH != 0:
                 self._attributes.STRENGTH -= 1
                 self._attributes.ATTRIBUTE_POINTS += 1
         self.refresh_character_menu()
 
-    def _event_remove_agility(self):
+    def _event_remove_agility(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS <= self._main_character_stats[an.ATTRIBUTE_POINTS]:
             if self._attributes.AGILITY != 0:
                 self._attributes.AGILITY -= 1
                 self._attributes.ATTRIBUTE_POINTS += 1
         self.refresh_character_menu()
 
-    def _event_remove_vitality(self):
+    def _event_remove_vitality(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS <= self._main_character_stats[an.ATTRIBUTE_POINTS]:
             if self._attributes.VITALITY != 0:
                 self._attributes.VITALITY -= 1
                 self._attributes.ATTRIBUTE_POINTS += 1
         self.refresh_character_menu()
 
-    def _event_remove_endurance(self):
+    def _event_remove_endurance(self) -> None:
         if self._attributes.ATTRIBUTE_POINTS <= self._main_character_stats[an.ATTRIBUTE_POINTS]:
             if self._attributes.ENDURANCE != 0:
                 self._attributes.ENDURANCE -= 1
                 self._attributes.ATTRIBUTE_POINTS += 1
         self.refresh_character_menu()
 
-    def _event_accept(self):
+    def _event_accept(self) -> None:
         output_attributes = {
             an.STRENGTH: self._attributes.STRENGTH,
             an.AGILITY: self._attributes.AGILITY,
@@ -160,5 +160,5 @@ class CharacterMenu(QFrame):
         self._main_menu.main_character.send_attributes(output_attributes)
         self.set_actual_character_stats()
 
-    def _event_exit_menu(self):
+    def _event_exit_menu(self) -> None:
         self.hide()

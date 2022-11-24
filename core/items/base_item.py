@@ -1,5 +1,5 @@
 class BaseItem:
-    def __init__(self, main_menu):
+    def __init__(self, main_menu) -> None:
         self._main_menu = main_menu
         self._language = main_menu.language
         self.item_type = None
@@ -8,8 +8,8 @@ class BaseItem:
         self.item_equipped = False
         self.description = None
 
-    def use_item(self):
+    def use_item(self) -> None:
         pass
 
-    def get_description_stats(self):
+    def get_description_stats(self) -> None:
         pass

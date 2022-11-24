@@ -5,8 +5,6 @@ from dataclasses import dataclass
 class ItemTypes:
     WEAPON: str = "weapon"
     CONSUMABLE: str = "consumable"
-    DAGGER: str = "dagger"
-    DUAL_DAGGERS: str = "dual_daggers"
     FOOD: str = "food"
 
 

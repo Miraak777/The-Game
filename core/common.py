@@ -13,7 +13,7 @@ def get_key_binds() -> Dict:
         return settings[KeyBindNames.KEY_BINDS]
 
 
-def clear_layout(layout):
+def clear_layout(layout) -> None:
     item_list = list(range(layout.count()))
     item_list.reverse()
     for i in item_list:
@@ -23,7 +23,7 @@ def clear_layout(layout):
             item.widget().deleteLater()
 
 
-def set_qdirs():
+def set_qdirs() -> None:
     QDir.addSearchPath(BACKGROUNDS, Paths.PATH_TO_BACKGROUNDS)
     QDir.addSearchPath(BUTTONS, Paths.PATH_TO_BUTTON_TEXTURES)
     QDir.addSearchPath(WIDGET_TEXTURES, Paths.PATH_TO_WIDGET_TEXTURES)

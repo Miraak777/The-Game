@@ -1,7 +1,7 @@
 consumable_type: food
 names:
   en: Apple
-  ru:
+  ru: \u042f\u0431\u043b\u043e\u043a\u043e
 stats:
   restore_value: 10
 icon: apple.png

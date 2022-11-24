@@ -1,5 +1,5 @@
 from random import random, uniform
-from typing import List, Any
+from typing import List, Any, Dict
 from core.constants.path_constants import Path, Paths
 from yaml import safe_load
 from core.common import get_enemy_stats
@@ -9,7 +9,7 @@ from .texts import Text
 
 
 class Enemy:
-    def __init__(self, level, main_menu, enemy_file_name):
+    def __init__(self, level: int, main_menu, enemy_file_name: str) -> None:
         self._main_menu = main_menu
         self.level = level
         self.game_menu = self._main_menu.game_menu
@@ -36,7 +36,7 @@ class Enemy:
         min_damage = self.min_damage
         max_damage = self.max_damage
         damage = round(uniform(min_damage, max_damage), 2)
-        self.game_menu.add_log(self.name + " " + self._text.DEAL + " " + str(damage) + " " + self._text.DAMAGE)
+        self.game_menu.add_log(f"{self.name} {self._text.DEAL} {str(damage)} {self._text.DAMAGE}")
         return damage
 
     def take_damage(self, damage: float) -> None:
@@ -49,7 +49,7 @@ class Enemy:
             self.game_menu.refresh_enemy_bar(self)
         if self.health == 0:
             self.is_dead = True
-            self.game_menu.add_log(self.name + " " + self._text.DIED)
+            self.game_menu.add_log(f"{self.name} {self._text.DIED}")
 
     def calculate_drop(self) -> List[Any]:
         dropped = []
@@ -65,7 +65,7 @@ class Enemy:
                 break
         return dropped
 
-    def _calculate_damage(self):
+    def _calculate_damage(self) -> None:
         self.max_damage = (
                 self.weapon.max_damage
                 * (1 + self.level / 10)
@@ -79,7 +79,7 @@ class Enemy:
                 * (1 + self.strength_per_level * self.level * self.strength_damage_multiplier)
         )
 
-    def _calculate_health(self):
+    def _calculate_health(self) -> None:
         self.max_health = (
                                   self.base_health * self.level + self.vitality_per_level * self.level *
                                   self.vitality_health_multiplier
@@ -90,7 +90,7 @@ class Enemy:
         self.experience_gained *= 1 + self.level * 0.5
 
     @staticmethod
-    def get_enemy_stats(enemy_file_name):
+    def get_enemy_stats(enemy_file_name: str) -> Dict[str, Any]:
         with open(str(Path(Paths.PATH_TO_ENEMIES, enemy_file_name)), "r") as enemy_file:
             stats = safe_load(enemy_file)
             return stats

@@ -1,6 +1,6 @@
 names:
   en: Goblin
-  ru:
+  ru: \u0413\u043e\u0431\u043b\u0438\u043d
 weapon: fists.yml
 stats:
   base_health: 15

@@ -5,7 +5,7 @@ from core.scenarios import BaseSituation, BattleSituation, ChillScenario
 
 
 class MeetSituation(BaseSituation):
-    def __init__(self, main_menu, text, scenario):
+    def __init__(self, main_menu, text, scenario) -> None:
         super().__init__(main_menu, text)
 
         self._scenario = scenario
@@ -68,8 +68,8 @@ class DerickBattleSituation(BattleSituation):
     def __init__(self, main_menu, scenario, text):
         self._won_text = text.WON
         self._scenario = scenario
-        derick = Human(main_menu.main_character.main_stats.level, main_menu)
-        derick.set_name(text.DERICK)
+        derick = Enemy(main_menu.main_character.main_stats.LEVEL, main_menu, "human.yml")
+        derick.name = text.DERICK
         super().__init__(main_menu=main_menu, enemy=derick)
         self._texts[ActionButtons.FOURTH_ACTION] = ""
         self.refresh_buttons()

@@ -5,7 +5,6 @@ from core.constants.language_constants import Language
 
 @dataclass(frozen=True)
 class EnglishText:
-    TAKEN: str = "took"
     DEAL: str = "dealt"
     DAMAGE: str = "damage"
     DIED: str = "died"
@@ -15,7 +14,6 @@ class EnglishText:
 
 @dataclass(frozen=True)
 class RussianText:
-    TAKEN: str = "получил"
     DEAL: str = "нанёс"
     DAMAGE: str = "единиц урона"
     DIED: str = "умер"

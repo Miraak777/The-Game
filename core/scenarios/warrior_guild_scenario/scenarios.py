@@ -3,7 +3,7 @@ from .texts import Text
 
 
 class WarriorGuildScenario:
-    def __init__(self, main_menu):
+    def __init__(self, main_menu) -> None:
         self._main_menu = main_menu
         self._text = Text[self._main_menu.language]
         self._log = self._main_menu.game_menu.add_log
@@ -11,5 +11,5 @@ class WarriorGuildScenario:
 
         self.meet()
 
-    def meet(self):
+    def meet(self) -> None:
         situations.MeetSituation(self._main_menu, self._text, self)

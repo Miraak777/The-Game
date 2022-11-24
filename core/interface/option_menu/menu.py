@@ -14,7 +14,7 @@ from .texts import Text
 
 
 class OptionMenu(QFrame):
-    def __init__(self, main_menu):
+    def __init__(self, main_menu) -> None:
         super().__init__()
         self.main_menu = main_menu
         self._language = self.main_menu.language
@@ -24,12 +24,12 @@ class OptionMenu(QFrame):
         self.setStyleSheet(option_menu_stylesheet)
         self._create_layout()
 
-    def _create_layout(self):
+    def _create_layout(self) -> None:
         self._layout = QVBoxLayout()
         self._create_widgets()
         self.setLayout(self._layout)
 
-    def _create_widgets(self):
+    def _create_widgets(self) -> None:
 
         exit_menu_button = widgets.create_exit_menu_button(self)
         self._layout.addWidget(exit_menu_button, alignment=Qt.AlignmentFlag.AlignRight)
@@ -56,13 +56,13 @@ class OptionMenu(QFrame):
             alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight),
         )
 
-    def _refresh_menu(self):
+    def _refresh_menu(self) -> None:
         clear_layout(self._layout)
         clear_layout(self._choose_language_layout)
         clear_layout(self._languages_layout)
         self._create_widgets()
 
-    def _event_set_en_language(self):
+    def _event_set_en_language(self) -> None:
         with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
             settings = safe_load(settings_file)
         settings[LANGUAGE] = Language.EN
@@ -70,7 +70,7 @@ class OptionMenu(QFrame):
             safe_dump(settings, settings_file, default_flow_style=False)
         self._event_language_changed()
 
-    def _event_set_ru_language(self):
+    def _event_set_ru_language(self) -> None:
         with open(Paths.PATH_TO_SETTINGS, "r") as settings_file:
             settings = safe_load(settings_file)
         settings[LANGUAGE] = Language.RU
@@ -78,7 +78,7 @@ class OptionMenu(QFrame):
             safe_dump(settings, settings_file, default_flow_style=False)
         self._event_language_changed()
 
-    def _event_language_changed(self):
+    def _event_language_changed(self) -> None:
         clear_layout(self._languages_layout)
         clear_layout(self._choose_language_layout)
         clear_layout(self._layout)
@@ -90,18 +90,18 @@ class OptionMenu(QFrame):
         )
         self._layout.addWidget(button, alignment=(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop))
 
-    def _event_debug_mode(self):
+    def _event_debug_mode(self) -> None:
         DebugScenario(self.main_menu)
 
-    def event_open_about_menu(self):
+    def event_open_about_menu(self) -> None:
         if self.main_menu.about_menu.isHidden():
             self.main_menu.about_menu.show()
         else:
             self.main_menu.about_menu.hide()
 
     @staticmethod
-    def _event_exit():
+    def _event_exit() -> None:
         exit()
 
-    def _event_exit_menu(self):
+    def _event_exit_menu(self) -> None:
         self.main_menu.option_menu_widget.hide()

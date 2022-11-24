@@ -1,6 +1,6 @@
 names:
   en: Assassin
-  ru:
+  ru: \u0423\u0431\u0438\u0439\u0446\u0430
 weapon: dagger.yml
 stats:
   base_health: 20

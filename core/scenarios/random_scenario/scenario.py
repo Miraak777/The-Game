@@ -1,15 +1,15 @@
 from random import random, randrange
-from typing import List
+from typing import List, Callable
 from ..scenarios_maps import scenarios_maps
 
 
 class RandomScenario:
-    def __init__(self, main_menu):
+    def __init__(self, main_menu) -> None:
         self._main_menu = main_menu
         self._battle_scenario = self._main_menu.battle_scenario
         self._battle_chance = 0.8
 
-    def get_random_scenario(self):
+    def get_random_scenario(self) -> Callable:
         scenarios_map = self._get_scenarios_map()
         if random() < self._battle_chance:
             return self._battle_scenario.start_battle

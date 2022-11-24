@@ -44,10 +44,8 @@ class MainMenu(QMainWindow):
 
         BaseSituation(self)
 
-
-
     @staticmethod
-    def exit():
+    def exit() -> None:
         exit()
 
     def _create_layouts(self) -> None:

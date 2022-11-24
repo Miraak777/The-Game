@@ -1,9 +1,10 @@
 from core.constants.path_constants import Paths, Path
 from core.enemies import Enemy
 from core.constants.item_constants import StatNames
+from typing import Dict
 
 
-def get_enemy_table():
+def get_enemy_table() -> Dict[str, int]:
     enemies_dir = Path(Paths.PATH_TO_ENEMIES)
     enemies_table = {}
 

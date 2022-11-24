@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QFrame, QGridLayout
+from PyQt6.QtWidgets import QFrame, QGridLayout, QMainWindow
 
 from core.constants.item_constants import ItemTypes
 from core.common import clear_layout
@@ -10,7 +10,7 @@ from .widgets import ItemSlot
 
 
 class InventoryMenu(QFrame):
-    def __init__(self, main_menu):
+    def __init__(self, main_menu: QMainWindow) -> None:
         super().__init__()
         self._main_menu = main_menu
         self._log = self._main_menu.game_menu.add_log
@@ -24,11 +24,11 @@ class InventoryMenu(QFrame):
         self.create_layout()
         self._create_item_buttons()
 
-    def create_layout(self):
+    def create_layout(self) -> None:
         self._layout = QGridLayout()
         self.setLayout(self._layout)
 
-    def _create_item_buttons(self):
+    def _create_item_buttons(self) -> None:
         item_id = 0
         for vertical in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER):
             for horizontal in range(InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
@@ -36,11 +36,11 @@ class InventoryMenu(QFrame):
                 item_id += 1
                 self._layout.addWidget(item_button, vertical, horizontal)
 
-    def refresh_inventory(self):
+    def refresh_inventory(self) -> None:
         clear_layout(self._layout)
         self._create_item_buttons()
 
-    def unequip_all_weapon(self):
+    def unequip_all_weapon(self) -> None:
         for item_id in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER * InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
             if (
                     self._inventory_map[item_id] and
@@ -50,7 +50,7 @@ class InventoryMenu(QFrame):
                 self._inventory_map[item_id].item_equipped = False
         self.refresh_inventory()
 
-    def add_item(self, item):
+    def add_item(self, item) -> None:
         if self._inventory_map[len(self._inventory_map) - 1]:
             self._log(self._text.INVENTORY_IS_FULL)
         else:
@@ -61,6 +61,6 @@ class InventoryMenu(QFrame):
                     break
         self.refresh_inventory()
 
-    def remove_item(self, item_id):
+    def remove_item(self, item_id) -> None:
         self._inventory_map[item_id] = None
         self.refresh_inventory()

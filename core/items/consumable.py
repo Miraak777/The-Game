@@ -1,12 +1,12 @@
 from core.items.base_item import BaseItem
-from typing import List
+from typing import List, Dict, Any
 from yaml import safe_load
 from core.constants.path_constants import Path, Paths
 from core.constants.item_constants import StatNames, ItemTypes
 
 
 class Consumable(BaseItem):
-    def __init__(self, main_menu, consumable_file_name):
+    def __init__(self, main_menu, consumable_file_name: str) -> None:
         super().__init__(main_menu=main_menu)
         self.item_type = ItemTypes.CONSUMABLE
         stats = self.get_consumable_stats(consumable_file_name)
@@ -25,7 +25,7 @@ class Consumable(BaseItem):
         pass
 
     @staticmethod
-    def get_consumable_stats(consumable_file_name):
+    def get_consumable_stats(consumable_file_name: str) -> Dict[str, Any]:
         with open(str(Path(Paths.PATH_TO_CONSUMABLES, consumable_file_name)), "r") as consumable_file:
             stats = safe_load(consumable_file)
             return stats
