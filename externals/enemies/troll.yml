@@ -3,10 +3,10 @@ names:
   ru: "\u0422\u0440\u043e\u043b\u043b\u044c"
 weapon: fists.yml
 stats:
-  base_health: 25
+  base_health: 15
   strength_per_level: 2
   vitality_per_level: 2
-  strength_damage_multiplier: 0.11
-  vitality_health_multiplier: 20
+  strength_damage_multiplier: 0.6
+  vitality_health_multiplier: 15
   experience_gained: 200
 min_level: 9

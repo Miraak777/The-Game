@@ -4,8 +4,8 @@ names:
   en: Dual Maces
   ru: "\u041f\u0430\u0440\u043d\u044b\u0435\u0020\u0411\u0443\u043b\u0430\u0432\u044b"
 stats:
-  max_damage: 32
-  min_damage: 26
+  max_damage: 24
+  min_damage: 20
   accuracy: 0.6
   critical_strike_chance: 0.025
   base_stamina_consumption: 9

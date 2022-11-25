@@ -4,9 +4,9 @@ names:
   en: Dagger
   ru: "\u041a\u0438\u043d\u0436\u0430\u043b"
 stats:
-  max_damage: 6
+  max_damage: 7
   min_damage: 2
   accuracy: 0.8
   critical_strike_chance: 0.1
-  base_stamina_consumption: 2
+  base_stamina_consumption: 1.5
 icon: dagger.png

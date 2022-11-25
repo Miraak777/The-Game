@@ -118,8 +118,8 @@ class BattleSituation(BaseSituation):
         reward = self._enemy.calculate_drop()
         for item in reward:
             if item.item_type == ItemTypes.WEAPON:
-                self._log(f"{self._text.YOU_FOUNDED} {item.name} {item.level} {self._text.level}")
+                self._log(f"{self._text.YOU_FOUNDED} {item.name} {item.level} {self._text.LEVEL}")
             else:
-                self._log(self._text.YOU_FOUNDED + item.name)
+                self._log(f"{self._text.YOU_FOUNDED} {item.name}")
             self._main_menu.inventory_menu.add_item(item)
         ChillScenario(self._main_menu)

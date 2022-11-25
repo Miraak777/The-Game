@@ -20,7 +20,7 @@ def create_strength_adding_button(self) -> QPushButton:
     strength_adding_button.setFixedSize(CharacterMenuButtons.ATTRIBUTE_BUTTON)
     strength_adding_button.setCheckable(True)
     strength_adding_button.clicked.connect(self._event_add_strength)
-    if self._attributes.ATTRIBUTE_POINTS == 0:
+    if self._main_character_copy.attribute_points == 0:
         strength_adding_button.setDisabled(True)
     else:
         strength_adding_button.setDisabled(False)
@@ -33,7 +33,7 @@ def create_agility_adding_button(self) -> QPushButton:
     agility_adding_button.setFixedSize(CharacterMenuButtons.ATTRIBUTE_BUTTON)
     agility_adding_button.setCheckable(True)
     agility_adding_button.clicked.connect(self._event_add_agility)
-    if self._attributes.ATTRIBUTE_POINTS == 0:
+    if self._main_character_copy.attribute_points == 0:
         agility_adding_button.setDisabled(True)
     else:
         agility_adding_button.setDisabled(False)
@@ -46,7 +46,7 @@ def create_vitality_adding_button(self) -> QPushButton:
     vitality_adding_button.setFixedSize(CharacterMenuButtons.ATTRIBUTE_BUTTON)
     vitality_adding_button.setCheckable(True)
     vitality_adding_button.clicked.connect(self._event_add_vitality)
-    if self._attributes.ATTRIBUTE_POINTS == 0:
+    if self._main_character_copy.attribute_points == 0:
         vitality_adding_button.setDisabled(True)
     else:
         vitality_adding_button.setDisabled(False)
@@ -59,7 +59,7 @@ def create_endurance_adding_button(self) -> QPushButton:
     endurance_adding_button.setFixedSize(CharacterMenuButtons.ATTRIBUTE_BUTTON)
     endurance_adding_button.setCheckable(True)
     endurance_adding_button.clicked.connect(self._event_add_endurance)
-    if self._attributes.ATTRIBUTE_POINTS == 0:
+    if self._main_character_copy.attribute_points == 0:
         endurance_adding_button.setDisabled(True)
     else:
         endurance_adding_button.setDisabled(False)
@@ -73,9 +73,9 @@ def create_strength_removing_button(self) -> QPushButton:
     strength_removing_button.setCheckable(True)
     strength_removing_button.clicked.connect(self._event_remove_strength)
     if (
-            self._attributes.ATTRIBUTE_POINTS == self._main_character_stats[an.ATTRIBUTE_POINTS]
-            or self._attributes.STRENGTH == 0
-            or self._attributes.STRENGTH <= self._main_character_stats[an.STRENGTH]
+            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+            or self._main_character_copy.strength == 0
+            or self._main_character_copy.strength <= self._main_menu.main_character.strength
     ):
         strength_removing_button.setDisabled(True)
     else:
@@ -90,9 +90,9 @@ def create_agility_removing_button(self) -> QPushButton:
     agility_removing_button.setCheckable(True)
     agility_removing_button.clicked.connect(self._event_remove_agility)
     if (
-            self._attributes.ATTRIBUTE_POINTS == self._main_character_stats[an.ATTRIBUTE_POINTS]
-            or self._attributes.AGILITY == 0
-            or self._attributes.AGILITY <= self._main_character_stats[an.AGILITY]
+            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+            or self._main_character_copy.agility == 0
+            or self._main_character_copy.agility <= self._main_menu.main_character.agility
     ):
         agility_removing_button.setDisabled(True)
     else:
@@ -107,9 +107,9 @@ def create_vitality_removing_button(self) -> QPushButton:
     vitality_removing_button.setCheckable(True)
     vitality_removing_button.clicked.connect(self._event_remove_vitality)
     if (
-            self._attributes.ATTRIBUTE_POINTS == self._main_character_stats[an.ATTRIBUTE_POINTS]
-            or self._attributes.VITALITY == 0
-            or self._attributes.VITALITY <= self._main_character_stats[an.VITALITY]
+            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+            or self._main_character_copy.vitality == 0
+            or self._main_character_copy.vitality <= self._main_menu.main_character.vitality
     ):
         vitality_removing_button.setDisabled(True)
     else:
@@ -124,9 +124,9 @@ def create_endurance_removing_button(self) -> QPushButton:
     endurance_removing_button.setCheckable(True)
     endurance_removing_button.clicked.connect(self._event_remove_endurance)
     if (
-            self._attributes.ATTRIBUTE_POINTS == self._main_character_stats[an.ATTRIBUTE_POINTS]
-            or self._attributes.ENDURANCE == 0
-            or self._attributes.ENDURANCE <= self._main_character_stats[an.ENDURANCE]
+            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+            or self._main_character_copy.endurance == 0
+            or self._main_character_copy.endurance <= self._main_menu.main_character.endurance
     ):
         endurance_removing_button.setDisabled(True)
     else:
@@ -140,7 +140,7 @@ def create_accept_button(self) -> QPushButton:
     accept_button.setFixedSize(CharacterMenuButtons.ACCEPT_BUTTON)
     accept_button.setCheckable(True)
     accept_button.clicked.connect(self._event_accept)
-    if is_attributes_changed(self) and self._main_character_stats[an.ATTRIBUTE_POINTS] != 0:
+    if is_attributes_changed(self) and self._main_menu.main_character.attribute_points != 0:
         accept_button.setEnabled(True)
     else:
         accept_button.setEnabled(False)
@@ -149,10 +149,10 @@ def create_accept_button(self) -> QPushButton:
 
 def is_attributes_changed(self) -> bool:
     rules = (
-        self._attributes.STRENGTH != self._main_character_stats[an.STRENGTH],
-        self._attributes.AGILITY != self._main_character_stats[an.AGILITY],
-        self._attributes.VITALITY != self._main_character_stats[an.VITALITY],
-        self._attributes.ENDURANCE != self._main_character_stats[an.ENDURANCE],
+        self._main_character_copy.strength != self._main_menu.main_character.strength,
+        self._main_character_copy.agility != self._main_menu.main_character.agility,
+        self._main_character_copy.endurance != self._main_menu.main_character.endurance,
+        self._main_character_copy.vitality != self._main_menu.main_character.vitality,
     )
     if True in rules:
         return True

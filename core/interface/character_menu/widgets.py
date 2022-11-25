@@ -34,24 +34,18 @@ def create_general_widget(self) -> list:
 
 
 def create_name_widget(self) -> QLabel:
-    label = QLabel(self._text.NAME + self._main_character_stats[msn.NAME])
+    label = QLabel(f" {self._text.NAME} {self._main_character_copy.name}")
     return label
 
 
 def create_level_line(self) -> QLabel:
-    label = QLabel(
-        str(self._text.LEVEL)
-        + str(self._main_character_stats[msn.LEVEL])
-        + ", "
-        + str(self._main_character_stats[msn.EXPERIENCE])
-        + "/"
-        + str(self._main_character_stats[msn.MAX_EXPERIENCE])
-    )
+    label = QLabel(f" {self._text.LEVEL} {self._main_character_copy.level}, "
+                   f"{self._main_character_copy.experience}/{self._main_character_copy.max_experience}")
     return label
 
 
 def create_class_line(self, class_map) -> QLabel:
-    label = QLabel(self._text.CLASS + class_map[self._main_character_stats[msn.CLASS]])
+    label = QLabel(f" {self._text.CLASS} {class_map[self._main_character_copy.character_class]}")
     return label
 
 
@@ -70,22 +64,14 @@ def create_bars_lines(self) -> list[QLabel]:
 
 
 def create_health_widget(self) -> QLabel:
-    label = QLabel(
-        self._text.HEALTH
-        + str(self._main_character_stats[bn.HEALTH])
-        + "/"
-        + str(self._main_character_stats[bn.MAX_HEALTH])
-    )
+    label = QLabel(f" {self._text.HEALTH} "
+                   f"{self._main_character_copy.health}/{self._main_character_copy.max_health}")
     return label
 
 
 def create_stamina_widget(self) -> QLabel:
-    label = QLabel(
-        self._text.STAMINA
-        + str(self._main_character_stats[bn.STAMINA])
-        + "/"
-        + str(self._main_character_stats[bn.MAX_STAMINA])
-    )
+    label = QLabel(f" {self._text.STAMINA} "
+                   f"{self._main_character_copy.stamina}/{self._main_character_copy.max_stamina}")
     return label
 
 
@@ -152,27 +138,27 @@ def create_attributes_widget(self) -> list[QHBoxLayout]:
 
 
 def create_strength_widget(self) -> QLabel:
-    label = QLabel(self._text.STRENGTH + str(self._attributes.STRENGTH))
+    label = QLabel(f" {self._text.STRENGTH} {self._main_character_copy.strength}")
     return label
 
 
 def create_agility_widget(self) -> QLabel:
-    label = QLabel(self._text.AGILITY + str(self._attributes.AGILITY))
+    label = QLabel(f" {self._text.AGILITY} {self._main_character_copy.agility}")
     return label
 
 
 def create_vitality_widget(self) -> QLabel:
-    label = QLabel(self._text.VITALITY + str(self._attributes.VITALITY))
+    label = QLabel(f" {self._text.VITALITY} {self._main_character_copy.vitality}")
     return label
 
 
 def create_endurance_widget(self) -> QLabel:
-    label = QLabel(self._text.ENDURANCE + str(self._attributes.ENDURANCE))
+    label = QLabel(f" {self._text.ENDURANCE} {self._main_character_copy.endurance}")
     return label
 
 
 def create_attribute_points_widget(self) -> QLabel:
-    label = QLabel(self._text.ATTRIBUTE_POINTS + str(self._attributes.ATTRIBUTE_POINTS))
+    label = QLabel(f"{ self._text.ATTRIBUTE_POINTS} {self._main_character_copy.attribute_points}")
     return label
 
 
@@ -198,29 +184,23 @@ def create_stats_widget(self) -> list[QLabel]:
 
 
 def create_damage_widget(self) -> QLabel:
-    label = QLabel(
-        self._text.DAMAGE
-        + str(self._main_character_stats[cs.MIN_DAMAGE])
-        + "-"
-        + str(self._main_character_stats[cs.MAX_DAMAGE])
-    )
+    label = QLabel(f" {self._text.DAMAGE} "
+                   f"{self._main_character_copy.min_damage}-{self._main_character_copy.max_damage}")
     return label
 
 
 def create_accuracy_widget(self) -> QLabel:
-    label = QLabel(self._text.ACCURACY + str(self._main_character_stats[cs.ACCURACY] * 100) + "%")
+    label = QLabel(f" {self._text.ACCURACY} {self._main_character_copy.accuracy * 100}%")
     return label
 
 
 def create_critical_strike_chance_widget(self) -> QLabel:
-    label = QLabel(
-        self._text.CRITICAL_STRIKE_CHANCE + str(self._main_character_stats[cs.CRITICAL_STRIKE_CHANCE] * 100) + "%"
-    )
+    label = QLabel(f" {self._text.CRITICAL_STRIKE_CHANCE} "
+                   f"{self._main_character_copy.critical_strike_chance * 100}%")
     return label
 
 
 def create_critical_strike_multiplier_widget(self) -> QLabel:
-    label = QLabel(
-        self._text.CRITICAL_STRIKE_MULTIPLIER + str(self._main_character_stats[cs.CRITICAL_STRIKE_MULTIPLIER])
-    )
+    label = QLabel(f" {self._text.CRITICAL_STRIKE_MULTIPLIER} "
+                   f"{self._main_character_copy.critical_strike_multiplier}")
     return label

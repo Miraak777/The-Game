@@ -3,10 +3,10 @@ names:
   ru: "\u041c\u0435\u0447\u043d\u0438\u043a\u0020\u0441\u0020\u0414\u0432\u0443\u0440\u0443\u0447\u043d\u044b\u043c\u0020\u043c\u0435\u0447\u0451\u043c"
 weapon: two_handed_sword.yml
 stats:
-  base_health: 20
+  base_health: 10
   strength_per_level: 2
   vitality_per_level: 1
-  strength_damage_multiplier: 0.1
-  vitality_health_multiplier: 15
+  strength_damage_multiplier: 0.06
+  vitality_health_multiplier: 10
   experience_gained: 50
 min_level: 7

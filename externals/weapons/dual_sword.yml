@@ -4,8 +4,8 @@ names:
   en: Dual Swords
   ru: "\u041f\u0430\u0440\u043d\u044b\u0435\u0020\u041c\u0435\u0447\u0438"
 stats:
-  max_damage: 24
-  min_damage: 18
+  max_damage: 18
+  min_damage: 12
   accuracy: 0.6
   critical_strike_chance: 0.06
   base_stamina_consumption: 7

@@ -12,7 +12,7 @@ class Weapon(BaseItem):
         self.level = level
         stats = self.get_weapon_stats(weapon_file_name)
 
-        self._level_damage_multiplier = 0.2
+        self._level_damage_multiplier = 0.15
         self.weapon_type = stats[StatNames.WEAPON_TYPE]
         self.item_type = ItemTypes.WEAPON
         self.name = stats[StatNames.NAMES][main_menu.language]
@@ -27,8 +27,8 @@ class Weapon(BaseItem):
         self._calculate_stamina_cost()
 
     def _calculate_damage(self) -> None:
-        self.max_damage = self.max_damage * (1 + self.level * self._level_damage_multiplier)
-        self.min_damage = self.min_damage * (1 + self.level * self._level_damage_multiplier)
+        self.max_damage = self.max_damage * (1 + (self.level - 1) * self._level_damage_multiplier)
+        self.min_damage = self.min_damage * (1 + (self.level - 1) * self._level_damage_multiplier)
 
     def _calculate_stamina_cost(self) -> None:
         self.stamina_consumption = self._base_stamina_consumption * self.level

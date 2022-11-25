@@ -4,8 +4,8 @@ names:
   en: Two Handed Sword
   ru: "\u0414\u0432\u0443\u0440\u0443\u0447\u043d\u044b\u0439\u0020\u041c\u0435\u0447"
 stats:
-  max_damage: 18
-  min_damage: 12
+  max_damage: 11
+  min_damage: 8
   accuracy: 0.6
   critical_strike_chance: 0.06
   base_stamina_consumption: 5

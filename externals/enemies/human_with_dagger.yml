@@ -3,10 +3,10 @@ names:
   ru: "\u0423\u0431\u0438\u0439\u0446\u0430"
 weapon: dagger.yml
 stats:
-  base_health: 20
+  base_health: 10
   strength_per_level: 2
   vitality_per_level: 1
-  strength_damage_multiplier: 0.1
-  vitality_health_multiplier: 15
+  strength_damage_multiplier: 0.06
+  vitality_health_multiplier: 10
   experience_gained: 70
 min_level: 5

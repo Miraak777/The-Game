@@ -4,7 +4,7 @@ names:
   en: Dual Daggers
   ru: "\u041f\u0430\u0440\u043d\u044b\u0435\u0020\u041a\u0438\u043d\u0436\u0430\u043b\u044b"
 stats:
-  max_damage: 12
+  max_damage: 14
   min_damage: 4
   accuracy: 0.8
   critical_strike_chance: 0.1

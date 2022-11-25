@@ -59,6 +59,8 @@ class Enemy:
         for consumable in consumables_table:
             if random() < 0.2:
                 dropped.append(Consumable(self._main_menu, consumable))
+        if self.weapon_drop_type == "fists":
+            return dropped
         for weapon in weapon_table:
             if random() < 0.2:
                 dropped.append(Weapon(self._main_menu, self.level, weapon))

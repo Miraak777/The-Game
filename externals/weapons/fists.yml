@@ -4,8 +4,8 @@ names:
   en: Fists
   ru: "\u041a\u0443\u043b\u0430\u043a\u0438"
 stats:
-  max_damage: 2
-  min_damage: 1
+  max_damage: 4
+  min_damage: 2
   accuracy: 0.8
   critical_strike_chance: 0.05
   base_stamina_consumption: 1

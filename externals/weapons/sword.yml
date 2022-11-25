@@ -4,8 +4,8 @@ names:
   en: Sword
   ru: "\u041c\u0435\u0447"
 stats:
-  max_damage: 12
-  min_damage: 9
+  max_damage: 9
+  min_damage: 6
   accuracy: 0.8
   critical_strike_chance: 0.06
   base_stamina_consumption: 3.5
