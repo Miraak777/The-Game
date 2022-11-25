@@ -9,12 +9,12 @@ from core.constants.character_constants import MainStatsNames as msn
 from core.items import Weapon
 from core.scenarios.death_scenario.scenario import DeathScenario
 
-from . import classes, characters_formulas as cf
+from . import characters_formulas as cf
+from . import classes
 from .texts import Text
 
 
 class MainCharacter:
-
     def __init__(self, character_name: str, main_menu) -> None:
         self._main_menu = main_menu
         self._text = Text[self._main_menu.language]

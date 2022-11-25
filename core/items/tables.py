@@ -1,7 +1,8 @@
-from core.constants.path_constants import Paths, Path
-from core.items import Weapon, Consumable
-from core.constants.item_constants import StatNames
 from typing import Dict
+
+from core.constants.item_constants import StatNames
+from core.constants.path_constants import Path, Paths
+from core.items import Consumable, Weapon
 
 
 def get_weapon_table() -> Dict[str, str]:
@@ -26,4 +27,3 @@ def get_consumables_table() -> Dict[str, str]:
         consumable_table[consumable_file] = stats[StatNames.CONSUMABLE_TYPE]
 
     return consumable_table
-

@@ -18,29 +18,32 @@ scroll_area_stylesheet = "background-color: rgba(0, 0, 0, 0.08);" "border: 0px;"
 
 label_stylesheet = "QLabel {" "background-color: rgba(0, 0, 0, 0);" "font: 18px;" "}"
 
-health_bar_stylesheet = ("QProgressBar {"
-                         "background-color: grey;"
-                         "border: 2px solid black;"
-                         "color: black;"
-                         "text-align: center; }"
+health_bar_stylesheet = (
+    "QProgressBar {"
+    "background-color: grey;"
+    "border: 2px solid black;"
+    "color: black;"
+    "text-align: center; }"
+    "QProgressBar::chunk {"
+    "background-color: #378E01; }"
+)
 
-                         "QProgressBar::chunk {"
-                         "background-color: #378E01; }")
+stamina_bar_stylesheet = (
+    "QProgressBar {"
+    "background-color: grey;"
+    "border: 2px solid black;"
+    "color: black;"
+    "text-align: center; }"
+    "QProgressBar::chunk {"
+    "background-color: #9E8B00; }"
+)
 
-stamina_bar_stylesheet = ("QProgressBar {"
-                          "background-color: grey;"
-                          "border: 2px solid black;"
-                          "color: black;"
-                          "text-align: center; }"
-
-                          "QProgressBar::chunk {"
-                          "background-color: #9E8B00; }")
-
-enemy_bar_stylesheet = ("QProgressBar {"
-                        "background-color: grey;"
-                        "border: 2px solid black;"
-                        "color: black;"
-                        "text-align: center; }"
-
-                        "QProgressBar::chunk {"
-                        "background-color: #378E01; }")
+enemy_bar_stylesheet = (
+    "QProgressBar {"
+    "background-color: grey;"
+    "border: 2px solid black;"
+    "color: black;"
+    "text-align: center; }"
+    "QProgressBar::chunk {"
+    "background-color: #378E01; }"
+)

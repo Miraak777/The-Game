@@ -1,10 +1,11 @@
+from pathlib import Path
 from typing import Dict
+
 from PyQt6.QtCore import QDir
 from yaml import safe_load
-from pathlib import Path
 
-from core.constants.key_bind_constants import KeyBindNames
 from core import BACKGROUNDS, BUTTONS, WIDGET_TEXTURES, Paths
+from core.constants.key_bind_constants import KeyBindNames
 
 
 def get_key_binds() -> Dict:
@@ -27,12 +28,6 @@ def set_qdirs() -> None:
     QDir.addSearchPath(BACKGROUNDS, Paths.PATH_TO_BACKGROUNDS)
     QDir.addSearchPath(BUTTONS, Paths.PATH_TO_BUTTON_TEXTURES)
     QDir.addSearchPath(WIDGET_TEXTURES, Paths.PATH_TO_WIDGET_TEXTURES)
-
-
-
-
-
-
 
 
 def get_enemy_stats(enemy_file_name):

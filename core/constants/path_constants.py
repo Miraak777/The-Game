@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+
 from core.constants.item_constants import ItemTypes
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent)

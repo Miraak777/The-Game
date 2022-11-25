@@ -1,12 +1,12 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QFrame, QLabel, QVBoxLayout
 from copy import copy
 
-from core.constants.character_constants import AttributesNames as an
-from core.common import clear_layout
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QFrame, QLabel, QVBoxLayout
 
-from . import widgets
-from . import buttons
+from core.common import clear_layout
+from core.constants.character_constants import AttributesNames as an
+
+from . import buttons, widgets
 from .constants import CharacterMenuSizes
 from .stylesheets import character_menu_stylesheet
 from .texts import Text

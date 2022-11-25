@@ -3,6 +3,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QGridLayout, QHBoxLayout, QMainWindow, QStackedLayout, QWidget
 from yaml import safe_load
 
+from core.common import set_qdirs
 from core.constants.language_constants import LANGUAGE
 from core.constants.path_constants import Paths
 from core.interface.character_menu.menu import CharacterMenu
@@ -12,7 +13,6 @@ from core.interface.option_menu.menu import OptionMenu
 from core.main_character.character import MainCharacter
 from core.scenarios import BattleScenario, RandomScenario, StartScenario
 from core.scenarios.base_situation.base_situation import BaseSituation
-from core.common import set_qdirs
 
 from . import widgets
 from .constants import MainMenuSizes

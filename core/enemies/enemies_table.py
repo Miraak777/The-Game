@@ -1,7 +1,8 @@
-from core.constants.path_constants import Paths, Path
-from core.enemies import Enemy
-from core.constants.item_constants import StatNames
 from typing import Dict
+
+from core.constants.item_constants import StatNames
+from core.constants.path_constants import Path, Paths
+from core.enemies import Enemy
 
 
 def get_enemy_table() -> Dict[str, int]:

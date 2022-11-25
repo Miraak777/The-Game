@@ -1,10 +1,13 @@
 from random import random, uniform
-from typing import List, Any, Dict
-from core.constants.path_constants import Path, Paths
+from typing import Any, Dict, List
+
 from yaml import safe_load
+
 from core.common import get_enemy_stats
 from core.constants.enemy_constants import StatNames
-from core.items import Weapon, Consumable, get_weapon_table, get_consumables_table
+from core.constants.path_constants import Path, Paths
+from core.items import Consumable, Weapon, get_consumables_table, get_weapon_table
+
 from .texts import Text
 
 
@@ -54,8 +57,11 @@ class Enemy:
     def calculate_drop(self) -> List[Any]:
         dropped = []
         consumables_table = get_consumables_table()
-        weapon_table = [weapon_file_name for weapon_file_name, weapon_type in get_weapon_table().items() if
-                        weapon_type == self.weapon_drop_type]
+        weapon_table = [
+            weapon_file_name
+            for weapon_file_name, weapon_type in get_weapon_table().items()
+            if weapon_type == self.weapon_drop_type
+        ]
         for consumable in consumables_table:
             if random() < 0.2:
                 dropped.append(Consumable(self._main_menu, consumable))
@@ -69,23 +75,22 @@ class Enemy:
 
     def _calculate_damage(self) -> None:
         self.max_damage = (
-                self.weapon.max_damage
-                * (1 + self.level / 10)
-                * self.difficulty_multiplier
-                * (1 + self.strength_per_level * self.level * self.strength_damage_multiplier)
+            self.weapon.max_damage
+            * (1 + self.level / 10)
+            * self.difficulty_multiplier
+            * (1 + self.strength_per_level * self.level * self.strength_damage_multiplier)
         )
         self.min_damage = (
-                self.weapon.min_damage
-                * (1 + self.level / 10)
-                * self.difficulty_multiplier
-                * (1 + self.strength_per_level * self.level * self.strength_damage_multiplier)
+            self.weapon.min_damage
+            * (1 + self.level / 10)
+            * self.difficulty_multiplier
+            * (1 + self.strength_per_level * self.level * self.strength_damage_multiplier)
         )
 
     def _calculate_health(self) -> None:
         self.max_health = (
-                                  self.base_health * self.level + self.vitality_per_level * self.level *
-                                  self.vitality_health_multiplier
-                          ) * self.difficulty_multiplier
+            self.base_health * self.level + self.vitality_per_level * self.level * self.vitality_health_multiplier
+        ) * self.difficulty_multiplier
         self.health = self.max_health
 
     def _calculate_experience_gained(self):

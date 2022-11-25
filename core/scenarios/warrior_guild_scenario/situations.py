@@ -1,6 +1,6 @@
 from core.constants.actions_constants import ActionButtons
-from core.main_character.classes import WarriorClass
 from core.enemies import Enemy
+from core.main_character.classes import WarriorClass
 from core.scenarios import BaseSituation, BattleSituation, ChillScenario
 
 
@@ -32,8 +32,11 @@ class MeetSituation(BaseSituation):
 
     def _event_third_action(self) -> None:
         self._log("")
-        sentry = Enemy(main_menu=self._main_menu, level=self._main_menu.main_character.main_stats.level + 10,
-                       enemy_file_name="human_with_sword")
+        sentry = Enemy(
+            main_menu=self._main_menu,
+            level=self._main_menu.main_character.main_stats.level + 10,
+            enemy_file_name="human_with_sword",
+        )
         sentry.name = self._text.SENTRY
         BattleSituation(self._main_menu, sentry)
 

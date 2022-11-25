@@ -56,4 +56,3 @@ exit_menu_button_stylesheet = (
     f"background-image: url({BUTTONS}:selected_exit_menu_button.png);"
     "}"
 )
-

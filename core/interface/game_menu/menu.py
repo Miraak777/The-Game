@@ -1,12 +1,12 @@
 from typing import Any, Dict
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QFrame, QGridLayout, QLabel, QVBoxLayout, QWidget, QHBoxLayout, QMainWindow
+from PyQt6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QLabel, QMainWindow, QVBoxLayout, QWidget
 
-from core.constants.actions_constants import ActionButtons
-from core.constants.key_bind_constants import KeyBindNames
-from core.constants.character_constants import BarsNames as bn
 from core.common import clear_layout, get_key_binds
+from core.constants.actions_constants import ActionButtons
+from core.constants.character_constants import BarsNames as bn
+from core.constants.key_bind_constants import KeyBindNames
 from core.enemies import Enemy
 
 from . import widgets

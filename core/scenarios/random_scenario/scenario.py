@@ -1,5 +1,6 @@
 from random import random, randrange
-from typing import List, Callable
+from typing import Callable, List
+
 from ..scenarios_maps import scenarios_maps
 
 

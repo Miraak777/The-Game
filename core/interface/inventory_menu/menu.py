@@ -1,11 +1,12 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout, QMainWindow
 
-from core.constants.item_constants import ItemTypes
 from core.common import clear_layout
+from core.constants.item_constants import ItemTypes
+
 from .constants import InventoryMenuSizes
+from .inventory_map import inventory_map
 from .stylesheets import inventory_menu_stylesheet
 from .texts import Text
-from .inventory_map import inventory_map
 from .widgets import ItemSlot
 
 
@@ -43,9 +44,9 @@ class InventoryMenu(QFrame):
     def unequip_all_weapon(self) -> None:
         for item_id in range(InventoryMenuSizes.ITEMS_VERTICAL_NUMBER * InventoryMenuSizes.ITEMS_HORIZONTAL_NUMBER):
             if (
-                    self._inventory_map[item_id] and
-                    self._inventory_map[item_id].item_type == ItemTypes.WEAPON and
-                    self._inventory_map[item_id].item_equipped
+                self._inventory_map[item_id]
+                and self._inventory_map[item_id].item_type == ItemTypes.WEAPON
+                and self._inventory_map[item_id].item_equipped
             ):
                 self._inventory_map[item_id].item_equipped = False
         self.refresh_inventory()

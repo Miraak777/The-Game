@@ -60,13 +60,7 @@ class BattleSituation(BaseSituation):
         }
         self.refresh_buttons()
         self._game_menu.add_log(
-            self._text.BATTLE_START
-            + " "
-            + enemy.name
-            + " "
-            + str(enemy.level)
-            + " "
-            + self._text.LEVEL
+            self._text.BATTLE_START + " " + enemy.name + " " + str(enemy.level) + " " + self._text.LEVEL
         )
         self._game_menu.refresh_enemy_bar(enemy)
         self._log("")

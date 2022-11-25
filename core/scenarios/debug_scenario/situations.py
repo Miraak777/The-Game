@@ -1,7 +1,7 @@
-from core.scenarios import BaseSituation
-from core.main_character.classes import WarriorClass, AssassinClass
-from core.items.weapon import Weapon
 from core.items.tables import get_weapon_table
+from core.items.weapon import Weapon
+from core.main_character.classes import AssassinClass, WarriorClass
+from core.scenarios import BaseSituation
 
 
 class DebugSituation(BaseSituation):
@@ -17,9 +17,9 @@ class DebugSituation(BaseSituation):
         weapon_list = get_weapon_table()
         for weapon in weapon_list:
             if weapon != "fists.yml":
-                self._main_menu.inventory_menu.add_item(Weapon(self._main_menu,
-                                                               self._main_menu.main_character.main_stats.LEVEL,
-                                                               weapon))
+                self._main_menu.inventory_menu.add_item(
+                    Weapon(self._main_menu, self._main_menu.main_character.main_stats.LEVEL, weapon)
+                )
 
     def _event_third_action(self) -> None:
         self._main_menu.main_character.set_class(WarriorClass)

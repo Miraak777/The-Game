@@ -5,14 +5,14 @@ from core.constants.language_constants import Language
 
 from .constants import OptionMenuButtons, OptionMenuSizes
 from .stylesheets import (
-    debug_button_stylesheet,
     about_button_stylesheet,
+    debug_button_stylesheet,
     exit_button_stylesheet,
+    exit_menu_button_stylesheet,
     language_choose_stylesheet,
     languages_buttons_stylesheet,
     restart_request_stylesheet,
     title_stylesheet,
-    exit_menu_button_stylesheet,
 )
 
 

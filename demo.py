@@ -2,7 +2,6 @@ from PyQt6.QtWidgets import QApplication
 
 from core.interface import MainMenu
 
-
 app = QApplication([])
 
 main_window = MainMenu()

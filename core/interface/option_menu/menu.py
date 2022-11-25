@@ -3,8 +3,8 @@ from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout
 from yaml import safe_dump, safe_load
 
 from core import Paths
-from core.constants.language_constants import LANGUAGE, Language
 from core.common import clear_layout
+from core.constants.language_constants import LANGUAGE, Language
 from core.scenarios.debug_scenario.scenario import DebugScenario
 
 from . import widgets

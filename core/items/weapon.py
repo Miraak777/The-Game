@@ -1,9 +1,11 @@
-from core.items.base_item import BaseItem
-from core.constants.item_constants import StatNames, ItemTypes
-from typing import List, Dict, Any
-from yaml import safe_load
-from core.constants.path_constants import Path, Paths
+from typing import Any, Dict, List
+
 from PyQt6.QtWidgets import QMainWindow
+from yaml import safe_load
+
+from core.constants.item_constants import ItemTypes, StatNames
+from core.constants.path_constants import Path, Paths
+from core.items.base_item import BaseItem
 
 
 class Weapon(BaseItem):

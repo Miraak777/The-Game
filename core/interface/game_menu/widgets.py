@@ -1,9 +1,10 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QPushButton, QScrollArea, QProgressBar
 from typing import Callable
 
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QProgressBar, QPushButton, QScrollArea
+
 from .constants import GameMenuButtons, GameMenuSizes
-from .stylesheets import scroll_area_stylesheet, health_bar_stylesheet, stamina_bar_stylesheet, enemy_bar_stylesheet
+from .stylesheets import enemy_bar_stylesheet, health_bar_stylesheet, scroll_area_stylesheet, stamina_bar_stylesheet
 
 
 def create_scroll_area(self) -> QScrollArea:

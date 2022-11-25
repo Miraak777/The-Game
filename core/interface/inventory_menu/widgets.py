@@ -1,9 +1,12 @@
-from PyQt6.QtWidgets import QPushButton
-from PyQt6.QtGui import QIcon
 from pathlib import Path
-from .constants import InventoryMenuSizes
-from .stylesheets import item_button_stylesheet, equipped_item_button_stylesheet
+
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QPushButton
+
 from core.constants.path_constants import path_to_item_icons_map
+
+from .constants import InventoryMenuSizes
+from .stylesheets import equipped_item_button_stylesheet, item_button_stylesheet
 
 
 class ItemSlot(QPushButton):
@@ -20,5 +23,3 @@ class ItemSlot(QPushButton):
                 self.setStyleSheet(equipped_item_button_stylesheet)
         else:
             self.setDisabled(True)
-
-

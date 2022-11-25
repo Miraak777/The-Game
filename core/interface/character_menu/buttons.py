@@ -3,7 +3,12 @@ from PyQt6.QtWidgets import QPushButton
 from core.constants.character_constants import AttributesNames as an
 
 from .constants import CharacterMenuButtons
-from .stylesheets import accept_button_stylesheet, add_button_stylesheet, remove_button_stylesheet, exit_menu_button_stylesheet
+from .stylesheets import (
+    accept_button_stylesheet,
+    add_button_stylesheet,
+    exit_menu_button_stylesheet,
+    remove_button_stylesheet,
+)
 
 
 def create_exit_menu_button(self) -> QPushButton:
@@ -73,9 +78,9 @@ def create_strength_removing_button(self) -> QPushButton:
     strength_removing_button.setCheckable(True)
     strength_removing_button.clicked.connect(self._event_remove_strength)
     if (
-            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
-            or self._main_character_copy.strength == 0
-            or self._main_character_copy.strength <= self._main_menu.main_character.strength
+        self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+        or self._main_character_copy.strength == 0
+        or self._main_character_copy.strength <= self._main_menu.main_character.strength
     ):
         strength_removing_button.setDisabled(True)
     else:
@@ -90,9 +95,9 @@ def create_agility_removing_button(self) -> QPushButton:
     agility_removing_button.setCheckable(True)
     agility_removing_button.clicked.connect(self._event_remove_agility)
     if (
-            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
-            or self._main_character_copy.agility == 0
-            or self._main_character_copy.agility <= self._main_menu.main_character.agility
+        self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+        or self._main_character_copy.agility == 0
+        or self._main_character_copy.agility <= self._main_menu.main_character.agility
     ):
         agility_removing_button.setDisabled(True)
     else:
@@ -107,9 +112,9 @@ def create_vitality_removing_button(self) -> QPushButton:
     vitality_removing_button.setCheckable(True)
     vitality_removing_button.clicked.connect(self._event_remove_vitality)
     if (
-            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
-            or self._main_character_copy.vitality == 0
-            or self._main_character_copy.vitality <= self._main_menu.main_character.vitality
+        self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+        or self._main_character_copy.vitality == 0
+        or self._main_character_copy.vitality <= self._main_menu.main_character.vitality
     ):
         vitality_removing_button.setDisabled(True)
     else:
@@ -124,9 +129,9 @@ def create_endurance_removing_button(self) -> QPushButton:
     endurance_removing_button.setCheckable(True)
     endurance_removing_button.clicked.connect(self._event_remove_endurance)
     if (
-            self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
-            or self._main_character_copy.endurance == 0
-            or self._main_character_copy.endurance <= self._main_menu.main_character.endurance
+        self._main_character_copy.attribute_points == self._main_menu.main_character.attribute_points
+        or self._main_character_copy.endurance == 0
+        or self._main_character_copy.endurance <= self._main_menu.main_character.endurance
     ):
         endurance_removing_button.setDisabled(True)
     else:
