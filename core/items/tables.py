@@ -2,7 +2,8 @@ from typing import Dict
 
 from core.constants.item_constants import StatNames
 from core.constants.path_constants import Path, Paths
-from core.items import Consumable, Weapon
+from core.items.consumable import Consumable
+from core.items.weapon import Weapon
 
 
 def get_weapon_table() -> Dict[str, str]:

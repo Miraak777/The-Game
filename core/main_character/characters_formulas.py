@@ -9,7 +9,7 @@ def stamina_formula(stamina_mult: float, level: int, endurance: int) -> float:
 
 
 def min_damage_formula(
-    min_damage: int,
+    min_damage: float,
     agility: int,
     agility_damage_multiplier: float,
     strength: int,
@@ -22,7 +22,7 @@ def min_damage_formula(
 
 
 def max_damage_formula(
-    max_damage: int,
+    max_damage: float,
     agility: int,
     agility_damage_multiplier: float,
     strength: int,

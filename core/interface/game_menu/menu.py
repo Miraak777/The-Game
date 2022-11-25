@@ -1,11 +1,10 @@
 from typing import Any, Dict
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QLabel, QMainWindow, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QLabel, QVBoxLayout, QWidget
 
 from core.common import clear_layout, get_key_binds
 from core.constants.actions_constants import ActionButtons
-from core.constants.character_constants import BarsNames as bn
 from core.constants.key_bind_constants import KeyBindNames
 from core.enemies import Enemy
 
@@ -15,7 +14,7 @@ from .stylesheets import game_window_stylesheet, label_stylesheet
 
 
 class GameMenu(QFrame):
-    def __init__(self, main_menu: QMainWindow) -> None:
+    def __init__(self, main_menu) -> None:
         super().__init__()
         self._main_menu = main_menu
         self.setFixedSize(GameMenuSizes.GAME_WINDOW_SIZE)
@@ -79,17 +78,18 @@ class GameMenu(QFrame):
         self.buttons_layout.addWidget(button, 1, 1)
 
     def refresh_character_bars(self) -> None:
-        stats = self._main_menu.main_character.get_stats()
-        self._health_bar.setMaximum(int(stats[bn.MAX_HEALTH]))
-        self._health_bar.setValue(int(round(stats[bn.HEALTH])))
-        self._health_bar.setFormat(str(stats[bn.HEALTH]) + "/" + str(stats[bn.MAX_HEALTH]))
-        self._stamina_bar.setMaximum(int(stats[bn.MAX_STAMINA]))
-        self._stamina_bar.setValue(int(round(stats[bn.STAMINA])))
-        self._stamina_bar.setFormat(str(stats[bn.STAMINA]) + "/" + str(stats[bn.MAX_STAMINA]))
+
+        self._health_bar.setMaximum(int(self._main_menu.main_character.max_health))
+        self._health_bar.setValue(int(round(self._main_menu.main_character.health)))
+        self._health_bar.setFormat(f"{self._main_menu.main_character.health}/{self._main_menu.main_character.max_health}")
+        self._stamina_bar.setMaximum(int(self._main_menu.main_character.max_stamina))
+        self._stamina_bar.setValue(int(round(self._main_menu.main_character.stamina)))
+        self._stamina_bar.setFormat(f"{self._main_menu.main_character.stamina}/"
+                                    f"{self._main_menu.main_character.max_stamina}")
 
     def refresh_enemy_bar(self, enemy: Enemy) -> None:
         max_health = enemy.max_health
         health = enemy.health
         self._enemy_bar.setMaximum(int(max_health))
         self._enemy_bar.setValue(int(health))
-        self._enemy_bar.setFormat(str(health) + "/" + str(max_health))
+        self._enemy_bar.setFormat(f"{health}/{max_health}")

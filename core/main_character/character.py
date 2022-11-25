@@ -5,7 +5,6 @@ from core.constants.character_constants import AttributesNames as an
 from core.constants.character_constants import BarsNames as bn
 from core.constants.character_constants import CombatStatsNames as cs
 from core.constants.character_constants import CommonConstants as cc
-from core.constants.character_constants import MainStatsNames as msn
 from core.items import Weapon
 from core.scenarios.death_scenario.scenario import DeathScenario
 
@@ -189,90 +188,42 @@ class MainCharacter:
             self._add_level()
             self.send_experience(0)
 
-    def get_stats(self) -> Dict[str, Any]:
-        self.refresh_stats()
-        stats = {
-            msn.NAME: self.name,
-            msn.LEVEL: self.level,
-            msn.MAX_EXPERIENCE: self.max_experience,
-            msn.EXPERIENCE: self.experience,
-            msn.CLASS: self.character_class,
-            bn.MAX_HEALTH: self.max_health,
-            bn.HEALTH: self.health,
-            bn.MAX_STAMINA: self.max_stamina,
-            bn.STAMINA: self.stamina,
-            an.STRENGTH: self.strength,
-            an.AGILITY: self.agility,
-            an.VITALITY: self.vitality,
-            an.ENDURANCE: self.endurance,
-            an.ATTRIBUTE_POINTS: self.attribute_points,
-            cs.MAX_DAMAGE: self.max_damage,
-            cs.MIN_DAMAGE: self.min_damage,
-            cs.ACCURACY: self.accuracy,
-            cs.CRITICAL_STRIKE_CHANCE: self.critical_strike_chance,
-            cs.CRITICAL_STRIKE_MULTIPLIER: self.critical_strike_multiplier,
-        }
-        return stats
-
-    def calculate_character_stats(self) -> Dict[str, Any]:
-        calculated_stats = {
-            bn.MAX_HEALTH: cf.health_formula(
-                health_mult=self.health_multiplier,
-                level=self.level,
-                vitality=self.vitality,
-            ),
-            bn.MAX_STAMINA: cf.stamina_formula(
-                stamina_mult=self.stamina_multiplier,
-                level=self.level,
-                endurance=self.endurance,
-            ),
-            cs.MIN_DAMAGE: cf.min_damage_formula(
-                min_damage=self._equipped_weapon.min_damage,
-                strength=self.strength,
-                strength_damage_multiplier=self.strength_damage_multiplier,
-                agility=self.agility,
-                agility_damage_multiplier=self.agility_damage_multiplier,
-            ),
-            cs.MAX_DAMAGE: cf.max_damage_formula(
-                max_damage=self._equipped_weapon.max_damage,
-                strength=self.strength,
-                strength_damage_multiplier=self.strength_damage_multiplier,
-                agility=self.agility,
-                agility_damage_multiplier=self.agility_damage_multiplier,
-            ),
-            cs.CRITICAL_STRIKE_CHANCE: cf.critical_strike_formula(
-                base_critical_strike_chance=self._equipped_weapon.critical_strike_chance,
-                agility=self.agility,
-                critical_strike_chance_multiplier=self.critical_strike_chance_multiplier,
-            ),
-            cs.ACCURACY: cf.accuracy_formula(
-                accuracy=self._equipped_weapon.accuracy,
-                agility=self.agility,
-                level=self.level,
-            ),
-        }
-        return calculated_stats
-
     def refresh_stats(self) -> None:
-        stats = self.calculate_character_stats()
-        self.max_health = stats[bn.MAX_HEALTH]
-        self.max_stamina = stats[bn.MAX_STAMINA]
-        self.max_damage = stats[cs.MAX_DAMAGE]
-        self.min_damage = stats[cs.MIN_DAMAGE]
-        self.accuracy = stats[cs.ACCURACY]
-        self.critical_strike_chance = stats[cs.CRITICAL_STRIKE_CHANCE]
+        self.max_health = cf.health_formula(health_mult=self.health_multiplier,
+                                            level=self.level,
+                                            vitality=self.vitality, )
+        self.max_stamina = cf.stamina_formula(stamina_mult=self.stamina_multiplier,
+                                              level=self.level,
+                                              endurance=self.endurance, )
+        self.max_damage = cf.max_damage_formula(max_damage=self._equipped_weapon.max_damage,
+                                                strength=self.strength,
+                                                strength_damage_multiplier=self.strength_damage_multiplier,
+                                                agility=self.agility,
+                                                agility_damage_multiplier=self.agility_damage_multiplier, )
+        self.min_damage = cf.min_damage_formula(min_damage=self._equipped_weapon.min_damage,
+                                                strength=self.strength,
+                                                strength_damage_multiplier=self.strength_damage_multiplier,
+                                                agility=self.agility,
+                                                agility_damage_multiplier=self.agility_damage_multiplier, )
+        self.accuracy = cf.accuracy_formula(accuracy=self._equipped_weapon.accuracy,
+                                            agility=self.agility,
+                                            level=self.level, )
+        self.critical_strike_chance = cf.critical_strike_formula(
+            base_critical_strike_chance=self._equipped_weapon.critical_strike_chance,
+            agility=self.agility,
+            critical_strike_chance_multiplier=self.critical_strike_chance_multiplier, )
 
     def _init_start_parameters(self) -> None:
         self._equipped_weapon = Weapon(self._main_menu, 1, "fists.yml")
         self._no_weapon = True
-        self.level = 1
-        self.max_experience = 100
-        self.experience = 0
-        self.attribute_points = 3
-        self.strength = 0
-        self.agility = 0
-        self.vitality = 0
-        self.endurance = 0
+        self.level: int = 1
+        self.max_experience: int = 100
+        self.experience: int = 0
+        self.attribute_points: int = 3
+        self.strength: int = 0
+        self.agility: int = 0
+        self.vitality: int = 0
+        self.endurance: int = 0
         self.max_health = None
         self.health = None
         self.max_stamina = None
