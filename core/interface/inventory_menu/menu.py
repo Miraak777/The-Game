@@ -7,7 +7,7 @@ from .constants import InventoryMenuSizes
 from .inventory_map import inventory_map
 from .stylesheets import inventory_menu_stylesheet
 from .texts import Text
-from .widgets import ItemSlot
+from .item_slot import ItemSlot
 
 
 class InventoryMenu(QFrame):
@@ -28,6 +28,7 @@ class InventoryMenu(QFrame):
     def create_layout(self) -> None:
         self._layout = QGridLayout()
         self.setLayout(self._layout)
+        self._layout.setSpacing(0)
 
     def _create_item_buttons(self) -> None:
         item_id = 0

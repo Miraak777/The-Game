@@ -12,3 +12,4 @@ class StatNames:
     STRENGTH_DAMAGE_MULTIPLIER: str = "strength_damage_multiplier"
     VITALITY_HEALTH_MULTIPLIER: str = "vitality_health_multiplier"
     EXPERIENCE_GAINED: str = "experience_gained"
+    ITEM_QUALITY: str = "item_quality"

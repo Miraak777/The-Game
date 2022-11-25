@@ -10,11 +10,6 @@ main_menu_stylesheet = (
     "MainMenu {"
     f"background-image: url({BACKGROUNDS}:main_menu_background.jpg);"
     "}"
-    "QPushButton:hover {border: 1px solid #edbd79;"
-    "}"
-    "QPushButton {"
-    "border: 1px solid black;"
-    "}"
     "QWidget {"
     "font-family: Comic Sans MS, Comic Sans, cursive"
     "}"
@@ -32,6 +27,8 @@ character_creation_button_stylesheet = (
     "font: bold 18px;"
     "color: #000000;"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
+    "QPushButton {border: 1px solid black;}"
 )
 
 character_menu_button_stylesheet = (
@@ -41,6 +38,8 @@ character_menu_button_stylesheet = (
     "QPushButton {"
     f"image: url({BUTTONS}:character_menu_button_disabled.png);"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
+    "QPushButton {border: 1px solid black;}"
 )
 option_menu_button_stylesheet = (
     "QPushButton:enabled {"
@@ -49,6 +48,8 @@ option_menu_button_stylesheet = (
     "QPushButton {"
     f"image: url({BUTTONS}:option_menu_button_disabled.png);"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
+    "QPushButton {border: 1px solid black;}"
 )
 
 about_menu_stylesheet = (

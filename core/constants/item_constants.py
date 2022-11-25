@@ -22,3 +22,4 @@ class StatNames:
     CONSUMABLE_TYPE: str = "consumable_type"
     RESTORE_VALUE: str = "restore_value"
     MIN_LEVEL: str = "min_level"
+    RARITY: str = "rarity"

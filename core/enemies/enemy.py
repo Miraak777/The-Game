@@ -1,4 +1,4 @@
-from random import random, uniform
+from random import random, uniform, choices
 from typing import Any, Dict, List
 
 from yaml import safe_load
@@ -22,7 +22,8 @@ class Enemy:
         self.difficulty_multiplier = 1
         self.is_dead = False
         self.name = stats[StatNames.NAMES][self._main_menu.language]
-        self.weapon = Weapon(self._main_menu, self.level, stats[StatNames.WEAPON])
+        self.item_quality = stats[StatNames.STATS][StatNames.ITEM_QUALITY]
+        self.weapon = Weapon(self._main_menu, self.level, stats[StatNames.WEAPON], self.item_quality)
         self.base_health = stats[StatNames.STATS][StatNames.BASE_HEALTH]
         self.strength_per_level = stats[StatNames.STATS][StatNames.STRENGTH_PER_LEVEL]
         self.vitality_per_level = stats[StatNames.STATS][StatNames.VITALITY_PER_LEVEL]
@@ -69,7 +70,8 @@ class Enemy:
             return dropped
         for weapon in weapon_table:
             if random() < 0.2:
-                dropped.append(Weapon(self._main_menu, self.level, weapon))
+                rarity = choices([i for i in range(8)], [0.15, 0.2925, 0.2925, 0.15, 0.07, 0.03, 0.01, 0.005])[0]
+                dropped.append(Weapon(self._main_menu, self.level, weapon, rarity))
                 break
         return dropped
 

@@ -30,21 +30,30 @@ languages_buttons_stylesheet = (
     f"background-image: url({BUTTONS}:language_button_disabled.png);"
     "color: black;"
     "font: 18px;"
+    "border: 1px solid black;"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 restart_request_stylesheet = "QLabel {" "font: bold 18px;" "color: #edbd79;}"
 
 exit_button_stylesheet = (
-    "QPushButton {" f"background-image: url({BUTTONS}:exit_button.png);" "color:#edbd79;" "font: 18px;" "}"
+    "QPushButton {" f"background-image: url({BUTTONS}:exit_button.png);" 
+    "color:#edbd79; font: 18px; border: 1px solid black;}"
 )
 
 debug_button_stylesheet = (
-    "QPushButton {" f"background-image: url({BUTTONS}:debug_button.png);" "color:#edbd79;" "font: 18px;" "}"
+    "QPushButton {" f"background-image: url({BUTTONS}:debug_button.png);" 
+    "color:#edbd79; font: 18px;"
+    "border: 1px solid black;}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 about_button_stylesheet = (
-    "QPushButton {" f"background-image: url({BUTTONS}:debug_button.png);" "color:#edbd79;" "font: 18px;" "}"
+    "QPushButton {" 
+    f"background-image: url({BUTTONS}:debug_button.png); "
+    "color:#edbd79;font: 18px; border: 1px solid black;}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 exit_menu_button_stylesheet = (

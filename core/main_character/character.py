@@ -86,16 +86,14 @@ class MainCharacter:
         self._add_log(self._text.EQUIPPED_WEAPON + weapon.name)
         self._no_weapon = False
         self.refresh_stats()
-        self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
 
     def unequip_weapon(self) -> Weapon:
         weapon = self._equipped_weapon
         weapon.item_equipped = False
-        self._equipped_weapon = Weapon(self._main_menu, self.level, "fists.yml")
+        self._equipped_weapon = Weapon(self._main_menu, self.level, "fists.yml", 2)
         self._no_weapon = True
         self.refresh_stats()
-        self._main_menu.character_menu.set_actual_character_stats()
         self._main_menu.character_menu.refresh_character_menu()
         return weapon
 
@@ -214,7 +212,7 @@ class MainCharacter:
             critical_strike_chance_multiplier=self.critical_strike_chance_multiplier, )
 
     def _init_start_parameters(self) -> None:
-        self._equipped_weapon = Weapon(self._main_menu, 1, "fists.yml")
+        self._equipped_weapon = Weapon(self._main_menu, 1, "fists.yml", 2)
         self._no_weapon = True
         self.level: int = 1
         self.max_experience: int = 100
@@ -246,20 +244,20 @@ class MainCharacter:
 
     def _calculate_damage(self, attack_type_damage_multiplier: float) -> Dict[str, float]:
         self.refresh_stats()
-        max_damage = round(self.max_health * attack_type_damage_multiplier, 1)
+        max_damage = round(self.max_damage * attack_type_damage_multiplier, 1)
         min_damage = round(self.min_damage * attack_type_damage_multiplier, 1)
         return {cs.MAX_DAMAGE: max_damage, cs.MIN_DAMAGE: min_damage}
 
     def _add_level(self) -> None:
         self.level += 1
-        self.max_experience.MAX_EXPERIENCE = cf.max_experience_formula(level=self.level)
+        self.max_experience = cf.max_experience_formula(level=self.level)
         self.attribute_points += 3
         if self._no_weapon:
-            self._equipped_weapon = Weapon(self._main_menu, self.level, "fists.yml")
+            self._equipped_weapon = Weapon(self._main_menu, self.level, "fists.yml", 2)
         self.refresh_stats()
         self.set_max_health()
         self.set_max_stamina()
-        self._main_menu.character_menu.set_actual_character_stats()
+        self._main_menu.character_menu.refresh_character_copy()
         self._main_menu.character_menu.refresh_character_menu()
         self._add_log(self._text.LEVEL_UP)
         self._refresh_bars()

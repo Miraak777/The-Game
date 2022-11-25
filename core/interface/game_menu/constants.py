@@ -9,6 +9,8 @@ class GameMenuSizes:
     SCROLL_AREA_SIZE: QSize = QSize(760, 470)
     CHARACTER_BARS_SIZE: QSize = QSize(377, 20)
     ENEMY_BAR_SIZE: QSize = QSize(760, 20)
+    ITEM_INFO_SIZE: QSize = QSize(300, 100)
+    ITEM_INFO_LAYOUT_SIZE: QSize = QSize(780, 170)
 
 
 @dataclass(frozen=True)

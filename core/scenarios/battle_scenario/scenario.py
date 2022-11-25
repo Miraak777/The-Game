@@ -15,7 +15,7 @@ class BattleScenario:
     def start_battle(self, main_menu) -> None:
         self.main_menu.character_menu_button.setDisabled(True)
 
-        enemy = self.spawn_enemy(self.main_menu.main_character.main_stats.LEVEL)
+        enemy = self.spawn_enemy(self.main_menu.main_character.level)
 
         BattleSituation(main_menu=self.main_menu, enemy=enemy)
 

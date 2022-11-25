@@ -9,4 +9,5 @@ stats:
   strength_damage_multiplier: 0.6
   vitality_health_multiplier: 15
   experience_gained: 200
+  item_quality: 1
 min_level: 9

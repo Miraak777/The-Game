@@ -1,7 +1,7 @@
 from typing import Callable
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QProgressBar, QPushButton, QScrollArea
+from PyQt6.QtWidgets import QProgressBar, QPushButton, QScrollArea, QWidget, QHBoxLayout, QGridLayout
 
 from .constants import GameMenuButtons, GameMenuSizes
 from .stylesheets import enemy_bar_stylesheet, health_bar_stylesheet, scroll_area_stylesheet, stamina_bar_stylesheet

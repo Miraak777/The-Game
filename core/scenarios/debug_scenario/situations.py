@@ -1,3 +1,5 @@
+from random import randrange
+
 from core.items.tables import get_weapon_table
 from core.items.weapon import Weapon
 from core.main_character.classes import AssassinClass, WarriorClass
@@ -18,7 +20,7 @@ class DebugSituation(BaseSituation):
         for weapon in weapon_list:
             if weapon != "fists.yml":
                 self._main_menu.inventory_menu.add_item(
-                    Weapon(self._main_menu, self._main_menu.main_character.main_stats.LEVEL, weapon)
+                    Weapon(self._main_menu, self._main_menu.main_character.level, weapon, randrange(0, 8))
                 )
 
     def _event_third_action(self) -> None:

@@ -11,7 +11,9 @@ game_window_stylesheet = (
     "}"
     "QPushButton {"
     f"background-image: url({BUTTONS}:action_button_disabled.png);"
+    "border: 1px solid black;"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 scroll_area_stylesheet = "background-color: rgba(0, 0, 0, 0.08);" "border: 0px;"

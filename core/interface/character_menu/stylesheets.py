@@ -16,7 +16,9 @@ add_button_stylesheet = (
     "}"
     "QPushButton {"
     f"background-image: url({BUTTONS}:add_button_disabled.png);"
+    "border: 1px solid black"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 remove_button_stylesheet = (
@@ -26,7 +28,9 @@ remove_button_stylesheet = (
     "}"
     "QPushButton {"
     f"background-image: url({BUTTONS}:remove_button_disabled.png);"
+    "border: 1px solid black"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 accept_button_stylesheet = (
@@ -37,7 +41,9 @@ accept_button_stylesheet = (
     "QPushButton {"
     f"background-image: url({BUTTONS}:accept_button_disabled.png);"
     "font: bold 18px;"
+    "border: 1px solid black"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )
 
 exit_menu_button_stylesheet = (
@@ -47,5 +53,7 @@ exit_menu_button_stylesheet = (
     "}"
     "QPushButton:hover {"
     f"background-image: url({BUTTONS}:selected_exit_menu_button.png);"
+    "border: 1px solid black"
     "}"
+    "QPushButton:hover {border: 1px solid #edbd79;}"
 )

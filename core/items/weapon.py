@@ -9,9 +9,10 @@ from core.items.base_item import BaseItem
 
 
 class Weapon(BaseItem):
-    def __init__(self, main_menu: QMainWindow, level: int, weapon_file_name: str) -> None:
+    def __init__(self, main_menu: QMainWindow, level: int, weapon_file_name: str, rarity: float) -> None:
         super().__init__(main_menu)
         self.level = level
+        self.rarity = rarity
         stats = self.get_weapon_stats(weapon_file_name)
 
         self._level_damage_multiplier = 0.15
@@ -29,26 +30,30 @@ class Weapon(BaseItem):
         self._calculate_stamina_cost()
 
     def _calculate_damage(self) -> None:
-        self.max_damage = self.max_damage * (1 + (self.level - 1) * self._level_damage_multiplier)
-        self.min_damage = self.min_damage * (1 + (self.level - 1) * self._level_damage_multiplier)
+        self.max_damage = self.max_damage * (1 + (self.level - 1) * self._level_damage_multiplier) * (
+                    0.8 + self.rarity * 0.2)
+        self.min_damage = self.min_damage * (1 + (self.level - 1) * self._level_damage_multiplier) * (
+                    0.8 + self.rarity * 0.2)
 
     def _calculate_stamina_cost(self) -> None:
-        self.stamina_consumption = self._base_stamina_consumption * self.level
+        self.stamina_consumption = self._base_stamina_consumption * self.level / (0.8 + self.rarity * 0.1)
 
     def use_item(self) -> None:
+        self.main_menu.game_menu.hide_item_info()
         if self.item_equipped:
-            self._main_menu.main_character.unequip_weapon()
-            self._main_menu.inventory_menu.refresh_inventory()
+            self.main_menu.main_character.unequip_weapon()
+            self.main_menu.inventory_menu.refresh_inventory()
+            self.main_menu.character_menu.refresh_character_copy()
+            self.main_menu.character_menu.refresh_character_menu()
         else:
-            self._main_menu.inventory_menu.unequip_all_weapon()
-            self._main_menu.main_character.equip_weapon(self)
-            self._main_menu.inventory_menu.refresh_inventory()
+            self.main_menu.inventory_menu.unequip_all_weapon()
+            self.main_menu.main_character.equip_weapon(self)
+            self.main_menu.inventory_menu.refresh_inventory()
+            self.main_menu.character_menu.refresh_character_copy()
+            self.main_menu.character_menu.refresh_character_menu()
 
     @staticmethod
     def get_weapon_stats(weapon_file_name) -> Dict[str, Any]:
         with open(str(Path(Paths.PATH_TO_WEAPONS, weapon_file_name)), "r") as weapon_file:
             stats = safe_load(weapon_file)
             return stats
-
-    def get_description_stats(self) -> List[str]:
-        pass

@@ -36,9 +36,12 @@ class CharacterMenu(QFrame):
     def create_layout(self) -> None:
         self._layout = QVBoxLayout()
         self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self._main_character_copy = copy(self._main_menu.main_character)
+        self.refresh_character_copy()
         self._create_widgets()
         self.setLayout(self._layout)
+
+    def refresh_character_copy(self):
+        self._main_character_copy = copy(self._main_menu.main_character)
 
     def _create_widgets(self) -> None:
 
@@ -141,7 +144,7 @@ class CharacterMenu(QFrame):
             an.ATTRIBUTE_POINTS: self._main_character_copy.attribute_points,
         }
         self._main_menu.main_character.send_attributes(output_attributes)
-        self._main_character_copy = copy(self._main_menu.main_character)
+        self.refresh_character_copy()
         self.refresh_character_menu()
 
     def _event_exit_menu(self) -> None:
