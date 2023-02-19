@@ -1,0 +1,18 @@
+required_level:
+start:
+  texts:
+    en: "You made a halt"
+    ru: "Вы устроили привал"
+  actions:
+    action_1:
+      action_names:
+        en: "Continue traveling"
+        ru: "Продолжить путешествие"
+      action_type: random
+      next_event:
+      texts:
+        en: ""
+        ru: ""
+    action_2:
+    action_3:
+    action_4:

@@ -27,6 +27,6 @@ class Consumable(BaseItem):
 
     @staticmethod
     def get_consumable_stats(consumable_file_name: str) -> Dict[str, Any]:
-        with open(str(Path(Paths.PATH_TO_CONSUMABLES, consumable_file_name)), "r") as consumable_file:
+        with open(str(Path(Paths.PATH_TO_CONSUMABLES, consumable_file_name)), "r", encoding="utf-8") as consumable_file:
             stats = safe_load(consumable_file)
             return stats

@@ -18,6 +18,8 @@ class EnglishText:
     LEVEL: str = "Lvl"
     RESTORES: str = "Restores"
     HEALTH: str = "health"
+    ACCURACY: str = "Base accuracy"
+    CRITICAL_STRIKE_CHANCE: str = "Crit. chance"
 
 
 @dataclass(frozen=True)
@@ -35,6 +37,8 @@ class RussianText:
     LEVEL: str = "Ур."
     RESTORES: str = "Восстанавливает"
     HEALTH: str = "здоровья"
+    ACCURACY: str = "Базовая точность"
+    CRITICAL_STRIKE_CHANCE: str = "Шанс крита"
 
 
 Text = {Language.EN: EnglishText, Language.RU: RussianText}

@@ -11,8 +11,10 @@ from core.interface.game_menu.menu import GameMenu
 from core.interface.inventory_menu.menu import InventoryMenu
 from core.interface.option_menu.menu import OptionMenu
 from core.main_character.character import MainCharacter
-from core.scenarios import BattleScenario, RandomScenario, StartScenario
-from core.scenarios.base_situation.base_situation import BaseSituation
+from core.scenarios.scenario import ScenariosManager, ss
+from core.scenarios.event import Event
+from core.scenarios.common import read_scenario_stats
+from core.server_interactor.verificator import verify_resources_lists
 
 from . import widgets
 from .constants import MainMenuSizes
@@ -39,10 +41,12 @@ class MainMenu(QMainWindow):
 
         self._create_layouts()
         self._add_menu_to_stacked_layout()
-        self.battle_scenario = BattleScenario(self)
-        self.random_scenario = RandomScenario(self)
 
-        BaseSituation(self)
+        self.scenarios_manager = ScenariosManager(self)
+        self.chill_event = Event(self, read_scenario_stats("chill_scenario.yml")[ss.START])
+
+        # if not verify_resources_lists():
+        #     self.game_menu.add_log(self.text.FILE_VERIFY_FAILED)
 
     @staticmethod
     def exit() -> None:
@@ -74,6 +78,7 @@ class MainMenu(QMainWindow):
         self._character_creation_widget.setLayout(self._character_creation_menu_layout)
 
         self.game_menu = GameMenu(self)
+        Event(self, read_scenario_stats("start_scenario.yml")[ss.START]).run_event()
 
         self.inventory_menu = InventoryMenu(self)
         layout = QHBoxLayout()
@@ -130,7 +135,6 @@ class MainMenu(QMainWindow):
         self.main_character.set_max_stamina()
         self.character_menu_button.setDisabled(False)
         self.character_menu.create_layout()
-        StartScenario(self)
 
     def _event_main_character_name_entered(self, name: str) -> None:
         self._main_character_name = name

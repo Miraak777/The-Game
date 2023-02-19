@@ -9,7 +9,7 @@ from core.items.base_item import BaseItem
 
 
 class Weapon(BaseItem):
-    def __init__(self, main_menu: QMainWindow, level: int, weapon_file_name: str, rarity: float) -> None:
+    def __init__(self, main_menu, level: int, weapon_file_name: str, rarity: float) -> None:
         super().__init__(main_menu)
         self.level = level
         self.rarity = rarity
@@ -54,6 +54,6 @@ class Weapon(BaseItem):
 
     @staticmethod
     def get_weapon_stats(weapon_file_name) -> Dict[str, Any]:
-        with open(str(Path(Paths.PATH_TO_WEAPONS, weapon_file_name)), "r") as weapon_file:
+        with open(str(Path(Paths.PATH_TO_WEAPONS, weapon_file_name)), "r", encoding="utf-8") as weapon_file:
             stats = safe_load(weapon_file)
             return stats

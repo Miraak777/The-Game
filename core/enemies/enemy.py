@@ -3,10 +3,10 @@ from typing import Any, Dict, List
 
 from yaml import safe_load
 
-from core.common import get_enemy_stats
 from core.constants.enemy_constants import StatNames
 from core.constants.path_constants import Path, Paths
 from core.items import Consumable, Weapon, get_consumables_table, get_weapon_table
+from core.common import calculate_difficulty
 
 from .texts import Text
 
@@ -17,7 +17,7 @@ class Enemy:
         self.level = level
         self.game_menu = self._main_menu.game_menu
         self._text = Text[self._main_menu.language]
-        stats = get_enemy_stats(enemy_file_name)
+        stats = self.get_enemy_stats(enemy_file_name)
 
         self.difficulty_multiplier = 1
         self.is_dead = False
@@ -32,9 +32,15 @@ class Enemy:
         self.experience_gained = stats[StatNames.STATS][StatNames.EXPERIENCE_GAINED]
         self.weapon_drop_type = self.weapon.weapon_type
 
-        self._calculate_health()
         self._calculate_damage()
+        self.difficulty_multiplier = calculate_difficulty(self._main_menu, self)
+        self._calculate_damage()
+        self._calculate_health()
         self._calculate_experience_gained()
+
+    def set_weapon(self, weapon: Weapon):
+        self.weapon = weapon
+        self._calculate_damage()
 
     def attack(self) -> float:
         min_damage = self.min_damage
@@ -100,6 +106,6 @@ class Enemy:
 
     @staticmethod
     def get_enemy_stats(enemy_file_name: str) -> Dict[str, Any]:
-        with open(str(Path(Paths.PATH_TO_ENEMIES, enemy_file_name)), "r") as enemy_file:
+        with open(str(Path(Paths.PATH_TO_ENEMIES, enemy_file_name)), "r", encoding="utf-8") as enemy_file:
             stats = safe_load(enemy_file)
             return stats

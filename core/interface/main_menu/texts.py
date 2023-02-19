@@ -20,6 +20,7 @@ class EnglishText:
         "Short Project Description:\n"
         "This is a Roguelike Text RPG."
     )
+    FILE_VERIFY_FAILED: str = "Your files different from server files. Check them for loses."
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,7 @@ class RussianText:
         "Короткое описание проекта:\n"
         "Это Роглайк Текстовое РПГ."
     )
+    FILE_VERIFY_FAILED: str = "Ваши файлы отличаются от серерных. Проверьте их на наличие потерь."
 
 
 Text = {

@@ -1,0 +1,7 @@
+onsumable_type: food
+names:
+  en: Pie
+  ru: "Пирог"
+stats:
+  restore_value: 50
+icon: pie.png

@@ -1,12 +1,10 @@
 import random
-from typing import Any, Dict
+from typing import Dict
 
 from core.constants.character_constants import AttributesNames as an
-from core.constants.character_constants import BarsNames as bn
 from core.constants.character_constants import CombatStatsNames as cs
-from core.constants.character_constants import CommonConstants as cc
+from core.constants.character_constants import CommonConstants as ccc
 from core.items import Weapon
-from core.scenarios.death_scenario.scenario import DeathScenario
 
 from . import characters_formulas as cf
 from . import classes
@@ -24,9 +22,9 @@ class MainCharacter:
 
     def attack(self, attack_type: str) -> float:
         attack_map = {
-            cc.LIGHT_ATTACK: self.light_attack_prediction,
-            cc.MEDIUM_ATTACK: self.medium_attack_prediction,
-            cc.HEAVY_ATTACK: self.heavy_attack_prediction,
+            ccc.LIGHT_ATTACK: self.light_attack_prediction,
+            ccc.MEDIUM_ATTACK: self.medium_attack_prediction,
+            ccc.HEAVY_ATTACK: self.heavy_attack_prediction,
         }
         attack_params = attack_map[attack_type]()
         if random.random() < self.critical_strike_chance:
@@ -34,10 +32,10 @@ class MainCharacter:
             critical_multiplier = self.critical_strike_multiplier
         else:
             critical_multiplier = 1
-        if self.stamina < attack_params[cc.STAMINA_CONSUMPTION]:
+        if self.stamina < attack_params[ccc.STAMINA_CONSUMPTION]:
             self._add_log(self._text.NOT_ENOUGH_STAMINA)
             return 0
-        self.stamina = round(self.stamina - attack_params[cc.STAMINA_CONSUMPTION], 1)
+        self.stamina = round(self.stamina - attack_params[ccc.STAMINA_CONSUMPTION], 1)
         if random.random() < self.accuracy:
             damage = random.uniform(attack_params[cs.MAX_DAMAGE], attack_params[cs.MIN_DAMAGE])
             damage *= critical_multiplier
@@ -51,7 +49,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 0.7, 1),
+            ccc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 0.7, 1),
         }
         return output
 
@@ -60,7 +58,7 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1, 1),
+            ccc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1, 1),
         }
         return output
 
@@ -69,16 +67,20 @@ class MainCharacter:
         output = {
             cs.MAX_DAMAGE: damage[cs.MAX_DAMAGE],
             cs.MIN_DAMAGE: damage[cs.MIN_DAMAGE],
-            cc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1.4, 1),
+            ccc.STAMINA_CONSUMPTION: round(self._equipped_weapon.stamina_consumption * 1.4, 1),
         }
         return output
 
     def take_damage(self, damage: float) -> None:
         if self.health <= damage:
             self._add_log(self._text.DEATH)
-            DeathScenario(self._main_menu)
-        self.health = round(self.health - damage, 2)
-        self._refresh_bars()
+            exit()
+            self.health = round(self.health - damage, 2)
+            self.health = 0
+            self._refresh_bars()
+        else:
+            self.health = round(self.health - damage, 2)
+            self._refresh_bars()
 
     def equip_weapon(self, weapon: Weapon) -> None:
         self._equipped_weapon = weapon
@@ -109,7 +111,7 @@ class MainCharacter:
         if self.health:
             self.health *= self.health_multiplier
             self.stamina *= self.stamina_multiplier
-            self._main_menu.character_menu.set_actual_character_stats()
+            self._main_menu.character_menu.refresh_character_copy()
             self._main_menu.character_menu.refresh_character_menu()
             self._add_log(self._text.CHANGE_CLASS + self.character_class)
             self._refresh_bars()
@@ -135,14 +137,6 @@ class MainCharacter:
             self.health = self.max_health
 
         self._refresh_bars()
-
-    def rest(self) -> None:
-        if self.health < self.max_health / 2:
-            self.health = self.max_health / 2
-            self._add_log(self._text.REST)
-            self._refresh_bars()
-        else:
-            self._add_log(self._text.CANNOT_REST)
 
     def restore_stamina(self, stamina: float) -> None:
         self.stamina += stamina
@@ -181,6 +175,8 @@ class MainCharacter:
         self.experience += experience
         if experience != 0:
             self._main_menu.game_menu.add_log(self._text.GAINED_EXPERIENCE + str(experience))
+            self._main_menu.character_menu.refresh_character_copy()
+            self._main_menu.character_menu.refresh_character_menu()
         if self.experience >= self.max_experience:
             self.experience -= self.max_experience
             self._add_level()

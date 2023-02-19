@@ -1,0 +1,18 @@
+required_level:
+start:
+  texts:
+    en: "You awake in the Forest. Trees surround you and you don't know where to go. You made a halt."
+    ru: "Вы просыпаетесь посреди Леса. Вас окружают деревья, и вы не знаете куда пойти. Вы устроили привал."
+  actions:
+    action_1:
+      action_names:
+        en: "Hit the road"
+        ru: "Отправиться в путь"
+      action_type: random
+      next_event:
+      texts:
+        en: ""
+        ru: ""
+    action_2:
+    action_3:
+    action_4:

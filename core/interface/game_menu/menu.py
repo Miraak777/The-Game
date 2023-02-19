@@ -1,10 +1,9 @@
-from typing import Any, Dict
+from typing import Any, List
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QGridLayout, QHBoxLayout, QLabel, QVBoxLayout, QWidget, QStackedLayout
 
 from core.common import clear_layout, get_key_binds
-from core.constants.actions_constants import ActionButtons
 from core.constants.key_bind_constants import KeyBindNames
 from core.constants.item_constants import ItemTypes
 from core.enemies import Enemy
@@ -80,21 +79,21 @@ class GameMenu(QFrame):
         scroll_bar = self._scroll_area.verticalScrollBar()
         scroll_bar.rangeChanged.connect(lambda: scroll_bar.setValue(scroll_bar.maximum()))
 
-    def set_action_buttons(self, events: Dict[str, Any], texts: Dict[str, Any]) -> None:
+    def set_action_buttons(self, actions: List[Any], texts: List[Any]) -> None:
         clear_layout(self.buttons_layout)
-        button = widgets.create_action_button(events[ActionButtons.FIRST_ACTION], texts[ActionButtons.FIRST_ACTION])
+        button = widgets.create_action_button(actions[0], texts[0], 0)
         button.setShortcut(get_key_binds()[KeyBindNames.FIRST_ACTION])
         self.buttons_layout.addWidget(button, 0, 0)
 
-        button = widgets.create_action_button(events[ActionButtons.SECOND_ACTION], texts[ActionButtons.SECOND_ACTION])
+        button = widgets.create_action_button(actions[1], texts[1], 1)
         button.setShortcut(get_key_binds()[KeyBindNames.SECOND_ACTION])
         self.buttons_layout.addWidget(button, 0, 1)
 
-        button = widgets.create_action_button(events[ActionButtons.THIRD_ACTION], texts[ActionButtons.THIRD_ACTION])
+        button = widgets.create_action_button(actions[2], texts[2], 2)
         button.setShortcut(get_key_binds()[KeyBindNames.THIRD_ACTION])
         self.buttons_layout.addWidget(button, 1, 0)
 
-        button = widgets.create_action_button(events[ActionButtons.FOURTH_ACTION], texts[ActionButtons.FOURTH_ACTION])
+        button = widgets.create_action_button(actions[3], texts[3], 3)
         button.setShortcut(get_key_binds()[KeyBindNames.FOURTH_ACTION])
         self.buttons_layout.addWidget(button, 1, 1)
 
@@ -143,18 +142,29 @@ class GameMenu(QFrame):
         self.item_info_layout.addWidget(rarity_label, 0, 1,
                                         alignment=(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight))
         if item.item_type == ItemTypes.WEAPON:
-            damage_label = QLabel(f"{self._text.DAMAGE}: {round(item.min_damage, 2)}-{round(item.max_damage, 2)}")
-            damage_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px;")
+            damage_label = QLabel(f"{self._text.DAMAGE}: {round(item.min_damage, 2)}-{round(item.max_damage, 2)} "
+                                  f"({round((item.max_damage + item.min_damage) / (2 * item.stamina_consumption), 2)} )")
+            damage_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px; font: 13px;")
             self.item_info_layout.addWidget(damage_label, 1, 0, alignment=Qt.AlignmentFlag.AlignLeft)
+
+            accuracy_label = QLabel(
+                f"{self._text.ACCURACY}: {round(item.accuracy*100, 2)}%")
+            accuracy_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px;")
+            self.item_info_layout.addWidget(accuracy_label, 2, 0, alignment=Qt.AlignmentFlag.AlignLeft)
+
+            critical_strike_chance_label = QLabel(
+                f"{self._text.CRITICAL_STRIKE_CHANCE}: {round(item.critical_strike_chance * 100, 2)}%")
+            critical_strike_chance_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px;")
+            self.item_info_layout.addWidget(critical_strike_chance_label, 3, 0, alignment=Qt.AlignmentFlag.AlignLeft)
 
             stamina_consumption_label = QLabel(
                 f"{self._text.STAMINA_CONSUMPTION}: {round(item.stamina_consumption, 2)}")
-            self.item_info_layout.addWidget(stamina_consumption_label, 2, 0, alignment=Qt.AlignmentFlag.AlignLeft)
-
             stamina_consumption_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px;")
+            self.item_info_layout.addWidget(stamina_consumption_label, 4, 0, alignment=Qt.AlignmentFlag.AlignLeft)
+
             level_label = QLabel(f"{self._text.LEVEL} {item.level}")
             level_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 0px;")
-            self.item_info_layout.addWidget(level_label, 3, 1,
+            self.item_info_layout.addWidget(level_label, 5, 1,
                                             alignment=(Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight))
 
         elif item.item_type == ItemTypes.CONSUMABLE:

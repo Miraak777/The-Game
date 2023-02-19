@@ -1,7 +1,7 @@
 consumable_type: food
 names:
   en: Pie
-  ru: "\u041f\u0438\u0440\u043e\u0433\u000a"
+  ru: "Пирог"
 stats:
   restore_value: 50
 icon: pie.png

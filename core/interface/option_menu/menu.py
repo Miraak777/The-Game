@@ -1,11 +1,13 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout
 from yaml import safe_dump, safe_load
+from random import randrange
 
 from core import Paths
 from core.common import clear_layout
 from core.constants.language_constants import LANGUAGE, Language
-from core.scenarios.debug_scenario.scenario import DebugScenario
+# from core.scenarios.debug_scenario.scenario import DebugScenario
+from core.items import Weapon, Consumable, get_consumables_table, get_weapon_table
 
 from . import widgets
 from .constants import OptionMenuSizes
@@ -91,7 +93,19 @@ class OptionMenu(QFrame):
         self._layout.addWidget(button, alignment=(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop))
 
     def _event_debug_mode(self) -> None:
-        DebugScenario(self.main_menu)
+        # DebugScenario(self.main_menu)
+        pass
+        weapon_list = get_weapon_table()
+        for weapon in weapon_list:
+            if weapon != "fists.yml":
+                self.main_menu.inventory_menu.add_item(
+                    Weapon(self.main_menu, self.main_menu.main_character.level, weapon, randrange(0, 8))
+                )
+        consumable_list = get_consumables_table()
+        for consumable in consumable_list:
+            self.main_menu.inventory_menu.add_item(
+                Consumable(self.main_menu, consumable)
+            )
 
     def event_open_about_menu(self) -> None:
         if self.main_menu.about_menu.isHidden():

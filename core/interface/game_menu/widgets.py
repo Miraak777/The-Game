@@ -1,4 +1,5 @@
 from typing import Callable
+from functools import partial
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QProgressBar, QPushButton, QScrollArea, QWidget, QHBoxLayout, QGridLayout
@@ -16,10 +17,10 @@ def create_scroll_area(self) -> QScrollArea:
     return scroll_area
 
 
-def create_action_button(event: Callable, text: str) -> QPushButton:
+def create_action_button(event: Callable, text: str, action_button_number: int) -> QPushButton:
     button = QPushButton(text=text)
     button.setFixedSize(GameMenuButtons.ACTION_BUTTON_SIZE)
-    button.clicked.connect(event)
+    button.clicked.connect(partial(event, action_button_number))
     if text == "":
         button.setEnabled(False)
     return button

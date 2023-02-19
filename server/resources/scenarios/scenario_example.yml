@@ -1,0 +1,113 @@
+start:
+  texts:
+    en: "Event 1 text"
+    ru: "Текст первого события"
+  actions:
+    action_1:
+      action_names:
+        en: "Action example 1"
+        ru: "Пример действия 1"
+      action_type: dialog
+      texts:
+        en: "You chosen first action"
+        ru: "Вы выбрали действие 1"
+      next_event: event_example_1
+    action_2:
+      action_names:
+        en: "Action example 2"
+        ru: "Пример действия 2"
+      action_type: battle
+      texts:
+        en: "You chosen second action"
+        ru: "Вы выбрали действие 2"
+      next_event:
+      enemy_info:
+        names:
+          en: "Example enemy"
+          ru: "Пример противника"
+        enemy_type: "human"
+        level: character
+        added_level: 1
+        weapon: two_handed_mace.yml
+    action_3:
+    action_4:
+      action_names:
+        en: "Action example 4"
+        ru: "Пример действия 4"
+      action_type: leave
+      texts:
+        en: "You chosen fourth action"
+        ru: "Вы выбрали действие 4"
+      next_event:
+
+event_example_1:
+  texts:
+    en: "Event 2 text"
+    ru: "Текст второго события"
+  actions:
+    action_1:
+      action_names:
+        en: "Action example 1"
+        ru: "Пример действия 1"
+      action_type: leave
+      texts:
+        en: "You chosen first action"
+        ru: "Вы выбрали действие 1"
+      next_event:
+    action_2:
+      action_names:
+        en: "Action example 2"
+        ru: "Пример действия 2"
+      action_type: reward
+      texts:
+        en: "You chosen second action"
+        ru: "Вы выбрали действие 2"
+      next_event:
+      rewards:
+        items: dagger.yml, apple.yml
+        experience: 150
+    action_3:
+    action_4:
+
+#empty_event:
+#  texts:
+#    en: ""
+#    ru: ""
+#  actions:
+#    action_1:
+#      action_names:
+#        en: ""
+#        ru: ""
+#      action_type:
+#      texts:
+#        en: ""
+#        ru: ""
+#      next_event:
+#    action_2:
+#      action_names:
+#        en: ""
+#        ru: ""
+#      action_type:
+#      texts:
+#        en: ""
+#        ru: ""
+#      next_event:
+#    action_3:
+#      action_names:
+#        en: ""
+#        ru: ""
+#      action_type:
+#      texts:
+#        en: ""
+#        ru: ""
+#      next_event:
+#    action_4:
+#      action_names:
+#        en: ""
+#        ru: ""
+#      action_type:
+#      texts:
+#        en: ""
+#        ru: ""
+#      next_event:
+

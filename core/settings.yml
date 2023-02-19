@@ -6,3 +6,6 @@ key_binds:
   second_action: w
   third_action: e
 language: ru
+server:
+  host: "http://localhost"
+  port: "8000"
